@@ -1,7 +1,7 @@
 {
   "name": "Other Lives — Life Simulator",
   "short_name": "Other Lives",
-  "description": "A text-based life simulator about circumstance, choice, and chance.",
+  "description": "A life, not a leaderboard: a text-first simulator about circumstances and choice.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -9,7 +9,13 @@
   "theme_color": "#f5f2eb",
   "icons": [
     {
-      "src": "icon.svg",
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

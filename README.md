@@ -1,19 +1,28 @@
 # Other Lives
 
-A standalone, independent text-first life simulation inspired by the *genre* of life simulations. It is not affiliated with 1 in 8 Billion and uses original code and writing.
+A private-play, text-led life simulation about circumstance, decisions and probability. It is an **independent original implementation**, not affiliated with the original game *1 in 8 Billion*. The repository and GitHub Pages site are public; your saves are normally stored locally on your device.
 
-## Playing
-Open GitHub Pages from this repository once enabled. On iPhone, open in Safari and choose Share → Add to Home Screen → Open as Web App.
+## How to play
 
-## Gameplay
-Automatic ageing, life-record events, decision cards, demographic starting conditions, relationships and a Life Archive. The numbers and probabilities are illustrative gameplay parameters, not scientifically validated estimates.
+Open **https://aidanko1.github.io/other-lives/**. On iPhone Safari: Share → Add to Home Screen → Open as Web App. Wait for the site to load fully once to cache it for offline use.
 
-## Saving
-Saves stay on this browser/device; export your archive before switching to a new URL or device. GitHub Pages is public; don't commit personal saves to GitHub.
+## Version 2.4
 
-## Publishing
-This repository includes a GitHub Actions workflow. In GitHub Settings → Pages, set Source to GitHub Actions to publish. The project is served over HTTPS and includes offline caching.
+- Automatic monthly timeline: usually 2–5 entries per year, with consequential decisions only some years
+- Set aside an unanswered decision to inspect your profile, family, money, people and sourced country facts; return without resolving it
+- Compact combined yearly progress and 1×–16× playback bar, quick bottom navigation on mobile
+- Explicit Mom/Dad roles with individual whereabouts; household finance and estimated earnings views
+- Ghana, Bangladesh, Hong Kong, UK, India, Nigeria and Ethiopia context, including additional fictional local scenes and sourced factual statistics
+- Named job offers informed by skills and interests; accept or decline
+- Future reflections recalling a loved pet and an encouraging teacher
+- Coloured consequences in the life record; pixel-art app icon from the game's original art
 
-## Deployment status
+## Honest limitations
 
-GitHub Pages is configured to deploy on pushes to `main` through GitHub Actions. After choosing **Settings → Pages → Source: GitHub Actions**, check the **Actions** tab for a successful deploy.
+The model is **not scientifically calibrated**. It uses hand-tuned income, mortality, health, event and demographic probabilities for 57 locations, not validated life tables or population-weighted global estimates. Many original-game features—such as globally comprehensive births, historical/future eras, independently validated mortality curves, world-life comparison and polished monetary economics—remain work in progress. The sourced fact bubbles are not event probabilities.
+
+## Save safety
+
+Export a JSON backup from the Life Archive before upgrading or switching website domains. Saves do not automatically sync between Netlify, GitHub Pages, Safari and a Home Screen installation.
+
+See [Research & limitations](RESEARCH_AND_LIMITATIONS.md) for source links and the implementation checklist.
