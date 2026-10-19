@@ -13,3 +13,7 @@ Saves stay on this browser/device; export your archive before switching to a new
 
 ## Publishing
 This repository includes a GitHub Actions workflow. In GitHub Settings → Pages, set Source to GitHub Actions to publish. The project is served over HTTPS and includes offline caching.
+
+## Deployment status
+
+GitHub Pages is configured to deploy on pushes to `main` through GitHub Actions. After choosing **Settings → Pages → Source: GitHub Actions**, check the **Actions** tab for a successful deploy.
