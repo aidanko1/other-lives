@@ -797,7 +797,7 @@ HK:{topic:'Housing in Hong Kong',facts:[{text:'Hong Kong’s 2021 Population Cen
 };
 O.parentRole=p=>p.role==='Parent'?(p.gender==='F'?'Mother':'Father'):p.role;
 O.personLabel=p=>{const r=O.parentRole(p);const k={Mother:'Mom',Father:'Dad',Sibling:'Sibling',Grandparent:'Grandparent',Friend:'Friend',Partner:'Partner',Mentor:'Mentor',Child:'Child'};return `${k[r]||r} (${p.name})`};
-O.factForEvent=(s,e)=>{const rec=O.COUNTRY_CONTEXT[s.country.code];if(!rec||!e)return null;const topic=(e.category||'')+' '+(e.title?.(s)||'');if(s.country.code==='GH'){if(/housing|commut|migration|urban|neighbou?rhood|market|city|travel/i.test(topic))return rec.facts[1];if(/famil|marriage|future|school|education|relative/i.test(topic))return rec.facts[0];return null;}if(s.country.code==='HK')return /hous|living|rent|flat|home/i.test(topic)?rec.facts[0]:null;if(s.country.code==='GB')return /apprentice|job|work|career|train/i.test(topic)?rec.facts[0]:null;return /family|marriage|future|school|educat|relative|girl/i.test(topic)?rec.facts[0]:null;};
+O.factForEvent=(s,e)=>{const rec=O.COUNTRY_CONTEXT[s.country.code];if(!rec||!e)return null;const topic=(e.category||'')+' '+(e.title?.(s)||'');if(s.age<13&&s.country.code!=='HK')return null;if(s.country.code==='GH'){if(/housing|commut|migration|urban|neighbou?rhood|market|city|travel/i.test(topic))return rec.facts[1];if(/famil|marriage|future|school|education|relative/i.test(topic))return rec.facts[0];return null;}if(s.country.code==='HK')return /hous|living|rent|flat|home/i.test(topic)?rec.facts[0]:null;if(s.country.code==='GB')return /apprentice|job|work|career|train/i.test(topic)?rec.facts[0]:null;return /family|marriage|future|school|educat|relative|girl/i.test(topic)?rec.facts[0]:null;};
 O.countryFact=s=>{const rec=O.COUNTRY_CONTEXT[s.country.code];return rec?.facts[(s.age<15&&rec.facts.length>1)?1:0]||null};
 const rawCreate=O.create;O.create=function(settings){const s=rawCreate(settings);O.upgradeLife(s);return s};
 O.upgradeLife=s=>{
@@ -826,6 +826,7 @@ const rawMortality=O.mortality;
 O.mortality=function(s){if(s.age>0&&s.age<5&&s.flags.vaccinationMissed){const modifier=s.strata<=1?1.8:1.35;let ordinary=rawMortality(s);return ordinary||O.chance(s,.0025*modifier*(1+Math.max(0,60-s.country.infra)/80));}return rawMortality(s)};
 const rawJournal=O.journal;O.journal=function(s,title,description,type='life'){
  for(const p of s.people||[]){if(description.includes(p.name)&&!description.includes(O.personLabel(p)))description=description.split(p.name).join(O.personLabel(p));if(title.includes(p.name)&&!title.includes(O.personLabel(p)))title=title.split(p.name).join(O.personLabel(p));}
+ for(const p of s.people||[]){const first=p.name.split(' ')[0];if(first.length>2&&(s.people||[]).filter(q=>q.name.split(' ')[0]===first).length===1&&!description.includes(O.personLabel(p)))description=description.replace(new RegExp(`\\b${first}\\b`,'g'),O.personLabel(p));}
  rawJournal(s,title,description,type);
  const entry=s.journal[0];
  if(['loss','ending'].includes(type)||/died|death|unwell|injur|lost your|rejected|cannot afford|illness|crisis|disrupt|debt|threat|hurt|sick|closed down/i.test(title+' '+description))entry.tone='bad';
