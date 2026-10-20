@@ -1,8 +1,29 @@
-# Other Lives v5.5 — Narrative and life-path overhaul
+# Other Lives v5.7 — Clear decisions and a persistent household
 
 Other Lives is an **independent** fictional life simulator. It is not affiliated with *1 in 8 Billion* and does not use its proprietary game code, artwork, text or database.
 
-## What changed
+
+## v5.7 update
+
+- Automatic light/dark appearance follows the device, including changes while playing.
+- Persistent original pixel household scene: home on the left, living household and pet in the middle, current school/university/workplace on the right. Children are smaller; older people have grey hair.
+- Income (annual and monthly), cash, debt and net worth appear beneath the status bars. GBP is the default display, with USD/HKD/EUR choices. These are fixed **game purchasing-power display scales**, not live FX or verified local wages. Canonical story money can be reformatted when the display changes.
+- An unexpected bill is quoted once before choosing. Cash payment, a 12-month fixed-charge plan, and uncertain negotiation refer to the same bill. Instalments are tracked without charging ordinary debt interest twice on the active plan.
+- Career changes require an explicit job search (except the first search on leaving education). Higher-pay searches only show qualified roles with higher earnings. Interest-led searches can offer lower-paid work. Contracts show current pay, offered annual/monthly pay and percentage change.
+- Spending shows actual available stat changes before purchase. Vehicle upkeep and investment fees are shown and applied. Profile records work and practice experience. Existing saves begin detailed practice tracking from their migration age.
+- Pressing Play from another tab returns to the log; an unanswered decision reopens before time continues.
+- Family ages, deaths, pet ages, retirement and leaving-home transitions persist. Family mortality uses the same country baseline as the player, with modelled personal adjustments.
+- Relevant source context is shown both beside the current unfolding event and in the log. Facts are blue, positive outcomes green, negative outcomes red. Survival milestones and a baseline curve are explicitly identified as model outputs; Kenya adds a 2024 UNICEF under-five anchor of 38.8/1,000.
+
+### Verification
+
+`node tests/life-clarity.test.cjs --quick` checks bill persistence/affordability and instalments, search gating and salary filters, retirement and household membership, spending effects, currency reformatting, device-theme change callbacks, narrative/survival rendering and the Kenya under-five hazard product. The full suite simulates 12 countries. Browser QA covered phone-width light/dark layouts, Profile-to-log playback, spending effects and visible financial summaries.
+
+### Limits
+
+The new statistical UI does **not** turn the existing 129-country model into a measured age/sex life-table dataset. Childhood mortality is source-anchored for selected locations; other childhood baselines, adult age shapes, cause-of-death labels, personal modifiers, wages, retirement timing and most transitions are still assumptions. Source links and distinctions remain visible. New fictional text and sprite art are authored for this project; reference-game code and assets are not included.
+
+## Earlier improvements
 
 - **Age-sensitive gameplay and logs**: early childhood focuses on care, play, family, first learning, food and surroundings rather than adult decisions. Under-12s have no personal spending menu; teenagers only have limited allowance and age-appropriate options.
 - **129 retained playable country/location profiles** with locally contextualised meals, transport, cultural events, everyday routines and family variation. A country does not imply that every household celebrates the same occasion or eats the same food.
