@@ -18,18 +18,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble v5.2 static site
+      - name: Assemble static site
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p _site
-          cp index.html world-countries.js world-simulation.js culture-economy.js _site/
-          cp sw.js manifest.webmanifest _site/
+          cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js sw.js manifest.webmanifest _site/
           if [[ -d icons ]]; then cp -R icons _site/icons; fi
           if [[ -f icon.svg ]]; then cp icon.svg _site/; fi
-          echo "5.2.0" > _site/release-version.txt
+          echo "5.5.0" > _site/release-version.txt
           test -s _site/index.html
-          test -s _site/culture-economy.js
+          test -s _site/age-culture-audit.js
+          test -s _site/life-depth.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
