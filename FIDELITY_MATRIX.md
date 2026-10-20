@@ -25,3 +25,5 @@ Measure normal-speed duration and pause behaviour; decisions/year and meaningful
 
 ## Verified Other Lives checkpoint
 At code 07f81f2, Chromium completed a natural US seed 951 life through age 105 with 47 choices, reloaded established histories at childhood/adulthood/old age, inspected navigation and finances, verified archive/export/import and began another life. All eight quality jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39494233610. This verifies those own-game interactions; it does not turn unknown reference behaviours into verified matches.
+
+Cycle2 backend improvement: annual cost/read/save ownership changes add zero player controls or decisions.645 working cost scenarios preserve base 2aea totals; prepaid-overseas crash, load/display effects and recreated cleared debt are corrected. The actual US951 UI lifecycle remains47choices/death105. These are Other Lives regression measurements, not new evidence about reference-game probabilities or full parity. Final evidence: RELEASE_STATUS.md.

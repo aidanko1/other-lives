@@ -35,3 +35,5 @@ Source 07f81f2: https://github.com/aidanko1/other-lives/actions/runs/39494233610
 
 ## Cost/read boundary regressions
 `node --test tests/finance-boundary.test.cjs` checks complete-state quote/display/load immutability, tuition and family-gift conservation, repeat/reload receipts, affordability/funding holds, transactional rollback, missing legacy cash and129-country prepaid/institution budgets. It is included in npm test and the existing CI glob. Browser smoke exports the actual inspected paused life and compares every serialized field. Private backups may be audited read-only; never commit them or report them as complete new simulated lives.
+
+Cycle2 executed source a24854966d67901fa1bc82306349623e520b23f3:49 tests, production build, two 1,000-life cohorts, balance and Chromium browser gates passed. Evidence: https://github.com/aidanko1/other-lives/actions/runs/39509582008. Private 13-record migration/render/consistency audit also passed read-only. See RELEASE_STATUS.md for limits; this is not a deployment.

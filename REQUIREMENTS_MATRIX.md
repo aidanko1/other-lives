@@ -11,7 +11,7 @@ Updated 2026-10-21. Status **PASS-SCOPED** means the named implementation/tests 
 | S01 | Age-appropriate enrolment and events | engine/rules.js, core.js, events.js, age-culture-audit.js | contracts, registry-sweep, simulation assertions | PASS-SCOPED; national school ages simplified |
 | S02 | Context checked at execution; failed choice unchanged | engine/commands.js, rules.js | contracts stale/rollback/replay tests | PASS-SCOPED; lower-level mutators not all transactional |
 | S03 | Choices persist and cooldowns work | engine/core.js, clock.js | contracts cooldown/replay, simulation | PASS-SCOPED |
-| S04 | Consistent identity, ages, death, partnership | engine/state.js, life-relationships.js, life-continuity.js | contracts transition/candidate tests; invariants every action | PARTIAL; full parent/child chronology not yet encoded |
+| S04 | Consistent identity, ages, death, partnership | engine/state.js, life-relationships.js, life-continuity.js | contracts transition/candidate tests; invariants every action | PARTIAL; parent/child age assertions present; full historical causality incomplete |
 | S05 | Education, workload, qualification and careers connect | life-university.js, flow.js, careers.js, route-education.js | university, career-continuity, flow-balance-routes | PARTIAL; professional laws and all cross-route combinations incomplete |
 | S06 | Finite conserved finance; assets distinct from liabilities | life-clarity.js, dynamics.js, route-assets.js | financial-property contracts, mortgage regression, invariants | PARTIAL; aggregate rental assets and annual ledger debt remain |
 | S07 | Ending is terminal and occurs once | engine/core.js, life-route-assets.js | reliability ending regression, browser ending | PASS-SCOPED |
@@ -28,4 +28,13 @@ Updated 2026-10-21. Status **PASS-SCOPED** means the named implementation/tests 
 | UX02 | Simulation depth does not add mandatory micromanagement | existing focus/route/policy UI | fidelity playtest checklist in GAME_DESIGN.md | Unknown; density review needed before new UI |
 
 
-Cycle2 verification pending: S06 and S09 now additionally map to engine/finance.js and tests/finance-boundary.test.cjs (explicit cost ownership, conservation/rollback, once-per-age reload, display purity, conservative old-save migration). tests/browser-smoke.cjs adds complete-state reload/render/export equality. The existing implementation-status rows above describe07f81, not a claim that cycle2 CI has passed. See ENGINEERING_CYCLE_2.md for final revision evidence.
+## Cycle2 scoped evidence
+Code a24854966d67901fa1bc82306349623e520b23f3, all eight quality jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39509582008.
+| Requirement | Implementing boundary | Permanent tests | Status/limits |
+|---|---|---|---|
+| S06: cost quotes do not mutate; tuition/gifts conserve funds; repeat/reload cannot repay | engine/finance.js; core explicit settlement | finance-boundary; contracts; university; both simulation cohorts | PASS-SCOPED; remaining income/debt/asset annual pipeline separate |
+| S09: load retains history, versioned record identity and legacy unknowns | engine/state.js; engine/context.js | finance-boundary; contracts; eight save-replay countries;13 private records audited read-only | PASS-SCOPED; early missing liquid cash explicitly unknown with zero opening funds |
+| S04/S06: estate/trust transfer at a simulation transition, never display | life-continuity.js; read helper owners; pixel-household.js | retained career-continuity conservation/trust assertions; finance-boundary read identity | PASS-SCOPED; other structural repair chains remain |
+| T04: actual reload/inspect/export leaves every state field unchanged | ui/app.js; browser-smoke.cjs | Chromium paused-life full-state equality; existing lifecycle/storage suite retained | PASS-SCOPED; other browser engines unverified |
+
+Current totals:49 reported Node tests,2,000 complete asserted seeded lives across129 countries, full browser life to 105. Counts do not establish subjective reference fidelity or demographic calibration.

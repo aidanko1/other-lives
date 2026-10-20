@@ -18,6 +18,7 @@ The extraction preserved the original authored content. The old extension graph 
 | Factors and routes | `life-balance.js`, `life-routes.js`, `life-route-{education,enterprise,family,world,special,health-money,assets}.js`, `life-integrity.js`: factor effects and persistent route stage contracts |
 | Art | `pixel-household.js`, `engine/pixel-legacy.js`: original canvas tile/sprite drawing and legacy fallback |
 | Shared contracts | `engine/rules.js`: eligibility, enrolment predicate, deterministic shuffle, family funding quote/commit and pure annual quote; `engine/state.js`: schema migrations and consistency/transition diagnostics; `engine/commands.js`: atomic command boundary |
+| Annual cost commitments | `engine/finance.js`: pure quotes, explicit conserved tuition/gift/policy settlement, saved receipt and rollback; other yearly income/debt/asset stages remain to consolidate |
 | Browser | `ui/app.js`: rendering, navigation, playback, current-save storage, IndexedDB archive, JSON import/export and replay UI |
 
 ## State and transitions

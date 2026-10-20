@@ -1,42 +1,32 @@
-# Current development status
-
-Cycle2 is under verification on the draft engineering branch. The previous verified checkpoint below remains the last verified engineering version until fresh checks pass. See ENGINEERING_CYCLE_2.md. Experimental code is not stable and is not deployed.
-
 # Release status — verified engineering checkpoint
 
-Updated 2026-10-21. **6.2.0-dev.1 is unreleased. The complete overhaul is unfinished.**
-Engineering branch: engineering/fidelity-reliability-baseline. Review: https://github.com/aidanko1/other-lives/pull/2 (draft).
-Tested code: 07f81f2516c7209e3932bc4a3952832339cf6bc4.
-All eight quality jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39494233610. This documentation checkpoint changes no runtime or test code.
+Verified 2026-10-20UTC (21October Hong Kong). **6.2.0-dev.1 is unreleased. The complete overhaul remains unfinished.**
+Branch: engineering/fidelity-reliability-baseline. Review: https://github.com/aidanko1/other-lives/pull/2 (draft).
+Tested code: a24854966d67901fa1bc82306349623e520b23f3. All eight quality jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39509582008.
+The following documentation checkpoint changes no runtime, test or workflow code.
 
-## Last published restore point
-Production remains v6.1.0, 4072fd4997992cb7fd6bf78d7f0c9cab41a7379f.
-Restore branch: baseline/v6.1-before-engineering-overhaul.
-Historical deployment: https://github.com/aidanko1/other-lives/actions/runs/39457407780.
-Known baseline defects mean historical deployment success is not a new certification of correctness. No production merge or deployment occurred in this cycle.
-
-## Executed checks
-| Gate | Verified result at 07f81f2 |
+## Executed gates at a248549
+| Gate | Verified result |
 |---|---|
-| Syntax, registries, assets and production packaging | Pass; actual static site assembled |
-| Unit/integration/regression | All 40 Node-reported tests pass; no assertions removed to conceal failures |
-| Registry contexts | 2,838 country/age/wealth contexts; 15,863 eligible decision render contracts; 523 definitions |
-| Save/replay | Eight country round trips with real snapshots; migration purity/idempotence/future-version rejection; stage-specific browser reload |
-| Optional-route/background simulation | 1,000 complete lives, zero failures; 129 countries, four backgrounds; 547 decision definitions reached; 34/42 route types initiated |
-| Original trajectory simulation | Additional 1,000 complete lives, zero failures; 129 countries, five quintiles, four policies; baseline/fragile/isolated conditions |
-| Browser lifecycle and persistence | Chromium desktop/mobile; birth/choices, tab pause, export/import, archive delete/restore/resume, family-assisted postgraduate funding, school-entry/home learning |
-| Natural UI lifecycle | US seed 951: birth through childhood, adulthood and old age; 47 choices; death at 105; stage reloads, archive cause and another birth |
-| Deployment | Not performed; main unchanged |
+| Production build, syntax, assets and registries | Pass; static site assembled locally and in CI |
+| Unit/integration/regression |49 Node-reported tests,49 passed,0 failed |
+| Registry contexts |2,838 country/age/wealth contexts;15,863 eligible decision contracts;523 definitions |
+| Save/replay | Eight country round trips with real snapshots; migration purity/idempotence/future-version rejection |
+| Finance/read boundaries | Nine focused regressions: conserved tuition/gifts, once-per-age receipts/reload, affordability, rollback, read identity, old journals/missing cash/zero debt;129-country prepaid and institution cases |
+| Optional-route/background simulations |1,000 complete asserted lives;0 failures;129 countries, four backgrounds,547 decision definitions,34/42 route types initiated |
+| Original trajectory simulations | Additional 1,000 complete asserted lives;0 failures;129 countries, five quintiles, four policies, baseline/fragile/isolated conditions |
+| Browser | Chromium desktop/mobile, choice/save/export/import/archive/funding/school flows; complete-state reload→inspect→export equality |
+| Natural UI lifecycle | US seed951: birth, childhood/adulthood/old-age reloads,47 choices, death105, archived cause, another birth |
+| Private legacy compatibility |13/13 records migrated and rendered; source/journals unchanged, idempotent,0 consistency issues; three absent cash balances explicitly unknown, no invented opening savings |
+| Deployment | Not performed; production main unchanged |
 
-The background harness produced ages 1–109 (median 59), 56,548 choices and 34 initiated route types. The other harness had 965 lives with paid work, 973 with family change and mean ending age 74.008. These are policy-conditioned model outputs, not validated demographic estimates. Coverage counts do not establish all route stages or combinations.
-CI artifacts preserve detailed outcomes, failing reproduction format, balance/coverage summaries and browser evidence.
+Background cohort:56,668 choices; ages1–109, median59. Trajectory cohort:965 lives with paid work,973 with family change, mean ending age74.008. These policy-conditioned model outputs are not validated demographic estimates.34 initiated route types do not verify every stage or combination. CI retains assertions, summaries and browser artifacts. The private backup is not committed or counted among simulated lives.
 
-## Reference and remaining limitations
-Read-only reference browser research: https://github.com/aidanko1/other-lives/actions/runs/39493052211.
-Observed random birth, registration, begin-life, pause/speed and invocation of next-decision. The complete reference lifecycle, event frequencies and subjective equivalence remain unverified. See FIDELITY_MATRIX.md.
+## Restore points
+Published production remains v6.1.0 at4072fd4997992cb7fd6bf78d7f0c9cab41a7379f, preserved by baseline/v6.1-before-engineering-overhaul. Historical deployment success is not a new correctness certification.
+Previous verified engineering code 07f81f2: https://github.com/aidanko1/other-lives/actions/runs/39494233610; checkpoint/6.2.0-dev.1-verified. Current verified code a248549 remains a restorable ancestor of the documentation checkpoint.
 
-Legacy closure/wrapper chains, render-time adapters and financial settlement side effects remain. Invariants cover defined contracts, not every causal implication. Rare combinations, complete national/historical/legal data and qualitative narrative/pacing review are incomplete. The private 13-life backup was not re-audited. Other browser engines and a full accessibility review remain unverified.
-
-## Next highest-priority task
-Finish verification of cycle2 cost/migration/read extraction, then consolidate the remaining annual income/debt/mortgage/investment and employment transition owners. Preserve the existing gameplay and all working routes.
-A passing engineering checkpoint is not a stable release. Stable promotion also requires resolving remaining high-severity behaviour issues and completing fidelity/player review. Branch protection/hosting enforcement has not been verified.
+## Remaining limitations and next task
+Income, debt repayment, mortgage principal, investment returns, employment and structural repairs still use legacy annual/command wrapper chains. Decision-specific candidate/bill preparation caches remain. Annual cost settlement is now explicit, but the entire yearly simulation is not one transaction. Aggregate rental assets, rare combinations, national/legal/historical data, calibration, other browser engines and full accessibility review remain incomplete.
+Reference observation remains limited: https://github.com/aidanko1/other-lives/actions/runs/39493052211. The full reference lifecycle, frequencies, normal-speed duration and subjective gameplay equivalence remain unverified; see FIDELITY_MATRIX.md. No new gameplay controls or features were introduced in this cycle.
+Next priority: consolidate the remaining annual income/debt/mortgage/investment and employment transition owners behind conservation and continuation tests, preserving this verified checkpoint. No stable label, production merge/deployment or branch-protection claim is made.
