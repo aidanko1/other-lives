@@ -27,3 +27,5 @@ Update CHANGELOG.md and BACKLOG.md; distinguish implemented, verified, incomplet
 ## Phase 11: invariants and traceability
 Read REQUIREMENTS_MATRIX.md, BUGS.md and RELEASE_STATUS.md at session start. Keep verified implementation status and exact-revision test evidence current. Record expected/actual state, reproduction seed, cause, correction and regression for significant bugs. Do not weaken/delete failing assertions, hide errors or reduce coverage to pass a release. Correct an invalid test transparently with evidence.
 Use the extracted engine/rules.js, engine/state.js and engine/commands.js boundaries. Never use livingCost as a read-only preview: quoteAnnualCosts clones state. Keep old migration fixtures and browser assertions. Quality CI must gate production packaging/deployment; no automatic deployment from experimental branches. Do not label stable while critical/high defects remain or release checks are unverified.
+
+Consult FIDELITY_MATRIX.md for measurable comparison and unknown reference behaviour. Preserve the original game through independent code/art/prose. A passing technical gate does not resolve documented player-experience or calibration gaps.

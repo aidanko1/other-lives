@@ -31,3 +31,5 @@ OL-012 / High: seed128702 CM, school exam preparation followed by service, deliv
 OL-013 / High: a professional-training enquiry could reach selection after the player left the eligible profession; dereferencing careerTrack(job).id then failed. Revalidate initial consider-stage prerequisites before offering its action; preserve history via a recorded changed-circumstances exit. Regression: professional preparation after job change.
 
 CI-001 remains under investigation: awaiting an iframe load event alone did not resolve the retained browser funding check. Added actual saved ID/pending route/parent budget/choice diagnostics. No funding assertion has been removed or relaxed.
+
+TEST-004 / resolved fixture race: browser diagnostic showed current ID qa-old and no pending decision after installing qa-master. The old iframe's active clock/visibility save overwrote the fixture during navigation. Unload the old application and await its load event before installing each synthetic current record. Retain every funding, delete, import and school assertion. This isolates test setup; it does not weaken save behaviour assertions.

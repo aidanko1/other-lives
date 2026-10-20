@@ -32,3 +32,5 @@ Existing user-requested tabs, combined time/speed control, pause during inspecti
 ## Implemented versus goals
 The repository contains 853 event registrations and 42 routes at baseline. Counts are inventories, not proof of usable paths. See IMPLEMENTATION_COVERAGE.md for earlier claims and ENGINEERING_AUDIT.md for current confidence/risks.
 Coherent school, work, family, finance and health transitions, minimal decision burden and persistent consequences are acceptance goals. No guarantee of complete national law, taxes, clinical modelling or historically accurate country rules is made.
+
+The measurable per-dimension comparison and current direct-browser evidence are maintained in FIDELITY_MATRIX.md. A successful limited reference observation does not verify its full lifecycle, event probabilities or undocumented mechanics.

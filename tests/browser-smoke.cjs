@@ -18,11 +18,34 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   await page.evaluate(()=>{const s=JSON.parse(localStorage.getItem('other-lives-current-v1'));s.status='alive';s.pending=null;window.OL.finish(s,'Synthetic browser ending');localStorage.setItem('other-lives-current-v1',JSON.stringify(s));});await page.reload();await click('resume');assert(await page.locator('body').innerText().then(t=>t.includes('Life complete')));await page.screenshot({path:results+'/ending-desktop.png',fullPage:true});
   await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');const next=await read();assert.notEqual(next.id,saved.id,'another life must have a new identity');
   await page.setViewportSize({width:390,height:844});await page.locator('[data-action="game-tab"][data-tab="family"]').click();assert(await page.locator('.story-tabs').isVisible());await page.screenshot({path:results+'/family-mobile.png',fullPage:true});
+
+  // Complete a real seeded life through production UI controls. Only its birth input is fixed.
+  await page.evaluate(()=>{const create=window.OL.create;window.OL.create=settings=>{window.OL.create=create;return create({...settings,country:'US',seed:951});};});
+  await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');
+  const stages=new Set(['birth']);let lifecycleChoices=0,ended=false;
+  for(let step=0;step<200;step++){
+   let life=await read();if(life.status==='finished'){ended=true;break;}
+   for(const [stage,age]of [['childhood',6],['adulthood',18],['old-age',65]]){
+    if(life.age>=age&&!stages.has(stage)){stages.add(stage);const checkpoint=life;await page.reload();await click('resume');life=await read();assert.equal(life.id,checkpoint.id);assert.deepEqual(life.journal,checkpoint.journal,'history changed on '+stage+' reload');assert.equal(life.pending,checkpoint.pending,'pending choice changed on '+stage+' reload');}
+   }
+   if(!life.pending){await click('next-decision');continue;}
+   const choices=await page.locator('[data-action="choose"]').evaluateAll(nodes=>nodes.filter(n=>!n.disabled).map(n=>({index:n.dataset.index,label:n.querySelector('strong')?.textContent||n.textContent})));assert(choices.length,'no UI exit '+life.pending);
+   let chosen=choices[3%choices.length];
+   if(['adult-crossroads','graduate-next-step','career-search-results'].includes(life.pending))chosen=choices[0];
+   if(life.pending==='choose-degree-subject')chosen=choices.find(o=>o.label==='Medicine')||choices[0];
+   if(life.pending==='university-funding-review')chosen=choices.find(o=>/Confirm/.test(o.label))||choices.find(o=>/year away/.test(o.label))||choices.at(-1);
+   await page.locator('[data-action="choose"][data-index="'+chosen.index+'"]').click();lifecycleChoices++;
+   if(await page.locator('[data-action="save-pet-name"]').isVisible())await click('save-pet-name');
+  }
+  assert(ended,'natural UI life did not conclude');assert(stages.has('childhood')&&stages.has('adulthood')&&stages.has('old-age'),'full lifecycle stage coverage');const natural=await read();assert(natural.cause);assert(natural.age>=65);console.log('PASS natural UI lifecycle',JSON.stringify({country:'US',seed:951,age:natural.age,choices:lifecycleChoices,stages:[...stages]}));
+  await click('archive');await page.locator('[data-action="record"][data-id="'+natural.id+'"]').waitFor();await page.locator('[data-action="record"][data-id="'+natural.id+'"]').click();assert((await page.locator('body').innerText()).includes(natural.cause),'archive must display actual cause');
+  await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');assert.notEqual((await read()).id,natural.id,'new life after natural death');await page.locator('[data-action="game-tab"][data-tab="family"]').click();
+
   // Retain the earlier branch's browser assertions and execute them with real asynchronous waits.
   const legacy=await context.newPage();await legacy.goto('http://127.0.0.1:8000/tests/browser.html?autorun=1');
   await legacy.waitForFunction(()=>['passed','failed'].includes(document.querySelector('#results')?.dataset.status),{},{timeout:45000});
   const legacyResult=await legacy.locator('#results').innerText();console.log(legacyResult);
   assert.equal(await legacy.locator('#results').getAttribute('data-status'),'passed',legacyResult);await legacy.close();
-  assert.deepEqual(errors,[],'browser errors');console.log('PASS: Chromium birth/choice, tab pause, save/reload, downloaded export/import, ending display, next life, mobile navigation. Natural full-life timing and reference hands-on play remain unverified.');
+  assert.deepEqual(errors,[],'browser errors');console.log('PASS: Chromium birth/choice, tab pause, save/reload, downloaded export/import, ending display, next life, mobile navigation. Natural UI lifecycle exercised; wall-clock life duration and full reference lifecycle remain unverified.');
  }catch(e){await page.screenshot({path:results+'/browser-failure.png',fullPage:true}).catch(()=>{});throw e;}finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
