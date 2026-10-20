@@ -18,9 +18,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Assemble static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          if [[ -f "Other-Lives-v5.2-Source.zip" ]]; then
+            echo "Using packaged v5.2 release"
+            unzip -oq "Other-Lives-v5.2-Source.zip" -d _site
+            # Preserve branding assets and app manifest already committed.
+            if [[ -d icons ]]; then cp -R icons _site/icons; fi
+            if [[ -f manifest.webmanifest ]]; then cp manifest.webmanifest _site/; fi
+            if [[ -f icon.svg ]]; then cp icon.svg _site/; fi
+            echo "5.2.0" > _site/release-version.txt
+          else
+            echo "No v5.2 ZIP found; deploying existing game"
+            cp index.html sw.js manifest.webmanifest _site/
+            if [[ -f world-countries.js ]]; then cp world-countries.js _site/; fi
+            if [[ -f world-simulation.js ]]; then cp world-simulation.js _site/; fi
+            if [[ -d icons ]]; then cp -R icons _site/; fi
+            if [[ -f icon.svg ]]; then cp icon.svg _site/; fi
+          fi
+          test -s _site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
