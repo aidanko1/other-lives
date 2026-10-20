@@ -1,6 +1,6 @@
 /* Other Lives 5.9: explicit study/work, routines, relationships and money histories. */
 (function(O){'use strict';
-O.VERSION='5.9.0';
+O.VERSION='5.9.1';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const hash=v=>{let n=2166136261;for(const c of String(v))n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0;};
 const short=p=>p?.name?.split(' ')[0]||'someone close to you';
