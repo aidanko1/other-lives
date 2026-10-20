@@ -52,8 +52,10 @@ jobs:
           mkdir -p tests/reports
           node scripts/serve-tests.cjs &
           test_server_pid=$!
-          trap 'kill "$test_server_pid"' EXIT
-          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --dump-dom --virtual-time-budget=30000 'http://127.0.0.1:4173/tests/browser.html?autorun=1' > tests/reports/browser.html
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --remote-debugging-port=9222 --user-data-dir="$RUNNER_TEMP/other-lives-browser" about:blank > tests/reports/chrome.log 2>&1 &
+          test_browser_pid=$!
+          trap 'kill "$test_server_pid" "$test_browser_pid"' EXIT
+          node scripts/browser-ci.cjs
           node scripts/assert-browser-report.cjs
       - name: Preserve browser result
         if: always()

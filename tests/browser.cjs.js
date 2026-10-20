@@ -5,7 +5,7 @@ const pause=ms=>new Promise(r=>setTimeout(r,ms));
 async function waitFor(fn,label){for(let i=0;i<100;i++){const result=fn();if(result)return result;await pause(50);}throw Error('Timed out: '+label);}
 function check(condition,label){if(!condition)throw Error(label);output.textContent+='\nPASS '+label;}
 async function click(selector){const el=await waitFor(()=>frame.contentDocument.querySelector(selector),selector);if(el.disabled)throw Error('Disabled: '+selector);el.click();await pause(100);}
-async function load(){frame.src='../index.html?qa='+Date.now();await waitFor(()=>frame.contentDocument?.querySelector('#app .brand'),'app loaded');}
+async function load(){await new Promise(resolve=>{frame.onload=resolve;frame.src='../index.html?qa='+Date.now();});frame.onload=null;await waitFor(()=>frame.contentDocument?.querySelector('#app .brand'),'app loaded');}
 document.querySelector('#run').onclick=async()=>{
  output.textContent='Running…';output.dataset.status='running';document.querySelector('#run').disabled=true;
  const currentKey='other-lives-current-v1',original=localStorage.getItem(currentKey),created=new Set();let db;
@@ -13,6 +13,7 @@ document.querySelector('#run').onclick=async()=>{
   const html=await(await fetch('../index.html')).text();const parsed=new DOMParser().parseFromString(html,'text/html');
   if(!window.OL)for(const script of parsed.querySelectorAll('script[src]')){if(script.getAttribute('src').includes('ui/app.js'))continue;await new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='../'+script.getAttribute('src').replace(/^\.\//,'');s.onload=resolve;s.onerror=reject;document.head.append(s);});}
   const O=window.OL,s=O.create({country:'GB',seed:777,quintile:5});
+  for(const p of s.people)p.age+=25;
   Object.assign(s,{id:'qa-'+Date.now(),name:'QA Test Person',first:'QA',age:25,month:0,school:false,education:O.EDU[4],cash:100000,debt:0,pending:'unexpected-expense',agenda:[]});s.flags.flow.schoolLeavingResolved=true;O.ensureClarity(s);created.add(s.id);
   localStorage.setItem(currentKey,JSON.stringify(s));await load();await click('[data-action="resume"]');
   check(frame.contentDocument.querySelectorAll('.stats-grid .meter').length===4,'Four factor bars render');
@@ -34,18 +35,20 @@ document.querySelector('#run').onclick=async()=>{
   await waitFor(()=>frame.contentDocument.querySelector('[data-action="record"][data-id="'+s.id+'"]'),'imported archive card');check(true,'Individual JSON import restores the archived life');
   await click('[data-action="resume-record"][data-id="'+s.id+'"]');check(JSON.parse(localStorage.getItem(currentKey)).id===s.id,'Paused archive resumes the exact selected life');
   const postgraduate=O.create({country:'GB',seed:778,quintile:5});
+  for(const p of postgraduate.people)p.age+=25;
   Object.assign(postgraduate,{id:'qa-master-'+Date.now(),first:'Postgraduate',name:'Postgraduate QA',age:25,month:0,school:false,cash:0,debt:0,education:O.EDU[4],knowledge:85,pending:null,agenda:[],familyCash:200000,familyAssets:500000});postgraduate.flags.flow.schoolLeavingResolved=true;O.ensureClarity(postgraduate);O.startRoute(postgraduate,'masters');postgraduate.routes.active.masters.status='decision';postgraduate.pending='life-route-decision';created.add(postgraduate.id);localStorage.setItem(currentKey,JSON.stringify(postgraduate));
   await load();await click('[data-action="resume"]');
-  const familyChoice=[...frame.contentDocument.querySelectorAll('[data-action="choose"]')].find(el=>/full-time.*family support/.test(el.textContent));check(!!familyChoice&&!familyChoice.disabled,'Wealthy postgraduate family-funding choice is usable');familyChoice.click();await pause(100);
+  const familyChoice=[...frame.contentDocument.querySelectorAll('[data-action="choose"]')].find(el=>/full-time.*family support/.test(el.textContent));check(!!familyChoice&&!familyChoice.disabled,'Wealthy postgraduate family-funding choice is usable: '+[...frame.contentDocument.querySelectorAll('[data-action="choose"] strong')].map(el=>el.textContent).join(' / '));familyChoice.click();await pause(100);
   const enrolled=JSON.parse(localStorage.getItem(currentKey));check(enrolled.routes.active.masters.funding.family>0&&enrolled.debt===0,'Postgraduate choice commits a parental gift without debt');
-  const child=O.create({country:'CN',seed:779,quintile:3});Object.assign(child,{id:'qa-school-'+Date.now(),age:6,month:0,school:false,pending:'school-entry',agenda:[]});created.add(child.id);localStorage.setItem(currentKey,JSON.stringify(child));await load();await click('[data-action="resume"]');
+  const child=O.create({country:'CN',seed:779,quintile:3});for(const p of child.people)p.age+=6;Object.assign(child,{id:'qa-school-'+Date.now(),age:6,month:0,school:false,pending:'school-entry',agenda:[]});created.add(child.id);localStorage.setItem(currentKey,JSON.stringify(child));await load();await click('[data-action="resume"]');
   check(/The school years begin/.test(frame.contentDocument.body.textContent),'School-entry decision appears before attendance');await click('[data-action="choose"][data-index="1"]');await click('[data-action="game-tab"][data-tab="profile"]');check(/Not currently enrolled/.test(frame.contentDocument.body.textContent),'Home learning does not become primary-school enrolment');
-  output.dataset.status='passed';output.textContent+='\nALL BROWSER CHECKS PASSED';
- }catch(error){output.dataset.status='failed';output.textContent+='\nFAIL '+error.stack;}
+  output.dataset.status='cleaning';output.textContent+='\nALL BROWSER CHECKS PASSED';
+ }catch(error){output.dataset.status='failed';output.textContent+='\nFAIL '+error.stack+'\nApp notification: '+frame.contentDocument?.querySelector('.toast')?.textContent+'\nAvailable actions: '+[...frame.contentDocument?.querySelectorAll('[data-action]')||[]].map(el=>el.dataset.action).join(', ');}
  finally{
   frame.src='about:blank';await pause(100);
   if(original===null)localStorage.removeItem(currentKey);else localStorage.setItem(currentKey,original);
   await new Promise(resolve=>{const req=indexedDB.open('other-lives-library',1);req.onsuccess=()=>{db=req.result;if(!db.objectStoreNames.contains('lives'))return resolve();const tx=db.transaction('lives','readwrite');for(const id of created)tx.objectStore('lives').delete(id);tx.oncomplete=resolve;tx.onerror=resolve;};req.onerror=resolve;});db?.close();
+  if(output.dataset.status==='cleaning')output.dataset.status='passed';
   document.querySelector('#run').disabled=false;
  }
 };

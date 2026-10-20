@@ -38,6 +38,8 @@
    if (!p.id || ids.has(p.id)) issue('person.id', 'Missing or duplicate person identity.'); ids.add(p.id);
    if (!Number.isInteger(p.age) || p.age < 0 || p.age > 160) issue('person.age', 'Invalid family/contact age.');
    if (!p.alive && p.diedAt !== undefined && p.age !== p.diedAt) issue('person.death-age', 'A deceased person continued ageing.');
+   if(p.alive&&['Mother','Father'].includes(O.parentRole(p))&&p.age-s.age<14)issue('family.parent-timeline','Living parent age contradicts the player’s birth.');
+   if(p.role==='Child'&&p.age>s.age-14)issue('family.child-timeline','Child age contradicts the parent’s age.');
    if (p.role === 'Partner' && p.age < 18 && ((p.knownSince ?? 0) >= 18 || ['cohabiting','married'].includes(p.relationshipStage) || s.age - p.age > 2)) issue('family.partner-age', 'Adult partnership with a child.');
   }
   if (s.pending && !O.EVENTS.some(e => e.id === s.pending)) issue('decision.unknown', 'Unknown pending decision.');

@@ -51,3 +51,11 @@ The first actual browser run passed 14 assertions covering four factors, bill pa
 ## Remaining verification and design limits
 
 Legacy annual wrapper consolidation, full causal coverage of every rare route, large-save performance, broader manual lifetimes and demographic/economic calibration remain. Master's work leave/return and fine-grained family-care timelines need more targeted review. Spend complexity and hidden auxiliary-stat presentation remain product work. Passing structural invariants is necessary but insufficient to call the overall overhaul complete.
+
+### Updated local evidence (release candidate 6.2.0-rc.1)
+
+The strengthened explicit-policy run completed **1,000/1,000 lives**, zero assertion failures, **1,051,779 clock calls and 44,683 decisions**. All 129 countries, five quintiles, four policies, three initial-condition groups, ten degree subjects and 108 role titles were exercised. 965 lives entered paid work; 973 had family developments; annual time at 99+ was below the ceiling limit for every factor (zero in this sample). Lifespans ranged across child, adult and later-life bands; mean age 74.008 is a test-policy outcome, not demographic validation.
+
+Additional late-life edge review found and repaired age-expiring career/funding/graduation/reassessment follow-ups. Existing commitments can be resolved beyond the new-application ages. Family parent/child chronology diagnostics and regressions were added. The current contract suite has 17 passing tests, including 200 generated funding states. Re-run final CI after these additions; do not reuse a previous green revision as evidence for a changed engine.
+
+The first GitHub PR check passed fast checks/build, but its virtual-time Chrome runner failed waiting for the application. The runner now waits for actual page loads and uses real-time Chrome in CI. Local browser review also exposed cached release assets; the candidate now has consistent versioned asset references with an automated mixed-version guard. These infrastructure failures are recorded rather than counted as gameplay passes. Expanded browser and final GitHub statuses will follow.

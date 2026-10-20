@@ -1,9 +1,11 @@
 {
   "name": "other-lives",
-  "version": "6.1.0",
+  "version": "6.2.0-rc.1",
   "private": true,
   "description": "Buildless, browser-local life simulation with a dependency-free QA suite",
-  "engines": {"node": ">=22"},
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "check": "node scripts/check.cjs",
     "test": "node scripts/test.cjs",
