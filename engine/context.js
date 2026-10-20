@@ -22,7 +22,7 @@ O.upgradeLife=s=>{
  if(!s.memories)s.memories={};
  if(!s.flags)s.flags={};
  if(s.people)for(const p of s.people){if(p.role==='Parent')p.role=p.gender==='F'?'Mother':'Father';if(!p.residence)p.residence=p.role==='Mother'||p.role==='Father'||p.role==='Sibling'?'Family home':p.role==='Partner'?'Your household':p.role==='Child'?'Your household':'Nearby or elsewhere';if(!Number.isFinite(p.annualIncome))p.annualIncome=(p.role==='Mother'||p.role==='Father')?Math.max(0,Math.round((s.familyIncome||0)*(p.role==='Mother'?.43:.57))):0;}
- if(!s.familyDebts)s.familyDebts=Math.round((s.strata||0)<=1?(s.familyIncome||0)*.16:0);
+ if(s.familyDebts===undefined)s.familyDebts=Math.round((s.strata||0)<=1?(s.familyIncome||0)*.16:0);
  if(!s.factSeen)s.factSeen={};
  return s;
 };

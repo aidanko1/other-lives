@@ -70,3 +70,8 @@ test('untracked legacy family cash is marked unknown without creating money or r
  assert(!O.consistencyIssues(a).some(x=>x.code==='money.familyCash'));
  const avatar=O.spriteAvatar;try{O.spriteAvatar=()=>'';assert.match(O.familyHTML(a),/No opening savings were invented/);}finally{O.spriteAvatar=avatar;}
 });
+test('a known zero family-debt balance stays zero through migration and later adapters',()=>{
+ const s=student();s.strata=0;s.familyIncome=5000;s.familyDebts=0;delete s.schemaVersion;
+ const loaded=O.migrateLife(s);assert.equal(loaded.familyDebts,0,'loading must not create a family liability');
+ for(let i=0;i<3;i++){O.upgradeLife(loaded);assert.equal(loaded.familyDebts,0,'a cleared liability reappeared');}
+});

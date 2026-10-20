@@ -24,3 +24,5 @@ The private13-record backup was inspected read-only: migration/idempotence/input
 
 ## Remaining scope
 The general repair/annual wrapper chains, command-specific candidate/bill caches, unified employment transitions, full asset/debt ledger, balance calibration and complete reference/player review remain unfinished. These changes do not certify a stable release or deploy production.
+
+Follow-up audit found a falsy-default defect in engine/context.js: a known zero family debt was repeatedly re-created as16% of income for poorer households. A red regression reproduced0→800 on migration. The existing owner now initializes only undefined; cleared debts stay cleared. This follow-up requires fresh final CI.
