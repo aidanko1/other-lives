@@ -1,6 +1,6 @@
 # Other Lives
 
-An independent browser-local life simulation. The published baseline is v6.1.0. Engineering work for `6.2.0-rc.1` is isolated on `quality/simulation-foundation` and reviewed in PR #1; it is not yet a completed overhaul or a published stable release.
+An independent browser-local life simulation. The published baseline is v6.1.0. Engineering work for `6.2.0-rc.2` is isolated on `quality/simulation-foundation` and reviewed in PR #1; it is not yet a completed overhaul or a published stable release.
 
 Start development with [AGENTS.md](AGENTS.md), [GAME_DESIGN.md](GAME_DESIGN.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [TESTING.md](TESTING.md). [AUDIT.md](AUDIT.md) records baseline defects and prior-requirement gaps; [CHANGELOG.md](CHANGELOG.md) records repairs and outstanding work. Older release notes below are historical claims, not a substitute for current checks.
 

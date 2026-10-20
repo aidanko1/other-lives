@@ -7,7 +7,7 @@ Baseline: published 6.1.0, commit `4072fd4997992cb7fd6bf78d7f0c9cab41a7379f`. No
 - Recorded repository-wide inventory, baseline test results, prior-requirement gaps and prioritized causes in `AUDIT.md`.
 - Extracted embedded engine, narrative and browser UI scripts. The UI now boots once after all mechanics load. Existing registries/content retained: 129 countries, 853 events, 280 moments, 42 routes, 37 career tracks, ten degrees.
 - Separated school access from enrolment; preschool characters do not attend primary school. Learning at home explicitly leaves formal enrolment false.
-- Added common eligibility checks at delivery/application, successful-choice history/cooldowns, deterministic Fisher–Yates agenda shuffle, atomic guarded commands and expanded temporal/state diagnostics.
+- Added common eligibility checks at delivery/application, successful-choice history/cooldowns, deterministic Fisher–Yates agenda shuffle, atomic guarded commands (including eligibility validation) and expanded temporal/state diagnostics.
 - Added pure versioned save migrations, future-version rejection and exact-ID archive export. All load/import/resume/replay entry points use migration. Paused lives can be deleted; failed deletion no longer reports success; deleting the current record clears its pointer.
 - Shared finite family-funding quotes, reserve protection and transfers across undergraduate and master's study. Family-assisted master's tuition and essential living support now work without creating unrequested debt.
 - Fixed cached romantic candidates failing to age while an encounter waited. Found through a reproducible seed in the new release harness; retained a regression.

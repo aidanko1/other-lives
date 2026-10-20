@@ -1,7 +1,7 @@
 /* Shared simulation contracts. Queries do not consume simulation randomness. */
 (function (O) {
  'use strict';
- O.VERSION='6.2.0-rc.1';
+ O.VERSION='6.2.0-rc.2';
  const repeatable = new Set(['career-search-results', 'choose-degree-subject', 'university-funding-review', 'degree-assessment-review', 'life-route-decision', 'graduate-next-step']);
  O.rules = {
   schoolStartAge: 6,
