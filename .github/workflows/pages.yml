@@ -23,13 +23,20 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _site
-          cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js sw.js manifest.webmanifest _site/
+          if [[ -f "Other-Lives-v5.6-Researched-Countries.zip" ]]; then
+            unzip -oq "Other-Lives-v5.6-Researched-Countries.zip" -d _site
+            test -s _site/index.html
+            test -s _site/evidence-depth.js
+            grep -q 'evidence-depth.js' _site/index.html
+            echo "5.6.0" > _site/release-version.txt
+          else
+            cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js sw.js _site/
+            test -s _site/index.html
+            echo "5.5.0" > _site/release-version.txt
+          fi
+          cp manifest.webmanifest _site/
           if [[ -d icons ]]; then cp -R icons _site/icons; fi
           if [[ -f icon.svg ]]; then cp icon.svg _site/; fi
-          echo "5.5.0" > _site/release-version.txt
-          test -s _site/index.html
-          test -s _site/age-culture-audit.js
-          test -s _site/life-depth.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
