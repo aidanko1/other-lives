@@ -1,7 +1,16 @@
-# Other Lives v5.9 — A life shaped by particular circumstances
+# Other Lives v5.9.2 — Connected education and family memories
 
 Other Lives is an **independent** fictional life simulator. It is not affiliated with *1 in 8 Billion* and does not use its proprietary game code, artwork, text or database.
 
+
+## v5.9.2 update
+
+- Memories refer to people by their relationship: your mum, dad, sister, friend or partner. Existing journal text is formatted too, without changing names in identity records. Pet names remain personal.
+- Parents can cover all university tuition and essential student living costs if their available savings and assets allow it. Contributions protect household reserves, are recorded as gifts, and are reassessed annually against current means, dependants, retirement and care needs.
+- A funding shortfall opens a concrete course decision: confirm affordable funding, apply for a grant, consider a part-time route or take a year away to work. No tuition loan is silently created. Payments, study progress and work hours persist across the thread.
+- Nineteen additional course/funding moments and a supervised placement connect study to family relationships, pressure, skills and later relevant job offers. All probabilities/prices are illustrative game assumptions.
+- The [reference-game audit](REFERENCE_GAME_AUDIT.md) records verified major routes, eligibility and anti-repetition mechanisms from the official 1in8b.life UI and update history. It is a development reference, not a claim that all those routes are implemented here.
+- Verified full/partial parental support, cash/asset conservation, reserves, annual renewal, funding holds, grants, pause/resume, part-time progression and graduation fees. Preserves v5.9.1 artwork aspect ratio.
 
 ## v5.9 update
 

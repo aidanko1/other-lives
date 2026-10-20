@@ -52,7 +52,7 @@ let demo;O.drawScene=function(canvas,_scene,s){if(!s?.country){if(!demo){demo=O.
  // 24 by 8 tiles. Flat overhead ground; no horizon, sky, gradients or labels.
  const urban=s.urban,arid=!urban&&['EG','SA','AE','IR','PK','ET','KE','MA'].includes(s.country.code),cool=!urban&&['GB','DE','PL','CA','NZ'].includes(s.country.code);
  const ground=urban?['#a8b0b0','#889898','#c0c8c0']:arid?['#d8c080','#b89860','#e8d098']:cool?['#78a870','#508858','#a0c080']:['#50b080','#28885b','#78c088'];
- O.sceneEnvironment={kind:urban?'urban paving':arid?'dry countryside':cool?'temperate countryside':'lush countryside',place:s.location.name};
+ O.sceneEnvironment={kind:urban?'urban paving':arid?'dry countryside':cool?'temperate countryside':'lush countryside',place:s.location?.name||s.country.name};
  for(let y=0;y<128;y+=16)for(let x=0;x<384;x+=16){r(x,y,16,16,ground[0]);const n=hash(x+'|'+y);if(urban){r(x,y,16,1,ground[1]);r(x,y,1,16,ground[1]);r(x+2,y+2,13,1,ground[2]);if(n%5===0)r(x+9,y+8,3,1,ground[1]);}else{r(x+2,y+4,1,2,ground[1]);r(x+1,y+3,1,1,ground[1]);r(x+3,y+3,1,1,ground[1]);if(n%3){r(x+10,y+11,2,1,ground[2]);r(x+11,y+10,1,1,ground[2]);}if(n%5===0)r(x+7,y+7,2,1,ground[1]);}}
  // A narrow border of clustered foliage gives the strip the reference's dense greens.
  for(let x=0;x<384;x+=16){r(x,0,16,12,'#104830');r(x+1,1,13,9,'#206838');r(x+2,2,5,3,'#389840');r(x+9,5,5,4,'#389840');r(x+3,2,3,1,'#70b848');r(x+8,10,4,3,'#206838');leafCluster(k,x-2,2);leafCluster(k,x+7,5);}

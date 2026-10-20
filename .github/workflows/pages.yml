@@ -30,10 +30,14 @@ jobs:
           node --check life-dynamics.js
           node --check life-moments.js
           node --check life-relationships.js
+          node --check life-university.js
+          node --check life-memory-voice.js
           node tests/life-clarity.test.cjs --quick
           node tests/birth-reveal.test.cjs
           node tests/life-dynamics.test.cjs
-          cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js life-clarity.js life-clarity.css life-experience.js life-experience.css pixel-household.js life-evidence.js life-dynamics.js life-dynamics.css life-moments.js life-relationships.js sw.js _site/
+          node tests/memory-voice.test.cjs
+          node tests/university.test.cjs
+          cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js life-clarity.js life-clarity.css life-experience.js life-experience.css pixel-household.js life-evidence.js life-dynamics.js life-dynamics.css life-moments.js life-relationships.js life-university.js life-memory-voice.js sw.js _site/
           test -s _site/index.html
           cp release-version.txt _site/
           cp manifest.webmanifest _site/
