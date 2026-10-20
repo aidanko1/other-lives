@@ -19,7 +19,7 @@ test('cached currency formatting keeps the fixed display conventions',()=>{
  for(const [currency,rate]of [['GBP',.75],['USD',1],['HKD',7.8],['EUR',.9]]){O.setCurrency(currency);for(const amount of [0,1234.5,-321,Infinity]){const n=Number.isFinite(amount)?amount:0;if(!Number.isFinite(amount))continue;assert.equal(O.money(amount),new Intl.NumberFormat('en-GB',{style:'currency',currency,maximumFractionDigits:0}).format(n*rate));}}O.setCurrency('GBP');
 });
 test('saved lives continue identically at birth and after decisions at several ages',()=>{
- for(const age of [0,12,25,65]){const s=adult();s.age=age;s.pending=null;s.agenda=[];O.snapshot(s);const a=clone(s),b=JSON.parse(JSON.stringify(s));for(let i=0;i<16&&a.status==='alive';i++){
+ for(const age of [0,12,25,65]){const s=adult();s.age=age;s.pending=null;s.agenda=[];O.snapshot(s);const frozen=JSON.stringify(s),a=clone(s),b=JSON.parse(JSON.stringify(s));for(let i=0;i<16&&a.status==='alive';i++){
   if(a.pending){assert.equal(a.pending,b.pending);const e=O.EVENTS.find(e=>e.id===a.pending),index=e.options(a).findIndex(o=>!o.disabled);assert(index>=0);assert(O.applyChoice(a,index));assert(O.applyChoice(b,index));}else{O.advanceMonth(a);O.advanceMonth(b);}assert.deepEqual(a,b);
- }assert.deepEqual(s,JSON.parse(JSON.stringify(s)));}
+ }assert.equal(JSON.stringify(s),frozen,'continuing a copy must not change the source save');}
 });

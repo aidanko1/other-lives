@@ -18,6 +18,11 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   await page.evaluate(()=>{const s=JSON.parse(localStorage.getItem('other-lives-current-v1'));s.status='alive';s.pending=null;window.OL.finish(s,'Synthetic browser ending');localStorage.setItem('other-lives-current-v1',JSON.stringify(s));});await page.reload();await click('resume');assert(await page.locator('body').innerText().then(t=>t.includes('Life complete')));await page.screenshot({path:results+'/ending-desktop.png',fullPage:true});
   await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');const next=await read();assert.notEqual(next.id,saved.id,'another life must have a new identity');
   await page.setViewportSize({width:390,height:844});await page.locator('[data-action="game-tab"][data-tab="family"]').click();assert(await page.locator('.story-tabs').isVisible());await page.screenshot({path:results+'/family-mobile.png',fullPage:true});
+  // Retain the earlier branch's browser assertions and execute them with real asynchronous waits.
+  const legacy=await context.newPage();await legacy.goto('http://127.0.0.1:8000/tests/browser.html?autorun=1');
+  await legacy.waitForFunction(()=>['passed','failed'].includes(document.querySelector('#results')?.dataset.status),{},{timeout:45000});
+  const legacyResult=await legacy.locator('#results').innerText();console.log(legacyResult);
+  assert.equal(await legacy.locator('#results').getAttribute('data-status'),'passed',legacyResult);await legacy.close();
   assert.deepEqual(errors,[],'browser errors');console.log('PASS: Chromium birth/choice, tab pause, save/reload, downloaded export/import, ending display, next life, mobile navigation. Natural full-life timing and reference hands-on play remain unverified.');
  }catch(e){await page.screenshot({path:results+'/browser-failure.png',fullPage:true}).catch(()=>{});throw e;}finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

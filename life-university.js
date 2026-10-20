@@ -7,11 +7,9 @@ O.parentStudyBudget=function(s){
  const assets=Math.max(0,Math.floor(((s.familyAssets||0)-(s.familyDebts||0)-s.country.ppp*.6)*(retired?.08:.12)));
  return {cash:ps.length?cash:0,assets:ps.length?assets:0,reserve,dependents,retired,ill,parents:ps.length,wealth:Math.max(0,(s.familyCash||0)+(s.familyAssets||0)-(s.familyDebts||0))};
 };
-O.degreeFunding=function(s,d){const budget=O.parentStudyBudget(s),same=s.study?.degreeId===d.id,gross=Math.round(s.country.ppp*d.fee*(same&&s.study.mode==='part-time'?.5:1)),grant=same?Math.round(gross*(s.study.grantRate||0)):0,fee=gross-grant;
- const family=Math.min(fee,Math.floor((budget.cash+budget.assets)*(same?s.study.familyShare??1:1))),cashPart=Math.min(budget.cash,family),assetPart=family-cashPart;
- return {gross,grant,fee,family,cashPart,assetPart,personal:Math.max(0,fee-family),...{budget}};
-};
-function drawFamily(s,f){s.familyCash=Math.max(0,(s.familyCash||0)-f.cashPart);s.familyAssets=Math.max(0,(s.familyAssets||0)-f.assetPart);}
+O.degreeFunding=function(s,d){const same=s.study?.degreeId===d.id;return O.familyFundingQuote(s,s.country.ppp*d.fee*(same&&s.study.mode==='part-time'?.5:1),{grantRate:same?s.study.grantRate||0:0,familyShare:same?s.study.familyShare??1:1});};
+function drawFamily(s,f){O.commitFamilyGift(s,f);}
+
 function record(s,f){const st=s.study,record={age:s.age,gross:f.gross,grant:f.grant,family:f.family,cashPart:f.cashPart,assetPart:f.assetPart,personal:f.personal};st.funding.history.push(record);st.funding.totalFamily+=f.family;st.funding.totalPersonal+=f.personal;st.funding.last=record;st.funding.nextFeeAge=s.age+1;return record;}
 const applyDegree=O.applyForDegree;O.applyForDegree=function(s,id){if(['enrolled','paused','funding-review'].includes(s.study?.status)&&!s.flags.chooseExistingSubject)return 'You already have a course in progress. Review its funding and commitments before starting another.';const d=O.DEGREES.find(d=>d.id===id);if(!d)return applyDegree(s,id);const f=O.degreeFunding(s,d),cash=s.familyCash,assets=s.familyAssets,existing=s.flags.chooseExistingSubject,result=applyDegree(s,id);
  if(s.study?.status!=='enrolled'||s.study.degreeId!==id||s.study.funding)return result;
@@ -30,10 +28,10 @@ const living=O.livingCost;O.livingCost=function(s,base){const st=s.study;let pai
   else{drawFamily(s,f);s.cash-=f.personal;const last=st.funding.last;paid=record(s,f);if(last&&last.family!==f.family&&Math.abs(last.family-f.family)>f.gross*.2)O.journal(s,`${st.course}: your parents’ support changes`,`Their contribution changes from ${O.money(last.family)} to ${O.money(f.family)}. You pay ${O.money(f.personal)} from savings for this year. Family savings, assets, dependants, retirement and care needs determine the available support.`,'education');}
  }}
  let total=living(s,base);
- if(enrolled(s)&&st.mode==='full-time'&&st.funding?.managed){
-  const eligible=Math.max(0,total-(s.budgetBreakdown.pet||0)-(s.budgetBreakdown.routines||0)),prior=st.funding.livingHistory?.find(x=>x.age===s.age),budget=O.parentStudyBudget(s),amount=Math.min(eligible,prior?.amount??budget.cash+budget.assets);
-  if(amount>0){if(!prior){const cashPart=Math.min(amount,budget.cash),assetPart=amount-cashPart;drawFamily(s,{cashPart,assetPart});(st.funding.livingHistory??=[]).push({age:s.age,amount,cashPart,assetPart});st.funding.totalLiving=(st.funding.totalLiving||0)+amount;}total-=amount;s.budgetBreakdown.familyStudyLiving=amount;let remaining=amount;for(const key of ['basic','homePayment','care','childSchooling']){const n=Math.min(remaining,s.budgetBreakdown[key]||0);s.budgetBreakdown[key]-=n;remaining-=n;}}
- }
+ if(enrolled(s)&&st.mode==='full-time'&&st.funding?.managed) total=O.supportStudyLiving(s,total,st.funding);
+ const postgraduate=s.routes?.active?.masters;
+ if(postgraduate?.stage==='studying'&&postgraduate.mode==='full-time'&&postgraduate.funding?.familyAssisted)total=O.supportStudyLiving(s,total,postgraduate.funding);
+
  if(paid){s.budgetBreakdown.tuition=paid.personal;s.budgetBreakdown.parentTuition=paid.family;s.budgetBreakdown.tuitionGrant=paid.grant;s.flags.tuitionPaidUpfront={age:s.age,personal:paid.personal};}return total;
 };
 O.reviewUniversityFunding=function(s,action){const st=s.study,d=O.DEGREES.find(d=>d.id===st?.degreeId);if(!st||!d||!['funding-review','paused',...(action==='grant'?['enrolled']:[])].includes(st.status))return 'There is no outstanding course funding decision.';

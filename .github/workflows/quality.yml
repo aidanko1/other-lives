@@ -1,9 +1,10 @@
 name: Other Lives quality
 on:
   push:
-    branches: [main, 'engineering/**']
+    branches: ['engineering/**']
   pull_request:
     branches: [main]
+  workflow_call:
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,7 +21,9 @@ jobs:
         with:
           node-version: '22'
       - run: node tests/static-check.cjs
+      - run: npm run build
       - run: node --test --test-concurrency=2 tests/*.test.cjs
+      - run: node tests/registry-sweep.test.cjs
   simulation:
     runs-on: ubuntu-latest
     timeout-minutes: 35

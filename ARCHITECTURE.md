@@ -1,38 +1,45 @@
-# Architecture — observed baseline and intended boundaries
+# Architecture and ownership
 
-Baseline: 4072fd4997992cb7fd6bf78d7f0c9cab41a7379f (v6.1.0).
-This describes the current system; it does not claim the target architecture is implemented.
+## Boot and dependencies
 
-## Current execution
-A static browser application, no bundler or runtime package dependency. index.html contains CSS, country/job/event/story definitions, core state functions, clock and UI, localStorage and IndexedDB archive handling. Classic scripts execute in HTML order and share window.OL.
-External scripts extend or replace existing OL functions. tests/engine.cjs loads the same script order into a Node VM, excluding UI/theme/service-worker bootstraps. This exercises the production engine but cannot prove DOM/clock/storage behaviour.
+Buildless HTML/CSS/classic JavaScript; Node >=22 for development checks. No production or test package dependencies. `index.html` is the explicit ordered script manifest. Every engine/data extension loads synchronously before **one** `ui/app.js` startup. `scripts/check.cjs` verifies dependency existence, syntax, registry identities and boot order. `scripts/build.cjs` packages an explicit production allowlist into `_site`; tests/docs/private fixtures do not ship.
 
-| System | Main implementation files | Shared state |
-|---|---|---|
-| Initial/core world | index.html, world-countries.js, world-simulation.js | seed/rng, country, birth, people, factors, journal |
-| Local context | culture-economy.js, age-culture-audit.js, life-evidence.js | location, household context, facts, spending |
-| Narrative | life-depth.js, life-moments.js, life-memory-voice.js, life-career-moments.js | agenda, subject IDs, used templates/history |
-| People | life-clarity.js, life-relationships.js, life-route-family.js, life-continuity.js | people, closeness, residence, care, estates |
-| Education/work | life-dynamics.js, life-university.js, life-flow.js, life-careers.js, life-route-education.js | study/funding, qualifications, employment, experience |
-| Finance | life-clarity.js, life-experience.js, life-dynamics.js, life-route-assets.js, life-route-health-money.js | cash/debt/property, housing/mortgage, ledger, budget |
-| Staged intentions | life-routes.js and life-route-*.js | routes.active/history/policies, due stages, participants |
-| Cross-system repairs | life-integrity.js, life-continuity.js | compatibility and invariant repairs |
-| Presentation | index.html, life-*.css, pixel-household.js, render helpers in several JS files | UI-local tab/modal/clock flags; some helpers also mutate life state |
-| Offline entry | sw.js, manifest.webmanifest, icons | service worker currently clears caches; no full offline cache |
+The extraction preserved the original authored content. The old extension graph still exists and must be consolidated incrementally, not replaced wholesale with a smaller game.
 
-## Current action path
-create → layered initialisers → agenda; advanceMonth → pending follow-up or due story/decision → monthly position → birthday → layered passive yearly updates → mortality → next agenda.
-applyChoice → layered rule/financial handlers → selected option mutation → journal/ledger → possible follow-up pending decision.
-Routes share one life-route-decision event; readyRoute selects the next active due route. Route eligibility, invalidation and follow-up stage logic therefore all matter.
-Saving serialises the life state; archive snapshots preserve earlier copies. Preserve storage keys other-lives-current-v1 and archive identity during this stage.
+| Ownership | Files and responsibility |
+| --- | --- |
+| Base configuration/data | `engine/config.js`, `world-countries.js`: definitions, country/name pools and starting circumstances |
+| Core state and clock | `engine/core.js`, `engine/clock.js`: seeded RNG, creation, contacts, annual core, journal, snapshots, monthly event delivery and choice recording |
+| Retained content | `engine/events.js`, `engine/stories.js`, `engine/extra-events.js`, `engine/persistent-events.js`, `culture-economy.js`: original cards/stories and contextual generators |
+| Evidence | `engine/context.js`, `engine/demographics.js`, `world-simulation.js`, `life-evidence.js`: mortality assumptions, frozen data and sourced explanatory context |
+| Legacy adaptations | `engine/legacy-coherence.js`, `age-culture-audit.js`, `life-depth.js`, `life-clarity.js`, `life-experience.js`: old save adapters, ages, education tracks, money/UI helpers |
+| Current education/work | `life-dynamics.js`, `life-university.js`, `life-flow.js`, `life-careers.js`: subjects, hours, fees, progress, qualified offers and experience ladders |
+| Family/narrative | `life-moments.js`, `life-relationships.js`, `life-memory-voice.js`, `life-continuity.js`, `life-career-moments.js`: subjects, interpersonal development, estates and wording |
+| Factors and routes | `life-balance.js`, `life-routes.js`, `life-route-{education,enterprise,family,world,special,health-money,assets}.js`, `life-integrity.js`: factor effects and persistent route stage contracts |
+| Art | `pixel-household.js`, `engine/pixel-legacy.js`: original canvas tile/sprite drawing and legacy fallback |
+| Shared contracts | `engine/rules.js`: eligibility, enrolment predicate, deterministic shuffle, family funding quote/commit and pure annual quote; `engine/state.js`: schema migrations and consistency/transition diagnostics; `engine/commands.js`: atomic command boundary |
+| Browser | `ui/app.js`: rendering, navigation, playback, current-save storage, IndexedDB archive, JSON import/export and replay UI |
 
-## Target boundaries (not yet implemented)
-One explicit state schema/version and migration entry point. Pure eligibility and selectors. Named transitions for study, employment, household, ownership/debt and death. A documented ordered year pipeline with registered hooks rather than reassignment chains. State mutation belongs at actions/migration, not rendering.
-An event contract supplies stable ID, eligibility, prerequisites, options, costs/outcomes and follow-up/invalidation. Rendering does not consume RNG or secretly change those contracts.
-Refactor one boundary at a time after recording existing behaviours. Regression fixtures must protect intended outcomes and save continuity. Avoid claiming centralisation while the old wrappers still own behaviour.
+## State and transitions
 
-## Invariants
-Money stays finite; assets and liabilities stay distinct; secured debt stays traceable when home use changes; transfers conserve value apart from named costs/returns.
-A completed course is not still full-time schooling; professional roles require the relevant route; work hours and pay agree.
-People have stable identities, coherent ages and household presence. Dead people do not age/work; finalising a life is idempotent.
-Seeds reproduce simulation outcomes. Metadata identifiers/timestamps are separate from simulation randomness. No sort comparator consumes RNG.
+One serializable life record contains seeded RNG, clock, country/birth/current place, household resources, four factors/latent states, people, education/study, employment/experience, routes, money/debt history, journal, pending decision, agenda and snapshots. No function or DOM node belongs in a save.
+
+- `create(settings)` establishes a birth. Integer seeds, including zero, are normalised to uint32; unspecified seeds are random. Identity timestamps/random IDs are separated from simulation RNG in the VM test loader.
+- `advanceMonth(state)` delivers a queued highlight or increments the month. At a birthday it runs annual systems and mortality, then creates the next agenda. Route/funding/graduate follow-ups may interrupt before ordinary highlights.
+- `rules.eventBlock` / `eventEligible` is the shared prerequisite check. The monthly delivery and choice application use it. Legacy per-event `when` functions still own specific prerequisites.
+- `applyChoice` records `used`, `choiceHistory` and `journal.eventId` only after a successful choice. Staged events have explicit repeat exceptions; ordinary events default to seven years and milestones occur once.
+- `commands.js` snapshots the state at `applyChoice`, `startRoute` and `planAction`. Rejections restore the previous record. Exceptions or newly introduced consistency issues roll back and surface an error. Nested commands participate in the outer transaction. Existing legacy issues are not silently erased. This boundary preserves successful object references; rollback replaces state fields.
+- Funding quotes are pure. `payStudyFunding` re-quotes before committing. `commitFamilyGift` conserves family money. `supportStudyLiving` records annual support once. `livingCost` remains a **settlement** operation; use `quoteAnnualCosts` for previews.
+
+## Persistence
+
+`schemaVersion: 1` is the first explicit schema. `migrateLife` clones input, refuses future versions, separates preschool access/attendance and invokes retained adapters. It is tested for idempotence. Historical prose is not used to invent exact event IDs or unknowable expenses. Current load, imports, archived resume and replay use this boundary. Original exported inputs remain unchanged.
+
+Current life: localStorage `other-lives-current-v1`. Archive: IndexedDB `other-lives-library` / `lives`, with a localStorage fallback. `other-lives-life-v1` and `other-lives-backup-v1` envelopes remain supported. Exact-ID export never substitutes another record. Deletion must report storage success; deleting the current record clears its pointer to prevent resurrection.
+
+## Remaining architectural debt
+
+Legacy closures still capture older ensure/annual/query implementations. The command boundary is not yet the sole mutation path: annual routines and several lower-level helpers mutate directly. `livingCost` still combines calculation with annual settlement. Legacy `ensureClarity` can migrate/journal during reads. Some bill/candidate queries cache prepared card data. Invariant validation is observational, not proof of all causal relationships. Next extraction should create an explicit annual accounting ledger and formal education/people state machines with differential tests before deleting wrapper layers. Atomic snapshots need profiling for very large archived journals.
+
+## Latest integration checkpoint
+The engineering/fidelity-reliability-baseline branch incorporates b31a7af as a second parent and retains its extracted engine, existing tests and migration work. Additional ownership/ending fixes stay in life-route-assets.js. Currency formatters are cached in life-clarity.js. Refer to ENGINEERING_AUDIT.md and BUGS.md for this cycle's independently observed failures.

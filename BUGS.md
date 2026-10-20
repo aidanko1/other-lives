@@ -1,0 +1,17 @@
+# Reproducible bug register
+
+These are independently reproducible engineering findings. Fix status is provisional until the integration revision passes CI.
+Original baseline is 4072fd4. First red regression run: https://github.com/aidanko1/other-lives/actions/runs/39491583111 (a5b4ed4).
+
+| ID / severity | Expected versus actual; reproduction state/steps | Cause and correction | Regression / status |
+|---|---|---|---|
+| OL-001 / High | Seed 0 should replay. Create GB twice with seed:0. Baseline replaces zero with random seeds | Truthiness default in create. Accept integer zero and normalise uint32 in engine/core.js | reliability: zero seed. Red confirmed; fix awaits CI |
+| OL-002 / High | A let property's mortgage must survive moving back in. Seed 2218 GB synthetic age40, property100000, debt50000, rentalMortgage balance50000 annual6000. Start housing-review → Move into property currently let | Rebuilding housing dropped mortgage metadata while total debt remained. Preserve secured balance/payment, remove rental flag, test next principal payment and unchanged net worth | reliability: reoccupying home. Red confirmed; fix awaits CI |
+| OL-003 / High | End-of-life effects once. Seed2218 GB age40, insurance on, will present. finish twice | Asset wrapper paid insurance before checking finished state. Second call added 46400 again and altered ending history. Guard before all side effects | reliability: finish twice. Red confirmed; fix awaits CI |
+| OL-004 / Medium | Same seed must have portable agenda ordering | Random comparator passed to sort; engine-dependent comparator calls. Reuse extracted Fisher–Yates in engine/rules.js and clock.js | reliability: seeded permutation; save-replay. Old baseline lacked shuffle; integration awaits CI |
+| OL-005 / Critical | Resolved decisions must update used/cooldown; restored pending ID must not replay a reward | Monthly and older annual implementations diverged. Integrated b31a7af records successful choice and rechecks shared eligibility | contracts cooldown/replay and simulation. Existing branch pass is historical, integrated CI pending |
+| OL-006 / Critical | Newborn may have school access, not attendance. School-entry choice at six decides enrolment | One school boolean represented both. Integrated explicit schoolAccess and migration plus attendance checks | contracts newborn/school-entry, registry-sweep; integrated CI pending |
+| OL-007 / Critical | Invalid/stale commands do not change funds/history/RNG | Baseline trusted pending ID/options. Integrated guarded eligibility and rollback | contracts stale choices/failed commands; integrated CI pending |
+| OL-008 / High | Load/import/replay share a versioned boundary and reject future versions | Several inconsistent ensure chains. Integrated clone-based migrateLife and UI load paths | contracts migration + eight save-replay round trips; private export not tested |
+| TEST-001 / Test defect | JSON round trip should preserve content; VM objects need not share host prototypes | New save assertion compared VM object prototypes using deepStrictEqual. Replaced with exact serialised state/source immutability assertion; no fields ignored | Documented correction; rerun required |
+| CI-001 / Unknown | Earlier quality branch browser runner should report the actual failed check | Chrome dump-dom/virtual-time run failed without visible diagnostic. Retain every browser assertion and run it under Playwright with an explicit wait and captured result | browser-smoke legacy runner; investigate returned failure if any |

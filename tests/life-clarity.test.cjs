@@ -12,10 +12,10 @@ const O=window.OL;
 function adult(country='GB',seed=23){let s=O.create({country,seed});s.age=30;s.job='Retail worker';s.income=15000;s.cash=20000;s.debt=0;s.education=O.EDU[4];O.ensureClarity(s);return s;}
 const bill=O.EVENTS.find(e=>e.id==='unexpected-expense');
 {
- const s=adult();s.pending=bill.id;s.used[bill.id]=s.age;const description=bill.description(s),cash=s.cash,opts=bill.options(s);assert.equal(bill.description(s),description);const s2=JSON.parse(JSON.stringify(s));assert.equal(bill.description(s2),description);assert(O.applyChoice(s,0));assert(s.cash<cash);assert.equal(s.debt,0);assert(s.journal[0].money.cash<0);
+ const s=adult();s.pending=bill.id;const description=bill.description(s),cash=s.cash,opts=bill.options(s);assert.equal(bill.description(s),description);const s2=JSON.parse(JSON.stringify(s));assert.equal(bill.description(s2),description);assert(O.applyChoice(s,0));assert(s.cash<cash);assert.equal(s.debt,0);assert(s.journal[0].money.cash<0);
 }
 {
- const s=adult();s.income=200000;s.cash=0;s.pending=bill.id;s.used[bill.id]=s.age;assert(bill.options(s)[0].disabled);const initial=JSON.stringify(s);assert.equal(O.applyChoice(s,0),false);assert.equal(JSON.stringify(s),initial);assert(O.applyChoice(s,1));assert(s.debt>0);assert.equal(s.flags.billPlans[0].balance,s.debt);
+ const s=adult();s.income=200000;s.cash=0;s.pending=bill.id;assert(bill.options(s)[0].disabled);const initial=JSON.stringify(s);assert.equal(O.applyChoice(s,0),false);assert.equal(JSON.stringify(s),initial);assert(O.applyChoice(s,1));assert(s.debt>0);assert.equal(s.flags.billPlans[0].balance,s.debt);
  s.agenda=[];s.month=0;s.cash=s.debt;const before=s.debt;O.advanceMonth(s);assert(s.debt<before);const paid=s.debt;O.advanceMonth(s);assert(s.debt<paid);
 }
 {

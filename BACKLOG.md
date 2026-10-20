@@ -27,3 +27,6 @@ Baseline of this backlog: 4072fd4. See CHANGELOG.md for cycle results.
 
 ## Remaining verification
 Private 13-life user backup not re-audited in this cycle. Reference interactive play not available initially. Full multi-browser/mobile/accessibility evaluation and every route combination require further work.
+
+## Recovered existing engineering branch
+Integrate b31a7af's extraction, shared eligibility, migration and annual quote boundary instead of rebuilding them. Preserve its contract/registry/save/browser assertions. Revalidate all at the combined revision; do not equate this with full wrapper consolidation. Add requirements traceability and bug/release records (Phase 11).

@@ -21,6 +21,7 @@ O.schoolLabel=s=>{
  if(s.flags.educationTrack?.status==='enrolled'&&!s.flags.educationTrack.completed)return s.flags.educationTrack.name;
  if(!s.school)return s.age<6?'Not in school yet':'Not currently enrolled';
  const a=s.age,c=s.country.code;
+ if(a<6)return 'Not in school yet';
  if(c==='IN')return a<11?`Primary school · Class ${clamp(a-5,1,5)}`:a<14?`Middle school · Class ${clamp(a-5,6,8)}`:a<16?`Secondary school · Class ${a-5}`:`Senior secondary · Class ${clamp(a-5,11,12)}`;
  if(c==='HK')return a<12?`Primary school · P${clamp(a-5,1,6)}`:`Secondary school · S${clamp(a-11,1,6)}${a>=16?' · HKDSE preparation':''}`;
  if(c==='CN')return a<12?'Primary school':a<15?'Junior secondary school':'Senior secondary school · gaokao pathway';

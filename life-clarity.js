@@ -13,7 +13,8 @@ let currency='GBP';try{currency=localStorage.getItem('other-lives-currency')||'G
 if(!rates[currency])currency='GBP';
 O.currency=()=>currency;
 O.setCurrency=value=>{if(rates[value]){currency=value;try{localStorage.setItem('other-lives-currency',value)}catch{}}};
-O.money=n=>new Intl.NumberFormat('en-GB',{style:'currency',currency,maximumFractionDigits:0}).format((Number(n)||0)*rates[currency]);
+const moneyFormats=Object.fromEntries(Object.keys(rates).map(currency=>[currency,new Intl.NumberFormat('en-GB',{style:'currency',currency,maximumFractionDigits:0})]));
+O.money=n=>moneyFormats[currency].format((Number(n)||0)*rates[currency]);
 O.currencySelector=()=>`<label class="currency-choice">Currency <select aria-label="Display currency" data-change="currency">${Object.keys(rates).map(c=>`<option ${c===currency?'selected':''}>${c}</option>`).join('')}</select></label>`;
 // Values in saved stories are canonical base-unit tokens, formatted only for display.
 const symbols={GBP:'£',USD:'US$',HKD:'HK$',EUR:'€'};

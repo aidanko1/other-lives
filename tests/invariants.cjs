@@ -8,6 +8,7 @@ function validate(O,s,previous){
  for(const k of finances)assert(Number.isFinite(s[k])&&s[k]>=0,'invalid '+k+': '+s[k]);
  for(const k of factors)assert(Number.isFinite(s[k])&&s[k]>=0&&s[k]<=100,'invalid factor '+k+': '+s[k]);
  assert.equal(O.lifeIssues(s).length,0,O.lifeIssues(s).join('; '));
+ if(O.assertConsistent)O.assertConsistent(s);
  assert.equal(new Set(s.people.map(p=>p.id)).size,s.people.length,'duplicate person ID');
  for(const p of s.people){assert(Number.isInteger(p.age)&&p.age>=0,'invalid person age '+p.id);if(!p.alive&&p.diedAt!==undefined)assert.equal(p.age,p.diedAt,'deceased person continued ageing '+p.id);}
  for(let i=1;i<s.journal.length;i++)assert(s.journal[i].age<=s.journal[i-1].age,'journal time reversed');
