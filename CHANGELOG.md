@@ -15,6 +15,7 @@ Baseline: published 6.1.0, commit `4072fd4997992cb7fd6bf78d7f0c9cab41a7379f`. No
 - Added dependency/syntax/registry checks, generated financial properties, command/migration/age regressions, eight deterministic save/replay round trips, all-country age/wealth registry sweep, real browser runner, and assertion-driven worker-based full-life simulations with reproducible seeds and balance/coverage reports.
 - Fixed age-expiring late-life career/funding/graduation/reassessment cards. Added parent/child birth-chronology diagnostics.
 - Versioned every release-candidate script/CSS reference consistently and added a mixed-version guard.
+- Manual UI playtesting found raw floating-point relationship percentages; person/archive/family displays now round them, with a real-browser regression. Removed stale version text from the page title.
 - Added separate PR quality workflow and deployment dependencies. Added permanent engineering/design/architecture/testing documentation.
 
 ### Release blockers / limitations

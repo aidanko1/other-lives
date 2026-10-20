@@ -16,9 +16,10 @@ document.querySelector('#run').onclick=async()=>{
   if(!window.OL)for(const script of parsed.querySelectorAll('script[src]')){if(script.getAttribute('src').includes('ui/app.js'))continue;await new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='../'+script.getAttribute('src').replace(/^\.\//,'');s.onload=resolve;s.onerror=reject;document.head.append(s);});}
   const O=window.OL,s=O.create({country:'GB',seed:777,quintile:5});
   for(const p of s.people)p.age+=25;
-  Object.assign(s,{id:'qa-'+Date.now(),name:'QA Test Person',first:'QA',age:25,month:0,school:false,education:O.EDU[4],cash:100000,debt:0,pending:'unexpected-expense',agenda:[]});s.flags.flow.schoolLeavingResolved=true;O.ensureClarity(s);created.add(s.id);
+  Object.assign(s,{id:'qa-'+Date.now(),name:'QA Test Person',first:'QA',age:25,month:0,school:false,education:O.EDU[4],cash:100000,debt:0,pending:'unexpected-expense',agenda:[]});s.flags.flow.schoolLeavingResolved=true;s.people[0].close=95.50000000001;O.ensureClarity(s);created.add(s.id);
   await install(s);await click('[data-action="resume"]');
   check(frame.contentDocument.querySelectorAll('.stats-grid .meter').length===4,'Four factor bars render');
+  check(!frame.contentDocument.body.textContent.includes('95.50000000001')&&frame.contentDocument.body.textContent.includes('96%'),'Relationship display does not leak floating-point precision');
   await click('[data-action="choose"][data-index="0"]');
   const paid=JSON.parse(localStorage.getItem(currentKey));check(paid.cash<s.cash&&paid.debt===0,'Decision charges the quoted bill and saves');check(paid.used['unexpected-expense']===25,'Decision cooldown is saved');
   await click('[data-action="game-tab"][data-tab="profile"]');check(!!frame.contentDocument.querySelector('.passport'),'Passport navigation');
