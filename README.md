@@ -1,7 +1,23 @@
-# Other Lives v5.8 — Personal lives, budgets and consequences
+# Other Lives v5.9 — A life shaped by particular circumstances
 
 Other Lives is an **independent** fictional life simulator. It is not affiliated with *1 in 8 Billion* and does not use its proprietary game code, artwork, text or database.
 
+
+## v5.9 update
+
+- **223 original conditional life moments** replace the small generic story rotation. Eligibility checks age, schooling or degree, work and experience, wealth/debt/housing, stress and all four factors, actual named relatives, friends, partners and living pets. Each moment changes stats, and some also change closeness, practice, health, costs or earnings. Queued subjects are revalidated; cooldowns and lifetime-use limits reduce repetition. These templates are fictional, not measured national event frequencies.
+- **51 precise source-linked explanations** define cultural practices, foods, exams and other terms, including Diwali, Homowo, Class 10/12, gaokao and HKDSE. The same note and actual stat changes appear in Life unfolding and the log. Existing mortality provenance remains distinct from cultural definitions.
+- **Real locality seeds in 21 country sets**, with city/village/town and region labels. Remaining countries use a named capital or its surrounding countryside. This is illustrative locality assignment, not a population-weighted settlement database. Current and birth places are separate. The scene uses urban paving, dry countryside or grass palettes, retaining home left, household/pet centre, school/work right.
+- Name a cat or dog on adoption and rename it in Family. Family background uses five circles for the birth income quintile, with accessible text.
+- Replace repetitive yearly rest/contact clicks with **up to two ongoing routines**, available beside the log as well as in Spend. Time limits force a choice. Free and paid routines continue automatically, develop skills or bonds, and apply annual consequences. Unaffordable paid routines pause without new debt.
+- **Ten university subjects** offer visible interest fit, preparation requirements, duration, first-year funding and modelled admission probability. Fees require funds, admission is uncertain and course progress can succeed or be interrupted. Passport records the current school stage or named course, year, completed degree, and explicit work hours. Full-time study limits paid work to part-time; the first tuition year is not charged twice.
+- Specific relationship decisions cover a school-age crush, meeting a named adult, dating, planning to share a home, marriage and strained relationships. Mutual interest, trust, confidence, wellbeing, time and finances matter. A declined advance is respected. Friendships can develop without romance; named children receive their own support outcomes.
+- Work and hobby **levels 1–20 derive from actual years**, with diminishing returns. Practice affects appropriate moment eligibility, admissions, salary offers and promotions. Unsearched career changes and obsolete generic crossroads are disabled; empty searches continue quietly without an empty offer card.
+- Outstanding debt retains **itemised origins and remaining balances**, with repayments allocated against them. Annual shortfalls identify essentials, housing, tuition, care, pets, routines and interest after savings. Historical saves without provenance are labelled as unknown earlier balances. Parents support the dependent school-leaving year rather than unexplained personal living-cost borrowing.
+
+### v5.9 verification
+
+`node tests/life-dynamics.test.cjs` checks event-bank integrity, age/state/person/pet revalidation, repeat suppression, named places, five-circle quintiles, pet-name escaping, debt provenance, school-leaving costs, persistent routines, skill progression, tuition and graduation, relationship candidates and job filters. `node tests/life-clarity.test.cjs` retains finance/theme/art regressions and simulates twelve countries; `node tests/birth-reveal.test.cjs` protects the spoiler-free randomiser. Browser review checks 390px light/dark layouts, pet naming, facts with effects and university choices. Locality coverage, art templates, programme durations, admissions, prices and relationships remain a game model rather than comprehensive national datasets.
 
 ## v5.8 update
 

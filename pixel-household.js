@@ -50,13 +50,16 @@ function tree(k,x,y){const r=(x,y,w,h,c)=>{k.fillStyle=c;k.fillRect(x,y,w,h)};
 }
 let demo;O.drawScene=function(canvas,_scene,s){if(!s?.country){if(!demo){demo=O.create({country:'GB',seed:14});demo.age=30;demo.job='Office worker';demo.school=false;}s=demo;}O.ensureClarity(s);canvas.width=384;canvas.height=128;const k=canvas.getContext('2d');if(!k)return;k.imageSmoothingEnabled=false;const r=(x,y,w,h,c)=>{k.fillStyle=c;k.fillRect(x,y,w,h)};
  // 24 by 8 tiles. Flat overhead ground; no horizon, sky, gradients or labels.
- for(let y=0;y<128;y+=16)for(let x=0;x<384;x+=16){r(x,y,16,16,'#50b080');const n=hash(x+'|'+y);r(x+2,y+4,1,2,'#28885b');r(x+1,y+3,1,1,'#28885b');r(x+3,y+3,1,1,'#28885b');if(n%3){r(x+10,y+11,2,1,'#78c088');r(x+11,y+10,1,1,'#78c088');}if(n%5===0)r(x+7,y+7,2,1,'#389868');}
+ const urban=s.urban,arid=!urban&&['EG','SA','AE','IR','PK','ET','KE','MA'].includes(s.country.code),cool=!urban&&['GB','DE','PL','CA','NZ'].includes(s.country.code);
+ const ground=urban?['#a8b0b0','#889898','#c0c8c0']:arid?['#d8c080','#b89860','#e8d098']:cool?['#78a870','#508858','#a0c080']:['#50b080','#28885b','#78c088'];
+ O.sceneEnvironment={kind:urban?'urban paving':arid?'dry countryside':cool?'temperate countryside':'lush countryside',place:s.location.name};
+ for(let y=0;y<128;y+=16)for(let x=0;x<384;x+=16){r(x,y,16,16,ground[0]);const n=hash(x+'|'+y);if(urban){r(x,y,16,1,ground[1]);r(x,y,1,16,ground[1]);r(x+2,y+2,13,1,ground[2]);if(n%5===0)r(x+9,y+8,3,1,ground[1]);}else{r(x+2,y+4,1,2,ground[1]);r(x+1,y+3,1,1,ground[1]);r(x+3,y+3,1,1,ground[1]);if(n%3){r(x+10,y+11,2,1,ground[2]);r(x+11,y+10,1,1,ground[2]);}if(n%5===0)r(x+7,y+7,2,1,ground[1]);}}
  // A narrow border of clustered foliage gives the strip the reference's dense greens.
  for(let x=0;x<384;x+=16){r(x,0,16,12,'#104830');r(x+1,1,13,9,'#206838');r(x+2,2,5,3,'#389840');r(x+9,5,5,4,'#389840');r(x+3,2,3,1,'#70b848');r(x+8,10,4,3,'#206838');leafCluster(k,x-2,2);leafCluster(k,x+7,5);}
- r(0,103,384,22,'#b8c890');r(0,103,384,2,'#488860');r(0,125,384,3,'#389060');for(let x=0;x<384;x+=8){const j=hash(x)%7;r(x+2,107+j,2,1,'#90b880');r(x+4,119-j,2,1,'#d0d0a0');r(x,115,1,1,'#78a878');}
+ r(0,103,384,22,urban?'#c8c0a8':arid?'#c8a870':'#b8c890');r(0,103,384,2,'#488860');r(0,125,384,3,'#389060');for(let x=0;x<384;x+=8){const j=hash(x)%7;r(x+2,107+j,2,1,'#90b880');r(x+4,119-j,2,1,'#d0d0a0');r(x,115,1,1,'#78a878');}
  tree(k,117,43);tree(k,266,42);
  building(k,12,96,'home',s);
- const stage=s.age<6?'garden':s.school&&!s.job||s.flags.studying?'school':s.job==='Retired'||!s.job?'garden':/farm|herd|agricultur/i.test(s.job)?'farm':/doctor|nurse|care/i.test(s.job)?'clinic':'work';building(k,292,96,stage,s);
+ const stage=s.age<6?'garden':s.school||s.study?.status==='enrolled'||s.flags.studying?'school':s.job==='Retired'||!s.job?'garden':/farm|herd|agricultur/i.test(s.job)?'farm':/doctor|nurse|care/i.test(s.job)?'clinic':'work';building(k,292,96,stage,s);
  const people=[{id:s.id,name:s.name,age:s.age,job:s.job,appearance:s.appearance},...O.householdMembers(s)];const maxRow=7;people.forEach((p,i)=>{const row=Math.floor(i/maxRow),count=Math.min(maxRow,people.length-row*maxRow),col=i%maxRow;person(k,192+(col-(count-1)/2)*21,89+row*24,p,s);});
  const pet=s.memories.pet;if(pet?.alive){const x=265,y=94;r(x,y,11,7,'#a07850');r(x+8,y-4,7,7,'#c09868');r(x+9,y-6,2,3,'#705040');r(x+13,y-6,2,3,'#705040');r(x+12,y-2,1,1,'#303038');r(x+1,y+6,2,3,'#705040');r(x+8,y+6,2,3,'#705040');r(x-3,y+1,4,2,'#a07850');}
  canvas.setAttribute('aria-label',O.householdCaption(s));
