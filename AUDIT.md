@@ -48,3 +48,9 @@ The eight existing test commands pass at baseline. The quick playthrough test co
 ## Review coverage and outstanding work
 
 Engine boundaries, clock, choice application, migration chains, education/funding, employment, route lifecycle, family/estate, factors and archive operations received focused source review. All registries and script dependencies were inventoried. Existing tests were executed before edits. This does **not** mean every branch of 853 definitions or every combination of 42 routes has been manually played. The permanent registry sweep, seeded harness and targeted browser work must supply further evidence; discoveries and limitations belong in `CHANGELOG.md` and `TESTING.md`.
+
+## Engineering-cycle outcome
+
+The implementation and exact evidence are in `CHANGELOG.md` and `TESTING.md`. Shared contracts now cover monthly delivery/application eligibility, choice usage, separate access/attendance, atomic commands, finite education gifts, explicit load migrations and temporal diagnostics. Embedded engine/UI code is separated and boot order is checked. Existing registries remain intact. Late-life follow-ups no longer expire while their underlying commitment persists.
+
+The highest remaining root-cause work is (1) replacing the annual wrapper chain with an explicit ordered accounting/health/people pipeline, (2) removing migration side effects from all read paths and captured private ensures, (3) reviewing postgraduate work return, family care and every rare-route causal combination with constrained resources, and (4) calibrating/playtesting balance and simplifying Spend without deleting routes. Existing test coverage is now a foundation for that work, not evidence that it is already finished. GitHub administration permissions remain a blocker to enforcing protected-branch settings.
