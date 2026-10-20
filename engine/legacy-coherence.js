@@ -47,9 +47,9 @@
     ...(s.strata>=5?[{label:'Ask about additional tutoring',detail:'Your family may be able to pay for extra support.',apply:st=>{st.school=true;O.adjust(st,{knowledge:9});return 'Your caregivers arrange extra help alongside school.'}}]:[])
    ];
  }
- const wasPassive=O.passive;
- O.passive=function(s){
-   wasPassive(s);
+ O.registerAnnualStage('legacy-education',s=>{
+
+ return ()=>{
    if(s.flags.vocationalEnrolled&&s.age>=s.flags.vocationalGraduationAge){s.flags.vocationalEnrolled=false;s.education=O.EDU[3];O.adjust(s,{knowledge:7,confidence:4});O.journal(s,'Vocational training completed','You complete a period of practical training. The qualification or experience improves some opportunities, but does not guarantee a job.','education');}
    if(s.age===1&&!s.flags.vaccineChoiceMade){
      const coverage=Math.max(.18,Math.min(.96,.30+(s.country.infra||40)/160+s.strata*.025));
@@ -57,4 +57,5 @@
      O.journal(s,'Early childhood healthcare',offered?'Your caregivers are able to arrange routine childhood immunisations. Access depends on local services, travel and family circumstances.':'Some recommended childhood vaccinations are delayed or unavailable to your family. Adults continue seeking healthcare where possible.','health');
    }
  };
+});
 })(window.OL);

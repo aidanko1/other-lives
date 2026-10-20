@@ -87,7 +87,7 @@ const careers={id:'career-search-results',min:18,max:120,weight:70,category:'Wor
  title:s=>s.flags.searchMode==='interest'?'Work closer to your interests':'Your job search: the available offers',
  description:s=>`Current role: ${s.job||'Not employed'}. Earnings: ${O.money(s.income)} a year (${O.money(s.income/12)} a month). ${s.flags.searchMode==='interest'?'These roles match an interest, but may reduce your earnings.':'Only qualified roles paying more than your current income are listed.'} ${O.careerOffers(s).length?'These are firm in-game salary offers.':'No suitable vacancy was found this time.'}`,
  options:s=>[...O.careerOffers(s).map(j=>({label:j.title,detail:`${O.money(j.pay)} / year · ${O.money(j.pay/12)} / month · ${O.payComparison(s.income,j.pay)}${j.match?' · Matches your interests':''}. Current: ${O.money(s.income)} / year.`,apply:st=>{
- const old=st.job||'No paid role',pay=st.income;st.job=j.title;st.income=j.pay;st.workYears=0;st.flags.jobSearching=false;st.flags.workMemory={job:j.title,age:st.age,pay:j.pay};st.flags.lastCareerAge=st.age;st.experience.roles[j.title]??=0;O.adjust(st,{confidence:3,stress:2});return `You move from ${old} (${O.money(pay)} a year) to ${j.title} (${O.money(j.pay)} a year; ${O.payComparison(pay,j.pay)}). Your new work experience begins here.`;}})),
+ const old=st.job||'No paid role',pay=st.income;O.setEmployment(st,{role:j.title,pay:j.pay,mode:j.mode||'full-time',hours:j.hours??(j.mode==='part-time'?20:40)});st.flags.workMemory={job:j.title,age:st.age,pay:j.pay};st.flags.lastCareerAge=st.age;st.experience.roles[j.title]??=0;O.adjust(st,{confidence:3,stress:2});return `You move from ${old} (${O.money(pay)} a year) to ${j.title} (${O.money(j.pay)} a year; ${O.payComparison(pay,j.pay)}). Your new work experience begins here.`;}})),
  {label:'Keep looking',detail:'Keep your current role and income. Another round of applications may take a year.',apply:st=>{st.flags.searchReady=st.age+1;st.flags.searchSerial=(st.flags.searchSerial||0)+1;return `You keep looking. Current annual earnings remain ${O.money(st.income)}.`;}},
  {label:'Stop the search',detail:'Keep your current role and income; restart from Spend whenever you wish.',apply:st=>{st.flags.jobSearching=false;return 'You stop applying for now. Your current work arrangement continues.';}}]};
 O.EVENTS.push(careers);
@@ -116,15 +116,13 @@ O.countryEvidence=s=>s.country.code==='KE'?{under5:38.8,infant:null,life:null,un
 if(O.SOURCE_MODEL?.childMortality2024)O.SOURCE_MODEL.childMortality2024.KE=[38.8,undefined];
 const journalContext=O.contextForJournal;
 O.contextForJournal=(s,e)=>e?.context||journalContext?.(s,e);
-const passive=O.passive;O.passive=function(s){
+O.registerAnnualStage('family-work-journal',s=>{
  ensure(s);const before=amounts(s),oldWorth=O.netWorth(s),oldAge=s.age;
  for(const p of s.people)if(p.alive&&!p.retired&&p.age>=63&&p.job&&p.job!=='—'&&(p.age>=68||hash(p.id+'|'+p.age)%4===0))retirePerson(s,p,true);
- const planBalances=(s.flags.billPlans||[]).map(p=>p.balance);
- passive(s);
- const debtRepaid=Math.max(0,before.debt-s.debt);let allocate=debtRepaid;for(const plan of s.flags.billPlans||[]){const n=Math.min(allocate,plan.balance);plan.balance-=n;allocate-=n;}
+
+ return ()=>{
  for(const p of s.people){if(!p.alive){p.diedAt??=p.age;p.annualIncome=0;}if(p.alive&&p.role==='Child'&&p.age>=22&&!p.movedOut&&hash(s.seed+'|'+p.id+'|'+p.age)%3===0){p.movedOut=true;p.residence='Separate home';O.journal(s,`${p.name.split(' ')[0]} moves out`,`${p.name}, ${p.age}, establishes a separate home. You still make time to visit.`,'family');}}
  const parents=s.people.filter(p=>['Mother','Father'].includes(p.role));if(parents.length)s.familyIncome=parents.reduce((sum,p)=>sum+(p.alive?(p.annualIncome||0):0),0);
- if(s.income>0&&s.job!=='Retired'){s.experience.totalYears++;s.experience.roles[s.job]=(s.experience.roles[s.job]||0)+1;}
  for(const [name,hobby] of Object.entries(s.experience.hobbies)){if(s.age<6)continue;hobby.years+=s.focus==='Rest'?1:.25;hobby.level+=s.focus==='Rest'?2:1;if(hobby.level>=12&&!hobby.noted){hobby.noted=true;O.journal(s,`Your practice in ${name} is showing`,`After sustained practice, people start asking you for tips on ${name.toLowerCase()}. It has become something you can share.`,'achievement');}}
  if(s.age>=18){const after=amounts(s),change=diff(before,after);s.ledger.unshift({age:s.age,title:'Yearly finances',...change});s.ledger=s.ledger.slice(0,120);
  O.journal(s,'Your yearly finances',`Income ${O.money(before.income)} · living costs ${O.money(s.annualExpenses||0)} · debt change ${change.debt>=0?'+':''}${O.money(change.debt)}. Savings ${O.money(s.cash)}; debt ${O.money(s.debt)}. Net worth ${O.money(O.netWorth(s))} (${O.netWorth(s)-oldWorth>=0?'+':''}${O.money(O.netWorth(s)-oldWorth)} this year).`,'money');s.journal[0].money=change;s.journal[0].tone=O.netWorth(s)>=oldWorth?'good':'bad';}
@@ -132,20 +130,14 @@ const passive=O.passive;O.passive=function(s){
  const evidence=O.countryEvidence(s);const survival=O.baselineSurvival(s,s.age);O.journal(s,'A birthday, and those born alongside you',`You reach ${s.age}. In this simulation’s baseline cohort for ${s.country.name}, about ${(survival*100).toFixed(1)}% survive to this age. Your own health and circumstances can change your risk.`,'milestone');
  s.journal[0].context={text:evidence.under5!==null?`National under-five mortality: ${evidence.under5} per 1,000 live births (2024). Survival after childhood is a model fitted to life expectancy, not a measured age/sex life table.`:`This location currently uses an estimated mortality curve. The displayed survival percentage is a model output, not a verified national statistic.`,source:evidence.under5!==null?'UNICEF / UN IGME 2024':'Mortality model and its limits',url:evidence.under5Source||'https://population.un.org/wpp/'};
  }
-};
+ };
+});
 
 const advanceMonth=O.advanceMonth;
 O.advanceMonth=function(s){
  ensure(s);const at=s.age*12+s.month;const result=advanceMonth(s);
  // Story resolution may run more than once in a month; never collect twice.
- if(result.advanced&&s.age*12+s.month!==at&&s.flags.lastInstalmentMonth!==at){
-  s.flags.lastInstalmentMonth=at;
-  for(const plan of s.flags.billPlans||[]){if(plan.monthsLeft<=0||plan.balance<=0)continue;
-   const due=Math.min(plan.monthly,plan.balance),paid=Math.min(Math.max(0,s.cash),due);
-   s.cash-=paid;s.debt=Math.max(0,s.debt-paid);plan.balance-=paid;plan.monthsLeft--;
-   if(paid<due){O.journal(s,'An instalment is short',`You pay ${O.money(paid)} of the ${O.money(due)} bill instalment. The unpaid amount remains in your debt.`,'money');}
-  }
- }
+ if(result.advanced&&s.age*12+s.month!==at)O.settleBillInstalments(s,at);
  return result;
 };
 

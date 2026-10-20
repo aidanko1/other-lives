@@ -56,3 +56,6 @@ Final fixture correction: after advancing a synthetic family's ages40years, clea
 OL-020 / High: a known zero familyDebts value was treated as missing on every upgradeLife call. GB seed61 synthetic low-income household, familyIncome5000/familyDebts0: migration recreated800 of debt, including after a balance had been cleared. Only undefined now receives the original initial estimate. Zero remains zero across migration and repeated annual/monthly adapters. Red reproduced; permanent finance-boundary known-zero regression retained and passed.
 
 OL-016–OL-020 fixes and all retained regressions pass at a248549 in https://github.com/aidanko1/other-lives/actions/runs/39509582008. This does not certify every financial or annual transition; remaining ownership debt is recorded in RELEASE_STATUS.md.
+
+## Cycle3 — verification pending
+See ENGINEERING_CYCLE_3.md for OL-021–OL-027 red reproductions, expected behaviour, corrective owners and permanent tests. No new stable claim or deployment.

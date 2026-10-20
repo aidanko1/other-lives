@@ -133,10 +133,10 @@ add({id:'postgraduate-crossroads',min:21,max:29,category:'Education · After gra
   {label:'Explore a degree abroad',detail:`Estimated savings needed ${O.money(abroadCost)} for initial costs. ${available<abroadCost?'Out of reach financially for now.':'Visa, admission and housing are still uncertain.'}`,disabled:available<abroadCost,apply:st=>{st.flags.postgraduateChoice=true;payStudyFees(st,abroadCost);st.flags.educationTrack={route:'postgraduate',name:'study abroad',started:st.age,status:'enquiring',due:null,progress:0};O.adjust(st,{knowledge:4,stress:5});return 'You begin the lengthy application and relocation process. Finances help but are not a guarantee.'}}
  ];
  }});
-const oldPassive=O.passive;
-O.passive=function(s){
+O.registerAnnualStage('education-tracks',s=>{
  const earlierQualification=O.educationNumber(s.education);
- oldPassive(s);
+
+ return ()=>{
  if(s.status!=='alive')return;
  // Qualifications are durable; progressing through a different route must not erase an earned degree.
  if(O.educationNumber(s.education)<earlierQualification)s.education=O.EDU[earlierQualification];
@@ -168,7 +168,8 @@ O.passive=function(s){
      O.journal(s,'Training completed',`You complete ${t.name}. This achievement adds to your education history, but it does not guarantee admission elsewhere or employment.`,'education');
    }else O.journal(s,'Study interrupted',`Your ${t.name} programme ends without the intended qualification. You have gained experience but may need to apply again or follow another route.`,'education');
  }
-};
+ };
+});
 const priorApplyChoice=O.applyChoice;
 O.applyChoice=function(s,index){
  const qualificationBefore=O.educationNumber(s.education);

@@ -52,12 +52,7 @@ O.advanceMonth=function(s){
   return {advanced:true,decision:!!s.pending,entry:true};
  }
  if(s.month<11){s.month++;s.lastOutcome='';return {advanced:true};}
- s.age++;s.month=0;s.lastOutcome='';
- O.passive(s);
- if(O.mortality(s)){O.finish(s);return {advanced:true,finished:true,birthday:true};}
- O.snapshot(s);
- s.agenda=O.makeAgenda(s);
- return {advanced:true,birthday:true};
+ return O.completeBirthday(s);
 };
 O.advance=function(s){ // Legacy compatibility; advance to the next birthday or decision.
  if(!s||s.pending||s.status!=='alive')return false;

@@ -1,5 +1,9 @@
 # Changelog
 
+## Cycle3 — annual/employment/decision continuity (verification pending)
+
+Replaced passive wrapper composition with one ordered annual/birthday transaction, saved once-per-age receipts and complete rollback. Centralized budget/debt allocation and employment/hour/FTE updates. Added read-only decision views, stale-click tokens, participant-bound family intentions and course/stipend cancellation cleanup. Retained all content and existing assertions; see ENGINEERING_CYCLE_3.md for red reproductions and exact verification status. No production change.
+
 ## Cycle2 — verified annual cost/read boundaries (unreleased)
 
 - Extracted one annual cost quote/settlement owner; removed the earlier living-cost wrapper chain. Pure quotes, once-per-age receipts, gift/tuition conservation and rollback; existing funding/routes/cost rates preserved.

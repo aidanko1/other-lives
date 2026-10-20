@@ -12,8 +12,8 @@ Baseline of this backlog: 4072fd4. See CHANGELOG.md for cycle results.
 
 ## Next: explicit simulation ownership
 1. VERIFIED at a248549 (see RELEASE_STATUS.md): explicit annual cost owner; current-load identity; read-only profile/family/spending/finance/art; explicit estate/trust transition; legacy missing cash marked unknown without invented money. See ENGINEERING_CYCLE_2.md. Remaining decision/candidate/bill caches and legacy command/clock adapters still need extraction.
-2. Define one employment transition owner and ordered annual pipeline. Replace redundant wrappers gradually; preserve study workload/pay and qualification gates.
-3. Bind pending route/decision identity and validate prerequisites again at execution. Test death, separation, moving, insufficient funds and cancellation between preparation and follow-up.
+2. IMPLEMENTED; final CI pending: explicit annual transaction and ordered stages, shared budget/debt and employment owners. Annual receipt/rollback, retired/FTE work and all retained study/care tests pass locally. See ENGINEERING_CYCLE_3.md.
+3. IMPLEMENTED; final CI pending: read-only decision views and UI tokens; route partner/residence binding; pregnancy parentage and overseas/doctoral cancellation regressions. Further rare combinations remain subject to simulation gates.
 4. Introduce shared family timeline/history assertions: parent/child dates, deceased-person immutability, adult status, residence and simultaneous partners. Fix identified violations with seed reproductions.
 5. Unify asset/debt accounting and rental-property identity. Multiple rentals currently aggregate values; do not imply per-dwelling mortgages or legal settlement precision.
 

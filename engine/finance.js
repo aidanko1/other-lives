@@ -89,6 +89,60 @@
    return clone(q);
   }catch(error){for(const key of Object.keys(s))delete s[key];Object.assign(s,before);throw error;}
  };
+ O.protectedDebt=s=>(s.flags.billPlans||[]).reduce((n,p)=>n+(p.monthsLeft>0?p.balance:0),0)+(s.housing?.mortgage?.balance||0);
+ O.repayUnsecuredDebt=function(s,requested){
+  if(!Number.isFinite(requested)||requested<0)throw Error('Invalid debt repayment.');
+  const paid=Math.min(s.cash,Math.max(0,s.debt-O.protectedDebt(s)),Math.round(requested));
+  s.debt-=paid;s.cash-=paid;let remaining=paid;
+  for(const plan of s.flags.billPlans||[]){if(plan.monthsLeft>0)continue;const n=Math.min(remaining,plan.balance);plan.balance-=n;remaining-=n;if(remaining<=0)break;}
+  return paid;
+ };
+ O.settleAnnualBudget=function(s){
+  if(s.annualBudgetSettlement?.age===s.age)return clone(s.annualBudgetSettlement);
+  if(s.status!=='alive'||s.age<18)throw Error('Annual personal budgets require an active adult.');
+  const before=clone(s),age=s.age,c=s.country;
+  try{
+  const earned=O.earnedIncome?O.earnedIncome(s):s.income,partnerIncome=O.partnerContribution?.(s)||0,assetIncome=O.passiveAssetIncome?.(s)||0,annual=earned+partnerIncome+assetIncome;
+  s.lastIncomeSources={earned,partner:partnerIncome,assets:assetIncome};
+  let cost=Math.max(900,round(c.ppp*(s.urban?.34:.25)*(s.people.some(p=>p.role==='Child'&&p.alive)?1.25:1)*(s.flags.livingWithFamily?.61:1)));
+  if(s.strata>=5&&s.flags.familySupport&&!s.income)cost*=.5;
+  if(s.flags.foodInsecure)cost*=.9;
+  if(s.job==='Retired')cost*=.85;
+  if(O.settleAnnualCosts)cost=O.settleAnnualCosts(s,cost).total;cost+=(s.flags.annualUpkeep||0);s.annualExpenses=round(cost);
+  const planBalance=O.protectedDebt(s);const interest=round(Math.max(0,s.debt-planBalance)*(s.flags.predatoryDebt?.19:.055));
+  let net=round(annual-cost-interest);
+  if(net>0){s.cash+=net;if(s.debt>0)O.repayUnsecuredDebt(s,round(net*.48));}else{const deficit=-net,fromCash=Math.min(s.cash,deficit);s.cash-=fromCash;s.debt+=deficit-fromCash;O.adjust(s,{stress:2,happiness:-1})}
+  s.lastInterest=interest;s.lastAnnualIncome=annual;O.reconcileDebt?.(s,'Annual budget shortfall','budget',`Living / housing costs ${O.money(s.budgetBreakdown?.basic||0)}; rent / mortgage payments ${O.money(s.budgetBreakdown?.homePayment||0)}; child school fees ${O.money(s.budgetBreakdown?.childSchooling||0)}; continuing care ${O.money(s.budgetBreakdown?.care||0)}; tuition ${O.money(s.budgetBreakdown?.tuition||0)}; pet care ${O.money(s.budgetBreakdown?.pet||0)}; routines ${O.money(s.budgetBreakdown?.routines||0)}; other commitments ${O.money(s.flags.annualUpkeep||0)}; interest ${O.money(interest)}; total income ${O.money(annual)}. Savings were used first.`);
+  if(s.investments>0){let returnRate=O.investmentReturn?O.investmentReturn(s):-.12+O.rand(s)*.23;s.investments=Math.max(0,round(s.investments*(1+returnRate)))}
+  if(s.property>0)s.property=Math.max(0,round(s.property*(.96+O.rand(s)*.09)));
+  if(s.debt>c.ppp*2)O.adjust(s,{stress:3,happiness:-2});
+
+   const valuation=(s.investments-before.investments)+(s.property-before.property),personalTuition=s.annualCostSettlement?.personalTuition||0;
+   const actual=(s.cash-s.debt+s.investments+s.property)-(before.cash-before.debt+before.investments+before.property),expected=net-personalTuition+valuation;
+   if(Math.abs(actual-expected)>.001)throw Error('Annual budget conservation failed.');
+   s.annualBudgetSettlement={age,income:annual,cost:round(cost),interest,personalTuition,net,valuation,netWorthChange:actual};
+   return clone(s.annualBudgetSettlement);
+  }catch(error){for(const key of Object.keys(s))delete s[key];Object.assign(s,before);throw error;}
+ };
+ O.settleMortgagePrincipal=function(s){
+  if(s.mortgageSettlement?.age===s.age)return clone(s.mortgageSettlement);
+  const mortgage=s.housing.mortgage;if(!mortgage||mortgage.balance<=0)return null;
+  const interest=round(mortgage.balance*mortgage.rate),principal=Math.min(mortgage.balance,Math.max(0,mortgage.annual-interest));
+  if(!Number.isFinite(principal)||principal<0||principal>s.debt)throw Error('Invalid mortgage principal payment.');
+  mortgage.balance-=principal;s.debt-=principal;mortgage.years=Math.max(0,mortgage.years-1);
+  s.mortgageSettlement={age:s.age,interest,principal};
+  if(mortgage.balance<=0){mortgage.annual=0;O.journal(s,'Your mortgage is paid off','Your home is now owned without a mortgage. Maintenance costs continue.','money');}
+  return clone(s.mortgageSettlement);
+ };
+ O.settleBillInstalments=function(s,month){
+  if(s.flags.lastInstalmentMonth===month||s.status!=='alive')return;
+  s.flags.lastInstalmentMonth=month;
+  for(const plan of s.flags.billPlans||[]){if(plan.monthsLeft<=0||plan.balance<=0)continue;
+   const due=Math.min(plan.monthly,plan.balance),paid=Math.min(Math.max(0,s.cash),due);
+   s.cash-=paid;s.debt-=paid;plan.balance-=paid;plan.monthsLeft--;
+   if(paid<due)O.journal(s,'An instalment is short',`You pay ${O.money(paid)} of the ${O.money(due)} bill instalment. The unpaid amount remains in your debt.`,'money');
+  }
+ };
  // Compatibility for older tests/integrations: this name is explicitly a settlement, never a query.
  O.livingCost=(s,base)=>O.settleAnnualCosts(s,base).total;
 })(window.OL);

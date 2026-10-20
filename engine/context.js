@@ -26,9 +26,9 @@ O.upgradeLife=s=>{
  if(!s.factSeen)s.factSeen={};
  return s;
 };
-const rawPassive=O.passive;
-O.passive=function(s){
- rawPassive(s);
+O.registerAnnualStage('context',s=>{
+
+ return ()=>{
  O.upgradeLife(s);
  if(s.memories.pet&&s.memories.pet.alive){s.memories.pet.age++;if(s.memories.pet.age>=7&&O.chance(s,.075+Math.max(0,s.memories.pet.age-12)*.07)){let pet=s.memories.pet;pet.alive=false;pet.diedAt=s.age;O.journal(s,`Goodbye, ${pet.name}`,`${pet.name}, your ${pet.kind}, died at ${pet.age}. For days the rooms seem unusually quiet.`,'loss');O.adjust(s,{happiness:-8});}}
  if(s.memories.pet&&!s.memories.pet.alive&&!s.memories.pet.reflected&&s.age>=s.memories.pet.diedAt+1&&O.chance(s,.55)){
@@ -38,7 +38,8 @@ O.passive=function(s){
   const teacher=s.memories.teacher;teacher.remembered=true;O.journal(s,'A voice you remember',`You think of ${teacher.name}, the teacher who first noticed your interest in ${teacher.subject.toLowerCase()}. Their encouragement still changes how you approach new things.`,'reflection');
  }
  if(s.age<5&&s.flags.vaccinationMissed&&O.chance(s,.06)){O.adjust(s,{health:-9});O.journal(s,'A preventable illness',`A serious infection puts your health at risk. Limited access to routine immunisation can make childhood more dangerous; this fictional outcome is not an estimated national rate.`,'loss');}
-};
+ };
+});
 const rawMortality=O.mortality;
 O.mortality=function(s){if(s.age>0&&s.age<5&&s.flags.vaccinationMissed){const modifier=s.strata<=1?1.8:1.35;let ordinary=rawMortality(s);return ordinary||O.chance(s,.0025*modifier*(1+Math.max(0,60-s.country.infra)/80));}return rawMortality(s)};
 const rawJournal=O.journal;O.journal=function(s,title,description,type='life'){

@@ -57,7 +57,7 @@ O.create=(settings={})=>{
  O.journal(s,'A beginning',s.birthDescription,'birth');
  O.snapshot(s);return s;
 };
-O.passive=(s)=>{
+O.annualCore=(s)=>{
  const age=s.age,c=s.country;
  s.people.forEach(p=>{
   if(!p.alive)return;
@@ -71,24 +71,7 @@ O.passive=(s)=>{
  if(s.stress>65)O.adjust(s,{health:-3,happiness:-2});
  if(age>=6&&age<=18&&s.school){O.schoolProgress?O.schoolProgress(s,O.int(s,1,3)+(s.strata>=4?1:0)):(s.knowledge=O.clamp(s.knowledge+O.int(s,1,3)+(s.strata>=4?1:0))); s.schoolGrades=O.clamp(s.schoolGrades+O.int(s,-4,5))}
  if(s.flags.studying&&age>=s.flags.graduationAge){s.flags.studying=false;s.education=O.EDU[4];O.adjust(s,{knowledge:9,happiness:6});O.journal(s,'A qualification earned','You complete a period of higher education. It may expand your options, although a degree does not guarantee employment.','education')}
- if(age>=18){
-  const earned=O.earnedIncome?O.earnedIncome(s):s.income,partnerIncome=O.partnerContribution?.(s)||0,assetIncome=O.passiveAssetIncome?.(s)||0,annual=earned+partnerIncome+assetIncome;
-  s.lastIncomeSources={earned,partner:partnerIncome,assets:assetIncome};
-  let cost=Math.max(900,round(c.ppp*(s.urban?.34:.25)*(s.people.some(p=>p.role==='Child'&&p.alive)?1.25:1)*(s.flags.livingWithFamily?.61:1)));
-  if(s.strata>=5&&s.flags.familySupport&&!s.income)cost*=.5;
-  if(s.flags.foodInsecure)cost*=.9;
-  if(s.job==='Retired')cost*=.85;
-  if(O.settleAnnualCosts)cost=O.settleAnnualCosts(s,cost).total;cost+=(s.flags.annualUpkeep||0);s.annualExpenses=round(cost);
-  const planBalance=(s.flags.billPlans||[]).reduce((n,p)=>n+(p.monthsLeft>0?p.balance:0),0)+(s.housing?.mortgage?.balance||0);const interest=round(Math.max(0,s.debt-planBalance)*(s.flags.predatoryDebt?.19:.055));
-  let net=round(annual-cost-interest);
-  if(net>0){s.cash+=net;if(s.debt>0){let paid=Math.min(Math.max(0,s.debt-planBalance),round(net*.48));s.debt-=paid;s.cash-=paid}}else{const deficit=-net,fromCash=Math.min(s.cash,deficit);s.cash-=fromCash;s.debt+=deficit-fromCash;O.adjust(s,{stress:2,happiness:-1})}
-  s.lastInterest=interest;s.lastAnnualIncome=annual;O.reconcileDebt?.(s,'Annual budget shortfall','budget',`Living / housing costs ${O.money(s.budgetBreakdown?.basic||0)}; rent / mortgage payments ${O.money(s.budgetBreakdown?.homePayment||0)}; child school fees ${O.money(s.budgetBreakdown?.childSchooling||0)}; continuing care ${O.money(s.budgetBreakdown?.care||0)}; tuition ${O.money(s.budgetBreakdown?.tuition||0)}; pet care ${O.money(s.budgetBreakdown?.pet||0)}; routines ${O.money(s.budgetBreakdown?.routines||0)}; other commitments ${O.money(s.flags.annualUpkeep||0)}; interest ${O.money(interest)}; total income ${O.money(annual)}. Savings were used first.`);
-  if(s.investments>0){let returnRate=O.investmentReturn?O.investmentReturn(s):-.12+O.rand(s)*.23;s.investments=Math.max(0,round(s.investments*(1+returnRate)))}
-  if(s.property>0)s.property=Math.max(0,round(s.property*(.96+O.rand(s)*.09)));
-  if(!s.income&&s.job!=='Retired')s.unemployedYears++;
-  if(s.income>0){s.yearsWorked++;s.workYears++}
-  if(s.debt>c.ppp*2)O.adjust(s,{stress:3,happiness:-2});
- }
+ if(age>=18){O.settleAnnualBudget(s);O.recordEmploymentYear(s);}
  if(age>=10&&age<=60){if(O.chance(s,.035)){O.adjust(s,{health:-O.int(s,3,12),stress:4});O.journal(s,'A difficult spell','An ordinary illness or period of stress interrupts your plans. Recovery depends partly on resources and support.','health')}}
  if(age>=18&&s.job&&s.job!=='Retired'&&O.chance(s,.06)){s.income=Math.max(0,round(s.income*(.96+O.rand(s)*.16)))}
  if(age>=12&&s.strata===0&&O.chance(s,.05)){s.flags.foodInsecure=true}

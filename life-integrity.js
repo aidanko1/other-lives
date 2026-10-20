@@ -18,7 +18,6 @@ O.ensureClarity=function(s){
 const block=O.routeBlock;
 O.routeBlock=function(s,d){
  const reason=block(s,d)||O.rules.routeConflict(s,d);if(reason)return reason;
- if(['overseas-work','overseas-study','return-home'].includes(d.id)&&s.housing.kind==='owned')return 'Choose whether to sell or let your current home under Money & property before moving abroad.';
  if(d.id==='kpop'&&s.country.code!=='KR')return 'This agency-training route is currently available while living in South Korea.';
  return null;
 };

@@ -7,12 +7,22 @@
   schoolStartAge: 6,
   attendingSchool: s => s.age >= 6 && !!s.school,
   fullTimeStudy: s => s.study?.mode === 'full-time' && ['enrolled', 'overseas-route'].includes(s.study.status),
-  routeConflict(s,d) {
-   if(s.institution&&d.exclusive!=='institution'&&!d.institution)return 'This plan must wait until your institutional commitment ends.';
+  routeConflict(s,d,r) {
+   if(s.institution&&d.exclusive!=='institution'&&!d.institution&&!(d.id==='child-planning'&&r?.stage==='birth'))return 'This plan must wait until your institutional commitment ends.';
+   if(['overseas-work','overseas-study','return-home'].includes(d.id)&&s.housing?.kind==='owned'&&!(d.id==='overseas-study'&&r?.stage==='study'))return 'Choose whether to sell or let your current home under Money & property before moving abroad.';
    const research=Object.values(s.routes?.active||{}).find(r=>r.id==='masters'&&r.stage==='studying'||r.id==='phd'&&r.stage==='research');
    if(research&&['overseas-work','military','seafaring','politics','vocation','business','family-enterprise'].includes(d.id))return 'Resolve the current postgraduate commitment first.';
    if(this.fullTimeStudy(s)&&(d.exclusive==='rare-career'||['seafaring','politics','vocation','business','family-enterprise','masters','phd','faculty'].includes(d.id)))return 'Complete or pause your full-time course before committing to this work route.';
    if(s.business&&['overseas-study','masters','phd'].includes(d.id))return 'Resolve your business responsibilities before this study commitment.';
+   return null;
+  },
+  routeSubjectBlock(s,d,r){
+   if(d.partnerBound&&r.stage!=='birth'){
+    const original=r.partnerId??r.participants?.find(id=>s.people.some(p=>p.id===id&&['Partner','Former partner'].includes(p.role)));
+    if(original&&s.people.find(p=>p.alive&&p.role==='Partner')?.id!==original)return 'The partnership for this plan has changed. Make a new plan with the people now involved.';
+   }
+   if(d.id==='overseas-study'&&r.stage==='study'&&r.country?.code!==s.country.code)return 'You have left the country where this course required attendance.';
+   if(['overseas-work','overseas-study','return-home'].includes(d.id)&&r.stage!=='study'&&r.preparedIn&&r.preparedIn!==s.country.code)return 'Your country of residence changed after this application was prepared.';
    return null;
   },
   eventBlock(s, e, {resolving = false} = {}) {
