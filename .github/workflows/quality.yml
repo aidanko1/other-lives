@@ -1,0 +1,63 @@
+name: Simulation quality
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: ['quality/**']
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  checks:
+    name: Required checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm test
+      - run: npm run build
+  simulation:
+    name: 1000 complete seeded lives
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm run test:simulation
+      - name: Preserve assertions, seeds, outcomes and balance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: simulation-report
+          path: tests/reports/simulation-latest.json
+  browser:
+    name: Browser interactions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Exercise actual application in Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tests/reports
+          node scripts/serve-tests.cjs &
+          test_server_pid=$!
+          trap 'kill "$test_server_pid"' EXIT
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --dump-dom --virtual-time-budget=30000 'http://127.0.0.1:4173/tests/browser.html?autorun=1' > tests/reports/browser.html
+          node scripts/assert-browser-report.cjs
+      - name: Preserve browser result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-report
+          path: tests/reports/browser.html

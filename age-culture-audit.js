@@ -54,7 +54,7 @@ function clean(s,value){
 }
 O.journal=function(s,title,desc,type){return oldJournal(s,clean(s,title),clean(s,desc),type)};
 const previousEnsure=O.ensureTimeline;
-O.ensureTimeline=function(s){const r=previousEnsure(s);if(s&&Array.isArray(s.journal)){for(const e of s.journal){e.title=clean(s,e.title);e.description=clean(s,e.description);}}return r};
+O.ensureTimeline=function(s){const r=previousEnsure(s);if(s&&Array.isArray(s.journal)&&!s.flags.journalAgeCleaned54){for(const e of s.journal){e.title=clean(s,e.title);e.description=clean(s,e.description);}s.flags.journalAgeCleaned54=true;}return r};
 const prevCreate=O.create;
 O.create=function(opts){const s=prevCreate(opts);O.ensureTimeline(s);return s};
 function familyName(s){const mother=(s.people||[]).find(p=>p.alive&&p.role==='Mother');const dad=(s.people||[]).find(p=>p.alive&&p.role==='Father');return mother?'Mom':dad?'Dad':'a caregiver'}

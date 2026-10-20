@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
-const html=fs.readFileSync(path.join(__dirname,'..','index.html'),'utf8');
+const html=fs.readFileSync(path.join(__dirname,'..','ui','app.js'),'utf8');
 const section=(start,end)=>html.slice(html.indexOf(start),html.indexOf(end,html.indexOf(start)));
 const code=section('function birthRevealView(s){','function archiveView()')+section('function drawBirthRoulette(){','function render(){');
 // Exercise the actual view and timer with a selected country distinct from every decoy.

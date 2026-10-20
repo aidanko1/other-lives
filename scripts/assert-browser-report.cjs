@@ -1,0 +1,1 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),text=fs.readFileSync('tests/reports/browser.html','utf8');assert(/data-status="passed"/.test(text),'Browser runner did not pass; inspect browser.html artifact');assert(text.includes('ALL BROWSER CHECKS PASSED'));console.log('PASS actual browser E2E runner');
