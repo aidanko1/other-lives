@@ -735,6 +735,12 @@ function ensure(s){
   s.familyContext={fertility:Number.isFinite(fertility)?fertility:null,modelFertility:Number.isFinite(fertility)?fertility:num(FALLBACK_FERTILITY[s.country.region],2.3),tradition:traditional(s),note:'Fertility is a national population indicator; it does not determine this family’s number of children.'};
  }
  if(!Number.isFinite(s.familyCash))s.familyCash=Math.max(0,Math.round(s.familyIncome*(s.strata<=1?.07:.17)));
+ if(s.age>=12&&s.age<18&&s.youthCashYear!==s.age){
+   const allowanceRate=s.strata<=1?.00003:s.strata<=3?.00013:s.strata<=5?.0004:.001;
+   const expected=Math.max(0,Math.min(s.strata>=6?180:65,Math.round((s.country.ppp||8000)*allowanceRate*(.8+s.age/25))));
+   const funded=Math.min(num(s.familyCash,0),expected);
+   s.youthCash=funded;s.familyCash=Math.max(0,s.familyCash-funded);s.youthCashYear=s.age;
+ }
  if(!s.flags.familyTradition)s.flags.familyTradition=traditional(s);
  if(typeof s.flags.observesTradition!=='boolean')s.flags.observesTradition=(hash(s.seed+'|'+s.country.code+'|home-festival')%100)<56; // narrative variation, not a researched participation rate
  return s;
@@ -761,7 +767,12 @@ O.create=function(settings){
  s.spendingYear=s.age;s.spendingOffers=makeOffers(s);s.spendHistory=[];return s;
 };
 O.ensureTimeline=function(s){oldEnsure(s);ensure(s);return s};
-function cashPool(s){return s.age<18?num(s.familyCash,0):num(s.cash,0)}
+function childAccessibleBudget(s){
+ if(s.age<13) return Math.max(8,Math.round(totalCost(s,0.0025 + s.age*0.00035,8)));
+ if(s.age<18) return Math.max(20,Math.round(totalCost(s,0.006 + (s.age-13)*0.0012,20)));
+ return num(s.cash,0);
+}
+function cashPool(s){return s.age<12?0:s.age<18?num(s.youthCash,0):num(s.cash,0)}
 function totalCost(s,factor,floor=4){return Math.max(floor,Math.round(s.country.ppp*factor));}
 function catalog(s){
  const adult=s.age>=18,independent=s.age>=16,young=s.age<13;
@@ -802,18 +813,28 @@ function catalog(s){
  return items.filter(item=>chosen.has(item.id));
 }
 function hash(s){let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return h>>>0}
-function makeOffers(s){return catalog(s).map(o=>({...o,year:s.birthYear+s.age}));}
+function makeOffers(s){
+ if(s.age<12)return [];
+ if(s.age<18){
+   const permitted=new Set(['social','fest','supplies','sport','transport','trip']);
+   const offers=catalog(s).filter(o=>permitted.has(o.id));
+   const free=[{id:'free-social',title:'Spend time with a friend or family member',detail:'A walk or conversation that does not require spending money.',tag:'Relationships',bucket:'pocket',delta:{relationships:2,happiness:1},cost:0,year:s.birthYear+s.age},
+    {id:'free-curiosity',title:'Explore an interest with what you have',detail:'Practise a skill, talk with someone experienced or read materials already available.',tag:'Learning',bucket:'pocket',delta:{knowledge:2,happiness:1},cost:0,year:s.birthYear+s.age}];
+   return [...free,...offers.map(o=>({...o,bucket:'pocket',cost:Math.max(1,Math.round(o.cost*.10)),year:s.birthYear+s.age}))];
+ }
+ return catalog(s).map(o=>({...o,year:s.birthYear+s.age}));
+}
 O.spendFunds=cashPool;
 O.spendOffers=function(s){ensure(s);return s.spendingOffers};
-O.buy=function(s,id){ensure(s);if(s.status!=='alive')return {ok:false,message:'This life has ended.'};
+O.buy=function(s,id){ensure(s);if(s.status!=='alive')return {ok:false,message:'This life has ended.'};if(s.age<12)return {ok:false,message:'At this age, parents and guardians handle spending decisions.'};
  const offer=s.spendingOffers.find(o=>o.id===id);if(!offer)return {ok:false,message:'This item is not offered this year.'};
  if(s.flags.spendYearUsed[s.age]?.includes(id))return {ok:false,message:'Already purchased this year.'};
- if(cashPool(s)<offer.cost)return {ok:false,message:'Insufficient '+(s.age<18?'household discretionary funds':'personal cash')+'.'};
- if(s.age<18)s.familyCash=Math.max(0,s.familyCash-offer.cost);else s.cash=Math.max(0,s.cash-offer.cost);
+ if(cashPool(s)<offer.cost)return {ok:false,message:'Insufficient '+(s.age<18?'pocket money':'personal cash')+'.'};
+ if(s.age<18)s.youthCash=Math.max(0,(s.youthCash||0)-offer.cost);else s.cash=Math.max(0,s.cash-offer.cost);
  O.adjust(s,offer.delta);if(id==='invest'&&s.age>=18)s.investments=(s.investments||0)+Math.round(offer.cost*.93);
  if(!s.flags.spendYearUsed[s.age])s.flags.spendYearUsed[s.age]=[];s.flags.spendYearUsed[s.age].push(id);
- s.spendHistory.unshift({age:s.age,year:s.birthYear+s.age,id,title:offer.title,cost:offer.cost,from:s.age<18?'Family':'Personal'});
- O.journal(s,'Spend: '+offer.title,`You spend ${O.money(offer.cost)} (illustrative international purchasing-power units) on ${offer.title.toLowerCase()}. ${offer.detail}`,'money');
+ s.spendHistory.unshift({age:s.age,year:s.birthYear+s.age,id,title:offer.title,cost:offer.cost,from:s.age<18?'Allowance':'Personal'});
+ O.journal(s,s.age<18?'Your activity: '+offer.title:'Spend: '+offer.title,s.age<18?(offer.cost===0?`You make time for ${offer.title.toLowerCase()}. No money changes hands. ${offer.detail}`:`You use ${O.money(offer.cost)} of your small allowance on ${offer.title.toLowerCase()}. ${offer.detail}`):`You spend ${O.money(offer.cost)} (illustrative international purchasing-power units) on ${offer.title.toLowerCase()}. ${offer.detail}`,'money');
  return {ok:true,message:offer.title+' recorded.'};
 };
 O.passive=function(s){
@@ -899,11 +920,47 @@ for(const [code,profile] of Object.entries(PROFILE)){
   description:s=>`${profile.detail}. In ${s.country.name}, people in the community observe this occasion in different ways. ${s.flags.observesTradition?'Your household has joined in before.':'Your household does not normally observe it.'} You have to balance your own interest, family preferences, available time and your money.`,
   options:s=>[
    {label:s.flags.observesTradition?'Join a family gathering':'Visit a public celebration',detail:'Spend time with others. You can join respectfully without assuming everyone takes part.',apply:st=>{st.flags.localCelebrationChoice='join';O.adjust(st,{happiness:3,relationships:4});return `You take part in a ${profile.name} gathering in a way that fits your circumstances. You remember the conversations more than the spectacle.`}},
-   {label:'Contribute to food, transport or a small gift',detail:'Only affordable when your household or personal cash covers the expense.',apply:st=>{st.flags.localCelebrationChoice='contribute';const cost=Math.max(4,Math.round(st.country.ppp*.006));const avail=st.age<18?st.familyCash:st.cash;if(avail<cost){O.adjust(st,{stress:1});return `You wanted to contribute to ${profile.name}, but the extra cost would put pressure on essential spending. You decide not to borrow.`}if(st.age<18)st.familyCash-=cost;else st.cash-=cost;O.adjust(st,{relationships:4,happiness:2,stress:-1});return `You contribute ${O.money(cost)} in illustrative purchasing-power units to the gathering. You still need to manage the remaining budget.`}},
+   {label:s.age<18?'Help prepare something with your family':'Contribute to food, transport or a small gift',detail:s.age<18?'Help with a small task; the adults decide whether to spend money.':'Only affordable when your personal cash covers the expense.',apply:st=>{st.flags.localCelebrationChoice='contribute';if(st.age<18){O.adjust(st,{relationships:3,happiness:2});return `You help prepare for ${profile.name} in an age-appropriate way. Your caregivers handle any money involved.`;}const cost=Math.max(4,Math.round(st.country.ppp*.006));const avail=st.age<18?st.familyCash:st.cash;if(avail<cost){O.adjust(st,{stress:1});return `You wanted to contribute to ${profile.name}, but the extra cost would put pressure on essential spending. You decide not to borrow.`}if(st.age<18){const guardian=(st.people||[]).find(p=>p.alive&&['Mother','Father'].includes(p.role));st.familyCash-=cost;return `${guardian?O.logLabel?.(guardian)||'A caregiver':'A caregiver'} arranges the contribution from household funds. You helped by preparing or carrying something; no money was under your control.`;}else st.cash-=cost;O.adjust(st,{relationships:4,happiness:2,stress:-1});return `You contribute ${O.money(cost)} in illustrative purchasing-power units to the gathering. You still need to manage the remaining budget.`}},
    {label:'Keep your time and money for other priorities',detail:'A reasonable choice; it may mean missing this particular social occasion.',apply:st=>{st.flags.localCelebrationChoice='decline';O.adjust(st,{stress:-1,confidence:1});return `You choose not to attend ${profile.name} this time. Others around you continue their celebrations, and your own priorities remain valid.`}},
   ]
  });
 }
 
-O.VERSION='5.2.0';
+O.VERSION='5.3.0';
+
+/* v5.3: household culture is experienced through ordinary life, not only festivals. */
+const FOOD_TEXTURES={"GH": ["waakye", "banku", "rice and stew"], "NG": ["jollof rice", "egusi soup", "yam and stew"], "ET": ["injera", "shiro", "bread and tea"], "KE": ["ugali", "sukuma wiki", "chapati"], "UG": ["matoke", "posho", "groundnut stew"], "TZ": ["ugali", "pilau", "beans and rice"], "RW": ["ibihaza", "beans and plantain", "isombe"], "ZA": ["pap", "chakalaka", "samp and beans"], "ZW": ["sadza", "vegetable relish", "peanut stew"], "SN": ["ceebu jën", "yassa", "thiakry"], "CI": ["attiéké", "alloco", "rice and sauce"], "MA": ["tagine", "couscous", "harira"], "TN": ["brik", "couscous", "ojja"], "EG": ["koshari", "ful medames", "baladi bread"], "DZ": ["couscous", "chorba", "flatbread"], "BD": ["dal and rice", "bhorta", "pitha"], "IN": ["dal and rice", "roti and sabzi", "idli"], "PK": ["roti and dal", "biryani", "chana"], "LK": ["rice and curry", "hoppers", "kiribath"], "NP": ["dal bhat", "momo", "sel roti"], "AF": ["bolani", "rice and stew", "mantoo"], "BT": ["ema datshi", "red rice", "momo"], "IR": ["tahdig", "ghormeh sabzi", "ash reshteh"], "TR": ["mercimek çorbası", "simit", "menemen"], "LB": ["manakish", "tabbouleh", "lentil soup"], "JO": ["mansaf", "maqluba", "falafel"], "SA": ["kabsa", "dates and coffee", "jareesh"], "AE": ["machboos", "luqaimat", "harees"], "HK": ["congee", "wonton noodles", "pineapple bun"], "CN": ["noodle soup", "congee", "dumplings"], "TW": ["beef noodle soup", "lu rou fan", "scallion pancake"], "JP": ["onigiri", "miso soup", "rice and grilled fish"], "KR": ["kimchi jjigae", "bibimbap", "gimbap"], "TH": ["khao pad", "som tam", "noodle soup"], "VN": ["phở", "cơm tấm", "bánh mì"], "MY": ["nasi lemak", "roti canai", "laksa"], "SG": ["chicken rice", "kaya toast", "laksa"], "ID": ["nasi goreng", "gado-gado", "soto ayam"], "PH": ["adobo", "sinigang", "pandesal"], "KH": ["fish amok", "rice porridge", "nom banh chok"], "LA": ["sticky rice", "larb", "noodle soup"], "MM": ["mohinga", "shan noodles", "tea-leaf salad"], "GB": ["beans on toast", "a roast dinner", "fish and chips"], "IE": ["soda bread", "stew", "porridge"], "FR": ["baguette and cheese", "pot-au-feu", "crêpes"], "DE": ["bread rolls", "potato soup", "pretzels"], "IT": ["pasta al pomodoro", "risotto", "minestrone"], "ES": ["tortilla española", "lentil stew", "pan con tomate"], "PT": ["caldo verde", "bacalhau", "soup and bread"], "PL": ["pierogi", "żurek", "kasza"], "UA": ["borshch", "varenyky", "buckwheat"], "GR": ["spanakopita", "fasolada", "souvlaki"], "NL": ["stamppot", "erwtensoep", "bread with cheese"], "BE": ["stoemp", "waffles", "soup and bread"], "SE": ["meatballs and potatoes", "knäckebröd", "pea soup"], "NO": ["fish soup", "open sandwiches", "lapskaus"], "FI": ["salmon soup", "rye bread", "porridge"], "DK": ["smørrebrød", "frikadeller", "rye bread"], "US": ["sandwiches", "macaroni and cheese", "chili"], "CA": ["poutine", "soup and bread", "butter tarts"], "MX": ["tacos", "tamales", "pozole"], "GT": ["pepian", "tamales", "black beans and tortillas"], "CR": ["gallo pinto", "casado", "olla de carne"], "BR": ["rice and beans", "feijoada", "pão de queijo"], "AR": ["empanadas", "milanesa", "locro"], "CL": ["pastel de choclo", "empanadas", "porotos granados"], "CO": ["arepas", "ajiaco", "sancocho"], "PE": ["lomo saltado", "ají de gallina", "ceviche"], "BO": ["salteñas", "sopa de maní", "pique macho"], "EC": ["encebollado", "llapingachos", "locro de papa"], "VE": ["arepas", "pabellón criollo", "cachapas"], "CU": ["rice and black beans", "ropa vieja", "yuca con mojo"], "JM": ["ackee and saltfish", "rice and peas", "patty"], "DO": ["mangú", "la bandera", "sancocho"], "AU": ["meat pie", "barbecued food", "savoury toast"], "NZ": ["hangi", "meat pie", "fish and chips"], "FJ": ["kokoda", "rourou", "rice and curry"], "WS": ["oka", "taro", "palusami"], "TO": ["lu sipi", "taro", "ota ika"]};
+const prevEverydayStories=O.pickStories;
+O.pickStories=function(s,n){
+ let out=prevEverydayStories(s,n);
+ if(!n||s.age<4||s.status!=='alive')return out;
+ if(!s.flags.dailyLifeMemory)s.flags.dailyLifeMemory={};
+ if(!O.chance(s,s.age<18?.67:.48))return out;
+ const foods=FOOD_TEXTURES[s.country.code];
+ const who=(s.people||[]).find(p=>p.alive&&['Mother','Father'].includes(p.role));
+ const parent=who?(O.logLabel?.(who)||who.role):'someone at home';
+ const means=s.flags.foodInsecure||s.strata<=1?'Some ingredients are hard to afford, so the family makes substitutions.':s.strata>=6?'Nobody has to worry much about the price, and that freedom is easy to take for granted.':'The family keeps an eye on prices, travel and everyone’s preferences.';
+ const nearby=s.urban?'a neighbourhood shop':'a local market or neighbour';
+ let candidate;
+ const mode=O.int(s,0,4);
+ if(mode===0&&foods){
+  const dish=O.pick(s,foods);
+  s.flags.dailyLifeMemory.food=dish;
+  candidate={title:'The food around you',description:`Around your community, ${dish} is one of many familiar meals or snacks. A meal with ${parent} turns into a conversation about preferences, work and the day ahead. ${means} It is one possibility among the many ways people eat in ${s.country.name}.`,scene:'home',effect:'daily-food'};
+ }else if(mode===1&&s.flags.dailyLifeMemory.food&&s.age>12){
+  candidate={title:'A familiar taste',description:`A taste or smell reminds you of ${s.flags.dailyLifeMemory.food} and an ordinary meal from childhood. You remember who was at the table, what people talked about and how the household has changed.`,scene:'home',effect:'daily-memory'};
+ }else if(mode===2){
+  candidate={title:'Small errands, real constraints',description:`An ordinary errand takes you to ${nearby}. What you can buy and how far you travel depend on the household’s money, work commitments and location. ${s.age<16?`${parent} decides what the family can spend.`:'You notice which everyday conveniences are available to you.'}`,scene:'shop',effect:'daily-errand'};
+ }else if(mode===3){
+  const siblings=(s.people||[]).filter(p=>p.role==='Sibling'&&p.alive).length;
+  candidate={title:'A day inside the household',description:`${parent} has responsibilities beyond looking after you. ${siblings?`With ${siblings} sibling${siblings===1?'':'s'}, the adults share time and attention between children.`:'Even a small household has work, meals and errands to organise.'} ${s.strata<=2?'The household has little financial room for surprises.':s.strata>=6?'Paid help or extra resources make some daily tasks easier.':'People negotiate chores, time and work around each other.'}`,scene:'home',effect:'daily-family'};
+ }else{
+  const loc=O.LOCAL_STORIES?.[s.country.code];const setting=loc?.transport||((s.urban)?'local transport':'paths and roads');
+  candidate={title:'Getting around',description:`You see how people nearby travel using ${setting}. ${s.age<13?'An adult generally chooses where and when you can go.':'Time, safety and the cost of a journey influence your plans.'} The exact journey varies by neighbourhood and household.`,scene:'city',effect:'daily-transport'};
+ }
+ if(!candidate)return out;
+ const replacement=O.int(s,0,out.length-1);out[replacement]=candidate;
+ return out;
+};
+
 })(window.OL);
