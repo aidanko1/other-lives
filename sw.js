@@ -1,1 +1,6 @@
-const CACHE='other-lives-world-v4-20261020b';const ASSETS=['./','./index.html','./world-countries.js','./world-simulation.js','./manifest.webmanifest','./icons/icon-192.png','./icon.svg'];self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));self.addEventListener('activate',event=>event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('other-lives-')&&k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()])));self.addEventListener('fetch',event=>{if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE).then(cache=>cache.put(event.request,copy)))}return response}).catch(()=>caches.match(event.request).then(r=>r||(event.request.mode==='navigate'?caches.match('./index.html'):Response.error()))))});
+// Other Lives v5.1 — online-only worker; clear caches left by older releases.
+self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+self.addEventListener('activate', e => e.waitUntil(Promise.all([
+  caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('other-lives-')).map(k => caches.delete(k)))),
+  self.clients.claim()
+])));
