@@ -7,9 +7,10 @@
   const implementation=O[name];
   O[name]=function(s,...args){
    if(active.has(s))return implementation(s,...args);
-   if(name==='applyChoice'&&(!Number.isInteger(args[0])||args[0]<0||!s.pending||!O.eventEligible(s,O.EVENTS.find(e=>e.id===s.pending),{resolving:true})))return false;
+   if(name==='applyChoice'&&(!Number.isInteger(args[0])||args[0]<0||!s.pending))return false;
    const before=JSON.parse(JSON.stringify(s)),known=new Set(O.consistencyIssues(s).map(x=>x.code));active.add(s);
    try{
+    if(name==='applyChoice'&&!O.eventEligible(s,O.EVENTS.find(e=>e.id===s.pending),{resolving:true})){restore(s,before);return false;}
     const result=implementation(s,...args);
     if(!succeeded(result)){restore(s,before);return result;}
     const issues=O.consistencyIssues(s).filter(x=>!known.has(x.code));

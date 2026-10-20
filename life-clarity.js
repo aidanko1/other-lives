@@ -82,7 +82,7 @@ O.careerOffers=function(s){
  }).filter(j=>mode==='interest'?j.match:j.pay>s.income).sort((a,b)=>mode==='interest'?(a.tier-b.tier||a.title.localeCompare(b.title)):(a.pay-b.pay||a.title.localeCompare(b.title))).slice(0,3);
 };
 O.payComparison=(current,offered)=>current>0?`${((offered-current)/current*100)>=0?'+':''}${((offered-current)/current*100).toFixed(1)}% ${offered>=current?'increase':'decrease'}`:'First paid role · no previous earnings';
-const careers={id:'career-search-results',min:18,max:74,weight:70,category:'Work · Search results',scene:'office',
+const careers={id:'career-search-results',min:18,max:120,weight:70,category:'Work · Search results',scene:'office',
  when:s=>!!s.flags.jobSearching&&s.age>=(s.flags.searchReady||s.age)&&s.job!=='Retired'&&!s.flags.studying,
  title:s=>s.flags.searchMode==='interest'?'Work closer to your interests':'Your job search: the available offers',
  description:s=>`Current role: ${s.job||'Not employed'}. Earnings: ${O.money(s.income)} a year (${O.money(s.income/12)} a month). ${s.flags.searchMode==='interest'?'These roles match an interest, but may reduce your earnings.':'Only qualified roles paying more than your current income are listed.'} ${O.careerOffers(s).length?'These are firm in-game salary offers.':'No suitable vacancy was found this time.'}`,

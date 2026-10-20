@@ -1,6 +1,6 @@
 const test=require('node:test'),assert=require('node:assert/strict'),O=require('./engine.cjs');
 const clone=s=>JSON.parse(JSON.stringify(s));
-function adult(){const s=O.create({country:'GB',seed:2218});Object.assign(s,{age:40,month:0,pending:null,agenda:[],cash:100000,debt:50000,property:100000,school:false});s.flags.flow={schoolLeavingResolved:true};O.routeJob(s,'Office administrator',30000);O.ensureClarity(s);return s;}
+function adult(){const s=O.create({country:'GB',seed:2218});for(const p of s.people)p.age+=40;Object.assign(s,{age:40,month:0,pending:null,agenda:[],cash:100000,debt:50000,property:100000,school:false});s.flags.flow={schoolLeavingResolved:true};O.routeJob(s,'Office administrator',30000);O.ensureClarity(s);return s;}
 test('zero is a valid reproducible uint32 seed',()=>{const a=O.create({country:'GB',seed:0}),b=O.create({country:'GB',seed:0});assert.equal(a.seed,0);assert.equal(a.rng,b.rng);assert.equal(a.name,b.name);assert.deepEqual(a.agenda,b.agenda);});
 test('seeded shuffle preserves a permutation and repeats without random sort semantics',()=>{
  assert.equal(typeof O.shuffle,'function');for(const seed of [0,1,42,4294967295]){const a={rng:seed},b={rng:seed};const first=O.shuffle(a,[0,1,2,3,4,5]),second=O.shuffle(b,[0,1,2,3,4,5]);assert.deepEqual(first,second);assert.equal(a.rng,b.rng);assert.deepEqual([...first].sort(),[0,1,2,3,4,5]);}

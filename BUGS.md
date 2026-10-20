@@ -35,3 +35,11 @@ CI-001 remains under investigation: awaiting an iframe load event alone did not 
 TEST-004 / resolved fixture race: browser diagnostic showed current ID qa-old and no pending decision after installing qa-master. The old iframe's active clock/visibility save overwrote the fixture during navigation. Unload the old application and await its load event before installing each synthetic current record. Retain every funding, delete, import and school assertion. This isolates test setup; it does not weaken save behaviour assertions.
 
 Verification checkpoint efe1922: all four 250-life shards and the aggregate balance gate passed, for 1,000 complete lives with zero assertion failures. Node regression and production packaging passed. Browser still blocked by the identified fixture installation race; b75a476 fixes that setup and adds a full natural UI lifecycle. No test failure is represented as passed.
+
+OL-014 / High (recovered follow-up from 3d6b306): late-life funding, reassessment, graduation and search interruptions used smaller card age ceilings than the engine's possible lifespan, making a valid existing commitment unresolvable. Extend follow-up cards to the engine ceiling120; do not extend starting-course eligibility. Retain the age85 pending-course regression.
+
+OL-015 / High (recovered follow-up from 3d6b306): eligibility predicates could mutate money/RNG or throw before the command snapshot. Move validation inside the same rollback boundary. Retain rejected/throwing-predicate state-immutability tests.
+
+Added conservative parent/child birth-timeline diagnostics and the recovered regression. Synthetic fixture parents are aged with their player where these fixtures exercise consistency. No actual life history is rewritten to fit the assertion.
+
+TEST-005: the retained browser school check asserted an obsolete literal heading ('The school years begin') although the current authored school card uses a different title. Replace that wording assumption with the actual acceptance contract: the school-entry decision is pending, formal enrolment is false, and the choice dialog is present. Keep the home-learning outcome assertion.
