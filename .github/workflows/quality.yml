@@ -1,7 +1,5 @@
 name: Other Lives quality
 on:
-  push:
-    branches: ['engineering/**']
   pull_request:
     branches: [main]
   workflow_call:
@@ -23,7 +21,6 @@ jobs:
       - run: node tests/static-check.cjs
       - run: npm run build
       - run: node --test --test-concurrency=2 tests/*.test.cjs
-      - run: node tests/registry-sweep.test.cjs
   simulation:
     runs-on: ubuntu-latest
     timeout-minutes: 35
@@ -79,3 +76,17 @@ jobs:
         with:
           name: browser-results
           path: test-results/
+  trajectory-simulation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run test:simulation
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trajectory-simulation-report
+          path: tests/reports/simulation-latest.json

@@ -33,3 +33,5 @@ OL-013 / High: a professional-training enquiry could reach selection after the p
 CI-001 remains under investigation: awaiting an iframe load event alone did not resolve the retained browser funding check. Added actual saved ID/pending route/parent budget/choice diagnostics. No funding assertion has been removed or relaxed.
 
 TEST-004 / resolved fixture race: browser diagnostic showed current ID qa-old and no pending decision after installing qa-master. The old iframe's active clock/visibility save overwrote the fixture during navigation. Unload the old application and await its load event before installing each synthetic current record. Retain every funding, delete, import and school assertion. This isolates test setup; it does not weaken save behaviour assertions.
+
+Verification checkpoint efe1922: all four 250-life shards and the aggregate balance gate passed, for 1,000 complete lives with zero assertion failures. Node regression and production packaging passed. Browser still blocked by the identified fixture installation race; b75a476 fixes that setup and adds a full natural UI lifecycle. No test failure is represented as passed.
