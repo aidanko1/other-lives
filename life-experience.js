@@ -1,7 +1,7 @@
 /* Other Lives 5.8 — age-appropriate lives, household budgets and consequences. */
 (function(O){
 'use strict';
-O.VERSION='5.8.1';
+O.VERSION='5.8.2';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const hash=v=>{let h=2166136261;for(const c of String(v))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0};
 const badInterest=/^(learning|community|health|relationships|balanced|career|rest)$/i;

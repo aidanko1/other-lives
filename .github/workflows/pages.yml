@@ -27,6 +27,7 @@ jobs:
           node --check life-experience.js
           node --check pixel-household.js
           node tests/life-clarity.test.cjs --quick
+          node tests/birth-reveal.test.cjs
           cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js life-clarity.js life-clarity.css life-experience.js life-experience.css pixel-household.js sw.js _site/
           test -s _site/index.html
           cp release-version.txt _site/
