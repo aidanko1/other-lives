@@ -1,27 +1,31 @@
-# Other Lives — Version 5.1
+# Other Lives v5.2 — fixed-data culturally contextual life simulator
 
-A fictional, text-led life simulator built around random births, country context, family circumstances, relationships, and choices.
+Play at https://aidanko1.github.io/other-lives/ . On iPhone Safari, Share → Add to Home Screen. Internet access is required: offline cache support is intentionally disabled.
 
-**Play:** https://aidanko1.github.io/other-lives/
+## Changes in v5.2
 
-On iPhone: open the website in Safari, then Share → Add to Home Screen. The game is online-only; live World Bank requests and offline caching have been disabled.
+- Corrected the module loading order so **Family & Money** and **Spend & Plan** always load before the UI initializes, including for older saved lives.
+- Fixed non-working spending actions. Spend now draws from household discretionary cash for children or personal cash for adults, checks affordability, logs purchases and refreshes offers on each birthday.
+- Added contextual 2024 demographic notes to the *relevant life events and journal entries*, including national fertility rates alongside birth/family contexts and under-five mortality alongside early childhood health events.
+- Removed the separate **Facts** tab and links that took players away from the decision they were making.
+- Retained country-specific cultural settings, household expenses, family sizes and festival events for 129 curated locations. Celebration participation varies by household; an optional country-specific decision considers time, social ties and family finances. Others are currently excluded from random birth because profiles are incomplete.
+- Prevented old cached World Bank API data and stale service worker caches from overriding the fixed-reference model.
+- Continued preserving game progress and the user's Life Archive format.
 
-## v5.1 fixes
+## Important data caveats
 
-- **Family & Money and Spend & Plan** load reliably before the game renders, including with older life saves.
-- Spend options reflect age, interests, household circumstances and the country's selected cultural occasion. Offers refresh on birthdays. Family funds are separate from adult personal funds.
-- Purchases now check available money, update the character or family balance, and add to the life log.
-- Removed the separate Facts tab. Fixed demographic reference notes now appear beside relevant birth, family, healthcare and life-record events, with references and disclaimers.
-- 129 countries and locations with authored cultural reference profiles. Locations without such profiles are excluded from birth selection.
-- Profile and spending views pause the simulation and preserve unanswered decisions.
-- Entire game logic is packaged in index.html to avoid a stale or missing module breaking panels.
+The snapshot uses a **rounded, indicative reference around 2024**, including fertility values, not a rigorously validated year-specific statistical series for every country. Population values are descriptive, not precise odds of a particular person's fictional life. Household income, PPP spending costs, employment, cultural participation, mortality outside verified source coverage, and event frequencies are still model assumptions, and should not be presented as documented national probabilities. Festival examples are not universal across residents of a country.
 
-## Evidence limitations
+## Persistence
 
-The figures are an approximate fixed 2024-era reference snapshot, not a rigorously audited national dataset. Historical and current years differ across sources. Income, spending, career odds, healthcare, cultural participation and mortality outside reference datasets remain illustrative modelling assumptions. Real-world population statistics are **not** individual probabilities. Not every household participates in the same events or traditions.
+Saves stay on your phone/browser. Export your Life Archive to JSON before reinstalling or changing hosting sites. No account sync is implemented.
 
-## Saves
+## Verification completed
 
-Lives save locally on your device. Export your Life Archive before switching domains or clearing browser data. There is no account sync.
+- 129 of 129 country starts produced a playable life; 114 simulated deaths and 15 survivors after a fixed 116-year test horizon, with 4,673 decisions and no JavaScript simulation errors. All completed deaths had fictional causes recorded (the automated test checked for the `cause` field).
+- All 129 profiles exposed an annual spending catalogue and refreshed its year on age change. A second purchase of the same item in one year is rejected.
+- In an iPhone-size browser test, the Spend and Family views opened and a paused decision remained unchanged after opening/closing them.
+- No external network requests were made in the inline browser test.
+- Live GitHub Pages and physical iPhone persistence were not tested in this environment.
 
-Repository: https://github.com/aidanko1/other-lives
+**Not full scientific validation:** Festival participation choices, annual costs, family size generation and health outcomes are modelled; cultural profiles are examples, not universal practices. The fixed fertility estimates are approximate, not an audited country-by-country 2024 release. Data sources are linked for follow-up.
