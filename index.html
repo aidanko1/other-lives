@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Other Lives" />
   <meta name="application-name" content="Other Lives" />
   <meta name="description" content="Other Lives: an original, text-first life simulator about circumstance, choice and chance." />
-  <title>Other Lives — a life, not a leaderboard (v2.5)</title>
+  <title>Other Lives — a life, not a leaderboard (v2.4)</title>
   <style>
 :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#263c39;background:#f5f2eb;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;--paper:#f5f2eb;--white:#fffefa;--ink:#263c39;--muted:#73807b;--line:#e2e1d9;--green:#40776e;--green-dark:#285950;--mist:#eaf0e9;--coral:#c87861;--sand:#e4b680;--blue:#6486aa;--shadow:0 12px 36px rgba(51,66,61,.07)}
 *{box-sizing:border-box}body{margin:0;min-width:320px}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9dc9b8;outline-offset:3px}button{transition:background .16s ease,transform .16s ease}button:not(:disabled):active{transform:scale(.985)}.app-shell{max-width:1370px;margin:auto;padding:0 28px 44px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:86px;border-bottom:1px solid var(--line)}.brand{border:0;background:transparent;display:flex;gap:11px;align-items:center;color:var(--ink);padding:4px 0;text-align:left}.brand-mark{background:var(--green-dark);color:white;font-size:22px;font-weight:700;width:41px;height:41px;border-radius:13px;display:grid;place-items:center}.brand-name{font-size:19px;font-weight:800;letter-spacing:-.7px;line-height:1.1}.brand-sub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.7px;color:var(--muted);margin-top:5px}.top-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--white);color:var(--ink);padding:11px 15px;border-radius:11px;font-size:13px;font-weight:700}.btn:hover:not(:disabled){background:#edf3ed}.btn-primary{color:white;background:var(--green-dark);border-color:var(--green-dark)}.btn-primary:hover:not(:disabled){background:var(--green)}.btn-text{border:0;background:transparent;color:var(--muted)}.btn-danger{color:#ad5144}.btn-small{font-size:12px;padding:8px 11px}.btn-wide{width:100%}.eyebrow{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin:0 0 13px}.landing{padding:65px 0 50px}.landing-grid{display:grid;grid-template-columns:1fr 1.03fr;gap:60px;align-items:center}.hero-title{font-family:Georgia,Times,serif;font-size:clamp(51px,6vw,84px);font-weight:500;line-height:1.035;letter-spacing:-3.3px;margin:0 0 22px;max-width:650px}.hero-title em{color:var(--green);font-style:italic}.hero-lede{font-size:17px;line-height:1.85;color:#65716c;max-width:530px;margin-bottom:28px}.hero-note{font-size:12px;line-height:1.7;color:var(--muted);max-width:530px}.hero-buttons{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:30px}.art-frame{border:9px solid #fffdf8;border-radius:21px;overflow:hidden;box-shadow:0 23px 65px #59686022;background:#dde8df}.art-frame canvas{width:100%;display:block;image-rendering:pixelated;aspect-ratio:16/9}.hero-art{position:relative}.hero-overlays{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.small-pill{border:1px solid var(--line);background:#fbfaf6;padding:9px 13px;border-radius:24px;font-size:12px;font-weight:650;color:#5a6a64}.section-title{font-family:Georgia,serif;letter-spacing:-1.1px;font-size:29px;margin:0 0 14px;font-weight:500}.features{margin-top:68px;padding-top:36px;border-top:1px solid var(--line)}.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.feature{background:var(--white);padding:22px;border:1px solid var(--line);border-radius:15px}.feature .symbol{font-size:23px;margin-bottom:19px}.feature h3{margin:0 0 10px;font-size:15px}.feature p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}.footer-note{padding-top:25px;margin-top:35px;border-top:1px solid var(--line);font-size:11px;line-height:1.65;color:var(--muted)}
@@ -56,16 +56,43 @@ html { background: #f5f2eb; }
 
 </style>
 <style>
-/* 2.5 mobile usability and end-of-life identity */
-.quick-dock{position:sticky!important;bottom:calc(env(safe-area-inset-bottom) + 8px)!important;width:min(510px,calc(100% - 16px))!important;margin:18px auto 0!important;transform:none!important;left:auto!important;right:auto!important;z-index:12!important;box-shadow:0 6px 26px #1e38232c!important}
-.topbar{gap:12px}.top-actions{flex-wrap:wrap;justify-content:flex-end}.brand-sub{display:none}
-.game-main{padding-bottom:35px}.game-layout{min-width:0}.life-controls{box-shadow:none}
-.death-summary{background:#f9ece7;border:1px solid #e7c3b7;border-radius:14px;padding:17px;margin-top:18px;color:#693f36}.death-summary h3{font-family:Georgia,serif;font-size:23px;margin:8px 0}.death-summary p{line-height:1.6}
-.birth-shade{position:fixed;inset:0;background:#1f3f36df;z-index:90;display:flex;align-items:center;justify-content:center;padding:25px}.birth-reveal{border-radius:22px;background:#fffdf7;max-width:490px;width:100%;text-align:center;padding:30px 22px;box-shadow:0 26px 85px #0006}.birth-reveal h2{font-family:Georgia,serif;font-size:clamp(26px,7vw,38px);margin:16px 0;color:#263c39}.birth-reveal p{line-height:1.6}.draw-globe{width:86px;height:86px;margin:15px auto;border-radius:50%;background:repeating-linear-gradient(35deg,#6aa3a6 0 12px,#b1d1ad 12px 23px,#6aa3a6 23px 34px);border:7px solid #e1e5d3;animation:drawturn 1.2s ease-in-out 2}.birth-rolling{letter-spacing:2px;text-transform:uppercase;font-weight:700;font-size:11px;color:#657e76;animation:glow 1.3s ease-in-out 2}@keyframes drawturn{0%{transform:rotate(0)}80%{transform:rotate(315deg)}100%{transform:rotate(360deg)}}@keyframes glow{50%{opacity:.3}}
-@media(max-width:760px){.topbar{align-items:center;flex-wrap:wrap}.top-actions .btn{padding:7px 9px}.quick-dock{font-size:12px;padding:8px 5px!important}.game-main .page-heading{padding-top:14px}.page-heading h1{font-size:clamp(27px,7vw,38px)}.life-controls{position:relative!important;top:auto!important}.time-sticky{position:relative!important;top:auto!important}.game-main{padding-bottom:50px}}
-</style><link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+@media(max-width:680px){.quick-dock{position:sticky!important;bottom:8px!important;left:auto!important;right:auto!important;max-width:100%!important;transform:none!important;margin:12px auto!important;z-index:15!important;box-shadow:0 4px 16px #223b3420!important}.quick-dock button{font-size:12px!important;padding:9px 8px!important}.topbar .brand small,.topbar .brand .eyebrow{display:none!important}.game-main{padding-bottom:20px!important}}
+.end-cause{margin:16px 0;padding:16px;border:1px solid #d89a8e;border-radius:15px;background:#fff1eb;color:#7b3730}.end-cause strong{font-size:12px;text-transform:uppercase;letter-spacing:.08em}.end-cause p{font-weight:700;margin:7px 0}.end-cause small{color:#8a544a}
+.birth-reveal{text-align:center;padding:12px 4px}.birth-reveal h2{font-family:Georgia,serif;font-size:32px}.birth-globe{width:74px;height:74px;margin:8px auto 20px;border-radius:16px;background:#bfd9ca;color:#286151;display:grid;place-items:center;font-size:40px;animation:birth-pop 700ms ease-out both}@keyframes birth-pop{from{transform:scale(.5) rotate(-20deg);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+<style id="v3-improvements">
+/* Navigation now lives in normal document flow; no fixed dock obscuring the story. */
+/* One slim playback strip: year progress under the speed buttons. */
+.game-main .life-controls{position:relative!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;overflow:visible!important;gap:4px!important;padding:5px 5px 11px!important;min-height:42px!important}
+.game-main .life-controls .time-with-speed{position:absolute!important;bottom:1px!important;left:5px!important;right:5px!important;height:3px!important;min-width:0!important;padding:0!important;margin:0!important;pointer-events:none!important}
+.game-main .life-controls .time-label{display:none!important}.game-main .life-controls .time-track{height:3px!important;max-width:none!important;width:100%!important;border-radius:2px!important}
+.game-main .life-controls .speed-list{min-width:125px!important;flex:1 1 auto!important;gap:0!important}
+.game-main .life-controls .speed-btn{min-width:0!important;padding:7px 2px!important;font-size:11px!important}
+.game-main .life-controls .btn{font-size:11px!important;padding:7px 7px!important;flex-shrink:0!important}.game-main .life-controls [data-action="next-decision"]{white-space:nowrap!important;font-size:10px!important}
+@media(max-width:400px){.game-main .life-controls .speed-list{min-width:120px!important}.game-main .life-controls .btn{padding:7px 4px!important}.game-main .life-controls{gap:2px!important}}
+.game-main .quick-dock{position:sticky!important;top:0!important;bottom:auto!important;transform:none!important;left:auto!important;right:auto!important;display:flex!important;justify-content:space-around;max-width:100%!important;margin:4px 0 12px!important;width:100%!important;padding:5px!important;gap:3px!important;z-index:25!important;box-shadow:0 2px 8px #263c3920!important;background:#faf8f3!important;border:1px solid #d6ded5!important}
+.game-main .quick-dock button{flex:1;min-width:0;padding:9px 3px!important;font-size:11px!important;white-space:nowrap!important}
+.game-main .time-sticky{position:relative!important;top:0!important;z-index:18!important}
+.topbar .brand-sub{display:none!important}.topbar .brand-name{letter-spacing:-.03em!important}
+.game-main .page-heading{margin-bottom:12px!important}.game-main .game-layout{margin-top:10px!important}
+.money-card{padding:12px;border:1px solid #e0e4dc;border-radius:12px;margin:9px 0;background:#fdfdf9}
+.money-card strong{font-size:14px}.money-card p{font-size:12px;line-height:1.5;margin:5px 0;color:#66736b}.money-card button{margin-top:6px}
+.money-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:15px 0}
+.money-metric{padding:10px;border-radius:10px;background:#eaf0e9;font-size:11px;color:#4f665d}.money-metric strong{display:block;color:#203b35;font-size:16px}
+.market-heading{margin-top:16px;font-weight:800;letter-spacing:.04em;color:#3b655a;font-size:12px;text-transform:uppercase}
+.death-hero{border:1px solid #e6dfd4;border-radius:20px;padding:24px;background:#fffdfa;max-width:820px;margin:18px auto}
+.death-hero h1{font-family:Georgia,serif;font-size:clamp(31px,7vw,48px);line-height:1.15;margin:14px 0}
+.death-summary{padding:18px;border-left:4px solid #b98d86;background:#fbf4ed;border-radius:9px;margin:20px 0}
+.death-hero .game-scene{height:auto;max-height:340px;overflow:hidden;border-radius:14px}
+.death-hero .game-scene canvas{width:100%;height:auto;max-height:310px}
+.birth-spinner{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;text-align:center;color:#57817a;padding:15px}
+.birth-orbit{display:block;width:96px;height:96px;margin:15px auto;background:linear-gradient(140deg,#b6d3c1,#5a8b76);border:8px solid #edf1e9;border-radius:50%;box-shadow:0 0 0 4px #cadbc9,0 6px 16px #78968744;animation:birthOrbit 1.1s linear infinite}
+@keyframes birthOrbit{from{transform:rotate(0deg) scale(.95)}50%{transform:rotate(180deg) scale(1.04)}to{transform:rotate(360deg) scale(.95)}}
+.birth-choice{min-height:65px;text-align:center;font-family:Georgia,serif;font-size:25px;color:#28453c}
+.death-hero .panel-label{margin-top:20px}
+@media(max-width:760px){.game-main .quick-dock{top:0!important;margin:6px 0 9px!important}.game-main .quick-dock button{font-size:10.5px!important}.time-sticky .quick-stats{display:none!important}.app-shell{padding-bottom:calc(24px + env(safe-area-inset-bottom))!important}.death-hero{padding:16px}}
+</style>
+<link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icons/icon-192.png">
 </head>
 <body>
   <div id="app"></div>
@@ -75,7 +102,7 @@ html { background: #f5f2eb; }
    parameters, not a complete UN extract. Replace with vetted country/year tables
    before claiming representative worldwide or historical probabilities. */
 window.OL = window.OL || {};
-OL.VERSION = '2.3.0';
+OL.VERSION = '3.0.0';
 OL.COUNTRIES = [
 // code, country, region, annual births proxy (millions), income PPP/person proxy, life expectancy proxy, infrastructure score, schooling access, urbanisation %
 ['IN','India','South Asia',23.0,11000,72,64,75,37],
@@ -275,7 +302,7 @@ O.mortality=(s)=>{
  if(a>=105)hazard=.9;
  return O.chance(s,Math.min(.96,hazard));
 };
-O.finish=(s,reason)=>{if(!reason){const a=s.age;const childhood=a<15;const risk=s.flags?.vaccinationMissed&&a<5;const causes=childhood?(risk?['Complications of a serious infectious illness','Severe respiratory infection','An acute childhood illness']:['Severe respiratory infection','Complications of an acute illness','An accidental injury']):a<45?['A sudden medical emergency','An accidental injury','Complications of an infection','A serious undiagnosed condition']:a<70?['Cardiovascular illness','A serious infection','A chronic medical condition','Cancer']:['Cardiovascular illness','Cancer','Respiratory disease','Complications of frailty'];reason=O.pick(s,causes);s.deathContext=childhood?'Dying so young interrupts a childhood that has barely begun. Local healthcare, vaccination, nutrition and chance all influence population-level survival; this particular cause is a fictional simulation outcome.':a<70?'An earlier death can have many causes. This simulated event does not establish what would happen to a real person with similar circumstances.':'Older age brings increased risks of illness, even when healthcare and financial resources are available.';}s.status='finished';s.pending=null;s.finishedAt=new Date().toISOString();s.cause=reason|| (s.age>70?'Age-related illness':'An unexpected medical event');O.journal(s,'The end of a life',`${s.name} dies at age ${s.age}. Cause recorded: ${s.cause}. ${s.deathContext||''}`,'ending');s.lastOutcome='';};
+O.finish=(s,reason)=>{s.status='finished';s.pending=null;s.finishedAt=new Date().toISOString();s.cause=reason|| (s.age>70?'Age-related illness':'An unexpected medical event');O.journal(s,'The end of a life',`${s.name} dies at age ${s.age}. The story remains in your life archive.`,'ending');s.lastOutcome='';};
 O.advance=(s)=>{
  if(!s||s.status!=='alive'||s.pending)return false;
  s.age++;
@@ -750,6 +777,18 @@ O.makeAgenda=function(s){
  all.sort(()=>O.rand(s)-.5);
  return all.map((x,i)=>({...x,month:slots[i],done:false})).sort((a,b)=>a.month-b.month);
 };
+O.deathReason=function(s){
+ const age=s.age, low=s.strata<=2, weak=s.country.infra<55;
+ const choices=age<1?['Complications around birth','A severe neonatal infection','Complications of premature birth']:
+ age<5?(weak&&low?['A severe childhood respiratory infection','Complications of diarrhoeal illness and dehydration','A serious infectious illness','An accidental injury']:['A severe respiratory illness','An accidental injury','A serious infection']):
+ age<15?['An accidental injury','A serious infection','An undiagnosed medical condition']:
+ age<35?['An accidental injury','A sudden medical emergency','An infectious illness','An undiagnosed health condition']:
+ age<65?['A cardiovascular event','A serious illness','Complications of an infection','An accidental injury']:
+ ['A cardiovascular event','A serious chronic illness','Complications of a respiratory infection','Age-related medical complications'];
+ return O.pick(s,choices);
+};
+const finishBeforeCause=O.finish;
+O.finish=function(s,reason){finishBeforeCause(s,reason||O.deathReason(s));s.journal[0].description=`${s.name} died at age ${s.age}. Recorded cause: ${s.cause}. This is a fictional simulated cause, not a medical diagnosis or an estimated national cause-of-death rate. The life remains saved in the archive.`;};
 O.advanceMonth=function(s){
  if(!s||s.status!=='alive'||s.pending)return {advanced:false,decision:!!s?.pending};
  O.ensureTimeline(s);
@@ -908,199 +947,6 @@ O.relevantJobs=s=>{
 })(window.OL);
 </script>
   <script>
-/* OTHER LIVES v3: sourced childhood mortality targets + calibrated illustrative adult curve.
-   National indicators are targets, NOT person-level event probabilities.
-   Populations/countries without empirical q5 inputs retain explicitly marked proxies. */
-(function(O){
-'use strict';
-O.VERSION='3.0.0';
-const sourceUnicef=code=>`https://data.unicef.org/country/${({GH:'gha',NG:'nga',ET:'eth',BD:'bgd',IN:'ind',GB:'gbr',IR:'irn',US:'usa',JP:'jpn',PK:'pak',PL:'pol'})[code]}/`;
-// 2024: UNICEF UN-IGME national under-5 q5 and infant q1 per 1,000 live births.
-// Reliable estimates of populations, not likelihoods conditional on a particular household's history.
-const CHILD={GH:[35.9,28],NG:[115.6,70],ET:[44.5,undefined],BD:[30.5,24],IN:[26.6,23],GB:[4.7,4],IR:[11.3,10],US:[6.5,5],JP:[2.4,2],PK:[56,48],PL:[4.2,undefined]};
-// World Bank, 2024 life expectancy at birth (both sexes), precisely named countries.
-const LE={GH:65.69,ET:67.60,BD:74.93,IN:72.23,IR:77.85,HK:85.39,NG:54.6,PK:67.8,GB:81.3,US:79.0,JP:84.0,PL:78.0};
-O.SOURCE_MODEL={childMortality2024:CHILD,lifeExpectancy2024:LE,sourceUnicef};
-O.countryEvidence=(s)=>{const code=s.country.code;const q=CHILD[code];return {under5:q?q[0]:null,infant:q&&q[1]!==undefined?q[1]:null,life:LE[code]??null,under5Source:q?sourceUnicef(code):null,lifeSource:LE[code]?'https://data.worldbank.org/indicator/SP.DYN.LE00.IN':'',quality:q&&LE[code]?'partial_empirical':'illustrative_proxy'};};
-function childRisk(c,a){const code=c.code,r=CHILD[code],q5=(r?r[0]/1000:Math.min(.16,Math.max(.002,(87-c.life)*.0027)));
-  // When national infant mortality is unavailable, infant share is an assumption.
-  const q1=r?.[1]!==undefined?r[1]/1000:q5*.72;
-  if(a===1)return q1;
-  if(a<=5)return 1-Math.pow((1-q5)/(1-q1),1/4);
-  return 0;
-}
-function adultShape(age){if(age<=14)return .00025;if(age<=40)return .00045 + (age-14)*.000026;return .001126*Math.exp(.095*(age-40));}
-function impliedMean(c,m){let alive=1,years=0;for(let a=1;a<=111;a++){years+=alive;const q=a<=5?childRisk(c,a):1-Math.exp(-m*adultShape(a));alive*=1-Math.min(.9999,Math.max(0,q));}return years;}
-const rates={};
-function adultMultiplier(c){if(rates[c.code]!==undefined)return rates[c.code];const desired=LE[c.code]??c.life;let lo=.02,hi=100;for(let i=0;i<53;i++){const m=(lo+hi)/2;if(impliedMean(c,m)>desired)lo=m;else hi=m;}return rates[c.code]=(lo+hi)/2;}
-O.hazardAt=(c,a)=>a<=5?childRisk(c,a):1-Math.exp(-adultMultiplier(c)*adultShape(a));
-O.expectedYears=(c)=>impliedMean(c,adultMultiplier(c));
-O.mortality=function(s){const age=s.age;if(age<=0)return false;
- const base=O.hazardAt(s.country,age);
- // Individual variation is a modelled adjustment, NOT sourced stratified mortality tables.
- const classFactor=[1.34,1.18,1.04,.94,.88,.85,.83,.82][s.strata]??1;
- const sexFactor=s.gender==='M'?1.07:.94;
- const healthFactor=1+Math.max(0,40-(s.health??65))*.005;
- let modifier=classFactor*sexFactor*healthFactor;
- if(s.flags?.chronicIllness)modifier*=1.14;
- if(s.flags?.homeless)modifier*=1.09;
- if(s.flags?.unsafeEmployment&&age>=17)modifier*=1.06;
- if(s.flags?.vaccinationMissed&&age<=5)modifier*=1.18;
- const personal=1-Math.pow(1-base,modifier);
- return O.chance(s,Math.min(.98,personal));
-};
-// Explain specific fictional death causes and distinguish probabilities from diagnoses.
-const oldFinish=O.finish;
-O.finish=function(s,reason){
- if(!reason){
- const a=s.age,early=a<=5,conditions=s.flags||{};
- const options=early?['A severe respiratory infection','A serious gastrointestinal infection','Complications of a neonatal or childhood illness']:
- a<16?['An accidental injury','An acute infection','An undiagnosed medical emergency']:
- a<40?['An accidental injury','An acute medical emergency','A severe illness']:
- a<70?['A cardiovascular illness','Cancer','Complications of a serious infection']:
- ['Cardiovascular disease','Cancer','A serious respiratory illness','Complications of age-related frailty'];
- reason=O.pick(s,options);
- if(early&&conditions.vaccinationMissed&&O.chance(s,.28))reason='Complications of a vaccine-preventable infection';
- }
- oldFinish(s,reason);
- const evidence=O.countryEvidence(s);
- s.deathContext=`The stated cause is a plausible fictional narrative, not an individual medical diagnosis. The mortality *frequency* is based on ${evidence.quality==='partial_empirical'?'a calibrated model informed by 2024 national indicators':'an estimated demographic model with limited national data'}. This life is not a personal prediction.`;
- if(s.journal?.[0]?.type==='ending')s.journal[0].description+=` ${s.deathContext}`;
-};
-// Named relationships, local lore and condition-specific paths. Distinct flavour by place, age and class.
-const L={
-GH:{school:'BECE and senior high school',transport:'tro-tro',food:'waakye or banku',place:'a market in your area',jobs:['Market assistant','Mobile money agent','Teaching assistant'],adult:'a National Service posting or a local employer',fact:'UNICEF reports 35.9 deaths before age five per 1,000 live births in Ghana in 2024.'},
-NG:{school:'WAEC exams and secondary-school plans',transport:'danfo or other shared transport',food:'jollof rice or eba',place:'a busy neighbourhood market',jobs:['Retail clerk','Logistics assistant','Apprentice technician'],adult:'a vocational placement or a small firm',fact:'UNICEF estimated 115.6 under-five deaths per 1,000 live births in Nigeria in 2024.'},
-ET:{school:'Grade 8 and secondary-school routes',transport:'shared minibuses and local roads',food:'injera with a family dish',place:'the local market',jobs:['Agricultural assistant','Shop assistant','Trade apprentice'],adult:'a cooperative or small local employer',fact:'UNICEF estimated 44.5 deaths before age five per 1,000 births in Ethiopia in 2024.'},
-BD:{school:'SSC and HSC examination routes',transport:'rickshaw or bus',food:'rice, dal and vegetables',place:'a roadside bazaar',jobs:['Shop assistant','Garment production trainee','Mobile phone shop assistant'],adult:'a shop or manufacturing workplace',fact:'UNICEF estimated 30.5 under-five deaths per 1,000 live births in Bangladesh in 2024.'},
-IN:{school:'Class 10/12 examinations',transport:'bus or local train',food:'a family thali or street snack',place:'a nearby market',jobs:['Customer support trainee','Skilled trades apprentice','Retail assistant'],adult:'an ITI training place or regional employer',fact:'UNICEF estimated 26.6 under-five deaths per 1,000 live births in India in 2024.'},
-GB:{school:'GCSEs and further education choices',transport:'bus or train',food:'a familiar takeaway or homemade meal',place:'the high street',jobs:['Apprentice electrician','Care assistant','Retail worker'],adult:'an apprenticeship provider or employer',fact:'UNICEF estimated 4.7 deaths before age five per 1,000 live births in the UK in 2024.'},
-HK:{school:'DSE examinations and post-secondary choices',transport:'the MTR or minibus',food:'a cha chaan teng meal',place:'a wet market or shopping street',jobs:['Retail assistant','Office junior','Hospitality trainee'],adult:'a vocational institution or employer',fact:'Hong Kong recorded life expectancy at birth of about 85.4 years in World Bank 2024 data.'},
-IR:{school:'secondary-school examinations and university entrance routes',transport:'bus or metro where available',food:'rice and stew at home',place:'a neighbourhood bazaar',jobs:['Shop assistant','Office trainee','Workshop apprentice'],adult:'a local company or training programme',fact:'UNICEF estimated 11.3 under-five deaths per 1,000 live births in Iran in 2024.'},
-PK:{school:'matriculation and intermediate exams',transport:'rickshaw or bus',food:'roti, lentils and a family meal',place:'the local bazaar',jobs:['Shop assistant','Trade apprentice','Office junior'],adult:'a family enterprise or employer',fact:'UNICEF estimated 56 under-five deaths per 1,000 live births in Pakistan in 2024.'},
-US:{school:'high school, community college and university routes',transport:'bus, bicycle or car',food:'a meal at home with friends',place:'local shops',jobs:['Retail associate','Medical assistant trainee','Service technician'],adult:'a community-college course or employer',fact:'UNICEF estimated 6.5 deaths before age five per 1,000 births in the US in 2024.'},
-JP:{school:'entrance examinations and school-club decisions',transport:'local rail or bicycle',food:'rice and a family dish',place:'a local shopping street',jobs:['Convenience store clerk','Office trainee','Hospitality assistant'],adult:'a local firm or college',fact:'UNICEF estimated 2.4 under-five deaths per 1,000 live births in Japan in 2024.'},
-PL:{school:'matura examinations and technical schooling',transport:'bus or tram',food:'a homemade meal',place:'a local shopping street',jobs:['Office junior','Retail assistant','Trade apprentice'],adult:'a local workplace or vocational centre',fact:'UNICEF estimated 4.2 under-five deaths per 1,000 births in Poland in 2024.'}
-};
-O.LOCAL_STORIES=L;
-
-// Personalise named households, not just journal text. Examples are mixed pools, not statements
-// about any person's ethnicity/religion. Never infer those identities from nationality.
-const NAMES={
- GH:{male:['Kwame','Kofi','Yaw','Kojo','Kwaku','Samuel','Ibrahim'],female:['Akosua','Ama','Abena','Efua','Adwoa','Mariam','Grace'],last:['Mensah','Osei','Owusu','Boateng','Asante','Addo','Abubakar']},
- NG:{male:['Chinedu','Emeka','Tunde','Babatunde','Sani','Musa','Daniel'],female:['Adaeze','Ngozi','Aisha','Zainab','Yetunde','Chiamaka','Blessing'],last:['Okafor','Adeyemi','Bello','Okonkwo','Ibrahim','Balogun']},
- ET:{male:['Dawit','Abebe','Yonas','Tesfaye','Bereket','Samuel'],female:['Hana','Selam','Mekdes','Rahel','Tigist','Sara'],last:['Bekele','Tadesse','Girma','Tesfaye','Demissie']},
- BD:{male:['Rafiq','Arif','Tanvir','Hasan','Rahim','Imran'],female:['Nusrat','Tasnim','Ayesha','Maliha','Farzana','Ruma'],last:['Hossain','Rahman','Akter','Chowdhury','Islam','Ahmed']},
- IN:{male:['Aarav','Arjun','Rohan','Rahul','Imran','Kabir'],female:['Ananya','Priya','Aditi','Ayesha','Meera','Riya'],last:['Sharma','Singh','Patel','Khan','Gupta','Das']},
- HK:{male:['Ho Ming','Ka Ho','Chun Hei','Wing Ho','Chi Wai','Yat Long'],female:['Wing Yan','Tsz Yan','Ka Yan','Hiu Tung','Man Yi','Sze Wing'],last:['Chan','Wong','Lee','Cheung','Lam','Ng']},
- IR:{male:['Arman','Reza','Amir','Mehdi','Ali','Navid'],female:['Sara','Maryam','Niloofar','Leila','Nazanin','Shirin'],last:['Mohammadi','Hosseini','Rezaei','Karimi','Ahmadi']},
- PK:{male:['Bilal','Hamza','Usman','Ali','Ahmed','Hassan'],female:['Ayesha','Fatima','Zainab','Maryam','Sana','Hira'],last:['Khan','Malik','Ahmed','Butt','Shah']},
- JP:{male:['Haruto','Sota','Yuto','Ren','Kaito','Takumi'],female:['Yui','Hina','Sakura','Rin','Mei','Akari'],last:['Sato','Suzuki','Takahashi','Tanaka','Watanabe','Ito']},
- PL:{male:['Jakub','Mateusz','Piotr','Adam','Michal'],female:['Zofia','Anna','Julia','Maja','Katarzyna'],last:['Kowalski','Nowak','Wisniewski','Wojcik','Zielinski']}
-};
-const oldName=O.makeName;
-O.makeName=function(s,gender='F',surname=''){const names=NAMES[s.country?.code];if(!names)return oldName(s,gender,surname);return O.pick(s,gender==='M'?names.male:names.female)+' '+(surname||O.pick(s,names.last));};
-const FAMILY_JOBS={
- GH:{every:['Market trader','Farm worker','Bus driver','Tailor','Retail worker'],high:['Teacher','Accountant','Business owner','Healthcare worker']},
- NG:{every:['Market trader','Farm worker','Driver','Mechanic','Shopkeeper'],high:['Engineer','Doctor','Teacher','Corporate manager']},
- ET:{every:['Farm worker','Retail seller','Transport worker','Skilled tradesperson'],high:['Teacher','Civil servant','Business owner']},
- BD:{every:['Agricultural worker','Garment worker','Small shop owner','Transport worker'],high:['Teacher','Accountant','Business owner']},
- IN:{every:['Skilled tradesperson','Shop worker','Farm worker','Factory worker'],high:['Engineer','Teacher','Business owner','Doctor']},
- HK:{every:['Restaurant worker','Retail assistant','Driver','Security guard'],high:['Banking employee','Engineer','Business owner','Teacher']},
- IR:{every:['Shopkeeper','Office worker','Craft worker','Driver'],high:['Engineer','Doctor','Teacher','Business owner']},
- PK:{every:['Market trader','Farm worker','Driver','Tailor'],high:['Teacher','Accountant','Business owner']},
- GB:{every:['Care assistant','Warehouse operative','Retail worker','Driver'],high:['Solicitor','Software developer','Teacher','Doctor']},
- US:{every:['Healthcare aide','Retail worker','Driver','Construction worker'],high:['Engineer','Accountant','Doctor','Business owner']},
- JP:{every:['Shop worker','Office clerk','Delivery worker','Hospitality worker'],high:['Engineer','Teacher','Corporate manager']},
- PL:{every:['Factory worker','Retail worker','Driver','Tradesperson'],high:['Engineer','Doctor','Business owner','Teacher']}
-};
-const oldCreate=O.create;
-O.create=function(settings){const st=oldCreate(settings);if(st.country?.code==='HK')st.first=st.name.split(' ').slice(0,2).join(' ');return st;};
-const oldPerson=O.person;
-O.person=function(s,role,age,gender,surname,extra={}){
- const p=oldPerson(s,role,age,gender,surname,extra);const pool=FAMILY_JOBS[s.country?.code];
- if(pool&&['Parent','Mother','Father'].includes(role))p.job=O.pick(s,s.strata>=5?pool.high:pool.every);
- return p;
-};
-
-const mother=s=>s.people.find(x=>x.alive&&x.role==='Mother'),father=s=>s.people.find(x=>x.alive&&x.role==='Father');
-const parent=s=>{const p=mother(s)||father(s);return p?O.personLabel(p):'a caregiver';};
-const school=(s)=>s.school?'The school expects you back tomorrow.':'Your learning happens away from a regular classroom.';
-const poverty=(s)=>s.strata<2?'The family has little spare money and cannot assume support will arrive.':s.strata>=6?'Your family can absorb many expenses without changing daily plans.':'The household can cover most essentials, but unexpected bills still matter.';
-function put(s,phase,key,title,description,scene='home',change){return {id:`place-${s.country.code}-${phase}-${key}`,title,description,scene,effect:change?'local-effect':null,localEffect:change,type:'story'};}
-const oldPick=O.pickStories;
-O.pickStories=function(s,n){const base=oldPick(s,n);const d=L[s.country.code];if(!d||n<=0)return base;
- const a=s.age,ph=a<6?'infancy':a<14?'childhood':a<21?'teen':a<39?'young':a<66?'midlife':'elder';
- const contact=parent(s);const companion=s.people.find(x=>x.role==='Friend'&&x.alive);
- const friend=companion?O.personLabel(companion):'a neighbour';const place=s.urban?'your neighbourhood':'the surrounding community';
- const stories={
- infancy:[
- put(s,ph,0,'A visit about childhood health',`${contact} arranges an appointment or asks about routine immunisation. ${s.strata<2?'Travel costs and taking time off work complicate the visit.':'A health worker explains the next steps.'} Not every family has equal access.`, 'clinic'),
- put(s,ph,1,'The household around you',`You are too young to decide much. ${contact} arranges your day around care and paid or unpaid work. ${poverty(s)}`,'home'),
- put(s,ph,2,'People and places',`Family members carry you past ${d.place}. Conversations, sounds and familiar faces make up your first impressions.`, 'city')],
- childhood:[
- put(s,ph,0,'The journey to learn',`Whether heading to class or helping at home, you see classmates or neighbours preparing for ${d.school}. ${school(s)} ${poverty(s)}`,'school'),
- put(s,ph,1,'A familiar local meal',`${contact} shares ${d.food}. During the meal, adults discuss prices and whose earnings will cover the next bill.`, 'home'),
- put(s,ph,2,'A small encouragement',`${friend} says you are talented at ${s.flags.personalThread||'something you enjoy'}. You keep thinking about the compliment as you walk through ${place}.`,'park',{happiness:2,confidence:2}),
- put(s,ph,3,'An ordinary journey',`You travel by ${d.transport} to ${d.place}. The expense and length of the journey depend on where you live.`, 'city')],
- teen:[
- put(s,ph,0,'Examinations and expectations',`People talk about ${d.school}. ${contact} has hopes for your future, but your grades and the money available are not entirely in your control.`, 'school'),
- put(s,ph,1,'Different futures',`You hear that someone your age is training for work while another is continuing school. ${poverty(s)} It becomes harder to imagine everyone's life moving in the same direction.`,'city'),
- put(s,ph,2,'The limits of spare time',`A friend suggests meeting near ${d.place}. ${s.flags.foodInsecure?'Your family has been cutting food expenses, and outings feel harder to justify.':'You weigh the journey, responsibilities and whether you want to go.'}`,'park'),
- put(s,ph,3,'An interest takes shape',`You spend an evening thinking about ${s.flags.personalThread||'a subject that interests you'}. A teacher or relative's casual remark makes the interest feel more real.`,'school',{knowledge:1})],
- young:[
- put(s,ph,0,'A route into working life',`You hear about opportunities through ${d.adult}. ${s.job?`Your experience as a ${s.job} affects which offers seem realistic.`:'Qualifications, contacts and local demand shape which offers seem realistic.'}`,'office'),
- put(s,ph,1,'The cost of living independently',`A trip on ${d.transport} brings up housing, work and family expenses. ${poverty(s)} `,'city',{stress:1}),
- put(s,ph,2,'An unexpected family conversation',`${contact} asks whether you intend to stay nearby. Your work, friendships and financial obligations all shape what you can promise.`,'home'),
- put(s,ph,3,'Shared everyday life',`After an ordinary day you share ${d.food} with someone close. Conversations turn from tomorrow's practical problems to memories from school.`,'home',{happiness:1})],
- midlife:[
- put(s,ph,0,'A neighbourhood remembers',`At ${d.place}, someone asks how your family is doing. You find yourself comparing the opportunities you had with those available to younger people now.`,'city'),
- put(s,ph,1,'The household budget changes',`Prices and transport on ${d.transport} change what the family can spend. ${s.debt>0?'Repayments make you reconsider other plans.':s.strata>4?'Savings provide a buffer.':'You make practical adjustments.'}`,'home'),
- put(s,ph,2,'A path not taken',`A conversation about ${d.school} reminds you of your earlier choices. You wonder whether life would have differed if you had taken another route.`,'park'),
- put(s,ph,3,'Changing responsibilities',`Someone in your wider community needs help with an appointment or errand. Your working hours and family responsibilities determine how much you can offer.`,'home',{relationships:1})],
- elder:[
- put(s,ph,0,'A familiar part of town',`You pass ${d.place} and notice the shops, faces and routines that have changed since your youth.`, 'city'),
- put(s,ph,1,'The next generation',`You hear someone discussing ${d.school}. It sounds familiar but the pressures are not exactly the ones you experienced.`,'home'),
- put(s,ph,2,'Memories at an ordinary meal',`The taste of ${d.food} reminds you of ${contact} and the decisions your household used to make.`, 'home'),
- put(s,ph,3,'Getting around',`Travelling by ${d.transport} feels different as your energy changes. Distance and accessible services matter more than they once did.`,'city')]
- }[ph];
- // Replace around half of anonymous filler entries with unique, age-appropriate local memories.
- const eligible=stories.filter(t=>!s.storyUsed?.[t.id]);
- const count=Math.min(eligible.length,n>=3?2:1);
- for(let i=0;i<count;i++){
-  const chosen=O.pick(s,eligible);base[O.int(s,0,base.length-1)]=chosen;
-  eligible.splice(eligible.indexOf(chosen),1);if(!s.storyUsed)s.storyUsed={};s.storyUsed[chosen.id]=s.age;
- }
- return base;
-};
-const oldFire=O.fireStory;
-O.fireStory=function(s,event){oldFire(s,event);if(event.localEffect)O.adjust(s,event.localEffect);};
-// Make at least some *decisions*, not only text, location-specific.
-function option(title,desc,apply){return {label:title,detail:desc,apply};}
-for(const [code,data] of Object.entries(L)){
- O.EVENTS.push({id:`local-job-choice-${code}`,min:16,max:45,category:'Local opportunity',scene:'office',weight:26,
- when:s=>s.country.code===code&&!s.flags.studying&&(s.income<=0||s.flags.jobSearching||s.income<s.country.ppp*.3)&&(s.used[`local-job-choice-${code}`]===undefined||s.age-s.used[`local-job-choice-${code}`]>=8),
- title:()=>`A local offer: ${data.jobs[0]}`,
- description:s=>`A ${data.jobs[0].toLowerCase()} position is being considered through ${data.adult}. Whether you can take it depends on skills, travel, interview performance and family commitments. ${poverty(s)} The annual earnings below are simulated purchasing-power estimates, not a quoted real wage.`,
- options:s=>[
- option(`Accept: ${data.jobs[0]}`,`Illustrative pay: ${O.money(Math.round(s.country.ppp*.62))} PPP-equivalent/year; room to grow depends on experience.`,st=>{st.job=data.jobs[0];st.income=Math.round(st.country.ppp*.62*(.8+O.rand(st)*.4));st.flags.jobSearching=false;st.flags.firstLocalJob=st.job;O.adjust(st,{stress:1,confidence:4});return `You accept the ${st.job} position. Travel, colleagues and routines will shape your next few years.`;}),
- option(`Ask about: ${data.jobs[1]}`,`Different duties and training needs; interview is not guaranteed to succeed.`,st=>{if(O.chance(st,.32+st.knowledge/220)){st.job=data.jobs[1];st.income=Math.round(st.country.ppp*.79);st.flags.firstLocalJob=st.job;return `You are hired as a ${st.job}. The work brings a new routine.`;}st.flags.jobSearching=true;return `The employer declines. You continue looking while the original offer expires.`;}),
- option('Decline and keep looking','No income guaranteed while you search.',st=>{st.flags.jobSearching=true;O.adjust(st,{stress:2});return 'You decline the offer, knowing the next opportunity may take time.'})]});
-}
-const countryFact=O.factForEvent;
-O.factForEvent=(s,e)=>{
- const d=L[s.country.code];
- if(d&&e&&(/vaccin|immun|health|childhood/i.test((e.id||'')+' '+e.category))&&s.age<=5){const ev=O.countryEvidence(s);if(ev.under5!==null)return {text:d.fact,source:'UNICEF IGME, 2024 under-five mortality estimate (population-wide; not this character’s vaccine risk)',url:ev.under5Source};}
- const text=(e?.id||'')+' '+(e?.category||'')+' '+(typeof e?.title==='function'?e.title(s):'');
- if(s.age<14){if(s.country.code==='GH'&&/transport|urban|housing|market|commut/i.test(text))return O.COUNTRY_CONTEXT.GH.facts[1];if(s.country.code==='HK'&&/housing|rent|flat|home/i.test(text))return O.COUNTRY_CONTEXT.HK.facts[0];return null;}
- if(['GH','NG','ET','BD','IN'].includes(s.country.code)&&/marriage|partner|family planning|relationship.*future/i.test(text))return O.COUNTRY_CONTEXT[s.country.code]?.facts[0]||null;
- if(['GH','HK','GB'].includes(s.country.code))return countryFact(s,e);
- return null;
-};
-})(window.OL);
-
-</script>
-<script>
 /* Pixel drawings are original, procedurally rendered static scene assets.
    Deliberately evoke a classic overhead handheld-game illustration without
    copying any existing franchise sprites, maps or environments. */
@@ -1149,6 +995,258 @@ O.avatarData=(person)=>{const c=document.createElement('canvas');c.width=38;c.he
 
 </script>
   <script>
+/* Other Lives 3 — independent contextual simulation & voluntary spending.
+   Country-level under-five mortality figures are 2024 World Bank / UN IGME estimates.
+   The rest of the model uses illustrative mechanisms, never presents them as measurements. */
+(function(O){
+'use strict';
+O.VERSION='3.0.0';
+// 2024 mortality rates per 1,000 live births, World Bank SH.DYN.MORT / UN IGME.
+// Countries not in this table keep the prototype's illustrative risk calculation.
+O.UNDER_FIVE_2024={AF:53,AU:3.6,BD:30.5,CA:5.4,DE:3.7,EG:22.4,ET:44.5,FR:4.3,GH:36,IN:27,NG:115.6,PK:56,US:7,ZA:35};
+O.U5_SOURCE='https://data.worldbank.org/indicator/SH.DYN.MORT';
+O.LOCAL_LIFE={
+ GH:{places:['Accra','Kumasi','Tamale','Cape Coast'],local:['trotro','market stalls','mobile money'],school:'WASSCE',options:['Teacher training college','Technical university','Apprenticeship'],work:['Market trader','Driver','Teacher','Farm worker','Mobile-money agent']},
+ HK:{places:['Kowloon','Sha Tin','Tsuen Wan','Hong Kong Island'],local:['MTR','cha chaan teng','public estates'],school:'HKDSE',options:['Higher diploma','University','Apprenticeship'],work:['Clerical assistant','Retail worker','Technician','Teacher','Care worker']},
+ BD:{places:['Dhaka','Chattogram','Khulna','Rajshahi'],local:['rickshaw','monsoon season','garment workshops'],school:'HSC',options:['Technical training','University','Apprenticeship'],work:['Garment worker','Small trader','Teacher','Factory technician','Transport worker']},
+ NG:{places:['Lagos','Ibadan','Abuja','Kano'],local:['shared taxi','local markets','NECO and WAEC exams'],school:'WAEC',options:['Polytechnic','University','Apprenticeship'],work:['Small trader','Civil servant','Transport worker','Teacher','Technician']},
+ GB:{places:['London','Manchester','Birmingham','Leeds'],local:['bus pass','NHS appointment','local high street'],school:'GCSE/A levels',options:['College','Apprenticeship','University'],work:['Care worker','Shop assistant','Electrician','Teacher','IT technician']},
+ IN:{places:['Mumbai','Delhi','Bengaluru','Lucknow'],local:['local trains','board exams','community festivals'],school:'Class 12 board exams',options:['ITI course','University','Diploma'],work:['Shop assistant','Technician','Teacher','Delivery worker','Accountant']},
+ ET:{places:['Addis Ababa','Bahir Dar','Hawassa','Mekelle'],local:['shared minibuses','regional markets','coffee gatherings'],school:'secondary examinations',options:['TVET training','Teacher education','University'],work:['Market seller','Smallholder farmer','Teacher','Technician','Office clerk']},
+ IR:{places:['Tehran','Isfahan','Shiraz','Mashhad'],local:['metro','bazaar','konkur exam preparation'],school:'Konkur',options:['University','Vocational institute','Paid employment'],work:['Shopkeeper','Technician','Teacher','Office clerk','Engineer']},
+ US:{places:['New York','Atlanta','Houston','Chicago'],local:['public library','health insurance plan','community college'],school:'high-school diploma',options:['Community college','Trade school','University'],work:['Retail associate','Healthcare aide','Electrician','Teacher','Office coordinator']},
+ BR:{places:['São Paulo','Rio de Janeiro','Belo Horizonte','Recife'],local:['ônibus','ENEM preparation','neighbourhood feira'],school:'ENEM',options:['Technical course','Public university','Paid employment'],work:['Retail worker','Technician','Teacher','Delivery driver','Office assistant']},
+ PK:{places:['Lahore','Karachi','Islamabad','Faisalabad'],local:['rickshaw','board examinations','neighbourhood bazaar'],school:'intermediate examinations',options:['Vocational institute','University','Apprenticeship'],work:['Shopworker','Tailor','Teacher','Office assistant','Technician']},
+ JP:{places:['Tokyo','Osaka','Nagoya','Fukuoka'],local:['commuter rail','entrance exams','convenience stores'],school:'university entrance exams',options:['University','Specialist college','Employment'],work:['Office employee','Retail worker','Teacher','Technician','Care worker']}
+};
+O.COUNTRY_NAMES={
+ GH:{F:['Akosua','Ama','Abena','Adwoa','Esi','Efua'],M:['Kwame','Kofi','Kojo','Yaw','Kwaku','Ato'],L:['Mensah','Asante','Owusu','Osei','Boateng','Agyeman']},
+ HK:{F:['Mei','Ying','Wing','Hoi','Sze','Yan'],M:['Ho','Ming','Ka','Chun','Lok','Yat'],L:['Chan','Wong','Lee','Cheung','Lam','Ng']},
+ NG:{F:['Adaeze','Amara','Zainab','Ngozi','Aisha','Yetunde'],M:['Chinedu','Emeka','Ibrahim','Tunde','Sani','Segun'],L:['Okafor','Adeyemi','Bello','Balogun','Nwosu','Abubakar']},
+ BD:{F:['Ayesha','Nusrat','Farhana','Maliha','Sadia','Rumana'],M:['Rahim','Arif','Sakib','Hasan','Imran','Tanvir'],L:['Rahman','Hossain','Ahmed','Islam','Chowdhury','Karim']},
+ IR:{F:['Niloofar','Sara','Mina','Nazanin','Maryam','Shirin'],M:['Reza','Amir','Arash','Kian','Ali','Mehdi'],L:['Hosseini','Rahimi','Ahmadi','Karimi','Mohammadi','Rezaei']},
+ IN:{F:['Ananya','Priya','Aditi','Meera','Kavya','Nisha'],M:['Arjun','Rohan','Rahul','Aarav','Vikram','Sameer'],L:['Sharma','Patel','Kumar','Singh','Rao','Mehta']},
+ ET:{F:['Hana','Selam','Mekdes','Tigist','Liya','Rahel'],M:['Dawit','Samuel','Yonas','Bereket','Tesfaye','Eyob'],L:['Tesfaye','Bekele','Kebede','Alemu','Gebre','Abebe']},
+ JP:{F:['Yui','Sakura','Aoi','Hina','Mei','Akari'],M:['Haruto','Sota','Ren','Yuto','Kaito','Riku'],L:['Sato','Tanaka','Suzuki','Ito','Yamamoto','Kobayashi']},
+ BR:{F:['Ana','Mariana','Julia','Luiza','Camila','Beatriz'],M:['Lucas','Gabriel','Pedro','Rafael','Mateus','João'],L:['Silva','Santos','Oliveira','Souza','Costa','Pereira']},
+ PK:{F:['Ayesha','Fatima','Zara','Hina','Mariam','Noor'],M:['Ali','Ahmed','Bilal','Hamza','Usman','Hassan'],L:['Khan','Malik','Ahmed','Sheikh','Qureshi','Siddiqui']}
+};
+const baseMakeName=O.makeName;
+O.makeName=function(s,gender='F',surname=''){const p=O.COUNTRY_NAMES[s.country.code];return p?O.pick(s,gender==='M'?p.M:p.F)+' '+(surname?p.L[[...surname].reduce((v,ch)=>v+ch.charCodeAt(0),0)%p.L.length]:O.pick(s,p.L)):baseMakeName(s,gender,surname)};
+const originalCreate=O.create;
+O.create=function(settings={}){
+ const s=originalCreate(settings);O.enrich(s);
+ const p=s.people.filter(p=>['Mother','Father','Sibling','Grandparent'].includes(p.role));
+ s.birthDescription=`You were born in ${s.country.name}, ${s.lifeTexture.place}, ${s.urban?'an urban setting':'a rural setting'}. Your household is ${O.tier(s).toLowerCase()}, with ${s.lifeTexture.familyTheme}. Your family includes ${p.map(x=>O.personLabel(x)).join(', ')}. The world and family around you influence your opportunities, but they cannot determine everything that will happen.`;
+ const entry=s.journal.find(x=>x.type==='birth');if(entry)entry.description=s.birthDescription;
+ if(!settings.companion){s.contemporaries=[];for(let i=0;i<4;i++){
+ const shadow=O.create({country:'random',draw:'birth',classChoice:'random',year:s.birthYear,seed:O.int(s,1,2147483647),companion:true});
+ s.contemporaries.push({id:i,name:shadow.name,sex:shadow.gender,country:shadow.country.name,code:shadow.country.code,life:shadow.country.life,infrastructure:shadow.country.infra,age:0,alive:true,strata:shadow.strata,rng:shadow.rng});
+ }}return s;
+};
+O.enrich=function(s){
+ if(!s.flags)s.flags={};if(!s.spendingHistory)s.spendingHistory=[];if(!s.possessions)s.possessions=[];
+ if(!s.memories)s.memories={};if(!s.interests)s.interests=['Community','Learning'];
+ if(!s.financePlan)s.financePlan='Balanced';if(!s.homeType)s.homeType=s.flags.crowdedHousing?'Shared or crowded home':s.strata>=6?'Spacious family home':s.urban?'Family apartment':'Family home';
+ if(!s.lifeTexture){const r=O.LOCAL_LIFE[s.country.code];
+   s.lifeTexture={place:r?O.pick(s,r.places):(s.urban?'an urban neighbourhood':'a rural district'),daily:r?O.pick(s,r.local):'the neighbourhood',school:r?.school||'national examinations', aspiration:r?O.pick(s,r.work):'a stable livelihood',familyTheme:O.pick(s,['practical support','ambitious expectations','a close-knit household','independent-minded relatives'])};
+   if(s.journal?.length){s.journal[0].description+=` Your early home is in or near ${s.lifeTexture.place}, with ${s.lifeTexture.familyTheme}.`}
+ }
+ if(!s.moneyLedger)s.moneyLedger={lifetimeSpent:0,lifetimeEarned:0,investmentContributions:0};
+ if(!s.socialHistory)s.socialHistory=[];
+ for(const p of s.people||[]){if(!p.residence)p.residence=['Father','Mother','Sibling'].includes(p.role)?s.lifeTexture.place:'Elsewhere';if(!p.backstory)p.backstory=O.pick(s,['Often talks about the importance of security.','Values family gatherings and familiar routines.','Has hopes of a different future for the next generation.','Enjoys practical skills and problem-solving.']);}
+ return s;
+};
+O.factForEvent=(s,e)=>{const facts=O.COUNTRY_CONTEXT?.[s.country.code]?.facts;if(!facts||!e)return null;const topic=((e.category||'')+' '+(e.title?.(s)||'')).toLowerCase();
+ if(s.country.code==='GH'&&/market|neighbourhood|urban|housing|commute|travel|transport|trotro/.test(topic))return facts[1];
+ if(['GH','BD','NG','IN','ET'].includes(s.country.code)&&s.age>=14&&/marriage|early marriage|union|child marriage/.test(topic))return facts[0];
+ if(s.country.code==='GB'&&s.age>=16&&/apprentice|vocational|skills training/.test(topic))return facts[0];
+ if(s.country.code==='HK'&&/rent|housing|subdivided|flat|home/.test(topic))return facts[0];return null;
+};
+O.householdDisposable=s=>Math.max(0,s.familyIncome*.38-s.familyDebts*.06);
+O.availableMoney=s=>s.age<18?O.householdDisposable(s)*.28+Math.max(0,s.cash):s.cash;
+O.spendingCatalog=function(s){
+ const p=s.country.ppp,age=s.age, adult=age>=18, rich=s.strata>=6, parent=s.people.find(p=>p.alive&&['Mother','Father'].includes(p.role));
+ const c=(id,group,name,rate,desc,fx={},once=false)=>({id,group,name,cost:Math.max(4,Math.round(p*rate)),desc,fx,once});
+ const list=[
+ c('meal','Everyday','Share a meal with someone',.0018,'Spend time together, supporting a relationship.',{happiness:3,relationships:2}),
+ c('transport','Everyday','Pay for a local journey',.0015,'Reach a meeting, opportunity or enjoyable outing.',{happiness:1,confidence:1}),
+ c('essentials','Essential','Buy food and essential supplies',.012,'Improve household food security for the coming months.',{health:3,stress:-4}),
+ c('books','Learning','Books or learning materials',.004,'Support study, knowledge and curiosity.',{knowledge:4,confidence:1}),
+ c('training','Learning',`Fund a ${s.interests?.includes('Technology')?'technology':'vocational'} skills course`,.045,'Spend time and money on practical qualifications.',{knowledge:7,confidence:4,stress:1}),
+ c('care','Health','Visit a clinic or seek treatment',s.country.infra>85?.005:.027,'Medical care can improve health, though access varies.',{health:7,stress:-4}),
+ c('sports','Health','Join local recreation or sport',.003,'Exercise, community and personal interests.',{health:3,happiness:2}),
+ c('gift','People',`Buy a gift for ${parent?O.personLabel(parent):'someone close'}`,.008,'Show care to someone who matters.',{relationships:4,happiness:2}),
+ c('phone','Possessions','Buy a basic phone',.024,'Communication and sometimes access to opportunities.',{knowledge:1,relationships:2},true),
+ c('bike','Possessions','Buy a bicycle or transport pass',.021,'More independent local travel.',{health:2,confidence:2},true),
+ c('pet','People','Adopt and care for a pet',.028,'Companionship, but ongoing responsibilities.',{happiness:4,stress:1},true),
+ c('trip','Experiences','Take a holiday or family visit',.10,'A trip that creates memories and costs money.',{happiness:7,relationships:3}),
+ c('donate','People','Support someone struggling',.012,'Make a useful contribution without assuming it solves everything.',{relationships:2,confidence:2}),
+ ];
+ if(adult){list.push(
+ c('debt','Finance','Repay part of your debt',.065,'Lower future interest costs and debt stress.',{stress:-4}),
+ c('invest','Finance','Invest part of your savings',.075,'Move money from cash into a risky long-term portfolio.',{}),
+ c('withdraw','Finance','Sell part of your investments',.0,'Convert part of your investments back into cash (market value may have changed).',{}),
+ c('deposit','Housing','Save towards a housing deposit',.11,'Earmark funds for a later home; money remains yours.',{confidence:2}),
+ c('rent','Housing','Move to independent rental housing',.07,'More independence but higher continuing housing costs.',{confidence:4,happiness:2},true),
+ c('car','Transport','Purchase a used vehicle',.28,'Improve mobility, but running costs remain.',{confidence:3},true),
+ c('parentcare','People','Contribute to a parent’s care',.04,'Help cover transport, support or care when a parent needs assistance.',{relationships:3,stress:1}),
+ c('childeducation','People','Help fund a child’s education',.09,'Use resources to give a child additional options.',{relationships:4}),
+ c('property','Housing','Purchase a modest home',2.25,'Purchase property with a down payment and long-term mortgage if eligible.',{confidence:6},true),
+ );}
+ if(rich&&adult)list.push(c('luxury','Experiences','Major discretionary purchase',.32,'Enjoy an expensive purchase that does not guarantee lasting happiness.',{happiness:3,confidence:1}));
+ if(s.flags.foodInsecure)list.unshift(c('emergency_food','Essential','Emergency groceries',.006,'Try to feed the household now.',{health:4,stress:-5}));
+ return list.map(x=>({...x,unavailable:s.age<6||(s.age<13&&!['meal','essentials','books','sports','transport','gift'].includes(x.id))||(x.once&&s.possessions.includes(x.id))||(x.id==='debt'&&s.debt<=0)||(x.id==='withdraw'&&s.investments<=0)||(x.id==='childeducation'&&!s.people.some(p=>p.role==='Child'&&p.alive))||(x.id==='parentcare'&&!s.people.some(p=>['Mother','Father'].includes(p.role)&&p.alive))||(x.id==='pet'&&s.memories.pet?.alive)||(x.id==='property'&&(s.property>0||age<23))||(x.id==='deposit'&&s.property>0)}));
+};
+O.spend=function(s,id){O.enrich(s);if(s.status!=='alive')return {ok:false,message:'This life has ended.'};const item=O.spendingCatalog(s).find(x=>x.id===id);if(!item||item.unavailable)return {ok:false,message:'This purchase is unavailable at the moment.'};
+ if(s.age<6)return {ok:false,message:'Your caregivers make spending decisions during early childhood.'};
+ if(s.age<18&&['debt','invest','property','rent','deposit'].includes(item.id))return {ok:false,message:'This financial decision is not available to children.'};
+ let cost=item.cost,paidBy='your savings';
+ if(item.id==='withdraw'){if(s.investments<=0)return {ok:false,message:'You have no investments to sell.'};cost=Math.min(s.investments,Math.max(50,Math.round(s.investments*.25)));s.investments-=cost;s.cash+=cost;paidBy='portfolio sale';}else if(item.id==='property'){
+  const deposit=Math.round(cost*.25);if(s.cash<deposit||s.income<=0||s.debt>s.income*3)return {ok:false,message:`A deposit of ${O.money(deposit)}, earnings and borrowing capacity are required.`};
+  s.cash-=deposit;s.property+=cost;s.debt+=cost-deposit;s.flags.livingWithFamily=false;s.homeType='Your own home';cost=deposit;
+ } else {
+  if(item.id!=='withdraw'&&O.availableMoney(s)<cost)return {ok:false,message:`You cannot afford ${O.money(cost)} without further support or borrowing.`};
+  if(s.age<18&&cost>s.cash){s.familyAssets=Math.max(0,s.familyAssets-cost);paidBy='household resources';}
+  else{s.cash-=cost;}
+ }
+ if(item.id==='invest'){s.investments+=cost;s.moneyLedger.investmentContributions+=cost;}
+ if(item.id==='deposit'){s.cash+=cost;s.flags.savingForHome=true;}
+ if(item.id==='debt'){const paid=Math.min(s.debt,cost);s.debt-=paid;s.cash+=cost-paid;}
+ if(item.id==='pet'){const kinds=['cat','dog'];s.memories.pet={name:O.pick(s,['Milo','Cleo','Biscuit','Coco','Mochi','Kofi']),kind:O.pick(s,kinds),age:0,alive:true};}
+ if(item.id==='rent'){s.flags.livingWithFamily=false;s.homeType='Rented home';s.annualExpenses+=Math.round(s.country.ppp*.10);}
+ if(item.id==='car'){s.annualExpenses+=Math.round(s.country.ppp*.04)}
+ if(item.id==='childeducation'){const child=s.people.find(x=>x.role==='Child'&&x.alive);if(child){child.educationalSupport=(child.educationalSupport||0)+1;child.close=O.clamp(child.close+5)}}
+ if(item.id==='parentcare'){const parent=s.people.find(x=>['Mother','Father'].includes(x.role)&&x.alive);if(parent){parent.health=O.clamp(parent.health+3);parent.close=O.clamp(parent.close+4)}}
+ if(item.id==='essentials'||item.id==='emergency_food')s.flags.foodInsecure=false;
+ if(item.once&&!s.possessions.includes(id))s.possessions.push(id);
+ O.adjust(s,item.fx);if(!['withdraw','invest','debt','deposit','property'].includes(id))s.moneyLedger.lifetimeSpent+=cost;
+ const record={age:s.age,month:s.month||0,year:s.birthYear+s.age,id:item.id,name:item.name,cost,paidBy};s.spendingHistory.unshift(record);
+ O.journal(s,item.name,`${s.first} ${id==='invest'?'allocated money to investments':id==='debt'?'reduced outstanding debt':id==='property'?'bought a home':id==='pet'?`adopted ${s.memories.pet.name}`:'spent money on '+item.name.toLowerCase()}. ${paidBy==='household resources'?'The family helped cover the cost.':''} The expense was ${O.money(cost)} (illustrative PPP dollars).`,'economy');
+ return {ok:true,message:`${item.name} — ${O.money(cost)} (${paidBy}).`};
+};
+// Additional grounded country-specific scenes. Their *existence* is plausible; their frequency is fictional.
+const addLocal=(id,code,ages,weight,title,body,effect,when=()=>true)=>O.STORIES.push({id,min:ages[0],max:ages[1],weight,when:s=>s.country.code===code&&when(s),title,body,scene:'city',effect});
+const p=(s)=>s.people.find(x=>x.alive&&['Mother','Father'].includes(x.role));
+const pn=s=>p(s)?O.personLabel(p(s)):'someone in your family';
+addLocal('ghana-schoolfees','GH',[7,19],18,'The costs around school',s=>`In ${s.lifeTexture?.place}, ${pn(s)} looks at the cost of uniforms, transport and supplies. ${s.strata<3?'Paying every term is difficult.':'The family considers what support would be useful.'} A teacher asks whether anything is making attendance harder.`,null,s=>s.school);
+addLocal('ghana-exams','GH',[15,21],19,'WASSCE conversations',s=>`Classmates in ${s.lifeTexture?.place} discuss WASSCE subjects, technical university, apprenticeships and paid work. Your results and the cost of training will both matter.`,s=>{s.interests=s.interests||[];if(!s.interests.includes('Learning'))s.interests.push('Learning')},s=>s.school);
+addLocal('ghana-trader','GH',[12,72],17,'A changing market price',s=>`A trader in ${s.lifeTexture?.place} explains why the cost of tomatoes and transport has changed. You remember ${pn(s)} working out what the household can afford this week.`,null);
+addLocal('ghana-funeral','GH',[25,82],12,'A family contribution',s=>`Relatives discuss contributing to a funeral or family ceremony. Expectations, affection and the practical ability to give are not always aligned.`,null);
+addLocal('hk-rent','HK',[18,75],18,'Space comes at a price',s=>`A neighbour compares rent, transport access and living space in ${s.lifeTexture?.place}. Whether you live with relatives or on your own changes how quickly you can save.`,null);
+addLocal('hk-career','HK',[16,29],20,'Beyond the HKDSE',s=>`Someone you know compares a JUPAS application, an associate degree and a higher diploma. Tuition, grades and family support complicate the choice.`,null,s=>s.school);
+addLocal('hk-grandparents','HK',[10,80],13,'A family meal',s=>`At a table crowded with dishes, someone asks about your studies or salary. ${pn(s)} responds before you decide whether to answer.`,s=>O.adjust(s,{relationships:1}));
+addLocal('bd-flood','BD',[5,70],18,'The water rises',s=>`Heavy monsoon rains interrupt ${s.lifeTexture?.place}'s transport. ${s.strata<2?'The household worries about replacing damaged goods.':'You rearrange plans and think about relatives in worse-hit neighbourhoods.'}`,null);
+addLocal('bd-work','BD',[15,50],18,'A garment-sector opportunity',s=>`A relative describes garment work, overtime, commuting and unreliable demand. You compare immediate wages with gaining another qualification.`,null);
+addLocal('ng-power','NG',[10,75],16,'When the power goes',s=>`An interruption to electricity changes an evening routine in ${s.lifeTexture?.place}. The household weighs alternative power, going without, and what that means for study or work.`,null);
+addLocal('ng-ny-sc','NG',[19,30],19,'Thinking beyond graduation',s=>`University graduates discuss NYSC placement and finding work. Connections, education, and local vacancies all influence what comes next.`,null,s=>O.educationNumber(s.education)>=3);
+addLocal('ng-trade','NG',[16,75],18,'A mobile-money transfer',s=>`A relative asks about a bank transfer or mobile payment. Sending support is convenient, but the account balance still matters.`,null);
+addLocal('gb-costliving','GB',[18,85],18,'Heating or savings',s=>`A bill arrives as energy and food costs compete with other plans. You think about what you can cut without losing the things that make life enjoyable.`,null);
+addLocal('gb-apprentice','GB',[15,24],18,'An apprenticeship conversation',s=>`Someone explains the difference between apprenticeship earnings, college and university tuition. The best choice isn't necessarily the most prestigious one.`,null);
+addLocal('india-exam','IN',[14,23],19,'Preparing for the next examination',s=>`Families in ${s.lifeTexture?.place} compare tuition centres, study schedules, vocational courses and entrance tests. Access to quiet space makes a difference.`,null,s=>s.school);
+addLocal('india-train','IN',[16,75],16,'A journey between cities',s=>`You look at train fares and travel time before visiting a relative or following a work lead. India's size becomes a practical part of your plans.`,null);
+addLocal('et-household','ET',[10,66],18,'Work around the household',s=>`Relatives discuss how to divide responsibilities around ${s.lifeTexture?.place}. If you help with earning or caregiving, less time may remain for study and rest.`,null);
+addLocal('et-tv-et','ET',[16,26],18,'Skills or further study',s=>`A teacher describes a TVET route and university entry. Costs, exam results, location and the immediate need to earn all matter.`,null);
+addLocal('iran-konkur','IR',[15,25],20,'The Konkur conversation',s=>`A classmate in ${s.lifeTexture?.place} talks about the university entrance competition. Study preparation is tiring, and some families can afford more support than others.`,null,s=>s.school);
+addLocal('iran-bazaar','IR',[10,85],16,'A visit to the bazaar',s=>`The conversation turns to prices and whether this is a good moment to buy. You notice how the cost of everyday life affects family plans.`,null);
+addLocal('us-insurance','US',[19,75],17,'The question of coverage',s=>`A health appointment raises a question about insurance coverage, deductibles and what care will cost. Your job and household resources affect your options.`,null);
+addLocal('us-community-college','US',[16,30],17,'A local college option',s=>`Someone recommends community college or a trade programme. Tuition, transport, financial aid and whether you need to work all change the calculation.`,null);
+addLocal('br-enem','BR',[15,26],18,'The ENEM season',s=>`Friends compare preparation for ENEM, technical education and earning now. A public university place may be possible, but admission and the cost of living matter.`,null,s=>s.school);
+addLocal('pk-tuition','PK',[11,24],16,'An exam-preparation choice',s=>`Someone suggests additional tuition ahead of board examinations. ${pn(s)} considers the cost and whether another route would fit your skills.`,null,s=>s.school);
+addLocal('jp-jobhunt','JP',[19,31],17,'The recruitment calendar',s=>`A friend describes shūkatsu—the structured graduate job-hunting process. You consider how interviews, qualifications and timing influence the first offer.`,null,s=>O.educationNumber(s.education)>=3);
+// Personal consequences: enrich ordinary events with a *specific* remembered context.
+const baseFireStory=O.fireStory;
+O.fireStory=function(s,item){O.enrich(s);const story=Object.assign({},item);const family=s.people.find(p=>p.alive&&['Mother','Father'].includes(p.role));const partner=s.people.find(p=>p.alive&&p.role==='Partner');const friend=s.people.find(p=>p.alive&&p.role==='Friend');
+ const references=[];
+ if(family)references.push(`You think of ${O.personLabel(family)} and the way they respond to similar problems.`);
+ if(friend&&s.age>=14)references.push(`${O.personLabel(friend)} would probably see this differently; you've known their ${friend.trait.toLowerCase()} side for years.`);
+ if(partner&&s.age>=21)references.push(`Later you describe the day to ${O.personLabel(partner)}.`);
+ if(s.job&&s.age>=18)references.push(`Your routine working as a ${s.job.toLowerCase()} makes this situation more than an abstract possibility.`);
+ if(s.memories?.pet&&!s.memories.pet.alive&&s.age>=12)references.push(`A small detail reminds you of ${s.memories.pet.name}, whom you still sometimes miss.`);
+ if((s.strata<2||s.flags.foodInsecure)&&s.age>=12)references.push(`You check what this will cost before promising anything.`);
+ if(s.strata>=6&&s.age>=14)references.push(`Your family's resources could cushion a setback, and you know not everyone has that option.`);
+ if(s.interests?.length&&s.age>=12)references.push(`You wonder whether this will leave you time for ${s.interests[0].toLowerCase()}.`);
+ // Only attach a reflection occasionally. Do not overwrite authored scenes or duplicate the same person each year.
+ if(references.length&&O.chance(s,.26)&&!s.journal.slice(0,3).some(j=>j.description.includes(references[0].slice(0,35))))story.description+=' '+O.pick(s,references);
+ baseFireStory(s,story);
+};
+// Events that remember interests, family, location and income, not generic "make a choice" cards.
+const d=(id,ages,cat,scene,weight,when,title,description,options,extra={})=>O.EVENTS.push({id,min:ages[0],max:ages[1],category:cat,scene,weight,when,title:typeof title==='function'?title:()=>title,description:typeof description==='function'?description:()=>description,options,...extra});
+const choice=(label,detail,apply)=>({label,detail,apply});
+d('regional-study',[16,25],'Education','school',25,s=>!!O.LOCAL_LIFE[s.country.code]&&s.school&&(!s.flags.studying),s=>`Study or work in ${s.lifeTexture.place}?`,s=>`Your ${s.lifeTexture.school} results and family resources influence what's within reach. ${pn(s)} has ideas, but the choice will affect the household budget.`,s=>{
+ const r=O.LOCAL_LIFE[s.country.code];return [
+ choice(`Apply for ${r.options[0].toLowerCase()}`,'May improve skills but requires time and money.',s=>{const price=Math.round(s.country.ppp*.08);if(s.strata<3)s.debt+=price;else s.cash=Math.max(0,s.cash-price);s.education=O.EDU[3];O.adjust(s,{knowledge:7,stress:2});return `You take a step towards ${r.options[0].toLowerCase()}. Costs and training requirements remain.`}),
+ choice(`Try ${r.options[1].toLowerCase()}`,'Competitive entry, with future employment prospects.',s=>{const prob=.14+s.knowledge/180+s.strata*.04;if(O.chance(s,prob)){s.flags.studying=true;s.flags.graduationAge=s.age+3;s.debt+=s.strata<3?Math.round(s.country.ppp*.2):0;return `You are admitted. Your studies may change what work becomes available.`}O.adjust(s,{stress:4});return 'This application does not succeed. You consider another route.'}),
+ choice('Take paid work first','Earn quickly but delay further qualification.',s=>{let job=O.getJob(s,O.educationNumber(s.education));O.hire(s,job);s.flags.delayedStudies=true;return `You start work as a ${s.job.toLowerCase()}. Saving for future training is still possible.`})
+ ]});
+d('family-emergency-budget',[17,81],'Family & money','home',13,s=>s.flags.foodInsecure||s.debt>s.country.ppp*.5,s=>'A difficult month for the household',s=>`A bill arrives at the same time that food and transport costs rise. In ${s.lifeTexture.place}, ${pn(s)} asks what you can realistically contribute.`,s=>[
+ choice('Pay for essentials first','Spend what you can without borrowing beyond your means.',s=>{let amount=Math.min(Math.max(0,s.cash),Math.round(s.country.ppp*.012));s.cash-=amount;s.flags.foodInsecure=amount===0;O.adjust(s,{stress:-2});return `You put ${O.money(amount)} towards immediate needs. Other expenses may have to wait.`}),
+ choice('Ask family or community for help','Support may be possible, not guaranteed.',s=>{let ok=O.chance(s,.3+s.relationships/250);if(ok){s.cash+=Math.round(s.country.ppp*.05);return `${pn(s)} or someone nearby helps with the immediate cost.`}return 'Everyone you ask faces constraints of their own. The problem remains.'}),
+ choice('Borrow money','Relieve immediate pressure but increase debt and interest.',s=>{s.cash+=Math.round(s.country.ppp*.11);s.debt+=Math.round(s.country.ppp*.14);s.flags.predatoryDebt=true;O.adjust(s,{stress:5});return 'There is money for this month, but repayment becomes another obligation.'})
+ ]);
+d('local-mentor',[12,36],'Learning','school',15,s=>s.school&&s.knowledge>35,s=>'Someone notices your strengths',s=>`A teacher in ${s.lifeTexture.place} notices your interest in ${(s.interests||['Learning'])[0].toLowerCase()}. Their encouragement makes you wonder what else you could become.`,s=>[
+ choice('Ask for advice and keep practising','Build a meaningful connection and skill.',s=>{const t=O.createContact(s,'Mentor',s.age+24);t.job='Teacher';s.memories.teacher={name:t.name,age:s.age,subject:(s.interests||['Learning'])[0],remembered:false};O.adjust(s,{knowledge:5,confidence:6});return `${O.personLabel(t)} supports your curiosity. You may remember this conversation many years later.`}),
+ choice('Thank them but pursue other interests','Keep control of your direction.',s=>{O.adjust(s,{happiness:3,confidence:2});return 'The compliment remains a welcome memory even though you choose a different path.'})
+ ]);
+// Milestone pauses modelled as reflective events, not repeated generic tests.
+for(const age of [15,30,50,70])d('reflection-'+age,[age,age],'Reflection','park',110,s=>true,s=>`A pause at ${age}`,s=>`You are ${age}. ${s.job?`Your work as a ${s.job.toLowerCase()} is part of your identity. `:''}${s.memories.pet&&!s.memories.pet.alive?`You still remember ${s.memories.pet.name}. `:''}${s.people.filter(p=>p.alive).length} people remain in your circle. Looking back, what matters to you now?`,s=>[
+ choice('The people who stayed','Prioritise the relationships that have lasted.',s=>{s.focus='Relationships';O.adjust(s,{relationships:3,happiness:2});return 'You decide that relationships deserve more attention in the years ahead.'}),
+ choice('The opportunities still ahead','Focus on skills and future possibilities.',s=>{s.focus='Learning';O.adjust(s,{knowledge:3,confidence:2});return 'You remain curious about the paths you have not tried.'}),
+ choice('Finding peace with this life','Make room for rest and acceptance.',s=>{s.focus='Rest';O.adjust(s,{stress:-4,happiness:2});return 'You take a moment to see this life as more than its achievements.'})
+ ],{milestone:true});
+// Under-five mortality: sampled over 60 months, conditional multiplier by individual circumstances.
+// Preserves mean direction, but variation by household/vaccines is *not* calibrated against data.
+const originalMortality=O.mortality;
+O.mortality=function(s){if(s.age<5&&O.UNDER_FIVE_2024[s.country.code]!=null)return false;return originalMortality(s)};
+const originalAdvanceMonth=O.advanceMonth;
+O.advanceMonth=function(s){
+ if(!s||s.status!=='alive'||s.pending)return originalAdvanceMonth(s);
+ O.enrich(s);
+ if(s.age<5&&O.UNDER_FIVE_2024[s.country.code]!=null){
+  const rate=O.UNDER_FIVE_2024[s.country.code]/1000;
+  const mult=(s.strata<=1?1.12:s.strata>=6?.82:1)*(s.flags.vaccinationMissed?1.13:1)*(s.gender==='M'?1.09:.93);
+  const monthly=1-Math.pow(1-rate,1/60);
+  if(O.chance(s,monthly*mult)){
+   const reason=s.age<1?O.pick(s,['Complications of premature birth','A serious neonatal infection','Complications shortly after birth']):O.pick(s,['Complications of pneumonia','A severe infection','Complications of diarrhoeal illness']);
+   O.finish(s,reason);return {advanced:true,finished:true,birthday:false};
+  }
+ }
+ return originalAdvanceMonth(s);
+};
+const originalFinish=O.finish;
+O.finish=function(s,reason){O.enrich(s);originalFinish(s,reason);s.deathRecord={age:s.age,month:s.month||0,year:s.birthYear+s.age,country:s.country.name,place:s.lifeTexture?.place||s.country.name,cause:s.cause,close:s.people.filter(p=>p.alive).map(p=>O.personLabel(p)).slice(0,3),explanation:s.age<5?`This life ended during early childhood. Access to care, infection prevention, living conditions and chance all affect survival. The death was sampled, not predicted for a real person.`:s.age<15?'Childhood mortality is uncommon in many places but never impossible. This is a fictional outcome based on an illustrative life model.':'This fictional cause was selected from broad age-related possibilities, not a verified country-specific cause-of-death distribution.',source:s.age<5&&O.UNDER_FIVE_2024[s.country.code]!=null?{text:`2024 under-five mortality: ${O.UNDER_FIVE_2024[s.country.code]} per 1,000 live births (population-level rate)`,url:O.U5_SOURCE}:null};
+};
+const originalPassive=O.passive;
+O.passive=function(s){O.enrich(s);originalPassive(s);if(s.income>0)s.moneyLedger.lifetimeEarned+=s.income;
+ if(s.homeType==='Rented home')s.annualExpenses=Math.max(s.annualExpenses,Math.round(s.country.ppp*.43));
+ if(Array.isArray(s.contemporaries))for(const p of s.contemporaries){if(!p.alive)continue;p.age=s.age;
+ const u=O.UNDER_FIVE_2024[p.code],risk=p.age<5?(u!=null?1-Math.pow(1-u/1000,1/5):.004*(100-p.infrastructure)/40):p.age<18?.00035:Math.min(.75, .0013*Math.exp((p.age-p.life+30)/13));
+ const chance=Math.max(0,Math.min(.8,risk*(p.sex==='M'?1.10:.92)*(p.strata<=1?1.12:p.strata>=6?.86:1)));
+ // independent deterministic state for each person, not the player's random stream
+ p.rng=(Math.imul(1664525,p.rng)+1013904223)>>>0;if(p.rng/4294967296<chance){p.alive=false;p.diedAt=s.age;}
+ }
+ if(s.age>18&&s.possessions?.includes('phone')&&O.chance(s,.015)){O.journal(s,'A message from an old friend',`Someone you used to know writes unexpectedly. There is a small warmth in recognising the name.`,'reflection');}
+ if(s.age>22&&s.memories.teacher&&!s.memories.teacher.remembered&&O.chance(s,.045)){const t=s.memories.teacher;s.memories.teacher.remembered=true;O.journal(s,'An old encouragement',`When work becomes difficult, you remember ${t.name} telling you that you had an eye for ${t.subject}. You keep trying.`,'reflection');} // People around you live their own lives, and household constraints can change without your intervention.
+ for(const p of s.people||[]){if(!p.alive)continue;
+ if(['Mother','Father'].includes(p.role)){
+  if(p.age>62&&p.annualIncome>0&&!p.retired&&O.chance(s,.10)){p.retired=true;p.previousJob=p.job;p.job='Retired';s.familyIncome=Math.max(0,s.familyIncome-p.annualIncome);p.annualIncome=0;O.journal(s,`${O.personLabel(p)} retires`,`Their income changes, and the family begins adapting to a different financial situation.`,'family');}
+  else if(!p.retired&&s.age>3&&p.annualIncome>0&&O.chance(s,s.country.infra<50?.025:.013)){p.previousJob=p.job;p.job='Looking for work';p.annualIncome=0;s.familyIncome=Math.max(0,s.familyIncome*.65);s.familyAssets=Math.max(0,Math.round(s.familyAssets*.96));s.flags.parentUnemployed=p.id;O.adjust(s,{stress:3,happiness:-2});O.journal(s,`${O.personLabel(p)} loses work`,`Household income falls. Work, food costs and rent or transport become harder to balance.`, 'loss');}
+  else if(p.job==='Looking for work'&&O.chance(s,.24+s.country.school/350)){p.job=p.previousJob||'Paid work';p.annualIncome=Math.round(s.country.ppp*.32);s.familyIncome+=p.annualIncome;s.flags.parentUnemployed=null;O.journal(s,`${O.personLabel(p)} finds work again`,`The new earnings ease some immediate pressure, though the previous setback may take time to recover from.`, 'family');}
+  if(p.age>55&&O.chance(s,.025)){p.health=O.clamp(p.health-O.int(s,3,8));if(p.health<35&&O.chance(s,.2)){p.needsCare=true;O.journal(s,`${O.personLabel(p)} needs help`,`Age and health have changed their independence. The family considers how to share care responsibilities.`,'family');}}
+ }
+ if(['Friend','Sibling'].includes(p.role)&&s.age>=18&&O.chance(s,.025)){
+  const developments=[`takes a new job and becomes harder to see regularly`,`moves to another part of ${s.country.name}`,`starts a relationship and reorganises their priorities`,`finishes a period of study or training`];const news=O.pick(s,developments);
+  p.backstory=news[0].toUpperCase()+news.slice(1)+'.';p.close=O.clamp(p.close+O.int(s,-7,3));if(news.includes('moves'))p.residence='Elsewhere in '+s.country.name;
+  O.journal(s,`News from ${O.personLabel(p)}`,`${O.personLabel(p)} ${news}. You realise that the people who surround you have lives beyond your own decisions.`,'life');
+ }
+ }
+ // Family assets gradually respond to life events and income, including when parents support the player.
+ if(s.age<=25){const change=Math.round((s.familyIncome||0)*.028-(s.familyDebts||0)*.018);s.familyAssets=Math.max(0,Math.round(s.familyAssets*1.008)+change);if(s.familyDebts>0&&s.familyIncome>0)s.familyDebts=Math.max(0,s.familyDebts-Math.round(s.familyIncome*.006));}
+};
+})(window.OL);
+
+</script>
+  <script>
 (function(O){
 const $=s=>document.querySelector(s), root=$('#app');
 const K='other-lives-current-v1', FALLBACK='other-lives-archive-fallback-v1';
@@ -1156,8 +1254,8 @@ const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'
 const title=s=>safe(s);
 const trim=(s,n=130)=>s&&s.length>n?s.slice(0,n)+'…':s||'';
 const plural=(n,one,many)=>n===1?one:many;
-let birthReveal=false,birthRevealStarted=0,birthRouletteFinished=false,birthRouletteTimer=null;let view='landing',state=null,archive=[],detailId=null,modal=null,resumeAfterInspector=false,compare=new Set(),clockTimer=null,playing=false,clockSpeed=1,autoChoices=false,resumeAfterDecision=false,monthBank=0,lastPulse=0,toastTimer=null,logCount=10,chapter='timeline',decisionAside=false,inspector=null;
-function loadCurrent(){try{let s=JSON.parse(localStorage.getItem(K)||'null');if(s&&s.country&&s.id&&s.journal){state=s;O.ensureTimeline(state);if(O.upgradeLife)O.upgradeLife(state);}}catch(e){console.warn('Could not load save',e)}}
+let view='landing',state=null,archive=[],detailId=null,modal=null,compare=new Set(),clockTimer=null,playing=false,clockSpeed=1,autoChoices=false,resumeAfterDecision=false,monthBank=0,lastPulse=0,toastTimer=null,logCount=10,chapter='timeline',decisionAside=false,inspector=null;
+function loadCurrent(){try{let s=JSON.parse(localStorage.getItem(K)||'null');if(s&&s.country&&s.id&&s.journal){state=s;O.ensureTimeline(state);if(O.upgradeLife)O.upgradeLife(state);if(O.enrich)O.enrich(state);}}catch(e){console.warn('Could not load save',e)}}
 function saveCurrent(){if(!state)return;try{localStorage.setItem(K,JSON.stringify(state))}catch(e){notify('Local save limit reached. Export a backup to protect your lives.')}}
 function openDb(){return new Promise((resolve)=>{if(!window.indexedDB){resolve(null);return}let request;try{request=indexedDB.open('other-lives-library',1)}catch{resolve(null);return}request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('lives'))request.result.createObjectStore('lives',{keyPath:'id'})};request.onsuccess=()=>resolve(request.result);request.onerror=()=>resolve(null)})}
 let dbPromise=openDb();
@@ -1170,7 +1268,7 @@ function base(children){return `<div class="app-shell"><header class="topbar"><b
 function artCanvas(scene,s,cls='',id=''){return `<canvas class="${cls}" data-pixel="${safe(scene)}" data-life="${safe(s?.id||'demo')}" ${id?`id="${id}"`:''} role="img" aria-label="Static overhead pixel-art illustration of ${safe(scene)}"></canvas>`}
 function renderArt(){root.querySelectorAll('canvas[data-pixel]').forEach(c=>{let life=(state&&c.dataset.life===state.id?state:archive.find(x=>x.id===c.dataset.life))||{seed:14,strata:3,urban:true,gender:'F'};O.drawScene(c,c.dataset.pixel,life)})}
 function pill(s){return `<span class="tag ${s.strata<2?'tag-warn':s.strata>=6?'tag-blue':''}">${safe(O.tier(s))}</span>`}
-function landing(){return `<main class="landing fade"><div class="landing-grid"><div><p class="eyebrow">Life is not equally distributed</p><h1 class="hero-title">A world of lives.<br><em>One at a time.</em></h1><p class="hero-lede">Be born somewhere in the world, into circumstances you didn't choose. Live through childhood, work, love, wealth, hardship and chance. Every decision becomes part of a life worth remembering.</p><div class="hero-buttons"><button class="btn btn-primary" data-action="new-dialog">Be born into a life →</button>${state?`<button class="btn" data-action="resume">Continue ${safe(state.first)}'s story</button>`:''}<button class="btn" data-action="archive">Explore your lives</button></div><p class="hero-note">Automatic life progression. Decisions pause time. Original static pixel art. Local saves. A growing library of lives. The probabilities and economic figures in this version are illustrative, not a complete demographic dataset.</p></div><div class="hero-art"><div class="art-frame">${artCanvas('city',null)}</div><div class="hero-overlays"><span class="small-pill">◉ Demographic starting conditions</span><span class="small-pill">◇ ${O.COUNTRIES.length} locations</span><span class="small-pill">♡ People who remember you</span></div></div></div><section class="features"><p class="eyebrow">The world in a single life</p><h2 class="section-title">Circumstance. Choice. Consequence.</h2><div class="features-grid"><div class="feature"><div class="symbol">🌍</div><h3>A beginning you don't choose</h3><p>Start in one of ${O.COUNTRIES.length} countries and regions with varying opportunity, household resources and conditions.</p></div><div class="feature"><div class="symbol">↗</div><h3>More than one way through</h3><p>Navigate school, finances, work, relationships and difficult decisions across the whole lifespan.</p></div><div class="feature"><div class="symbol">♥</div><h3>People with histories</h3><p>Meet family, friends, partners, mentors and children whose lives continue alongside yours.</p></div><div class="feature"><div class="symbol">▤</div><h3>Every life remembered</h3><p>Archive entire stories, reopen timelines, compare different starting points and replay a turning point.</p></div></div></section></main>`}
+function landing(){return `<main class="landing fade"><div class="landing-grid"><div><p class="eyebrow">Life is not equally distributed</p><h1 class="hero-title">A world of lives.<br><em>One at a time.</em></h1><p class="hero-lede">Be born somewhere in the world, into circumstances you didn't choose. Live through childhood, work, love, wealth, hardship and chance. Every decision becomes part of a life worth remembering.</p><div class="hero-buttons"><button class="btn btn-primary" data-action="new-dialog">Be born into a life →</button>${state?`<button class="btn" data-action="resume">Continue ${safe(state.first)}'s story</button>`:''}<button class="btn" data-action="archive">Explore your lives</button></div><p class="hero-note">Automatic life progression. Decisions pause time. Original static pixel art. Local saves. A growing library of lives. The probabilities and economic figures in this version are illustrative, not a complete demographic dataset.</p></div><div class="hero-art"><div class="art-frame">${artCanvas('city',null)}</div><div class="hero-overlays"><span class="small-pill">◉ Demographic starting conditions</span><span class="small-pill">◇ ${O.COUNTRIES.length} locations</span><span class="small-pill">♡ People who remember you</span></div></div></div><section class="features"><p class="eyebrow">The world in a single life</p><h2 class="section-title">Circumstance. Choice. Consequence.</h2><div class="features-grid"><div class="feature"><div class="symbol">◎</div><h3>A beginning you don't choose</h3><p>Start in one of ${O.COUNTRIES.length} countries and regions with varying opportunity, household resources and conditions.</p></div><div class="feature"><div class="symbol">↗</div><h3>More than one way through</h3><p>Navigate school, finances, work, relationships and difficult decisions across the whole lifespan.</p></div><div class="feature"><div class="symbol">◇</div><h3>People with histories</h3><p>Meet family, friends, partners, mentors and children whose lives continue alongside yours.</p></div><div class="feature"><div class="symbol">▦</div><h3>Every life remembered</h3><p>Archive entire stories, reopen timelines, compare different starting points and replay a turning point.</p></div></div></section></main>`}
 function meter(label,value,cls=''){return `<div><div class="stat-head">${safe(label)} <span>${Math.round(value)}</span></div><div class="meter"><div class="meter-fill ${cls}" style="width:${O.clamp(value)}%"></div></div></div>`}
 function stats(s){return `<div class="stats-grid">${meter('Health',s.health)}${meter('Well-being',s.happiness,'amber')}${meter('Learning',s.knowledge,'blue')}${meter('Bonds',s.relationships,'rose')}</div>`}
 function dossierSmall(s){return `<div class="identity-block"><img class="avatar" width="55" height="55" src="${O.avatarData({id:s.id,name:s.name})}" alt="Pixel avatar for ${safe(s.name)}"><div><div class="name">${safe(s.name)}</div><div class="caption">${safe(s.country.name)}<br>${safe(O.stage(s.age))} · ${s.gender==='F'?'Female':'Male'} · ${s.urban?'Urban':'Rural'}</div></div></div><hr class="separator"><div class="badges">${pill(s)} ${s.flags.migrated?'<span class="tag tag-blue">Relocated</span>':''}${s.flags.foodInsecure?'<span class="tag tag-warn">Food insecurity</span>':''}</div><hr class="separator"><dl class="fact-list"><dt>Birth year</dt><dd>${s.birthYear}</dd><dt>Schooling</dt><dd>${safe(s.education)}</dd><dt>Occupation</dt><dd>${safe(s.job|| (s.age<18?'Not yet working':'Not employed'))}</dd><dt>Annual earnings*</dt><dd>${O.money(s.income)}</dd><dt>Cash savings*</dt><dd>${O.money(s.cash)}</dd><dt>Debt*</dt><dd>${O.money(s.debt)}</dd><dt>Net worth*</dt><dd>${O.money(O.netWorth(s))}</dd></dl><div class="tiny muted" style="margin-top:13px;line-height:1.6">* Illustrative annual purchasing-power dollars, not local-currency figures.</div>`}
@@ -1178,8 +1276,10 @@ function peoplePanel(s){const ppl=s.people.filter(p=>p.alive).sort((a,b)=>({Pare
 function journalPanel(s){const entries=s.journal.slice(0,logCount);return `<div class="panel panel-pad"><p class="panel-label">Life record <span class="quiet">${s.journal.length} memories</span></p><div class="log-list">${entries.map(e=>`<div class="log-entry tone-${e.tone||'neutral'}"><span class="age">Age ${e.age}</span><div class="text"><strong>${safe(e.title)}</strong><div>${safe(e.description)}</div></div></div>`).join('')}</div>${logCount<s.journal.length?`<button class="disclosure" data-action="more-log" style="margin-top:14px">See older memories →</button>`:''}</div>`}
 
 function familyIncomeRows(s){const parents=s.people.filter(p=>['Mother','Father'].includes(O.parentRole(p)));return `<div class="panel-label">Family household</div><dl class="fact-list"><dt>Parents' total income*</dt><dd>${O.money(s.familyIncome)}</dd><dt>Family assets*</dt><dd>${O.money(s.familyAssets)}</dd><dt>Family debts*</dt><dd>${O.money(s.familyDebts||0)}</dd><dt>Family net worth*</dt><dd>${O.money(s.familyAssets-(s.familyDebts||0))}</dd><dt>Your own net worth*</dt><dd>${O.money(O.netWorth(s))}</dd><dt>Your income*</dt><dd>${O.money(s.income)}</dd><dt>Housing</dt><dd>${s.flags.livingWithFamily?'With family':s.flags.crowdedHousing?'Crowded housing':s.urban?'Urban household':'Rural household'}</dd></dl><div class="panel-label" style="margin-top:15px">Parents and whereabouts</div>${parents.map(p=>`<button class="person-row" data-action="person" data-id="${safe(p.id)}"><span><strong>${safe(O.personLabel(p))}</strong><br><small>${safe(p.job)} · ${safe(p.residence)} · ${p.alive?'Living':'Died'}</small></span><span class="bond">${safe(O.money(p.annualIncome))} / yr*</span></button>`).join('')}<p class="tiny muted">*Illustrative PPP-dollar estimates; the current economic model is not country-calibrated. Parents' estimated individual earnings are approximate shares of total family income.</p>`}
-function factView(s){const rec=O.COUNTRY_CONTEXT?.[s.country.code];if(!rec)return `<div class="fact-bubble">A verified country-specific fact has not yet been added for ${safe(s.country.name)}. The game's economic figures are illustrative estimates, not sourced national values.</div>`;return `<div class="panel-label">${safe(rec.topic)}</div>${rec.facts.map(f=>`<div class="fact-bubble"><strong>ⓘ Real-world context</strong>${safe(f.text)}<p class="tiny">${safe(f.source)} · <a target="_blank" rel="noopener" href="${safe(f.url)}">Read the source ↗</a></p><small>This is a population statistic, not the probability of this specific fictional event.</small></div>`).join('')}`}
-function inspectorView(s){if(!inspector)return '';const tabs=[['profile','My profile'],['family','Family & money'],['people','People'],['facts','Country facts']];let content=inspector==='profile'?`<dl class="fact-list"><dt>Age</dt><dd>${s.age}</dd><dt>Birthplace</dt><dd>${safe(s.country.name)} · ${s.urban?'Urban':'Rural'}</dd><dt>Education</dt><dd>${safe(s.education)}</dd><dt>Occupation</dt><dd>${safe(s.job||'Not employed')}</dd><dt>Current focus</dt><dd>${safe(s.focus)}</dd><dt>Interests</dt><dd>${safe((s.interests||[]).join(', ')||'Not established')}</dd><dt>Health</dt><dd>${s.health}/100</dd><dt>Happiness</dt><dd>${s.happiness}/100</dd><dt>Knowledge</dt><dd>${s.knowledge}/100</dd><dt>Relationships</dt><dd>${s.relationships}/100</dd></dl>`:inspector==='family'?familyIncomeRows(s):inspector==='facts'?factView(s):s.people.map(p=>`<button class="person-row" data-action="person" data-id="${safe(p.id)}"><span><strong>${safe(O.personLabel(p))}</strong><br><small>${safe(p.job)} · ${safe(p.residence||'Location unknown')} · ${p.alive?'Alive':'Deceased'}</small></span><span class="bond">${p.close}%</span></button>`).join('');return `<div class="inspector-shade" id="inspector-shade"><section class="inspector-sheet" role="dialog" aria-modal="true" aria-label="Character details"><div style="display:flex;align-items:center;justify-content:space-between"><strong>${safe(s.name)} · Age ${s.age}</strong><button class="btn btn-small" data-action="close-inspector">Done ✕</button></div><div class="inspector-tabs">${tabs.map(([key,label])=>`<button class="${inspector===key?'active':''}" data-action="inspector" data-tab="${key}">${label}</button>`).join('')}</div>${content}<p class="tiny muted" style="margin-top:20px">${s.pending?'Your unanswered decision remains paused. Close this panel to return to it.':''}</p></section></div>`}
+function factView(s){const rec=O.COUNTRY_CONTEXT?.[s.country.code];const mortality=O.UNDER_FIVE_2024?.[s.country.code];const childFact=mortality!=null?`<div class="fact-bubble"><strong>2024 · Child survival</strong><p>${safe(mortality)} per 1,000 live births died before age five (2024 estimate).</p><p><a target="_blank" rel="noopener" href="${safe(O.U5_SOURCE)}">World Bank / UN IGME · source ↗</a></p><small>Population rate, not your individual risk. Circumstance multipliers in the game are illustrative.</small></div>`:'';if(!rec)return `${childFact}<div class="fact-bubble">A verified country-specific fact has not yet been added for ${safe(s.country.name)}. The game's economic figures are illustrative estimates, not sourced national values.</div>`;return `<div class="panel-label">${safe(rec.topic)}</div>${childFact}${rec.facts.map(f=>`<div class="fact-bubble"><strong>ⓘ Real-world context</strong>${safe(f.text)}<p class="tiny">${safe(f.source)} · <a target="_blank" rel="noopener" href="${safe(f.url)}">Read the source ↗</a></p><small>This is a population statistic, not the probability of this specific fictional event.</small></div>`).join('')}`}
+function moneyView(s){O.enrich(s);const rows=O.spendingCatalog(s);const groups=[...new Set(rows.map(x=>x.group))];return `<p class="panel-label">Your personal money</p><div class="money-grid"><div class="money-metric">Cash available<strong>${O.money(s.cash)}</strong></div><div class="money-metric">Estimated net worth<strong>${O.money(O.netWorth(s))}</strong></div><div class="money-metric">Annual earnings<strong>${O.money(s.income)}</strong></div><div class="money-metric">Debt / investments<strong>${O.money(s.debt)} / ${O.money(s.investments)}</strong></div></div><p class="tiny muted">${s.age<18?'Purchases may use household resources, subject to availability.':'Prices are estimated PPP-dollar gameplay amounts, not local retail prices. Debts incur interest and investments can fall.'}</p><p class="tiny muted">${s.age<6?'Your caregivers manage spending for you during early childhood. ':''}Home: ${safe(s.homeType)} · Family wealth: ${O.money(s.familyAssets-(s.familyDebts||0))}</p>${groups.map(group=>`<div class="market-heading">${safe(group)}</div>${rows.filter(x=>x.group===group).map(item=>`<div class="money-card"><strong>${safe(item.name)}</strong><span style="float:right;color:#396b5d;font-weight:750">${O.money(item.cost)}</span><p>${safe(item.desc)}</p><button class="btn btn-small ${item.unavailable?'':'btn-primary'}" data-action="purchase" data-purchase="${safe(item.id)}" ${item.unavailable?'disabled':''}>${item.unavailable?'Unavailable':'Choose'} →</button></div>`).join('')}`).join('')}<p class="panel-label" style="margin-top:18px">Recent transactions</p>${s.spendingHistory.slice(0,8).map(x=>`<div class="person-row"><span>${safe(x.name)} · age ${x.age}</span><strong>${x.id==='withdraw'?'+':'−'}${O.money(x.cost)}</strong></div>`).join('')||'<p class="small muted">No voluntary spending yet.</p>'}<p class="tiny muted">Financial model is illustrative. Investments, prices and earnings do not represent real investment advice or validated economic outcomes.</p>`}
+function worldPeers(s){const peers=s.contemporaries||[];if(!peers.length)return '';return `<div class="market-heading" style="margin-top:25px">Born alongside you, elsewhere in the world</div><p class="tiny muted">Four fictional parallel lives, generated at your birth. These simplified outcomes are illustrative, not a statistically calibrated cohort.</p>${peers.map(p=>`<div class="person-row"><span><strong>${safe(p.name)}</strong><br><small>${safe(p.country)} · ${p.alive?'Age '+p.age:'Died aged '+p.diedAt} · ${p.strata<=1?'Limited means':p.strata>=6?'Affluent household':'Other circumstances'}</small></span><span class="bond">${p.alive?'●':'○'}</span></div>`).join('')}`}
+function inspectorView(s){if(!inspector)return '';const tabs=[['profile','Profile'],['family','Family'],['money','Spend & invest'],['people','People'],['facts','Facts']];let content=inspector==='profile'?`<dl class="fact-list"><dt>Age</dt><dd>${s.age}</dd><dt>Birthplace</dt><dd>${safe(s.country.name)} · ${s.urban?'Urban':'Rural'}</dd><dt>Education</dt><dd>${safe(s.education)}</dd><dt>Occupation</dt><dd>${safe(s.job||'Not employed')}</dd><dt>Current focus</dt><dd>${safe(s.focus)}</dd><dt>Interests</dt><dd>${safe((s.interests||[]).join(', ')||'Not established')}</dd><dt>Health</dt><dd>${s.health}/100</dd><dt>Happiness</dt><dd>${s.happiness}/100</dd><dt>Knowledge</dt><dd>${s.knowledge}/100</dd><dt>Relationships</dt><dd>${s.relationships}/100</dd></dl>`:inspector==='family'?familyIncomeRows(s):inspector==='money'?moneyView(s):inspector==='facts'?factView(s):s.people.map(p=>`<button class="person-row" data-action="person" data-id="${safe(p.id)}"><span><strong>${safe(O.personLabel(p))}</strong><br><small>${safe(p.job)} · ${safe(p.residence||'Location unknown')} · ${p.alive?'Alive':'Deceased'}</small></span><span class="bond">${p.close}%</span></button>`).join('');if(inspector==='people')content+=worldPeers(s);return `<div class="inspector-shade" id="inspector-shade"><section class="inspector-sheet" role="dialog" aria-modal="true" aria-label="Character details"><div style="display:flex;align-items:center;justify-content:space-between"><strong>${safe(s.name)} · Age ${s.age}</strong><button class="btn btn-small" data-action="close-inspector">Done ✕</button></div><div class="inspector-tabs">${tabs.map(([key,label])=>`<button class="${inspector===key?'active':''}" data-action="inspector" data-tab="${key}">${label}</button>`).join('')}</div>${content}<p class="tiny muted" style="margin-top:20px">${s.pending?'Your unanswered decision remains paused. Close this panel to return to it.':''}</p></section></div>`}
 
 
 function yearlyFocusOptions(s){
@@ -1188,8 +1288,10 @@ function yearlyFocusOptions(s){
  if(s.age<65)return [['Balanced','Balanced year'],['Career','Career and work'],['Learning','Further learning'],['Health','Health and fitness'],['Relationships','Relationships'],['Rest','Rest and hobbies']];
  return [['Balanced','Balanced year'],['Health','Wellbeing'],['Relationships','Family and friends'],['Learning','Keep learning'],['Rest','Rest and reflection']];
 }
+function deathView(s){const record=s.deathRecord||{cause:s.cause||'Cause not recorded',place:s.country.name,explanation:'This is a fictional simulation.',close:[]};const book=s.journal||[];const bonds=s.people.filter(p=>p.alive).slice(0,3);return `<main class="fade"><section class="death-hero"><p class="eyebrow">The final chapter · ${safe(s.birthYear+s.age)}</p><h1>${safe(s.name)}'s life ends at age ${s.age}</h1><div class="game-scene">${artCanvas(s.scene||'home',s)}</div><div class="death-summary"><strong>Recorded cause of death</strong><h2>${safe(record.cause||s.cause||'Not recorded')}</h2><p>${safe(record.explanation||'This cause is fictional and the model is illustrative.')}</p><p class="small muted">Place: ${safe(record.place||s.country.name)} · Age ${s.age}${Number.isFinite(record.month)?' · Month '+(record.month+1):''}</p>${record.source?`<p class="tiny muted">Population context: <a target="_blank" rel="noopener" href="${safe(record.source.url)}">${safe(record.source.text)} ↗</a></p>`:''}</div><p class="panel-label">What this life held</p><p class="event-copy">Born in ${safe(s.country.name)}, ${safe(s.lifeTexture?.place||'a local community')}, into ${safe(O.tier(s).toLowerCase())} circumstances. ${s.job?`You worked as a ${safe(s.job.toLowerCase())}.`:s.age<18?'You were still a child.':''} ${s.people.length?`People and relationships shaped your time here.`:''}</p><div class="money-grid"><div class="money-metric">Years lived<strong>${s.age}</strong></div><div class="money-metric">Recorded moments<strong>${book.length}</strong></div><div class="money-metric">People encountered<strong>${s.people.length}</strong></div><div class="money-metric">Lifetime voluntary spending<strong>${O.money(s.moneyLedger?.lifetimeSpent||0)}</strong></div></div>${bonds.length?`<p class="panel-label">People remaining in your life</p><p>${bonds.map(x=>safe(O.personLabel(x))).join(' · ')}</p>`:''}<p class="panel-label">A few remembered moments</p>${book.filter(x=>x.type!=='ending'&&x.type!=='birth').slice(0,3).map(x=>`<div class="money-card"><strong>Age ${x.age} · ${safe(x.title)}</strong><p>${safe(x.description)}</p></div>`).join('')||'<p class="small muted">This life ended before many milestones could unfold.</p>'}<div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:20px"><button class="btn btn-primary" data-action="detail-current">Read complete life →</button><button class="btn" data-action="archive">Life archive</button><button class="btn" data-action="new-dialog">Begin another life</button></div><p class="tiny muted" style="margin-top:12px">The individual cause and life narrative are fictional outcomes; population facts are sourced separately.</p></section></main>`}
 function game(){
  const s=state;if(!s)return landing();
+  if(s.status==='finished')return deathView(s);
  const ev=s.pending?O.EVENTS.find(x=>x.id===s.pending):null;
  const last=s.journal[0];
  const status=s.status==='finished'?'The story of this life has ended.':s.age===0&&s.month<2?'A new life begins. The years will unfold automatically.':last?.description||'Life goes on.';
@@ -1202,46 +1304,31 @@ function game(){
  <label class="auto-choice-toggle"><input type="checkbox" data-change="autodecide" ${autoChoices?'checked':''}> Auto decisions</label>
  </div>`;
  return `<main class="game-main"><div class="page-heading"><div><p class="eyebrow">${s.birthYear+s.age} · ${safe(O.stage(s.age))}</p><h1>${safe(s.first)}'s life <span class="muted" id="live-age">· Age ${s.age}${s.status==='alive'?' · Month '+(s.month+1):''}</span></h1><div class="badges"><span class="tag">${safe(s.country.name)}</span>${pill(s)}${s.status==='finished'?'<span class="tag tag-warn">Life complete</span>':''}</div></div><div class="controls"><label for="focus" class="tiny muted">Life focus</label><select id="focus" data-change="focus">${yearlyFocusOptions(s).map(([key,label])=>`<option value="${key}" ${s.focus===key?'selected':''}>${label}</option>`).join('')}</select><button class="btn btn-small" data-action="archive">Archive</button></div></div>
- ${s.status==='alive'?`<div class="time-sticky">${control}<div class="quick-stats"><button data-action="inspector" data-tab="profile">Health ${s.health} · Mood ${s.happiness} · Learning ${s.knowledge} · Bonds ${s.relationships}</button><button data-action="inspector" data-tab="family">Family & money ↗</button><button data-action="inspector" data-tab="facts">ⓘ ${safe(s.country.name)}</button></div></div>`:''}
+ ${s.status==='alive'?`<div class="time-sticky">${control}<div class="quick-stats"><button data-action="inspector" data-tab="profile">♥ ${s.health} · ☺ ${s.happiness} · ◈ ${s.knowledge} · ♡ ${s.relationships}</button><button data-action="inspector" data-tab="family">Family & money ↗</button><button data-action="inspector" data-tab="facts">ⓘ ${safe(s.country.name)}</button></div></div>`:''}
   ${s.pending&&decisionAside?`<div class="decision-resume"><span>⏸ A decision is waiting. Time is stopped.</span><button class="btn btn-small" data-action="return-decision">Open decision ↗</button></div>`:''}
- <div class="game-layout"><section class="left-stack"><div class="panel"><div class="game-scene">${artCanvas(s.scene||'home',s)}</div>${stats(s)}<div class="event-content"><div class="event-header"><span class="event-category">${s.status==='finished'?'The end of a life':playing?'Life unfolding':s.pending?'Decision waiting':'Time paused'}</span><span class="tag">Age ${s.age} · ${s.month+1}/12</span></div><h2 class="event-title">${safe(displayTitle)}</h2><p class="event-copy">${safe(status)}</p>${s.lastOutcome?`<div class="outcome"><strong>What happened</strong>${safe(s.lastOutcome)}</div>`:''}${s.status==='finished'?`<section class="death-summary" role="status"><span class="eyebrow">Life ended · ${safe(s.birthYear+s.age)}</span><h3>${safe(s.first)} died at age ${s.age}</h3><p><strong>Recorded cause:</strong> ${safe(s.cause||'Cause not recorded')}</p><p>${safe(s.deathContext||'This is a fictional simulated outcome.')}</p>${O.countryEvidence(s).under5!==null?`<p class="small muted">Reference: UNICEF 2024 under-five mortality in ${safe(s.country.name)}: ${O.countryEvidence(s).under5} per 1,000 live births. This is a population statistic, not a personal prediction. <a target="_blank" rel="noopener" href="${O.countryEvidence(s).under5Source}">Source ↗</a></p>`:""}<button class="btn btn-primary" data-action="detail-current">Review the complete life →</button></section>`:''}<div class="year-actions">${s.status==='finished'?`<button class="btn btn-primary" data-action="detail-current">Read this life’s story →</button><button class="btn" data-action="new-dialog">Begin another life</button>`:`<span class="timeline-tip">${s.pending?'Your life is paused for a decision.':playing?'Time is advancing. Events appear in your life record below.':'Press Play to advance through life.'}</span>`}</div></div></div>
+ <nav class="quick-dock" aria-label="Game quick access"><button data-action="inspector" data-tab="profile">Profile</button><button data-action="inspector" data-tab="family">Family</button><button data-action="inspector" data-tab="money">Spend</button><button data-action="inspector" data-tab="people">People</button><button data-action="inspector" data-tab="facts">Facts</button>${s.pending?`<button class="pending-dot" data-action="return-decision">Decision ●</button>`:""}</nav>
+  <div class="game-layout"><section class="left-stack"><div class="panel"><div class="game-scene">${artCanvas(s.scene||'home',s)}<span class="scene-label">${safe(s.country.name)} · ${safe(s.urban?'Urban':'Rural')} · ${s.birthYear+s.age}</span></div>${stats(s)}<div class="event-content"><div class="event-header"><span class="event-category">${s.status==='finished'?'The end of a life':playing?'Life unfolding':s.pending?'Decision waiting':'Time paused'}</span><span class="tag">Age ${s.age} · ${s.month+1}/12</span></div><h2 class="event-title">${safe(displayTitle)}</h2><p class="event-copy">${safe(status)}</p>${s.lastOutcome?`<div class="outcome"><strong>What happened</strong>${safe(s.lastOutcome)}</div>`:''}<div class="year-actions">${s.status==='finished'?`<div class="end-cause"><strong>Cause of death</strong><p>${safe(s.cause||'Cause not recorded')}</p><small>Fictional outcome. Not a medical diagnosis or a verified country-specific probability.</small></div><button class="btn btn-primary" data-action="detail-current">Read this life’s story →</button><button class="btn" data-action="new-dialog">Begin another life</button>`:`<span class="timeline-tip">${s.pending?'Your life is paused for a decision.':playing?'Time is advancing. Events appear in your life record below.':'Press Play to advance through life.'}</span>`}</div></div></div>
  ${journalPanel(s)}</section>
  <aside class="right-stack"><div class="panel panel-pad"><p class="panel-label">Your circumstances <span class="quiet">What you inherited and built</span></p>${dossierSmall(s)}</div>${peoplePanel(s)}<div class="panel panel-pad"><p class="panel-label">Life and chance</p><p class="empty-note">Events, finances and people evolve in parallel. Not everything becomes a choice, and different starting circumstances change the opportunities available. The model is illustrative rather than statistically calibrated.</p><button class="disclosure" data-action="info">How realistic is the model? →</button></div></aside></div>
- ${birthReveal?`<div class="birth-shade"><section class="birth-reveal" role="dialog" aria-label="New life reveal"><p class="eyebrow">A life begins somewhere</p><div class="draw-globe">◌</div><p class="birth-rolling">A person among billions</p><h2>${safe(s.name)}</h2><p>You were born in <strong>${safe(s.country.name)}</strong> in ${s.birthYear}.</p><p>${safe(s.urban?'Urban':'Rural')} community · ${safe(O.tier(s))}</p><button class="btn btn-primary" data-action="dismiss-birth">Begin this life →</button></section></div>`:''}
  ${ev&&!decisionAside&&!inspector?`<div class="decision-shade" role="presentation"><section class="decision-popup" role="dialog" aria-modal="true" aria-label="A life decision"><div class="decision-top"><span class="event-category">${safe(ev.category)} · Age ${s.age}</span><button class="btn btn-small" data-action="set-aside">Set aside ▾</button></div><h2 class="event-title">${safe(ev.title(s))}</h2><p class="event-copy">${safe(ev.description(s))}</p>${O.factForEvent(s,ev)?`<div class="fact-bubble"><strong>ⓘ ${safe(s.country.name)} · Real-world context</strong>${safe(O.factForEvent(s,ev).text)} <button class="btn btn-small" data-action="inspector" data-tab="facts">Source & context ↗</button></div>`:""}<div class="choice-list">${choices.map((c,i)=>`<button class="choice" data-action="choose" data-index="${i}"><div><strong>${safe(c.label)}</strong><span>${safe(c.detail)}</span></div><b class="arrow">↗</b></button>`).join('')}</div><p class="event-subnote">Your choice matters, but personal circumstances and chance also shape the outcome.</p></section></div>`:''}
-  <nav class="quick-dock" aria-label="Game quick access"><button data-action="inspector" data-tab="profile">Profile</button><button data-action="inspector" data-tab="family">Family</button><button data-action="inspector" data-tab="people">People</button><button data-action="inspector" data-tab="facts">Facts</button>${s.pending?`<button class="pending-dot" data-action="return-decision">Decision ●</button>`:""}</nav>${inspectorView(s)}
+  ${inspectorView(s)}
  </main>`;
 }
-function archiveView(){let finished=archive;return `<main class="fade"><div class="page-heading"><div><p class="eyebrow">Your personal collection</p><h1>Life archive</h1><p class="small muted">Every saved life you have recorded is kept here. Select two completed lives to compare their starting conditions and outcomes.</p></div><div class="controls"><button class="btn" data-action="export">↓ Export backups</button><button class="btn" data-action="import">↑ Import</button>${compare.size===2?'<button class="btn btn-primary" data-action="compare">Compare selected →</button>':''}</div></div>${!finished.length?`<div class="panel archive-empty"><div class="symbol">◈</div><h2 class="section-title">A collection waiting to begin</h2><p>Finish or set aside a life and it will appear here with a complete journal, important relationships and milestone snapshots.</p><button class="btn btn-primary" data-action="new-dialog">Begin a life</button></div>`:`<div class="record-grid">${finished.map(s=>`<article class="record-card">${artCanvas(s.strata>=6?'mansion':'home',s)}<div class="body"><div class="eyebrow" style="margin-bottom:7px">${safe(s.country.name)} · ${s.birthYear}–${s.birthYear+s.age}</div><h3>${safe(s.name)}</h3><div class="badges">${pill(s)}<span class="tag">${s.status==='finished'?'Died age '+s.age:'Paused · Age '+s.age}</span></div><p class="summary">${safe(trim(s.journal.find(x=>x.type==='birth')?.description,130))}</p><div class="row"><button class="btn btn-small btn-primary" data-action="record" data-id="${safe(s.id)}">Read story →</button>${s.status==='paused'?`<button class="btn btn-small" data-action="resume-record" data-id="${safe(s.id)}">Resume</button>`:''}<label class="tiny muted" style="cursor:pointer"><input type="checkbox" data-compare="${safe(s.id)}" ${s.status!=='finished'?'disabled':''} ${compare.has(s.id)?'checked':''}> Compare</label></div></div></article>`).join('')}</div>`}<div class="notice" style="margin-top:22px">Archive entries are saved locally. They won't automatically sync across devices. Download a JSON backup regularly, particularly before changing browsers or clearing browser data. You can import that backup later.</div></main>`}
-function lifeDetail(s){if(!s)return archiveView();const end=s.status==='finished';return `<main class="fade"><div class="page-heading"><div><p class="eyebrow">${end?'A completed life':'Life in progress'} · ${safe(s.country.name)}</p><h1>${safe(s.name)}</h1><p class="muted small">${s.birthYear}–${s.birthYear+s.age} · Age ${s.age} · ${safe(O.tier(s))}</p></div><div class="controls"><button class="btn" data-action="archive">← Back to archive</button><button class="btn" data-action="export-one" data-id="${safe(s.id)}">↓ Export this life</button>${end?`<button class="btn btn-danger btn-small" data-action="delete-prompt" data-id="${safe(s.id)}">Delete record</button>`:''}</div></div><div class="detail-content"><div class="left-stack"><div class="panel"><div class="game-scene">${artCanvas(s.strata>=6?'mansion':'home',s)}</div><div class="panel-pad"><h2 class="section-title">The story of ${safe(s.first)}</h2><p class="event-copy">${safe(s.birthDescription)}</p><div class="badges"><span class="tag">${safe(O.stage(s.age))}</span>${pill(s)}<span class="tag">${s.people.length} people encountered</span><span class="tag">${s.journal.length} events recorded</span></div></div></div><div class="panel panel-pad"><div class="chapter-tabs"><button class="btn btn-small ${chapter==='timeline'?'selected':''}" data-action="chapter" data-chapter="timeline">Full timeline</button><button class="btn btn-small ${chapter==='people'?'selected':''}" data-action="chapter" data-chapter="people">People & relationships</button><button class="btn btn-small ${chapter==='turns'?'selected':''}" data-action="chapter" data-chapter="turns">Revisit turning points</button></div>${chapter==='timeline'?`<div class="timeline">${s.journal.slice().reverse().map(e=>`<div class="time-item"><strong>Age ${e.age} · ${safe(e.title)}</strong><em>${safe(e.description)}</em></div>`).join('')}</div>`:chapter==='people'?`<div>${s.people.map(p=>`<button class="person-row" data-action="person" data-id="${safe(p.id)}"><img class="avatar" src="${O.avatarData(p)}" width="39" height="39" alt=""><span class="person-meta"><strong>${safe(p.name)}</strong><span>${safe(p.role)} · ${p.age} yrs · ${safe(p.trait)} · ${p.alive?'Living':'Died'}</span></span><span class="bond">${p.close}%</span></button>`).join('')}</div>`:`<p class="small muted" style="line-height:1.7">Replay from a saved milestone to explore an alternative direction. This creates a new life record and preserves the original.</p>${s.snapshots.map(snap=>`<div class="log-entry"><span class="age">Age ${snap.age}</span><div class="text"><strong>${safe(snap.data.pending?O.EVENTS.find(e=>e.id===snap.data.pending)?.title(snap.data)||'Decision point':O.stage(snap.age))}</strong><div><button class="disclosure" data-action="fork" data-id="${safe(s.id)}" data-age="${snap.age}">Replay from this age →</button></div></div></div>`).join('')}`}</div></div><aside class="right-stack"><div class="panel panel-pad"><p class="panel-label">Life at a glance</p>${dossierSmall(s)}</div><div class="panel panel-pad"><p class="panel-label">Legacy</p><dl class="fact-list"><dt>Age reached</dt><dd>${s.age}</dd><dt>Years worked</dt><dd>${s.yearsWorked||0}</dd><dt>Children</dt><dd>${s.people.filter(x=>x.role==='Child').length}</dd><dt>Final well-being</dt><dd>${Math.round(s.happiness)}/100</dd><dt>Cause of death</dt><dd>${safe(s.cause||'—')}</dd></dl><p class="empty-note" style="margin-top:18px">There is no single score for a good life. Financial outcomes, relationships, health and meaning are not interchangeable.</p></div></aside></div></main>`}
+function archiveView(){let finished=archive;return `<main class="fade"><div class="page-heading"><div><p class="eyebrow">Your personal collection</p><h1>Life archive</h1><p class="small muted">Every saved life you have recorded is kept here. Select two completed lives to compare their starting conditions and outcomes.</p></div><div class="controls"><button class="btn" data-action="export">↓ Export backups</button><button class="btn" data-action="import">↑ Import</button>${compare.size===2?'<button class="btn btn-primary" data-action="compare">Compare selected →</button>':''}</div></div>${!finished.length?`<div class="panel archive-empty"><div class="symbol">◈</div><h2 class="section-title">A collection waiting to begin</h2><p>Finish or set aside a life and it will appear here with a complete journal, important relationships and milestone snapshots.</p><button class="btn btn-primary" data-action="new-dialog">Begin a life</button></div>`:`<div class="record-grid">${finished.map(s=>`<article class="record-card">${artCanvas(s.strata>=6?'mansion':'home',s)}<div class="body"><div class="eyebrow" style="margin-bottom:7px">${safe(s.country.name)} · ${s.birthYear}–${s.birthYear+s.age}</div><h3>${safe(s.name)}</h3><div class="badges">${pill(s)}<span class="tag">${s.status==='finished'?'Age '+s.age:'Paused · Age '+s.age}</span></div><p class="summary">${safe(trim(s.journal.find(x=>x.type==='birth')?.description,130))}</p><div class="row"><button class="btn btn-small btn-primary" data-action="record" data-id="${safe(s.id)}">Read story →</button>${s.status==='paused'?`<button class="btn btn-small" data-action="resume-record" data-id="${safe(s.id)}">Resume</button>`:''}<label class="tiny muted" style="cursor:pointer"><input type="checkbox" data-compare="${safe(s.id)}" ${s.status!=='finished'?'disabled':''} ${compare.has(s.id)?'checked':''}> Compare</label></div></div></article>`).join('')}</div>`}<div class="notice" style="margin-top:22px">Archive entries are saved locally. They won't automatically sync across devices. Download a JSON backup regularly, particularly before changing browsers or clearing browser data. You can import that backup later.</div></main>`}
+function lifeDetail(s){if(!s)return archiveView();const end=s.status==='finished';return `<main class="fade"><div class="page-heading"><div><p class="eyebrow">${end?'A completed life':'Life in progress'} · ${safe(s.country.name)}</p><h1>${safe(s.name)}</h1><p class="muted small">${s.birthYear}–${s.birthYear+s.age} · Age ${s.age} · ${safe(O.tier(s))}</p></div><div class="controls"><button class="btn" data-action="archive">← Back to archive</button><button class="btn" data-action="export-one" data-id="${safe(s.id)}">↓ Export this life</button>${end?`<button class="btn btn-danger btn-small" data-action="delete-prompt" data-id="${safe(s.id)}">Delete record</button>`:''}</div></div><div class="detail-content"><div class="left-stack"><div class="panel"><div class="game-scene">${artCanvas(s.strata>=6?'mansion':'home',s)}</div><div class="panel-pad"><h2 class="section-title">The story of ${safe(s.first)}</h2><p class="event-copy">${safe(s.birthDescription)}</p>${end?`<div class="end-cause"><strong>Recorded cause of death</strong><p>${safe(s.cause||'Not recorded')}</p><small>A fictional simulation outcome rather than a diagnosis.</small></div>`:''}<div class="badges"><span class="tag">${safe(O.stage(s.age))}</span>${pill(s)}<span class="tag">${s.people.length} people encountered</span><span class="tag">${s.journal.length} events recorded</span></div></div></div><div class="panel panel-pad"><div class="chapter-tabs"><button class="btn btn-small ${chapter==='timeline'?'selected':''}" data-action="chapter" data-chapter="timeline">Full timeline</button><button class="btn btn-small ${chapter==='people'?'selected':''}" data-action="chapter" data-chapter="people">People & relationships</button><button class="btn btn-small ${chapter==='turns'?'selected':''}" data-action="chapter" data-chapter="turns">Revisit turning points</button></div>${chapter==='timeline'?`<div class="timeline">${s.journal.slice().reverse().map(e=>`<div class="time-item"><strong>Age ${e.age} · ${safe(e.title)}</strong><em>${safe(e.description)}</em></div>`).join('')}</div>`:chapter==='people'?`<div>${s.people.map(p=>`<button class="person-row" data-action="person" data-id="${safe(p.id)}"><img class="avatar" src="${O.avatarData(p)}" width="39" height="39" alt=""><span class="person-meta"><strong>${safe(p.name)}</strong><span>${safe(p.role)} · ${p.age} yrs · ${safe(p.trait)} · ${p.alive?'Living':'Died'}</span></span><span class="bond">${p.close}%</span></button>`).join('')}</div>`:`<p class="small muted" style="line-height:1.7">Replay from a saved milestone to explore an alternative direction. This creates a new life record and preserves the original.</p>${s.snapshots.map(snap=>`<div class="log-entry"><span class="age">Age ${snap.age}</span><div class="text"><strong>${safe(snap.data.pending?O.EVENTS.find(e=>e.id===snap.data.pending)?.title(snap.data)||'Decision point':O.stage(snap.age))}</strong><div><button class="disclosure" data-action="fork" data-id="${safe(s.id)}" data-age="${snap.age}">Replay from this age →</button></div></div></div>`).join('')}`}</div></div><aside class="right-stack"><div class="panel panel-pad"><p class="panel-label">Life at a glance</p>${dossierSmall(s)}</div><div class="panel panel-pad"><p class="panel-label">Legacy</p><dl class="fact-list"><dt>Age reached</dt><dd>${s.age}</dd><dt>Years worked</dt><dd>${s.yearsWorked||0}</dd><dt>Children</dt><dd>${s.people.filter(x=>x.role==='Child').length}</dd><dt>Final well-being</dt><dd>${Math.round(s.happiness)}/100</dd><dt>Cause of death</dt><dd>${safe(s.cause||'—')}</dd></dl><p class="empty-note" style="margin-top:18px">There is no single score for a good life. Financial outcomes, relationships, health and meaning are not interchangeable.</p></div></aside></div></main>`}
 function compareView(){const a=archive.find(x=>x.id===Array.from(compare)[0]),b=archive.find(x=>x.id===Array.from(compare)[1]);if(!a||!b)return archiveView();const rows=[['Birthplace',s=>s.country.name],['Family resource group',s=>O.tier(s)],['Childhood environment',s=>s.urban?'Urban':'Rural'],['Family annual income*',s=>O.money(s.familyIncome)],['Age at death',s=>''+s.age],['Final occupation',s=>s.job||'None'],['Qualifications',s=>s.education],['Years employed',s=>s.yearsWorked||0],['Children',s=>s.people.filter(p=>p.role==='Child').length],['Final cash*',s=>O.money(s.cash)],['Final debts*',s=>O.money(s.debt)],['Final net worth*',s=>O.money(O.netWorth(s))],['Final well-being',s=>`${Math.round(s.happiness)}/100`]];
 return `<main class="fade"><div class="page-heading"><div><p class="eyebrow">Seeing beyond your own circumstances</p><h1>Two different lives</h1></div><button class="btn" data-action="archive">← Archive</button></div><div class="compare-cols">${[a,b].map(s=>`<div class="panel"><div class="game-scene">${artCanvas(s.strata>=6?'mansion':'home',s)}</div><div class="panel-pad"><h2 class="section-title">${safe(s.name)}</h2><p class="small muted">${safe(s.country.name)} · ${s.birthYear}–${s.birthYear+s.age}</p></div></div>`).join('')}</div><div class="panel panel-pad" style="margin-top:18px"><p class="panel-label">Circumstances and outcomes <span class="quiet">* Illustrative purchasing-power dollars</span></p>${rows.map(([name,fn])=>`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;border-top:1px solid #ecebe7;padding:12px 0;font-size:12px"><strong>${safe(fn(a))}</strong><span style="text-align:center;color:#7c867d">${safe(name)}</span><strong style="text-align:right">${safe(fn(b))}</strong></div>`).join('')}</div><div class="notice" style="margin-top:16px">These are two fictional outcomes from a simplified simulation. Differences cannot establish what caused success, hardship or early death. Use the comparison to ask questions, not to draw statistical conclusions.</div></main>`}
-function modalView(){if(!modal)return '';let body='',heading='';if(modal.type==='new'){heading='Begin a new life';body=`<p class="description">A random country and family are drawn from an illustrative set of locations and demographic parameters. The default mode preserves the unpredictability of birth.</p><div class="form-row"><label>Where are you born?</label><select id="new-country"><option value="random">Surprise me · weighted random birth</option>${O.COUNTRIES.map(c=>`<option value="${c.code}">${safe(c.name)}${O.LOCAL_STORIES[c.code]?' · Detailed events':' · Basic coverage'}</option>`).join('')}</select></div><div class="form-row"><label>Choose starting circumstances (optional)</label><select id="new-class"><option value="random">Fully random · normal distribution</option><option value="hardship">Explore severe hardship (bottom 8%)</option><option value="comfortable">Explore financial comfort (65th–85th percentile)</option><option value="top1">Explore the local top 1%</option></select></div><p class="tiny muted">Choosing a class or country is an exploration mode, not a statistically random global birth. A new life won't delete your finished archive.</p><div class="modal-foot"><button class="btn" data-action="close-modal">Cancel</button><button class="btn btn-primary" data-action="start">Be born →</button></div>`}
+function modalView(){if(!modal)return '';let body='',heading='';if(modal.type==='birth-draw'){heading='Where will your life begin?';body=`<div class="birth-spinner">A life is being drawn</div><div class="birth-orbit" aria-hidden="true"></div><div class="birth-choice" id="birth-roll">Somewhere in the world...</div><div class="birth-choice" id="birth-name-roll" style="font-size:16px;min-height:28px">A name not yet known</div><p class="small muted" style="text-align:center">Country, name, family and circumstances are being assigned.</p>`;}else if(modal.type==='birth-reveal'){heading='A life has been drawn';body=`<div class="birth-reveal"><div class="birth-globe" aria-hidden="true">✦</div><p class="eyebrow">BIRTH REGISTRATION · ${state.birthYear}</p><h2>${safe(state.name)}</h2><p class="description">Born in <strong>${safe(state.country.name)}</strong> · ${state.urban?'Urban':'Rural'} household.</p><p class="description">Your parents and household circumstances are already determined. The decades ahead are not.</p><p class="tiny muted">Birth weights and household estimates are illustrative; this draw is not a validated global population sample.</p></div><div class="modal-foot"><button class="btn btn-primary" data-action="enter-life">Begin this life →</button></div>`;}else if(modal.type==='new'){heading='Begin a new life';body=`<p class="description">A random country and family are drawn from an illustrative set of locations and demographic parameters. The default mode preserves the unpredictability of birth.</p><div class="form-row"><label>Where are you born?</label><select id="new-country"><option value="random">Surprise me · weighted random birth</option>${O.COUNTRIES.map(c=>`<option value="${c.code}">${safe(c.name)}</option>`).join('')}</select></div><div class="form-row"><label>Choose starting circumstances (optional)</label><select id="new-class"><option value="random">Fully random · normal distribution</option><option value="hardship">Explore severe hardship (bottom 8%)</option><option value="comfortable">Explore financial comfort (65th–85th percentile)</option><option value="top1">Explore the local top 1%</option></select></div><p class="tiny muted">Choosing a class or country is an exploration mode, not a statistically random global birth. A new life won't delete your finished archive.</p><div class="modal-foot"><button class="btn" data-action="close-modal">Cancel</button><button class="btn btn-primary" data-action="start">Be born →</button></div>`}
 else if(modal.type==='person'){let p=modal.person;heading=p?.name||'Person';body=`${p?`<div class="identity-block" style="margin:10px 0 22px"><img class="avatar" src="${O.avatarData(p)}" width="82" height="82" alt=""><div><div class="name">${safe(p.role)}</div><div class="caption">Age ${p.age} · ${safe(p.trait)} · ${p.alive?'Alive':'Deceased'}</div></div></div><dl class="fact-list"><dt>Relationship</dt><dd>${safe(p.role)}</dd><dt>Closeness</dt><dd>${p.close}/100</dd><dt>Temperament</dt><dd>${safe(p.trait)}</dd><dt>Health index</dt><dd>${p.health}/100</dd><dt>Occupation</dt><dd>${safe(p.job)}</dd><dt>Whereabouts</dt><dd>${safe(p.residence||'Unknown')}</dd><dt>Annual earnings*</dt><dd>${O.money(p.annualIncome||0)}</dd></dl><p class="tiny muted">*Illustrative earnings proxy, not verified individual income.</p><p class="description">This is a persistent fictional person. Their age, relationship with you and life circumstances may affect future events. Their inner experience is not reducible to a number.</p>`:''}<div class="modal-foot"><button class="btn btn-primary" data-action="close-modal">Close</button></div>`}
 else if(modal.type==='people'){const s=modal.life;heading='The people you encountered';body=`${s.people.map(p=>`<button class="person-row" data-action="person" data-id="${safe(p.id)}"><img class="avatar" src="${O.avatarData(p)}" width="42" height="42" alt=""><span class="person-meta"><strong>${safe(O.personLabel(p))}</strong><span>${safe(p.role)} · Age ${p.age} · ${p.alive?'Living':'Died'}</span></span><span class="bond">${p.close}%</span></button>`).join('')}<div class="modal-foot"><button class="btn" data-action="close-modal">Close</button></div>`}
-else if(modal.type==='info'){heading='How the simulation works';body=`<p class="description">Other Lives is an original, text-based fictional life simulator. Birthplace, household percentile and chance shape starting circumstances. The clock runs automatically, generating ordinary life events and pausing for consequential decisions. Your choices change health, learning, relationships, finances and future events.</p><div class="help-grid"><div class="feature"><h3>${O.COUNTRIES.length} countries / regions</h3><p>Curated example settings. Not comprehensive worldwide birth coverage.</p></div><div class="feature"><h3>Partial calibration</h3><p>UNICEF 2024 under-five survival and World Bank 2024 life expectancy anchor selected countries. The age-specific adult curve and personal risk adjustments remain modelled estimates.</p></div><div class="feature"><h3>Economic differences</h3><p>Household class, adult savings, debts and opportunity interact. Monetary values use rough PPP-dollar units.</p></div><div class="feature"><h3>Life archives</h3><p>Saved locally in your browser; unfinished lives can be resumed, and JSON backups protect your archive.</p></div></div><p class="description">Research starting points: <a href="https://population.un.org/wpp/" target="_blank" rel="noopener">UN World Population Prospects</a>, <a href="https://data.worldbank.org/" target="_blank" rel="noopener">World Bank</a>, <a href="https://ilostat.ilo.org/" target="_blank" rel="noopener">ILOSTAT</a> and <a href="https://www.who.int/data/gho" target="_blank" rel="noopener">WHO</a>. The current code does not import their complete datasets or claim event rates are verified. Outcomes are stories, not predictions or causal estimates.</p><div class="modal-foot"><button class="btn btn-primary" data-action="close-modal">Understood</button></div>`}
+else if(modal.type==='info'){heading='How the simulation works';body=`<p class="description">Other Lives is an independent, text-based fictional life simulator with purchases, local context and decision cards. Birthplace, household percentile and chance shape starting circumstances. The clock runs automatically, generating ordinary life events and pausing for consequential decisions. Your choices change health, learning, relationships, finances and future events.</p><div class="help-grid"><div class="feature"><h3>${O.COUNTRIES.length} countries / regions</h3><p>Curated example settings. Not comprehensive worldwide birth coverage.</p></div><div class="feature"><h3>Illustrative parameters</h3><p>Country figures and event probabilities are hand-tuned proxies, not validated scientific estimates.</p></div><div class="feature"><h3>Economic differences</h3><p>Household class, adult savings, debts and opportunity interact. Monetary values use rough PPP-dollar units.</p></div><div class="feature"><h3>Life archives</h3><p>Saved locally in your browser; unfinished lives can be resumed, and JSON backups protect your archive.</p></div></div><p class="description">Research starting points: <a href="https://population.un.org/wpp/" target="_blank" rel="noopener">UN World Population Prospects</a>, <a href="https://data.worldbank.org/" target="_blank" rel="noopener">World Bank</a>, <a href="https://ilostat.ilo.org/" target="_blank" rel="noopener">ILOSTAT</a> and <a href="https://www.who.int/data/gho" target="_blank" rel="noopener">WHO</a>. The current code does not import their complete datasets or claim event rates are verified. Outcomes are stories, not predictions or causal estimates.</p><div class="modal-foot"><button class="btn btn-primary" data-action="close-modal">Understood</button></div>`}
 else if(modal.type==='delete'){heading='Delete this life?';body=`<p class="description">This permanently deletes the selected archive record from this browser. Export a backup first if you might want to revisit it.</p><div class="modal-foot"><button class="btn" data-action="close-modal">Cancel</button><button class="btn btn-danger" data-action="delete" data-id="${safe(modal.id)}">Delete life</button></div>`}
 return `<div class="modal-backdrop" id="modal-backdrop"><section class="modal" role="dialog" aria-modal="true" aria-label="${safe(heading)}"><div class="modal-head"><h2>${safe(heading)}</h2><button class="btn btn-small" data-action="close-modal" aria-label="Close">✕</button></div>${body}</section></div>`}
-function drawBirthRoulette(){
- if(!birthReveal||birthRouletteFinished||birthRouletteTimer||view!=='game')return;
- const line=document.querySelector('.birth-rolling');const face=document.querySelector('.birth-reveal h2');
- const origin=face?.textContent||'';if(!line||!face)return;
- let count=0;
- birthRouletteTimer=setInterval(()=>{
-  if(!birthReveal||view!=='game'){clearInterval(birthRouletteTimer);birthRouletteTimer=null;return}
-  count++;
-  if(count>=14){clearInterval(birthRouletteTimer);birthRouletteTimer=null;birthRouletteFinished=true;
-   line.textContent='A beginning, drawn at random';face.textContent=origin;return;}
-  const idx=Math.floor(Math.random()*O.COUNTRIES.length),place=O.COUNTRIES[idx];
-  line.textContent='Searching across the world · '+place.name;
-  const pool=O.POOLS[place.region];face.textContent=pool?pool.firstF[Math.floor(Math.random()*pool.firstF.length)]+' …':'A life begins …';
- },100);
-}
-function render(){const y=window.scrollY||0;const content=view==='landing'?landing():view==='game'?game():view==='archive'?archiveView():view==='detail'?lifeDetail(detailId==='current'?state:archive.find(x=>x.id===detailId)):view==='compare'?compareView():landing();root.innerHTML=base(content);renderArt();drawBirthRoulette();if(view==='game'&&!state?.pending)window.scrollTo(0,y)}
+function render(){const y=window.scrollY||0;const content=view==='landing'?landing():view==='game'?game():view==='archive'?archiveView():view==='detail'?lifeDetail(detailId==='current'?state:archive.find(x=>x.id===detailId)):view==='compare'?compareView():landing();root.innerHTML=base(content);renderArt();if(view==='game'&&!state?.pending)window.scrollTo(0,y)}
 function stopClock(){playing=false;if(clockTimer){clearInterval(clockTimer);clockTimer=null;}monthBank=0;}
-function startClock(){if(!state||state.status!=='alive'||state.pending||inspector||modal)return;stopClock();playing=true;lastPulse=performance.now();clockTimer=setInterval(tickClock,85)}
+function startClock(){if(!state||state.status!=='alive'||state.pending||inspector||modal||document.hidden)return;stopClock();playing=true;lastPulse=performance.now();clockTimer=setInterval(tickClock,85)}
 function syncTime(){const bar=$('#month-fill');if(bar)bar.style.width=(state.month/12*100)+'%';const visible=$('.time-label');if(visible)visible.textContent=`Age ${state.age} · ${state.month+1}/12`;const label=$('#live-age');if(label)label.textContent=`· Age ${state.age} · Month ${state.month+1}`}
-function tickClock(){if(!state||state.status!=='alive'||view!=='game'){stopClock();return}if(state.pending){resumeAfterDecision=true;stopClock();render();return}
+function tickClock(){if(!state||state.status!=='alive'||view!=='game'||inspector||modal||document.hidden){stopClock();return}if(state.pending){resumeAfterDecision=true;stopClock();render();return}
  const now=performance.now(),dt=Math.max(0,Math.min(700,now-lastPulse));lastPulse=now;monthBank+=dt*clockSpeed/3750;
  let n=0,draw=false;
  while(monthBank>=1&&n++<8&&state.status==='alive'&&!state.pending){monthBank-=1;const r=O.advanceMonth(state);if(r.entry||r.birthday||r.finished)draw=true;if(r.decision){if(autoChoices){const e=O.EVENTS.find(x=>x.id===state.pending);if(e){O.applyChoice(state,O.int(state,0,e.options(state).length-1));draw=true}}else{resumeAfterDecision=true;stopClock();draw=true;break}}}
@@ -1251,26 +1338,27 @@ async function persistFinished(){if(state?.status==='finished'){const ok=await p
 function backupDownload(data,name){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 function selectedLife(){return view==='detail'?(detailId==='current'?state:archive.find(x=>x.id===detailId)):state}
 async function handle(action,el){switch(action){
- case 'home':stopClock();resumeAfterInspector=false;view='landing';break;
+ case 'home':stopClock();view='landing';break;
  case 'resume':stopClock();view='game';if(state?.status==='alive'&&!state.pending)startClock();break;
- case 'archive':stopClock();resumeAfterInspector=false;await refreshArchive();view='archive';break;
+ case 'archive':stopClock();await refreshArchive();view='archive';break;
  case 'new-dialog':stopClock();modal={type:'new'};break;
- case 'info':modal={type:'info'};break;
- case 'close-modal':modal=null;if(resumeAfterInspector&&!inspector&&!state?.pending&&state?.status==='alive'){resumeAfterInspector=false;startClock()}break;
- case 'start':{decisionAside=false;inspector=null;resumeAfterInspector=false;const country=$('#new-country')?.value||'random',classChoice=$('#new-class')?.value||'random';stopClock();if(state?.status==='alive'){await putArchive({...state,status:'paused'});await refreshArchive()}state=O.create({country,classChoice,draw:'birth',year:2026});saveCurrent();view='game';modal=null;logCount=10;chapter='timeline';birthReveal=true;birthRouletteFinished=false;birthRevealStarted=performance.now();stopClock();break}
+ case 'info':stopClock();modal={type:'info'};break;
+ case 'close-modal':modal=null;break;
+ case 'enter-life':modal=null;startClock();break;
+ case 'start':{decisionAside=false;inspector=null;const country=$('#new-country')?.value||'random',classChoice=$('#new-class')?.value||'random';stopClock();if(state?.status==='alive'){await putArchive({...state,status:'paused'});await refreshArchive()}state=O.create({country,classChoice,draw:'birth',year:2026});saveCurrent();view='game';modal={type:'birth-draw'};logCount=10;chapter='timeline';{let n=0;const randomise=setInterval(()=>{if(modal?.type!=='birth-draw'){clearInterval(randomise);return;}const c=O.COUNTRIES[n*13%O.COUNTRIES.length];const e=$('#birth-roll'),f=$('#birth-name-roll');if(e)e.textContent=c.name;if(f)f.textContent=['Amira','Kojo','Sakura','Maya','Daniel','Ayesha','Ren','Nadia','Lucas','Mei'][n%10];n++;},95);setTimeout(()=>{clearInterval(randomise);if(modal?.type==='birth-draw'){modal={type:'birth-reveal'};render();}},1650);}break}
  case 'choose':{if(!state||!state.pending)return;decisionAside=false;inspector=null;state.lastEventTitle=O.EVENTS.find(x=>x.id===state.pending)?.title(state);O.applyChoice(state,Number(el.dataset.index));saveCurrent();if(resumeAfterDecision){resumeAfterDecision=false;startClock()}break}
+ case 'purchase':{if(!state)return;stopClock();O.enrich(state);const result=O.spend(state,el.dataset.purchase);if(result.ok){saveCurrent();notify(result.message)}else notify(result.message);inspector='money';break;}
  case 'set-aside':decisionAside=true;break;
   case 'return-decision':decisionAside=false;inspector=null;break;
-  case 'inspector':if(playing){resumeAfterInspector=true;stopClock()}decisionAside=!!state?.pending;inspector=el.dataset.tab||'profile';break;
-  case 'close-inspector':inspector=null;if(resumeAfterInspector&&!state?.pending&&state?.status==='alive'){resumeAfterInspector=false;startClock()}break;
+  case 'inspector':if(playing)stopClock();decisionAside=!!state?.pending;inspector=el.dataset.tab||'profile';break;
+  case 'close-inspector':inspector=null;break;
   case 'next-decision':{if(!state||state.pending||state.status!=='alive')return;stopClock();resumeAfterDecision=true;O.skipToDecision(state);saveCurrent();if(state.status==='finished')await persistFinished();break}
  
- case 'dismiss-birth':birthReveal=false;birthRouletteFinished=true;if(birthRouletteTimer)clearInterval(birthRouletteTimer);birthRouletteTimer=null;startClock();break;
  case 'play-pause':if(playing)stopClock();else startClock();break;
  case 'speed':clockSpeed=Number(el.dataset.value)||4;break;
  case 'more-log':logCount+=15;break;
- case 'person':{if(playing){resumeAfterInspector=true;stopClock()}const life=selectedLife();const person=life?.people.find(p=>p.id===el.dataset.id);if(person)modal={type:'person',person};break}
- case 'all-people':modal={type:'people',life:state};break;
+ case 'person':{stopClock();const life=selectedLife();const person=life?.people.find(p=>p.id===el.dataset.id);if(person)modal={type:'person',person};break}
+ case 'all-people':stopClock();modal={type:'people',life:state};break;
  case 'record':view='detail';detailId=el.dataset.id;chapter='timeline';break;
  case 'resume-record':{const saved=archive.find(x=>x.id===el.dataset.id);if(!saved||saved.status!=='paused')break;if(state?.status==='alive'&&state.id!==saved.id)await putArchive({...state,status:'paused'});state=JSON.parse(JSON.stringify(saved));O.ensureTimeline(state);state.status='alive';await deleteArchive(saved.id);await refreshArchive();saveCurrent();view='game';chapter='timeline';if(!state.pending)startClock();break}
  case 'detail-current':view='detail';detailId='current';chapter='timeline';await persistFinished();break;
@@ -1283,11 +1371,11 @@ async function handle(action,el){switch(action){
  case 'delete':{await deleteArchive(el.dataset.id);compare.delete(el.dataset.id);await refreshArchive();modal=null;view='archive';notify('Record deleted from this browser.');break}
  case 'fork':{if(state?.status==='alive'){await putArchive({...state,status:'paused'});await refreshArchive()}const from=archive.find(x=>x.id===el.dataset.id)||state;const snap=from?.snapshots.find(x=>x.age===Number(el.dataset.age));if(!snap)return;const ns=JSON.parse(JSON.stringify(snap.data));ns.id='life-'+Date.now()+'-'+Math.floor(Math.random()*100000);ns.snapshots=[];ns.startedAt=new Date().toISOString();ns.finishedAt=null;ns.status='alive';ns.cause=null;ns.lastOutcome='';O.journal(ns,'Another possible path','You have restarted from an earlier turning point. The original life is preserved in the archive.','life');O.ensureTimeline(ns);state=ns;saveCurrent();view='game';chapter='timeline';if(!state.pending)startClock();notify('Alternate life created. Your original remains safe.');break}
  }render()}
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing){stopClock();saveCurrent();render();}});
-root.addEventListener('click',async ev=>{let btn=ev.target.closest('[data-action]');if(btn){ev.preventDefault();try{await handle(btn.dataset.action,btn)}catch(e){console.error(e);notify('An unexpected error occurred. You can export a backup from the archive.')}return}if(ev.target.id==='inspector-shade'){inspector=null;if(resumeAfterInspector&&!state?.pending&&state?.status==='alive'){resumeAfterInspector=false;startClock()}render();return}if(ev.target.id==='modal-backdrop'){modal=null;render()}});
+root.addEventListener('click',async ev=>{let btn=ev.target.closest('[data-action]');if(btn){ev.preventDefault();try{await handle(btn.dataset.action,btn)}catch(e){console.error(e);notify('An unexpected error occurred. You can export a backup from the archive.')}return}if(ev.target.id==='inspector-shade'){inspector=null;render();return}if(ev.target.id==='modal-backdrop'){modal=null;render()}});
 root.addEventListener('change',e=>{if(e.target.dataset.change==='autodecide'){autoChoices=e.target.checked;if(autoChoices&&state?.pending){const ev=O.EVENTS.find(x=>x.id===state.pending);if(ev){O.applyChoice(state,O.int(state,0,ev.options(state).length-1));saveCurrent();startClock();render();}}return;}if(e.target.dataset.change==='focus'&&state){state.focus=e.target.value;saveCurrent()}else if(e.target.dataset.compare){if(e.target.checked){if(compare.size===2){e.target.checked=false;notify('Select only two lives at a time.');return}compare.add(e.target.dataset.compare)}else compare.delete(e.target.dataset.compare);render()}});
 const fileInput=document.createElement('input');fileInput.type='file';fileInput.id='import-file';fileInput.accept='.json,application/json';fileInput.hidden=true;document.body.appendChild(fileInput);
 fileInput.addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());const lives=data.format==='other-lives-life-v1'?[data.life]:data.format==='other-lives-backup-v1'?data.lives:[];if(!lives||!Array.isArray(lives))throw Error('Invalid format');let n=0;for(const s of lives){if(s&&s.id&&s.country&&Array.isArray(s.journal)&&['finished','paused'].includes(s.status)){await putArchive(s);n++}}if(data.current&&data.current.id&&data.current.country&&(!state||confirm('Replace the current in-progress life with the one in this backup?'))){state=data.current;saveCurrent()}await refreshArchive();view='archive';render();notify(`Imported ${n} archived ${plural(n,'life','lives')}.`)}catch(err){notify('Could not read this backup. Check that it is an Other Lives JSON file.')}fileInput.value=''});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(playing)stopClock();}else render();});
 loadCurrent();refreshArchive().then(()=>{render()});
 })(window.OL);
 
@@ -1297,41 +1385,5 @@ loadCurrent();refreshArchive().then(()=>{render()});
       addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(console.warn));
     }
   </script>
-
-<script>
-/* V2.5: persistent, context-sensitive character life events. All fictional narratives,
-   not assertions that demographic identity causes a personal outcome. */
-(function(O){
- const OLD=O.pickStories;
- O.pickStories=function(s,n){
-  const out=OLD(s,n); const id=s.country.code; const age=s.age;
-  if(n&&age>=3&&age<=90){
-   if(!s.flags.personalThread)s.flags.personalThread=O.pick(s,['books','sport','music','drawing','animals','technology']);
-   const thread=s.flags.personalThread, people=(s.people||[]).filter(p=>p.alive);
-   const mother=people.find(p=>p.role==='Mother');const father=people.find(p=>p.role==='Father');
-   const guardian=mother||father||people[0];
-   const who=guardian?O.personLabel(guardian):'a family member';
-   let custom=null;
-   if(age>=5&&age<16&&s.school&&O.chance(s,.30)){
-    const subject=thread==='sport'?'physical education':thread==='music'?'music':thread==='technology'?'computing':thread==='drawing'?'art':'history';
-    const teacherNames={GH:['Ms. Mensah','Mr. Boateng'],HK:['Ms. Chan','Mr. Wong'],BD:['Mr. Rahman','Ms. Akter'],GB:['Ms. Smith','Mr. Taylor'],IN:['Ms. Das','Mr. Sharma'],NG:['Mr. Okafor','Ms. Adebayo'],ET:['Ms. Bekele','Mr. Tesfaye']};const teacher=s.flags.favouriteTeacher||O.pick(s,teacherNames[id]||['Ms. Taylor','Mr. Lee']);
-    s.flags.favouriteTeacher=teacher;
-    custom={title:`${teacher} notices your interest`,description:`Your ${subject} teacher, ${teacher}, notices how much attention you pay. A short conversation leaves you feeling seen. ${who} asks what made you so cheerful when you return home.`,scene:'school',effect:'thread-encouragement'};
-    s.flags.teacherMemory=age;
-   } else if(s.flags.teacherMemory&&age-s.flags.teacherMemory>=4&&!s.flags.teacherReflection&&O.chance(s,.26)){
-    custom={title:'A voice you remember',description:`You remember how ${s.flags.favouriteTeacher||'a teacher'} once encouraged your interest in ${thread}. That small moment comes back as you think about the next stage of life.`,scene:'home',effect:'thread-reflection'};
-    s.flags.teacherReflection=true;
-   } else if(age>=10&&O.chance(s,.19)){
-    const examples={GH:[`A tro-tro fare increase changes how your household plans travel. ${who} explains what must wait until the next pay day.`,`At a neighbourhood gathering, talk turns to school costs and work. You notice adults have different ideas about opportunity.`],HK:[`Your household compares public transport routes and rising housing costs. ${who} discusses how little space can shape daily routines.`,`A classmate talks about tutorials and school places. You compare experiences without assuming every family can afford the same support.`],BD:[`Seasonal rain changes the trip to school or market. ${who} worries about lost work time.`,`At a local bazaar, you hear adults comparing prices, debt and ways to manage household expenses.`],GB:[`A teacher describes different routes through GCSEs, sixth form, apprenticeships and college. ${who} asks what appeals to you.`,`A family conversation turns to housing costs and the possibility of moving farther from work.`],NG:[`A neighbour discusses fuel and transport expenses. ${who} adjusts the household budget.`,`A schoolfriend tells you about different exam and vocational routes, opening a new line of thought.`],IN:[`Your household plans around education fees, travel distance and exam options. ${who} shares their hopes.`,`You overhear a conversation about moving cities for work and the relatives who have already left.`],ET:[`Rainfall affects daily plans for some neighbours. ${who} talks about what that means for supplies.`,`You hear adults discuss community savings and how local networks can help during a difficult season.`]};
-    const pool=examples[id];if(pool)custom={title:({GH:'Fares and family budgets',HK:'Daily life in Hong Kong',BD:'Seasonal routines and prices',GB:'Choices closer to home',NG:'Life in the neighbourhood',IN:'Costs and opportunities',ET:'Community and seasons'})[id],description:O.pick(s,pool),scene:'city',effect:'local-'+id};
-   }
-   if(custom)out[O.int(s,0,out.length-1)]=custom;
-  }
-  return out;
- };
- const prevFire=O.fireStory;
- O.fireStory=function(s,item){prevFire(s,item);if(item.effect==='thread-encouragement')O.adjust(s,{knowledge:2,happiness:2});};
-})(window.OL);
-</script>
 </body>
 </html>
