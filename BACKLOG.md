@@ -1,32 +1,25 @@
-# Prioritised backlog
+# Prioritised continuation backlog
 
-Status vocabulary: TODO / IN PROGRESS / IMPLEMENTED (awaiting checks) / VERIFIED (link evidence).
-Baseline of this backlog: 4072fd4. See CHANGELOG.md for cycle results.
+Current verified source b87e519; exact evidence in RELEASE_STATUS.md. VERIFIED means scoped acceptance passed, not whole-game completeness.
 
-## Cycle 1
-- VERIFIED CHECKPOINT: restore branch and permanent reference/design/audit/architecture/testing instructions.
-- VERIFIED CHECKPOINT: secured mortgage preserved on reoccupation; payment/conservation regression.
-- VERIFIED CHECKPOINT: idempotent end-of-life insurance/wishes; repeated-call regression.
-- VERIFIED CHECKPOINT: uint32 zero seed, seeded shuffle and cached fixed-currency formatters.
-- VERIFIED CHECKPOINT: PR/reusable release CI, all existing tests, two 1,000-life cohorts with assertions/balance reports, browser lifecycle/storage/navigation/choices. See RELEASE_STATUS.md; this is an engineering checkpoint, not stable production.
+## Completed reliability stage
+- Reversible production baseline, isolated branch, permanent audit/design/fidelity/architecture/testing/requirements/bugs/release documentation, reusable quality and gated Pages workflow.
+- Shared eligibility/atomic commands, school access/attendance, resolved cooldowns, zero seed/seeded shuffle, once-only endings and save/history compatibility.
+- Pure cost/read/load boundaries; conserved tuition/gifts and explicit estate/trust commits; missing-cash unknowns and known-zero debt.
+- Ordered atomic annual/birthday pipeline and receipts; budget/interest/investment/mortgage ownership; employment pay/hours/FTE/restoration/pension.
+- Pure displayed choices/tokens; participant/conception identity; changed-circumstance exits and ended overseas/doctoral commitments.
+- Separate property/loan identity, rental/current residence, fees/sales/revaluation, schema2 compatibility and scheduled-debt prepayment.
+- Full official reference play to 91 plus infant/rebirth; Next bereavement stop through existing controls.
+- 75 tests/build,2,000 complete asserted lives and actual Chromium lifecycle/save/read/property/pacing gates. Checkpoint/6.2.0-dev.1-reliability-verified points at b87e519.
 
-## Next: explicit simulation ownership
-1. VERIFIED at a248549 (see RELEASE_STATUS.md): explicit annual cost owner; current-load identity; read-only profile/family/spending/finance/art; explicit estate/trust transition; legacy missing cash marked unknown without invented money. See ENGINEERING_CYCLE_2.md. Remaining decision/candidate/bill caches and legacy command/clock adapters still need extraction.
-2. IMPLEMENTED; final CI pending: explicit annual transaction and ordered stages, shared budget/debt and employment owners. Annual receipt/rollback, retired/FTE work and all retained study/care tests pass locally. See ENGINEERING_CYCLE_3.md.
-3. IMPLEMENTED; final CI pending: read-only decision views and UI tokens; route partner/residence binding; pregnancy parentage and overseas/doctoral cancellation regressions. Further rare combinations remain subject to simulation gates.
-4. Introduce shared family timeline/history assertions: parent/child dates, deceased-person immutability, adult status, residence and simultaneous partners. Fix identified violations with seed reproductions.
-5. Unify asset/debt accounting and rental-property identity. Multiple rentals currently aggregate values; do not imply per-dwelling mortgages or legal settlement precision.
+## Next work, by priority
+1. Compare normal-speed pacing and optional-menu density. Inspect route-heavy trajectories (up to178 decisions in the stress policy) and generic repetition; CI does not certify enjoyment.
+2. Reconcile duration settings, optional reflections/parallel lives and richer retrospective endings. Independently author justified work; preserve established tabs/home learning/funding/art.
+3. Source/version demographic/economic inputs, age/sex mortality and national schooling/opportunity.129 versus172 locations and eras remain incomplete; no invented national legal/wage precision.
+4. Extend rare-route/country combination coverage.34/42 types start in the cohort; contracts for all definitions do not validate every full trajectory.
+5. Incrementally simplify structural/command helpers only behind concrete acceptance; do not recreate annual/finance wrapper chains.
+6. Other browser engines, accessibility and unusually large archives remain unverified.
+7. Owner administration: main protection is false; available connector cannot configure protected-main required checks. Workflow already gates Pages. Production release remains a deliberate separate action.
 
-## Gameplay fidelity and balance
-- Hands-on official reference and Other Lives comparison on mobile/desktop; measure pace and decision burden. Document observations before changing layout.
-- Assess optional route/policy density. Preserve previously requested tabs and meaningful options; simplify only with evidence.
-- Measure major route coverage, country/background outcomes, repeated narrative categories and ordinary lives. Distribution smoke checks are not calibration.
-- Review country aliases, name pools and family consistency across all supported locations.
-- Reconcile reference omissions (parallel lives/reflections, era modelling) with the user's priority after a verified stable baseline.
-- Source demographic inputs and disclose proxies; adult mortality needs age/sex life tables. Research wages, education/registration and legal gates separately.
-
-## Remaining verification
-Private 13-record backup re-audited read-only in cycle2; initial three missing family-cash fields prompted an explicit conservative migration and regression. Exact final results are in ENGINEERING_CYCLE_2.md. Reference interactive play not available initially. Full multi-browser/mobile/accessibility evaluation and every route combination require further work.
-
-## Recovered existing engineering branch
-VERIFIED at the earlier checkpoint: integrated b31a7af extraction/contracts/tests and retained their provenance. Cycle2 revalidates them with the annual cost boundary; full wrapper consolidation is still outstanding.
+## Continuity
+Main4072fd4 is untouched; no new deployment. Known confirmed audit regressions are corrected in the tested checkpoint. Calibration/unknown combinations are documented limits. No private backup was modified/committed. Read all current repository evidence at the next session.

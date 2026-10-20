@@ -18,7 +18,10 @@ The extraction preserved the original authored content. The old extension graph 
 | Factors and routes | `life-balance.js`, `life-routes.js`, `life-route-{education,enterprise,family,world,special,health-money,assets}.js`, `life-integrity.js`: factor effects and persistent route stage contracts |
 | Art | `pixel-household.js`, `engine/pixel-legacy.js`: original canvas tile/sprite drawing and legacy fallback |
 | Shared contracts | `engine/rules.js`: eligibility, enrolment predicate, deterministic shuffle, family funding quote/commit and pure annual quote; `engine/state.js`: schema migrations and consistency/transition diagnostics; `engine/commands.js`: atomic command boundary |
-| Annual cost commitments | `engine/finance.js`: pure quotes, explicit conserved tuition/gift/policy settlement, saved receipt and rollback; other yearly income/debt/asset stages remain to consolidate |
+| Annual execution | `engine/annual.js`: 12 explicit ordered stages around core, once-per-age receipt, complete annual/birthday rollback |
+| Employment | `engine/employment.js`: role/pay/hours, restoration, FTE experience and pension exclusion |
+| Finance/property | `engine/finance.js`: pure costs, conserved budget/gifts, scheduled/unsecured/secured repayment. `engine/property.js`: dwelling identity/use/value/sale/loans |
+| Decisions | `engine/decisions.js`: pure serialized choice view; command boundary validates displayed tokens inside rollback |
 | Browser | `ui/app.js`: rendering, navigation, playback, current-save storage, IndexedDB archive, JSON import/export and replay UI |
 
 ## State and transitions
@@ -26,7 +29,7 @@ The extraction preserved the original authored content. The old extension graph 
 One serializable life record contains seeded RNG, clock, country/birth/current place, household resources, four factors/latent states, people, education/study, employment/experience, routes, money/debt history, journal, pending decision, agenda and snapshots. No function or DOM node belongs in a save.
 
 - `create(settings)` establishes a birth. Integer seeds, including zero, are normalised to uint32; unspecified seeds are random. Identity timestamps/random IDs are separated from simulation RNG in the VM test loader.
-- `advanceMonth(state)` delivers a queued highlight or increments the month. At a birthday it runs annual systems and mortality, then creates the next agenda. Route/funding/graduate follow-ups may interrupt before ordinary highlights.
+- `advanceMonth(state)` delivers a queued highlight or increments the month. At a birthday completeBirthday atomically advances age, executes annual stages and mortality, snapshots and creates the next agenda. Failure restores clock, RNG, people, finances and history. annualReceipt prevents duplicate annual effects after repeat/reload. Route/funding/graduate follow-ups may interrupt before ordinary highlights.
 - `rules.eventBlock` / `eventEligible` is the shared prerequisite check. The monthly delivery and choice application use it. Legacy per-event `when` functions still own specific prerequisites.
 - `applyChoice` records `used`, `choiceHistory` and `journal.eventId` only after a successful choice. Staged events have explicit repeat exceptions; ordinary events default to seven years and milestones occur once.
 - `commands.js` snapshots the state at `applyChoice`, `startRoute` and `planAction`. Rejections restore the previous record. Exceptions or newly introduced consistency issues roll back and surface an error. Nested commands participate in the outer transaction. Existing legacy issues are not silently erased. This boundary preserves successful object references; rollback replaces state fields.
@@ -34,15 +37,17 @@ One serializable life record contains seeded RNG, clock, country/birth/current p
 
 ## Persistence
 
-`schemaVersion: 1` is the first explicit schema. `migrateLife` clones input and refuses future versions. Current schema1 records do not rerun simulation adapters. Unversioned records separate preschool access/attendance and invoke retained structural adapters once, preserving their journal. Missing early family-cash balances become an explicitly unknown zero opening balance; no money is inferred from income. Historical prose is not used to invent exact event IDs or unknowable expenses. Current load, imports, archived resume and replay use this boundary. Original exported inputs remain unchanged.
+`schemaVersion: 2` is current. migrateLife clones input and refuses future versions; current-schema loading is an exact clone. Schema1→2 adds explicitly unknown legacy aggregate property holdings without inventing dwelling counts, dates, country or lost loans. Negative legacy family assets become equivalent household debt with an explicit repair record, conserving net wealth. Unversioned records separate preschool access/attendance and invoke retained structural adapters once, preserving their journal. Missing early family-cash balances become an explicitly unknown zero opening balance; no money is inferred from income. Historical prose is not used to invent exact event IDs or unknowable expenses. Current load, imports, archived resume and replay use this boundary. Original exported inputs remain unchanged.
 
 Current life: localStorage `other-lives-current-v1`. Archive: IndexedDB `other-lives-library` / `lives`, with a localStorage fallback. `other-lives-life-v1` and `other-lives-backup-v1` envelopes remain supported. Exact-ID export never substitutes another record. Deletion must report storage success; deleting the current record clears its pointer to prevent resurrection.
 
 ## Remaining architectural debt
 
-Legacy closures still capture older ensure/annual/query implementations. The command boundary is not yet the sole mutation path: annual routines and several lower-level helpers mutate directly. Annual cost composition is extracted; profile/family/spending/finance/art reads no longer invoke adapters. Legacy `ensureClarity` still combines structural repairs and transitions in command/clock paths. Some bill/candidate queries cache prepared card data. Invariant validation is observational, not proof of all causal relationships. Next extraction should consolidate the remaining income, debt, mortgage and investment annual stages and formal education/people state machines with differential tests before deleting wrapper layers. Atomic snapshots need profiling for very large archived journals.
+Annual wrapper composition has been replaced by registered preparation/finalization stages, retaining their established order. Cost/budget/property/mortgage settlement and employment now have explicit owners and conservation tests. The UI decision view is pure and token-bound.
+Legacy structural ensureClarity command/clock adapters and query/choice wrappers remain; simplify incrementally when a concrete contract or defect touches them. They no longer own annual transactions or execute from ordinary profile/family/spending/art reads. Pure property projections support old aggregate fixtures; a legacy aggregate is not evidence of one actual dwelling.
+Invariants detect defined contradictions, not all causal narrative relationships. National legal/tax/clinical precision and very large archive performance remain unverified.
 
 ## Latest integration checkpoint
 The engineering/fidelity-reliability-baseline branch incorporates b31a7af as a second parent and retains its extracted engine, existing tests and migration work. Additional ownership/ending fixes stay in life-route-assets.js. Currency formatters are cached in life-clarity.js. Refer to ENGINEERING_AUDIT.md and BUGS.md for this cycle's independently observed failures.
 
-Cycle2 implementation/acceptance and verification evidence: ENGINEERING_CYCLE_2.md. Cost receipts do not yet make the entire annual pipeline one transaction.
+Cycles2–5 implementation/acceptance are recorded in the corresponding ENGINEERING_CYCLE documents. RELEASE_STATUS.md is authoritative for current source/results; older checkpoint prose is historical.

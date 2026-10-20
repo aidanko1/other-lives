@@ -1,5 +1,11 @@
 # Gameplay contract and reference evidence
 
+## Current direct evidence and implementation
+The comparison below was originally written against baseline 4072fd4 and limited research; its hands-on unknowns are superseded by FIDELITY_MATRIX.md and REFERENCE_PLAYTEST_2026-10-21.md. Direct official play now covers an infant ending/rebirth and a whole life through school/university/work/family/care/retirement at60/old age/death at91. Numerical probabilities and all variants remain unknown.
+Current tested implementation is b87e519: full chronological text/choice loop retained; no new controls. Next pauses at new close-family loss, matching observed parent loss. Existing school-entry/home-learning/funding/tabs/static-art preferences remain deliberate requirements. RELEASE_STATUS.md records scoped verification and remaining omissions/calibration goals.
+
+## Historical baseline evidence
+
 Research checked 21 October 2026. Official reference: https://1in8b.life/en/ and https://1in8b.life/en/about/ (v0.7.89 beta). Similar-name sites are excluded: the official About page identifies 1in8b.life as its only official address.
 
 ## Evidence levels

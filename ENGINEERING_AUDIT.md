@@ -1,3 +1,12 @@
+# Current audit supplement — verified source b87e519
+
+The historical audit below retains its original source/tool limitations. Current tools enabled source work, real Chromium CI, read-only private compatibility checks and direct official-reference play through death at 91.
+Confirmed root causes now corrected: school access/attendance overload; resolved-event cooldowns; eligibility outside rollback; seed0/random-comparator ordering; adapters in load/read paths; duplicate annual/cost wrappers; repeated annual/ending effects; unowned role/pay/hours/experience; index-only/mutable decision presentation; lost family participants and incomplete cancellation; property/loan overwrite; bill repayments disconnected from schedules; Next skipping bereavement.
+Retained regressions cover those findings. No authored content was discarded to produce a smaller passing game. Source b87e519 passes 75 tests, build, two complete 1,000-life cohorts and all eight CI gates: https://github.com/aidanko1/other-lives/actions/runs/39515340262.
+Remaining limitations concern calibration, reference omissions, rare combinations, legacy structural helpers, accessibility/other browsers and long-archive performance. Do not infer a reproducible high defect solely from legacy code; record the actual failing state. See RELEASE_STATUS.md, REQUIREMENTS_MATRIX.md, BUGS.md and FIDELITY_MATRIX.md.
+
+---
+
 # Engineering and gameplay audit — cycle 1
 
 Date: 2026-10-21. Pinned source: 4072fd4997992cb7fd6bf78d7f0c9cab41a7379f.

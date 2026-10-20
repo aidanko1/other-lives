@@ -61,4 +61,9 @@ OL-016–OL-020 fixes and all retained regressions pass at a248549 in https://gi
 See ENGINEERING_CYCLE_3.md for OL-021–OL-027 red reproductions, expected behaviour, corrective owners and permanent tests. No new stable claim or deployment.
 
 ## Cycle4
-OL-028–OL-031 expected/actual states, seed reproductions, causes, corrections and regressions are recorded in ENGINEERING_CYCLE_4.md. Source85deb8d failed simulation CI (https://github.com/aidanko1/other-lives/actions/runs/39512695036), despite passing regression/browser. The unchanged full cohorts are required to pass the correction. No test assertions were weakened.
+OL-028–OL-031 expected/actual states, seed reproductions, causes, corrections and regressions are recorded in ENGINEERING_CYCLE_4.md. Source 85deb8d failed simulation CI (https://github.com/aidanko1/other-lives/actions/runs/39512695036), despite passing regression/browser. The unchanged full cohorts are required to pass the correction. No test assertions were weakened.
+
+## Final cycles3–5 resolution
+OL-021–OL-031 corrections and retained regressions pass at b87e519 in run39515340262: 75 reported tests and both 1,000-life cohorts have zero failures. OL-028's failing seeds remain unchanged in the full harnesses.
+OL-032 / Medium fidelity: Next skipped newly deceased family until another card. Direct reference father-loss observation established a pause without a choice. clock.js now stops on new close-family loss; app.js uses existing pause/toast. GB seed2218 synthetic30y11m with targeted parent mortality reproduced month1 instead of0 before correction. pacing.test and real browser annual-death/pause checks pass; old losses and distant contacts do not add stops. ENGINEERING_CYCLE_5.md records the scope/judgment.
+No unresolved confirmed critical/high audit finding remains uncorrected. Unknown combinations are not declared bug-free.

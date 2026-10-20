@@ -1,5 +1,7 @@
 # Testing and release criteria
 
+Latest tested source b87e519: 75 tests, build, 2,000 complete asserted lives, actual Chromium lifecycle/read/property/bereavement gates; all eight jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39515340262. Earlier counts below are historical; RELEASE_STATUS.md defines current limits.
+
 This document defines required verification. See CHANGELOG.md / CI for what actually ran; test-file presence alone is not a pass.
 
 ## Commands
@@ -37,3 +39,9 @@ Source 07f81f2: https://github.com/aidanko1/other-lives/actions/runs/39494233610
 `node --test tests/finance-boundary.test.cjs` checks complete-state quote/display/load immutability, tuition and family-gift conservation, repeat/reload receipts, affordability/funding holds, transactional rollback, missing legacy cash and129-country prepaid/institution budgets. It is included in npm test and the existing CI glob. Browser smoke exports the actual inspected paused life and compares every serialized field. Private backups may be audited read-only; never commit them or report them as complete new simulated lives.
 
 Cycle2 executed source a24854966d67901fa1bc82306349623e520b23f3:49 tests, production build, two 1,000-life cohorts, balance and Chromium browser gates passed. Evidence: https://github.com/aidanko1/other-lives/actions/runs/39509582008. Private 13-record migration/render/consistency audit also passed read-only. See RELEASE_STATUS.md for limits; this is not a deployment.
+
+## Annual, decision, property and pacing contracts
+annual-pipeline.test.cjs checks full annual/clock rollback, retry, receipts, debt schedules and pension exclusion. decision-boundary.test.cjs checks full-state preview purity and stale displayed option/route tokens. route-continuity.test.cjs checks participants, conception parentage and ended study/stipend cleanup.
+property-ledger.test.cjs contains ten tests, including schema0/1→2, separate holdings/loans, fees/sale/reoccupation, exact valuation, explicit legacy liability repair and 129-country two-mortgage annual/reload assertions. Browser smoke exercises real let/move/buy buttons and saved/reloaded ownership.
+pacing.test.cjs checks newly deceased close-family stops, unchanged history, continuation past old loss and unchanged ordinary/friend pacing. Browser smoke checks the actual annual death and an unchanged paused save after 4.1 seconds.
+Source 85deb8d passed regression/build/browser but failed both full cohorts on bill prepayment; the unchanged cohorts must remain in release gates. Final b87e519 passes them. A targeted test or short batch is not a replacement. Reference play is research, not a substitute for own-game lifecycle assertions.

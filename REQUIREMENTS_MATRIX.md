@@ -1,6 +1,6 @@
 # Requirements → implementation → tests
 
-Updated 2026-10-21. Status **PASS-SCOPED** means the named implementation/tests passed at source 07f81f2 in https://github.com/aidanko1/other-lives/actions/runs/39494233610. **PARTIAL** means known coverage/implementation gaps. Exact code-revision evidence is in RELEASE_STATUS.md. PASS-SCOPED is not whole-system completeness. No entire game/system is declared complete from one passing fixture.
+Current source b87e519 passes all eight gates: https://github.com/aidanko1/other-lives/actions/runs/39515340262. 75 tests/build and 2,000 complete asserted lives. PASS-SCOPED means executed acceptance, not entire-system completeness. The original matrix below is historical; the current cycle supplement and RELEASE_STATUS.md supersede its old counts/unknowns.
 
 | ID | Requirement / acceptance | Implementation | Tests / evidence | Status and limits |
 |---|---|---|---|---|
@@ -37,4 +37,19 @@ Code a24854966d67901fa1bc82306349623e520b23f3, all eight quality jobs passed: ht
 | S04/S06: estate/trust transfer at a simulation transition, never display | life-continuity.js; read helper owners; pixel-household.js | retained career-continuity conservation/trust assertions; finance-boundary read identity | PASS-SCOPED; other structural repair chains remain |
 | T04: actual reload/inspect/export leaves every state field unchanged | ui/app.js; browser-smoke.cjs | Chromium paused-life full-state equality; existing lifecycle/storage suite retained | PASS-SCOPED; other browser engines unverified |
 
-Current totals:49 reported Node tests,2,000 complete asserted seeded lives across129 countries, full browser life to 105. Counts do not establish subjective reference fidelity or demographic calibration.
+Historical cycle2 totals:49 reported Node tests,2,000 complete asserted seeded lives across 129 countries, full browser life to 105. Counts do not establish subjective reference fidelity or demographic calibration.
+
+## Current cycles3–5 traceability
+| Requirement | Implementing boundary | Permanent tests/evidence | Status/limits |
+|---|---|---|---|
+| S02/S03: pure displayed choices; stale click unchanged | decisions.js,commands.js,app.js | decision-boundary; retained eligibility/cooldown; actual UI choices | PASS-SCOPED; internal low-level helpers not all public transactions |
+| S04: family subjects/history retain identity | rules.js,routes.js,route-family.js,state.js | route-continuity participants/conception; parent/child/death checks each step | PASS-SCOPED; complete multi-generation causality not claimed |
+| S05: role/pay/hours/qualification/retirement | employment.js and education/care/service/migration callers | annual-pipeline pension/FTE; retained university/flow/career tests; both cohorts | PASS-SCOPED; national licensing simplified |
+| S06/S08: one reproducible atomic annual transaction | annual.js,core.js,finance.js | rollback/clock/retry/receipts, conservation;3360 pre-accounting differential transitions; save-replay | PASS-SCOPED; huge archive performance unprofiled |
+| S06: secured/property/scheduled liabilities reconcile | finance.js,property.js,state.js | CI-red prepayment regression; ten property tests incl129 countries; actual UI housing | PASS-SCOPED; legacy dwelling counts/dates explicitly unknown |
+| S09: history-preserving conservative load | state.js,property.js | schema0/1→2,explicit net-wealth repair,eight snapshot countries,13 private read-only records | PASS-SCOPED; private bytes unchanged, avatar stubbed in Node |
+| F02/RF14: Next stops at new close-family loss | clock.js,app.js | pacing.test red→green; actual annual death and 4.1s browser pause; ordinary/friend flow preserved | PASS-SCOPED; other close-family generalization is judgment |
+| F04/UX02: measured reference comparison | REFERENCE_PLAYTEST_2026-10-21.md,FIDELITY_MATRIX.md | infant ending/rebirth and full India life to 91/retirement at 60; controls/choices/inspection/ending | PARTIAL; enjoyment/all variants/timed normal play unknown |
+| T01–T04/E02: exact-revision quality | quality.yml/pages.yml,both harnesses,browser-smoke |75 tests/build,2,000 validated lives,all eight gates at b87e519 | PASS-SCOPED; no deployment; main protection false |
+
+No significant requirement is whole-game complete merely because a control exists or one fixture passes. Remaining work and owner-level enforcement are in BACKLOG.md.

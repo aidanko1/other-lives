@@ -1,5 +1,10 @@
 # Changelog
 
+## Verified cycles3–5 — unreleased reliability baseline
+Tested b87e519fd04fceb489a39c68a67719e0159d8324; all eight quality jobs pass: https://github.com/aidanko1/other-lives/actions/runs/39515340262. 75 tests, production build, 2,000 complete asserted lives across 129 countries and actual Chromium lifecycle/storage/read/property/bereavement checks.
+Completed explicit annual/birthday, employment, displayed-decision and property/debt ownership; schema2 compatibility, participant/conception identity and cancellation cleanup. Direct official-reference play covers a complete91-year life plus infant death/rebirth. Corrected Next skipping close-family loss using existing controls, with no new choice/menu.
+Source 85deb8d failed both full cohorts on debt prepayment; OL-028 is corrected without weakening cohorts. Source 08bc385 was the prior 73-test passing property checkpoint. Older pending entries below are preserved chronology, superseded by this final evidence. No production merge/deployment; see RELEASE_STATUS.md for remaining fidelity/calibration work.
+
 ## Cycle4 — property and debt identity (verification pending)
 
 Added per-holding property/loan ownership behind existing housing choices, schema2 conservative migrations, multi-loan budgeting/principal and asset/debt invariants. Fixed a full-cohort failure where prepaying a scheduled bill left future instalments charging. Added housing UI save/reload coverage and ten targeted property regressions, including129-country combinations. See ENGINEERING_CYCLE_4.md; final exact-revision gates pending.
