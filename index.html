@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Other Lives" />
   <meta name="application-name" content="Other Lives" />
   <meta name="description" content="Other Lives: an original, text-first life simulator about circumstance, choice and chance." />
-  <title>Other Lives — a life, not a leaderboard (v5.5.1)</title>
+  <title>Other Lives — a life, not a leaderboard (v5.6)</title>
   <style>
 :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#263c39;background:#f5f2eb;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;--paper:#f5f2eb;--white:#fffefa;--ink:#263c39;--muted:#73807b;--line:#e2e1d9;--green:#40776e;--green-dark:#285950;--mist:#eaf0e9;--coral:#c87861;--sand:#e4b680;--blue:#6486aa;--shadow:0 12px 36px rgba(51,66,61,.07)}
 *{box-sizing:border-box}body{margin:0;min-width:320px}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9dc9b8;outline-offset:3px}button{transition:background .16s ease,transform .16s ease}button:not(:disabled):active{transform:scale(.985)}.app-shell{max-width:1370px;margin:auto;padding:0 28px 44px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:86px;border-bottom:1px solid var(--line)}.brand{border:0;background:transparent;display:flex;gap:11px;align-items:center;color:var(--ink);padding:4px 0;text-align:left}.brand-mark{background:var(--green-dark);color:white;font-size:22px;font-weight:700;width:41px;height:41px;border-radius:13px;display:grid;place-items:center}.brand-name{font-size:19px;font-weight:800;letter-spacing:-.7px;line-height:1.1}.brand-sub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.7px;color:var(--muted);margin-top:5px}.top-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--white);color:var(--ink);padding:11px 15px;border-radius:11px;font-size:13px;font-weight:700}.btn:hover:not(:disabled){background:#edf3ed}.btn-primary{color:white;background:var(--green-dark);border-color:var(--green-dark)}.btn-primary:hover:not(:disabled){background:var(--green)}.btn-text{border:0;background:transparent;color:var(--muted)}.btn-danger{color:#ad5144}.btn-small{font-size:12px;padding:8px 11px}.btn-wide{width:100%}.eyebrow{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin:0 0 13px}.landing{padding:65px 0 50px}.landing-grid{display:grid;grid-template-columns:1fr 1.03fr;gap:60px;align-items:center}.hero-title{font-family:Georgia,Times,serif;font-size:clamp(51px,6vw,84px);font-weight:500;line-height:1.035;letter-spacing:-3.3px;margin:0 0 22px;max-width:650px}.hero-title em{color:var(--green);font-style:italic}.hero-lede{font-size:17px;line-height:1.85;color:#65716c;max-width:530px;margin-bottom:28px}.hero-note{font-size:12px;line-height:1.7;color:var(--muted);max-width:530px}.hero-buttons{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:30px}.art-frame{border:9px solid #fffdf8;border-radius:21px;overflow:hidden;box-shadow:0 23px 65px #59686022;background:#dde8df}.art-frame canvas{width:100%;display:block;image-rendering:pixelated;aspect-ratio:16/9}.hero-art{position:relative}.hero-overlays{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.small-pill{border:1px solid var(--line);background:#fbfaf6;padding:9px 13px;border-radius:24px;font-size:12px;font-weight:650;color:#5a6a64}.section-title{font-family:Georgia,serif;letter-spacing:-1.1px;font-size:29px;margin:0 0 14px;font-weight:500}.features{margin-top:68px;padding-top:36px;border-top:1px solid var(--line)}.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.feature{background:var(--white);padding:22px;border:1px solid var(--line);border-radius:15px}.feature .symbol{font-size:23px;margin-bottom:19px}.feature h3{margin:0 0 10px;font-size:15px}.feature p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}.footer-note{padding-top:25px;margin-top:35px;border-top:1px solid var(--line);font-size:11px;line-height:1.65;color:var(--muted)}
@@ -145,12 +145,17 @@ html { background: #f5f2eb; }
  .game-main .page-heading h1{font-size:clamp(25px,6.5vw,34px)}
 }
 </style>
-<style id="birth-screen-ui-fix">
+<style id="birth-dialog-v56-fix">
+/* Birth is a full-window modal: other navigation must not appear until dismissed. */
 html:has(.birth-shade),body:has(.birth-shade){overflow:hidden!important}
-body:has(.birth-shade) .story-tabs,body:has(.birth-shade) .life-details,
+body:has(.birth-shade) .life-details,body:has(.birth-shade) .story-tabs,
 body:has(.birth-shade) .quick-dock,body:has(.birth-shade) .nav-above-story{display:none!important}
-.birth-shade{position:fixed!important;inset:0!important;z-index:99999!important;display:flex!important;justify-content:center!important;align-items:center!important;padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 12px)!important}
-.birth-reveal{position:relative;max-width:460px!important;width:100%!important;max-height:calc(100dvh - 36px)!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:clamp(20px,5vw,34px)!important;border-radius:21px!important}
+.birth-shade{position:fixed!important;inset:0!important;z-index:99999!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 12px)!important}
+.birth-reveal{max-width:460px!important;width:100%!important;max-height:calc(100dvh - 36px)!important;
+ overflow-y:auto!important;overscroll-behavior:contain!important;position:relative;
+ padding:clamp(20px,5vw,34px)!important;border-radius:21px!important}
 .birth-reveal h2{overflow-wrap:anywhere;line-height:1.12!important;margin:12px 0!important}
 .birth-reveal .draw-globe{width:70px;height:70px;margin:10px auto}
 @media(max-width:420px){.birth-reveal{padding:22px 18px!important}.birth-reveal .birth-rolling{letter-spacing:1px}}
@@ -896,7 +901,7 @@ HK:{topic:'Housing in Hong Kong',facts:[{text:'Hong Kong’s 2021 Population Cen
 O.parentRole=p=>p.role==='Parent'?(p.gender==='F'?'Mother':'Father'):p.role;
 O.personLabel=p=>{const r=O.parentRole(p);if(r==='Mother')return 'Mom';if(r==='Father')return 'Dad';return p.name};
 O.profileLabel=p=>{const r=O.parentRole(p);const k={Mother:'Mom',Father:'Dad',Sibling:'Sibling',Grandparent:'Grandparent',Friend:'Friend',Partner:'Partner',Mentor:'Mentor',Child:'Child'};return `${k[r]||r} — ${p.name}`};
-O.logLabel=p=>{const r=O.parentRole(p);if(r==='Mother')return 'Mom';if(r==='Father')return 'Dad';return p.name};
+O.logLabel=p=>O.personLabel(p);
 O.factForEvent=(s,e)=>{const rec=O.COUNTRY_CONTEXT[s.country.code];if(!rec||!e)return null;const topic=(e.category||'')+' '+(e.title?.(s)||'');if(s.country.code==='GH'){if(/housing|commut|migration|urban|neighbou?rhood|market|city|travel/i.test(topic))return rec.facts[1];if(/famil|marriage|future|school|education|relative/i.test(topic))return rec.facts[0];return null;}if(s.country.code==='HK')return /hous|living|rent|flat|home/i.test(topic)?rec.facts[0]:null;if(s.country.code==='GB')return /apprentice|job|work|career|train/i.test(topic)?rec.facts[0]:null;return /family|marriage|future|school|educat|relative|girl/i.test(topic)?rec.facts[0]:null;};
 O.countryFact=s=>{const rec=O.COUNTRY_CONTEXT[s.country.code];return rec?.facts[(s.age<15&&rec.facts.length>1)?1:0]||null};
 const rawCreate=O.create;O.create=function(settings){const s=rawCreate(settings);O.upgradeLife(s);return s};
@@ -1468,16 +1473,20 @@ loadCurrent();refreshArchive().then(()=>{render()});
  const originalJournal=O.journal;
  O.cleanLogText=function(s,text){
   let v=String(text??'');
-  // Older archived journals are cleaned at display-time, without modifying saved files.
+  // Display-time cleanup means older saved journals also lose bracketed names.
+  // Only person-role/name patterns are changed; statistical parentheses are preserved.
   for(const p of s.people||[]){
    const role=O.parentRole?O.parentRole(p):p.role;
-   const label=role==='Mother'?'Mom':role==='Father'?'Dad':p.name;
-   for(const name of [p.name,p.name.split(' ')[0]].filter(Boolean)){
-     for(const prefix of [role,role.toLowerCase(),role==='Mother'?'Mom':role==='Father'?'Dad':'']){
-       if(prefix)v=v.split(prefix+' ('+name+')').join(label);
+   const base=role==='Mother'?'Mom':role==='Father'?'Dad':p.name;
+   const names=[p.name,p.name.split(' ')[0]].filter(Boolean);
+   const roles=[role,role.toLowerCase(),role==='Mother'?'Mom':role==='Father'?'Dad':role==='Mother'?'mum':role==='Father'?'dad':''];
+   for(const nm of names){
+     for(const prefix of roles.filter(Boolean)){
+       v=v.split(prefix+' ('+nm+')').join(base);
      }
    }
   }
+  // Handle previously saved formatting even if a person has left the active people array.
   v=v.replace(/\b(?:Mom|Dad|Mother|Father|Parent)\s*\([^)]{1,80}\)/gi,m=>/mom|mother/i.test(m)?'Mom':'Dad');
   v=v.replace(/\b(?:Friend|Partner|Sibling|Grandparent|Mentor|Child)\s*\(([^)]{1,80})\)/gi,(_m,name)=>name);
   return v;
@@ -1525,5 +1534,6 @@ loadCurrent();refreshArchive().then(()=>{render()});
 </script>
 <script src="./age-culture-audit.js"></script>
 <script src="./life-depth.js"></script>
+<script src="./evidence-depth.js"></script>
 </body>
 </html>
