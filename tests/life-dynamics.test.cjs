@@ -43,6 +43,6 @@ for(const age of [0,2,4,7,13,17,18,30,65,90])for(const code of ['IN','CN','HK','
  const adult=life('GB',30);assert.match(event('adult-connection-specific').description(adult),/near /);assert(!event('relationship-possibility').when(adult));assert(!event('life-at-22').when(adult));assert(!event('mortgage-or-rent').when(adult));
 }
 {
- const s=life();s.workYears=10;s.experience.roles[s.job]=10;s.knowledge=70;const p=event('promotion');const high=p.options(s)[0].detail;s.experience.roles[s.job]=0;const low=p.options(s)[0].detail;assert(parseInt(high)>parseInt(low));s.flags.searchMode='pay';s.income=1e9;assert.equal(O.careerOffers(s).length,0);assert(!event('career-search-results').when(s));
+ const s=life();s.workYears=10;s.experience.roles[s.job]=10;s.knowledge=70;const p=event('promotion');const high=p.options(s)[0].detail;s.experience.roles[s.job]=0;assert.match(high,/% game chance/);assert.equal(p.when(s),false,'promotion is unavailable without relevant experience');s.flags.searchMode='pay';s.income=1e9;assert.equal(O.careerOffers(s).length,0);assert(!event('career-search-results').when(s));
 }
 console.log(`PASS: ${O.MOMENT_DEFS.length} conditional moments; age/state/people revalidation, real places, quintile circles, pet names, debt causes, persistent routines, meaningful skills, degree funding/progression, named relationships and career filtering.`);

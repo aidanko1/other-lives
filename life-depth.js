@@ -145,7 +145,7 @@ O.passive=function(s){
  if(t.status==='enquiring'&&s.age>=t.started+1){
   const p=Math.min(.9,Math.max(.12,.22+(s.country.school||40)/175+(s.strata-3)*.022+(s.knowledge/600)-(t.route==='academic'&&!s.school?.13:0)));
   if(O.chance(s,p)){
-   t.status='enrolled';t.admittedAt=s.age;t.due=s.age+(t.route==='academic'?3:2);t.progress=0;s.school=true;
+   t.status='enrolled';t.admittedAt=s.age;t.due=t.route==='academic'?Math.max(s.age+1,O.schoolLeavingAge?.(s)||18):s.age+2;t.progress=0;s.school=true;
    O.journal(s,'A place to learn',`You are accepted onto a ${t.name} route. It will take several years to complete, and continued attendance, money and grades still matter.`,'education');
   }else{
    t.status='not_admitted';t.completed=true;t.passed=false;
@@ -162,7 +162,7 @@ O.passive=function(s){
    t.passed=O.chance(s,p);
    if(t.passed){
      const existing=O.educationNumber(s.education);
-     const achieved=t.route==='postgraduate'?5:t.route==='vocational'?3:(t.started>=18&&existing>=2?4:2);
+     const achieved=t.route==='postgraduate'?5:t.route==='vocational'?3:2;
      if(achieved>existing)s.education=O.EDU[achieved];
      O.adjust(s,{knowledge:6,confidence:4});
      O.journal(s,'Training completed',`You complete ${t.name}. This achievement adds to your education history, but it does not guarantee admission elsewhere or employment.`,'education');

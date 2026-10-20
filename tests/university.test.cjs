@@ -30,7 +30,7 @@ function admit(s){const chance=O.chance;O.chance=()=>true;const result=O.applyFo
 }
 {
  const s=student();admit(s);s.age=s.study.graduationAge;const cash=s.familyCash;O.livingCost(s,1000);assert.equal(s.familyCash,cash,'the graduation boundary does not charge an extra course year');
- const chance=O.chance;O.chance=()=>true;O.passive(s);O.chance=chance;assert.equal(s.study.status,'completed');assert.match(O.universityHTML(s),/Tuition payment history/);assert(!O.universityHTML(s).includes('Next annual tuition'));
+ s.study.progress=s.study.duration-1;const chance=O.chance;O.chance=()=>true;O.passive(s);O.chance=chance;assert.equal(s.study.status,'completed');assert.match(O.universityHTML(s),/Tuition payment history/);assert(!O.universityHTML(s).includes('Next annual tuition'));
 }
 {
  const s=student();s.cash=0;s.familyIncome=12000;admit(s);const chance=O.chance;O.chance=(_s,p)=>p>=.9;
