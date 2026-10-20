@@ -17,9 +17,7 @@ O.ensureClarity=function(s){
 };
 const block=O.routeBlock;
 O.routeBlock=function(s,d){
- const reason=block(s,d);if(reason)return reason;if(researchCourse(s)&&['overseas-work','military','seafaring','politics','vocation','business','family-enterprise'].includes(d.id))return 'Resolve the current postgraduate commitment first.';
- const activeStudy=['enrolled','funding-review','overseas-route'].includes(s.study?.status)&&s.study.mode==='full-time';
- if(activeStudy&&(d.exclusive==='rare-career'||['seafaring','politics','vocation','business','family-enterprise','masters','phd','faculty'].includes(d.id)))return 'Complete or pause your full-time course before committing to this work route.';
+ const reason=block(s,d)||O.rules.routeConflict(s,d);if(reason)return reason;
  if(['overseas-work','overseas-study','return-home'].includes(d.id)&&s.housing.kind==='owned')return 'Choose whether to sell or let your current home under Money & property before moving abroad.';
  if(d.id==='kpop'&&s.country.code!=='KR')return 'This agency-training route is currently available while living in South Korea.';
  return null;

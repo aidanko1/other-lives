@@ -5,7 +5,7 @@ const pause=ms=>new Promise(r=>setTimeout(r,ms));
 async function waitFor(fn,label){for(let i=0;i<100;i++){const result=fn();if(result)return result;await pause(50);}throw Error('Timed out: '+label);}
 function check(condition,label){if(!condition)throw Error(label);output.textContent+='\nPASS '+label;}
 async function click(selector){const el=await waitFor(()=>frame.contentDocument.querySelector(selector),selector);if(el.disabled)throw Error('Disabled: '+selector);el.click();await pause(100);}
-async function load(){frame.src='../index.html?qa='+Date.now();await waitFor(()=>frame.contentDocument?.querySelector('#app .brand'),'app loaded');}
+async function load(){const loaded=new Promise(resolve=>frame.addEventListener('load',resolve,{once:true}));frame.src='../index.html?qa='+Date.now();await loaded;await waitFor(()=>frame.contentDocument?.querySelector('#app .brand'),'new app document loaded');}
 document.querySelector('#run').onclick=async()=>{
  output.textContent='Running…';output.dataset.status='running';document.querySelector('#run').disabled=true;
  const currentKey='other-lives-current-v1',original=localStorage.getItem(currentKey),created=new Set();let db;

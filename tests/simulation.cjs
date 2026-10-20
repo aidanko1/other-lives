@@ -25,7 +25,7 @@ for(let n=shard;n<count;n+=shards){
   assert.equal(s.status,'finished','life did not finish within action bound');validate(O,s);
   const moments=s.journal.map(e=>e.momentId).filter(Boolean);assert.equal(new Set(moments).size,moments.length,'authored moment template repeated');
   outcomes.push({n,country,seed,background,age:s.age,decisions,actions,people:s.people.length,job:s.job,degree:s.study?.status||null});
- }catch(error){const failure={n,country,seed,background,age:s?.age,month:s?.month,pending:s?.pending,error:error.message};failures.push(failure);console.error(JSON.stringify(failure));}
+ }catch(error){const failure={n,country,seed,background,age:s?.age,month:s?.month,pending:s?.pending,error:error.message,stack:error.stack,route:s?.pending==='life-route-decision'?O.readyRoute(s)?.id:null,study:s?.study,employment:s?.employment,job:s?.job,unprogressed:s?.people.filter(p=>p.alive&&p.age>25&&/^(Student|Pupil|—|Not working|)$/i.test(p.job||'')&&!p.studyUntil)};failures.push(failure);console.error(JSON.stringify(failure));}
  if((n-shard)% (shards*25)===0)console.log('PROGRESS',JSON.stringify({shard,attempted:outcomes.length+failures.length,validated:outcomes.length,failures:failures.length}));
 }
 const expected=Math.max(0,Math.ceil((count-shard)/shards));

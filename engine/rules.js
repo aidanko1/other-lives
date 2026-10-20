@@ -6,6 +6,13 @@
   schoolStartAge: 6,
   attendingSchool: s => s.age >= 6 && !!s.school,
   fullTimeStudy: s => s.study?.mode === 'full-time' && ['enrolled', 'overseas-route'].includes(s.study.status),
+  routeConflict(s,d) {
+   const research=Object.values(s.routes?.active||{}).find(r=>r.id==='masters'&&r.stage==='studying'||r.id==='phd'&&r.stage==='research');
+   if(research&&['overseas-work','military','seafaring','politics','vocation','business','family-enterprise'].includes(d.id))return 'Resolve the current postgraduate commitment first.';
+   if(this.fullTimeStudy(s)&&(d.exclusive==='rare-career'||['seafaring','politics','vocation','business','family-enterprise','masters','phd','faculty'].includes(d.id)))return 'Complete or pause your full-time course before committing to this work route.';
+   if(s.business&&['overseas-study','masters','phd'].includes(d.id))return 'Resolve your business responsibilities before this study commitment.';
+   return null;
+  },
   eventBlock(s, e, {resolving = false} = {}) {
    if (!e) return 'Unknown decision.';
    if (s.status !== 'alive') return 'This life is not active.';
