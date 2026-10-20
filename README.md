@@ -1,4 +1,14 @@
-# Other Lives v5.9.2 — Connected education and family memories
+# Other Lives
+
+An independent browser-local life simulation. The published baseline is v6.1.0. Engineering work for `6.2.0-rc.3` is isolated on `quality/simulation-foundation` and reviewed in PR #1; it is not yet a completed overhaul or a published stable release.
+
+Start development with [AGENTS.md](AGENTS.md), [GAME_DESIGN.md](GAME_DESIGN.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [TESTING.md](TESTING.md). [AUDIT.md](AUDIT.md) records baseline defects and prior-requirement gaps; [CHANGELOG.md](CHANGELOG.md) records repairs and outstanding work. Older release notes below are historical claims, not a substitute for current checks.
+
+Node >=22; no external package dependencies. Run `npm test`, `npm run test:simulation` (1,000 complete seeded lives), `npm run build`, and the actual browser runner at `tests/browser.html`. Read the reports and release requirements before merging. Current and archived JSON formats remain supported; private life exports must never be committed.
+
+## Earlier release notes
+
+### v5.9.2 — Connected education and family memories
 
 ## v6.0 — connected routes and timeline repairs
 

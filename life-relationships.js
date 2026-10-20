@@ -3,7 +3,7 @@
 const {hash,short,alive,clamp}=O.dynamicsHelpers,partner=s=>alive(s,'Partner')[0],modelPercent=p=>`${Math.round(p*100)}% modelled chance`;
 const chance=(s,p)=>clamp(.18+s.relationships*.004+s.confidence*.0015+(p.close||50)*.002+(s.happiness>=45?.05:0)-(s.stress>75?.1:0),.1,.92);
 function candidate(s,teen=false){
- const cached=s.flags.dynamics.candidate;if(cached&&cached.teen===teen&&s.age-cached.createdAt<4)return cached.person;
+ const cached=s.flags.dynamics.candidate;if(cached&&cached.teen===teen&&s.age-cached.createdAt<4){cached.birthAt??=cached.createdAt-cached.person.age;cached.person.age=s.age-cached.birthAt;return cached.person;}
  const copy=JSON.parse(JSON.stringify(s)),age=teen?clamp(s.age+(hash(s.seed+'|crush')%3)-1,13,17):Math.max(18,s.age+(hash(s.seed+'|date')%7)-3),gender=hash(s.seed+'|connection|'+s.age)%2?'F':'M';
  const p=O.person(copy,'Acquaintance',age,gender);p.id='connection-'+s.age+'-'+hash(s.seed+'|'+s.age);p.knownSince=s.age;p.close=45+hash(p.name)%20;p.interests=s.interests.length?[s.interests[hash(p.name)%s.interests.length]]:['Music'];p.job=teen?'Student':['Retail assistant','Office worker','Care assistant','Skilled tradesperson'][hash(p.name)%4];p.annualIncome=teen?0:Math.round(s.country.ppp*(.35+(hash(p.name)%30)/100));
  s.flags.dynamics.candidate={teen,createdAt:s.age,person:p};return p;
