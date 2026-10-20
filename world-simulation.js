@@ -86,6 +86,16 @@ function makeStory(s,ageGroup,slot){const d=getLocale(s),c=s.country.name,who=pe
  const place=s.urban?'the urban area where you live':'your local community';const hometown=d.capital===c?'the capital region':d.capital;
  const monetary=isLow?'Limited household cash makes each change more consequential.':isWealthy?'Your household has enough savings to absorb many disruptions.':'You compare the costs against other family commitments.';
  const text={
+ infant:[
+ ['A familiar voice',`${who} talks softly while you settle against them. The words mean little yet; the rhythm of the voice is becoming familiar.`],
+ ['Reaching for something bright',`A bright scrap of cloth catches your attention. You reach, miss, and try again while ${who} watches.`],
+ ['An interrupted night',`You wake in the dark and cry until someone comes. By morning the grown-ups are tired, but you are ready to look around again.`],
+ ['Watching the room',`You follow movement across the room with your eyes. ${who} notices what holds your attention and brings it a little closer.`]],
+ preschool:[
+ ['A small discovery',`You turn a fallen leaf over and show it to ${who}. What began as a short walk takes much longer than the adults expected.`],
+ ['Trying it yourself',`You insist on putting your own shoes on. ${who} waits while you get them on the wrong feet, then helps you try again.`],
+ ['A game with no rules yet',`You and another child invent a game from whatever is lying around. The rules change whenever one of you starts to lose.`],
+ ['A story before sleep',`${who} tells you a story you already know. You interrupt whenever a familiar detail is left out.`]],
  child:[
  ['The journey to school',`${who} discusses the journey to school with you. ${remote?'Long distances and the condition of local roads can affect attendance.':'Travel times and costs can influence school choice.'} In ${c}, access to schools varies by community and household resources. ${monetary}`],
  ['A family conversation about the future',`You hear about work and training opportunities around ${hometown}. ${who} wonders what kinds of skills you might want to learn someday. Your household circumstances shape what feels attainable.`],
@@ -116,7 +126,7 @@ function makeStory(s,ageGroup,slot){const d=getLocale(s),c=s.country.name,who=pe
 }
 const priorPick=O.pickStories;
 O.pickStories=function(s,n){const base=priorPick(s,n);if(!n)return base;
- const age=s.age,period=age<13?'child':age<19?'teen':age<36?'young':age<65?'midlife':'elder';
+ const age=s.age,period=age<3?'infant':age<6?'preschool':age<13?'child':age<19?'teen':age<36?'young':age<65?'midlife':'elder';
  // Country-specific event eligibility: never force a repeated story into the same life stage.
  if(!s.worldEventsSeen)s.worldEventsSeen={};const pool=[0,1,2,3].filter(i=>!s.worldEventsSeen[period+'-'+i]);
  if(!pool.length)return base;

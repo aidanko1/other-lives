@@ -1,7 +1,22 @@
-# Other Lives v5.7 — Clear decisions and a persistent household
+# Other Lives v5.8 — Personal lives, budgets and consequences
 
 Other Lives is an **independent** fictional life simulator. It is not affiliated with *1 in 8 Billion* and does not use its proprietary game code, artwork, text or database.
 
+
+## v5.8 update
+
+- Infants and preschoolers have separate story banks; an additional guard rejects inappropriate stories already queued in older saves. Memory templates have an eight-year cooldown, with original named household moments replacing repetitive generic entries.
+- Passport profile with identity, actual interests, education and role/hobby experience. Learning and Community are removed as interests. Family includes the starting income quintile and current household income.
+- Spending separates savings from earnings, debt and assets. More than thirty contextual choices span wellbeing, relationships, hobbies, education, transport, housing and investments. Unaffordable choices sit under a closed “Not available yet” disclosure. Purchases recheck funds before applying.
+- Renting, moving, buying outright, mortgages, selling and investment property have explicit prices and continuing costs. Mortgage rules use a 20% deposit, 3% fees, modelled 5% interest and a twenty-year term; these are game assumptions, not national lending rules. Income, history, debt service and missed payments gate borrowing, including legacy voluntary loan choices and emergency instalments. Unpaid essentials become explicit arrears with consequences rather than silently approved loans.
+- Health and wellbeing affect earned income; low knowledge affects qualified role availability, salaries and study applications; isolation strains closeness and wellbeing. Health at zero ends the life as a critical health crisis. Free rest and reconnection actions and paid care provide recovery routes before that point. The factor disclosure explains thresholds in the UI.
+- Legacy direct-hire choices now initiate a search so actual offers can be compared before acceptance. Interest fit is shown alongside annual/monthly salary and percentage difference.
+- New original 16-pixel tile household art: overhead ground, compact sprites, persistent complexion and hair variants, family resemblance, age changes, no labels beneath sprites. See [ART_DIRECTION.md](ART_DIRECTION.md). The current small code-drawn tile catalogue is a first pass, not a complete country/era-specific art library.
+- All new surfaces use theme variables; device appearance remains automatic.
+
+### v5.8 verification
+
+The Node suite checks reported infant/toddler cases, queued-story rejection, repeated-memory suppression, insufficient funds and denied credit, mortgage equity/principal accounting, selling a home while retaining investment property, four-factor consequences, real interests, quintile boundaries, integer sprite coordinates, appearance persistence and prior v5.7 regressions. Full-life simulations cover twelve countries. Phone-width browser review covers both themes, profile, spending, locked housing, and playback from other tabs.
 
 ## v5.7 update
 
