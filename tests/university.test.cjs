@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict'),O=require('./engine.cjs');
 const degree=O.DEGREES.find(d=>d.id==='computing'),event=id=>O.EVENTS.find(e=>e.id===id);
 function student(){
- const s=O.create({country:'GB',seed:61});s.age=18;s.pending=null;s.agenda=[];s.job='';s.income=0;s.cash=30000;s.debt=0;s.familyCash=100000;s.familyAssets=200000;s.familyDebts=0;s.school=false;s.knowledge=90;s.health=85;s.schoolGrades=90;s.interests=['Programming'];s.flags.livingWithFamily=true;
+ const s=O.create({country:'GB',seed:61});s.age=18;s.education=O.EDU[2];s.pending=null;s.agenda=[];s.job='';s.income=0;s.cash=30000;s.debt=0;s.familyCash=100000;s.familyAssets=200000;s.familyDebts=0;s.school=false;s.knowledge=90;s.health=85;s.schoolGrades=90;s.interests=['Programming'];s.flags.livingWithFamily=true;
  for(const p of s.people.filter(p=>['Mother','Father'].includes(p.role))){p.alive=true;p.retired=false;p.health=90;}
  O.ensureClarity(s);return s;
 }

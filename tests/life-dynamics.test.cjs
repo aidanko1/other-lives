@@ -33,9 +33,9 @@ for(const age of [0,2,4,7,13,17,18,30,65,90])for(const code of ['IN','CN','HK','
  const poor=life();poor.cash=0;poor.income=0;poor.routines=[];assert(!O.setRoutine(poor,'therapy').ok);
 }
 {
- const s=life('IN',18);s.knowledge=85;s.schoolGrades=80;s.cash=500000;s.familyCash=20000;const d=O.DEGREES.find(x=>x.id==='computing');const base=O.degreeChance(s,d);s.experience.hobbies.Programming.years=9;assert(O.degreeChance(s,d)>=base);
+ const s=life('IN',18);s.education=O.EDU[2];s.knowledge=85;s.schoolGrades=80;s.cash=500000;s.familyCash=20000;const d=O.DEGREES.find(x=>x.id==='computing');const base=O.degreeChance(s,d);s.experience.hobbies.Programming.years=9;assert(O.degreeChance(s,d)>=base);
  const chance=O.chance;O.chance=()=>true;const funds=s.cash,quote=O.degreeFunding(s,d);O.applyForDegree(s,d.id);O.chance=chance;assert.equal(s.study.course,'Computer Science');assert.match(O.workLabel(s),/part-time/);assert.equal(s.employment.hours,20);assert.equal(s.cash,funds-quote.personal);assert.match(O.schoolLabel(s),/Computer Science.*Year 1/);
- O.passive(s);assert.equal(s.budgetBreakdown.tuition,0,'first tuition payment must not be charged twice');s.age++;O.passive(s);assert(s.budgetBreakdown.tuition+s.budgetBreakdown.parentTuition>0);s.age=s.study.graduationAge;O.chance=(_s,p)=>p>=.9;O.passive(s);O.chance=chance;assert.equal(s.study.status,'completed');assert.equal(s.flags.completedDegree,'computing');assert.equal(s.school,false);
+ O.passive(s);assert.equal(s.budgetBreakdown.tuition,0,'first tuition payment must not be charged twice');s.age++;O.passive(s);assert(s.budgetBreakdown.tuition+s.budgetBreakdown.parentTuition>0);s.age=s.study.graduationAge;s.study.progress=s.study.duration-1;s.knowledge=90;s.health=85;O.chance=(_s,p)=>p>=.9;O.passive(s);O.chance=chance;assert.equal(s.study.status,'completed');assert.equal(s.flags.completedDegree,'computing');assert.equal(s.school,false);
  const poor=life('IN',18);poor.cash=0;poor.familyCash=0;poor.knowledge=10;assert.match(O.applyForDegree(poor,'medicine'),/not yet sufficient/);assert.equal(poor.debt,0);
 }
 {

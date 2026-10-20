@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Other Lives" />
   <meta name="application-name" content="Other Lives" />
   <meta name="description" content="Other Lives: an original, text-first life simulator about circumstance, choice and chance." />
-  <title>Other Lives — a life, not a leaderboard (v5.9.2)</title>
+  <title>Other Lives — a life, not a leaderboard (v6.0.0)</title>
   <style>
 :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#263c39;background:#f5f2eb;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;--paper:#f5f2eb;--white:#fffefa;--ink:#263c39;--muted:#73807b;--line:#e2e1d9;--green:#40776e;--green-dark:#285950;--mist:#eaf0e9;--coral:#c87861;--sand:#e4b680;--blue:#6486aa;--shadow:0 12px 36px rgba(51,66,61,.07)}
 *{box-sizing:border-box}body{margin:0;min-width:320px}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9dc9b8;outline-offset:3px}button{transition:background .16s ease,transform .16s ease}button:not(:disabled):active{transform:scale(.985)}.app-shell{max-width:1370px;margin:auto;padding:0 28px 44px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:86px;border-bottom:1px solid var(--line)}.brand{border:0;background:transparent;display:flex;gap:11px;align-items:center;color:var(--ink);padding:4px 0;text-align:left}.brand-mark{background:var(--green-dark);color:white;font-size:22px;font-weight:700;width:41px;height:41px;border-radius:13px;display:grid;place-items:center}.brand-name{font-size:19px;font-weight:800;letter-spacing:-.7px;line-height:1.1}.brand-sub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.7px;color:var(--muted);margin-top:5px}.top-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--white);color:var(--ink);padding:11px 15px;border-radius:11px;font-size:13px;font-weight:700}.btn:hover:not(:disabled){background:#edf3ed}.btn-primary{color:white;background:var(--green-dark);border-color:var(--green-dark)}.btn-primary:hover:not(:disabled){background:var(--green)}.btn-text{border:0;background:transparent;color:var(--muted)}.btn-danger{color:#ad5144}.btn-small{font-size:12px;padding:8px 11px}.btn-wide{width:100%}.eyebrow{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin:0 0 13px}.landing{padding:65px 0 50px}.landing-grid{display:grid;grid-template-columns:1fr 1.03fr;gap:60px;align-items:center}.hero-title{font-family:Georgia,Times,serif;font-size:clamp(51px,6vw,84px);font-weight:500;line-height:1.035;letter-spacing:-3.3px;margin:0 0 22px;max-width:650px}.hero-title em{color:var(--green);font-style:italic}.hero-lede{font-size:17px;line-height:1.85;color:#65716c;max-width:530px;margin-bottom:28px}.hero-note{font-size:12px;line-height:1.7;color:var(--muted);max-width:530px}.hero-buttons{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:30px}.art-frame{border:9px solid #fffdf8;border-radius:21px;overflow:hidden;box-shadow:0 23px 65px #59686022;background:#dde8df}.art-frame canvas{width:100%;display:block;image-rendering:pixelated;aspect-ratio:auto;height:auto}.hero-art{position:relative}.hero-overlays{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.small-pill{border:1px solid var(--line);background:#fbfaf6;padding:9px 13px;border-radius:24px;font-size:12px;font-weight:650;color:#5a6a64}.section-title{font-family:Georgia,serif;letter-spacing:-1.1px;font-size:29px;margin:0 0 14px;font-weight:500}.features{margin-top:68px;padding-top:36px;border-top:1px solid var(--line)}.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.feature{background:var(--white);padding:22px;border:1px solid var(--line);border-radius:15px}.feature .symbol{font-size:23px;margin-bottom:19px}.feature h3{margin:0 0 10px;font-size:15px}.feature p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}.footer-note{padding-top:25px;margin-top:35px;border-top:1px solid var(--line);font-size:11px;line-height:1.65;color:var(--muted)}
@@ -155,9 +155,9 @@ body:has(.birth-shade) .quick-dock,body:has(.birth-shade) .nav-above-story{displ
 .birth-reveal .draw-globe{width:70px;height:70px;margin:10px auto}
 @media(max-width:420px){.birth-reveal{padding:22px 18px!important}.birth-reveal .birth-rolling{letter-spacing:1px}}
 </style>
-<link rel="stylesheet" href="./life-clarity.css">
-<link rel="stylesheet" href="./life-experience.css">
-<link rel="stylesheet" href="./life-dynamics.css">
+<link rel="stylesheet" href="./life-clarity.css?v=6.0.0">
+<link rel="stylesheet" href="./life-experience.css?v=6.0.0">
+<link rel="stylesheet" href="./life-dynamics.css?v=6.0.0">
 <script>document.documentElement.dataset.theme=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";</script>
 </head>
 <body>
@@ -264,7 +264,7 @@ OL.MOODS=['A small ordinary day','A new season','The days between','Something ch
 OL.educationNumber = (e)=>Math.max(0,OL.EDU.indexOf(e));
 
 </script>
-<script src="./world-countries.js"></script>
+<script src="./world-countries.js?v=6.0.0"></script>
   <script>
 (function(O){
 const round=(x)=>Math.round(x);
@@ -335,10 +335,11 @@ O.passive=(s)=>{
  const f=focus[s.focus]||focus.Balanced;
  O.adjust(s,{health:f[0]-(age>50?Math.max(1,Math.floor((age-45)/14)):0),happiness:f[1]+O.int(s,-1,1),knowledge:f[2],relationships:f[3]-(O.chance(s,.3)?1:0),stress:s.focus==='Rest'?-3:0});
  if(s.stress>65)O.adjust(s,{health:-3,happiness:-2});
- if(age>=6&&age<=18&&s.school){s.knowledge=O.clamp(s.knowledge+O.int(s,1,3)+(s.strata>=4?1:0));s.schoolGrades=O.clamp(s.schoolGrades+O.int(s,-4,5))}
+ if(age>=6&&age<=18&&s.school){O.schoolProgress?O.schoolProgress(s,O.int(s,1,3)+(s.strata>=4?1:0)):(s.knowledge=O.clamp(s.knowledge+O.int(s,1,3)+(s.strata>=4?1:0))); s.schoolGrades=O.clamp(s.schoolGrades+O.int(s,-4,5))}
  if(s.flags.studying&&age>=s.flags.graduationAge){s.flags.studying=false;s.education=O.EDU[4];O.adjust(s,{knowledge:9,happiness:6});O.journal(s,'A qualification earned','You complete a period of higher education. It may expand your options, although a degree does not guarantee employment.','education')}
  if(age>=18){
-  const annual=(O.earnedIncome?O.earnedIncome(s):s.income)+(O.passiveAssetIncome?.(s)||0);
+  const earned=O.earnedIncome?O.earnedIncome(s):s.income,partnerIncome=O.partnerContribution?.(s)||0,assetIncome=O.passiveAssetIncome?.(s)||0,annual=earned+partnerIncome+assetIncome;
+  s.lastIncomeSources={earned,partner:partnerIncome,assets:assetIncome};
   let cost=Math.max(900,round(c.ppp*(s.urban?.34:.25)*(s.people.some(p=>p.role==='Child'&&p.alive)?1.25:1)*(s.flags.livingWithFamily?.61:1)));
   if(s.strata>=5&&s.flags.familySupport&&!s.income)cost*=.5;
   if(s.flags.foodInsecure)cost*=.9;
@@ -348,7 +349,7 @@ O.passive=(s)=>{
   let net=round(annual-cost-interest);
   if(net>0){s.cash+=net;if(s.debt>0){let paid=Math.min(Math.max(0,s.debt-planBalance),round(net*.48));s.debt-=paid;s.cash-=paid}}else{const deficit=-net,fromCash=Math.min(s.cash,deficit);s.cash-=fromCash;s.debt+=deficit-fromCash;O.adjust(s,{stress:2,happiness:-1})}
   s.lastInterest=interest;s.lastAnnualIncome=annual;O.reconcileDebt?.(s,'Annual budget shortfall','budget',`Living / housing costs ${O.money(s.budgetBreakdown?.basic||0)}; rent / mortgage payments ${O.money(s.budgetBreakdown?.homePayment||0)}; child school fees ${O.money(s.budgetBreakdown?.childSchooling||0)}; continuing care ${O.money(s.budgetBreakdown?.care||0)}; tuition ${O.money(s.budgetBreakdown?.tuition||0)}; pet care ${O.money(s.budgetBreakdown?.pet||0)}; routines ${O.money(s.budgetBreakdown?.routines||0)}; other commitments ${O.money(s.flags.annualUpkeep||0)}; interest ${O.money(interest)}; total income ${O.money(annual)}. Savings were used first.`);
-  if(s.investments>0){let returnRate=-.12+O.rand(s)*.23;s.investments=Math.max(0,round(s.investments*(1+returnRate)))}
+  if(s.investments>0){let returnRate=O.investmentReturn?O.investmentReturn(s):-.12+O.rand(s)*.23;s.investments=Math.max(0,round(s.investments*(1+returnRate)))}
   if(s.property>0)s.property=Math.max(0,round(s.property*(.96+O.rand(s)*.09)));
   if(!s.income&&s.job!=='Retired')s.unemployedYears++;
   if(s.income>0){s.yearsWorked++;s.workYears++}
@@ -386,9 +387,9 @@ O.applyChoice=(s,index)=>{
  if(!s.pending||s.status!=='alive')return false;
  const e=O.EVENTS.find(e=>e.id===s.pending);if(!e)return false;
  const options=e.options(s);if(!options[index]||options[index].disabled)return false;
- const opt=options[index];
+ const opt=options[index],eventTitle=e.title(s);
  const outcome=opt.apply(s)||'The consequences will unfold over time.';
- O.journal(s,e.title(s),`${opt.label}. ${outcome}`,e.category||'decision');
+ O.journal(s,eventTitle,`${opt.label}. ${outcome}`,e.category||'decision');
  s.pending=null;s.lastOutcome=outcome;
  return true;
 };
@@ -1245,8 +1246,8 @@ O.avatarData=(person)=>{const c=document.createElement('canvas');c.width=38;c.he
 })(window.OL);
 
 </script>
-<script src="./world-simulation.js"></script>
-<script src="./culture-economy.js"></script>
+<script src="./world-simulation.js?v=6.0.0"></script>
+<script src="./culture-economy.js?v=6.0.0"></script>
   <script>
 (function(O){
 const $=s=>document.querySelector(s), root=$('#app');
@@ -1378,6 +1379,8 @@ async function handle(action,el){switch(action){
  case 'choose':{if(!state||!state.pending)return;decisionAside=false;inspector=null;state.lastEventTitle=O.EVENTS.find(x=>x.id===state.pending)?.title(state);const resolved=O.applyChoice(state,Number(el.dataset.index));if(!resolved){notify('This option is unavailable for your current circumstances.');break}saveCurrent();if(state.memories.pet?.needsName){modal={type:'pet-name'};resumeAfterInspector=resumeAfterDecision;resumeAfterDecision=false;}else if(resumeAfterDecision&&!state.pending){resumeAfterDecision=false;startClock()}break}
  case 'name-pet':if(playing){resumeAfterInspector=true;stopClock()}modal={type:'pet-name'};break;
  case 'save-pet-name':{const r=O.namePet(state,$('#pet-name')?.value);notify(r.message);if(r.ok){saveCurrent();modal=null;if(resumeAfterInspector&&!state.pending){resumeAfterInspector=false;startClock()}}break;}
+ case 'route-start':{const r=O.startRoute(state,el.dataset.id);notify(r.message);saveCurrent();if(r.ok){stopClock();gameTab='log';O.advanceMonth(state);decisionAside=false;saveCurrent();}break;}
+ case 'life-policy':{const r=O.setLifePolicy(state,el.dataset.id);notify(r.message);saveCurrent();break;}
  case 'set-routine':{const r=O.setRoutine(state,el.dataset.id);notify(r.message);saveCurrent();break;}
  case 'review-university':if(state&&!state.pending&&O.EVENTS.find(e=>e.id==='university-funding-review').when(state)){stopClock();state.pending='university-funding-review';gameTab='log';decisionAside=false;saveCurrent()}break;
  case 'browse-degrees':if(state&&state.age>=18&&!state.pending){stopClock();state.flags.degreeChoosing=true;state.pending='choose-degree-subject';gameTab='log';decisionAside=false;saveCurrent()}break;
@@ -1419,7 +1422,7 @@ async function handle(action,el){switch(action){
  }render()}
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing){stopClock();saveCurrent();render();}});
 root.addEventListener('click',async ev=>{let btn=ev.target.closest('[data-action]');if(btn){ev.preventDefault();try{await handle(btn.dataset.action,btn)}catch(e){console.error(e);notify('An unexpected error occurred. You can export a backup from the archive.')}return}if(ev.target.id==='inspector-shade'){inspector=null;if(resumeAfterInspector&&!state?.pending&&state?.status==='alive'){resumeAfterInspector=false;startClock()}render();return}if(ev.target.id==='modal-backdrop'){handle('close-modal',{});}});
-root.addEventListener('change',e=>{if(e.target.dataset.change==='currency'){O.setCurrency(e.target.value);render();return;}if(e.target.dataset.change==='autodecide'){autoChoices=e.target.checked;if(autoChoices&&state?.pending){const ev=O.EVENTS.find(x=>x.id===state.pending);if(ev){{const valid=ev.options(state).map((c,i)=>c.disabled?null:i).filter(i=>i!==null);if(valid.length)O.applyChoice(state,O.pick(state,valid));}saveCurrent();if(state.memories.pet?.needsName){modal={type:'pet-name'};stopClock()}else if(!state.pending)startClock();render();}}return;}if(e.target.dataset.change==='focus'&&state){state.focus=e.target.value;saveCurrent()}else if(e.target.dataset.compare){if(e.target.checked){if(compare.size===2){e.target.checked=false;notify('Select only two lives at a time.');return}compare.add(e.target.dataset.compare)}else compare.delete(e.target.dataset.compare);render()}});
+root.addEventListener('change',e=>{if(e.target.dataset.change==='route-destination'&&state){O.ensureRoutes(state).destination=e.target.value;saveCurrent();render();return;}if(e.target.dataset.change==='currency'){O.setCurrency(e.target.value);render();return;}if(e.target.dataset.change==='autodecide'){autoChoices=e.target.checked;if(autoChoices&&state?.pending){const ev=O.EVENTS.find(x=>x.id===state.pending);if(ev){{const valid=ev.options(state).map((c,i)=>c.disabled?null:i).filter(i=>i!==null);if(valid.length)O.applyChoice(state,O.pick(state,valid));}saveCurrent();if(state.memories.pet?.needsName){modal={type:'pet-name'};stopClock()}else if(!state.pending)startClock();render();}}return;}if(e.target.dataset.change==='focus'&&state){state.focus=e.target.value;saveCurrent()}else if(e.target.dataset.compare){if(e.target.checked){if(compare.size===2){e.target.checked=false;notify('Select only two lives at a time.');return}compare.add(e.target.dataset.compare)}else compare.delete(e.target.dataset.compare);render()}});
 const fileInput=document.createElement('input');fileInput.type='file';fileInput.id='import-file';fileInput.accept='.json,application/json';fileInput.hidden=true;document.body.appendChild(fileInput);
 fileInput.addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());const lives=data.format==='other-lives-life-v1'?[data.life]:data.format==='other-lives-backup-v1'?data.lives:[];if(!lives||!Array.isArray(lives))throw Error('Invalid format');let n=0;for(const s of lives){if(s&&s.id&&s.country&&Array.isArray(s.journal)&&['finished','paused'].includes(s.status)){await putArchive(s);n++}}if(data.current&&data.current.id&&data.current.country&&(!state||confirm('Replace the current in-progress life with the one in this backup?'))){state=data.current;saveCurrent()}await refreshArchive();view='archive';render();notify(`Imported ${n} archived ${plural(n,'life','lives')}.`)}catch(err){notify('Could not read this backup. Check that it is an Other Lives JSON file.')}fileInput.value=''});
 
@@ -1530,16 +1533,28 @@ loadCurrent();refreshArchive().then(()=>{render()});
  };
 })(window.OL);
 </script>
-<script src="./age-culture-audit.js"></script>
-<script src="./life-depth.js"></script>
-<script src="./life-clarity.js"></script>
-<script src="./life-experience.js"></script>
-<script src="./pixel-household.js"></script>
-<script src="./life-evidence.js"></script>
-<script src="./life-dynamics.js"></script>
-<script src="./life-moments.js"></script>
-<script src="./life-relationships.js"></script>
-<script src="./life-university.js"></script>
-<script src="./life-memory-voice.js"></script>
+<script src="./age-culture-audit.js?v=6.0.0"></script>
+<script src="./life-depth.js?v=6.0.0"></script>
+<script src="./life-clarity.js?v=6.0.0"></script>
+<script src="./life-experience.js?v=6.0.0"></script>
+<script src="./pixel-household.js?v=6.0.0"></script>
+<script src="./life-evidence.js?v=6.0.0"></script>
+<script src="./life-dynamics.js?v=6.0.0"></script>
+<script src="./life-moments.js?v=6.0.0"></script>
+<script src="./life-relationships.js?v=6.0.0"></script>
+<script src="./life-university.js?v=6.0.0"></script>
+<script src="./life-memory-voice.js?v=6.0.0"></script>
+<script src="./life-balance.js?v=6.0.0"></script>
+<script src="./life-routes.js?v=6.0.0"></script>
+<script src="./life-route-education.js?v=6.0.0"></script>
+<script src="./life-route-enterprise.js?v=6.0.0"></script>
+<script src="./life-route-family.js?v=6.0.0"></script>
+<script src="./life-route-world.js?v=6.0.0"></script>
+<script src="./life-route-special.js?v=6.0.0"></script>
+<script src="./life-route-health-money.js?v=6.0.0"></script>
+<script src="./life-route-assets.js?v=6.0.0"></script>
+<script src="./life-flow.js?v=6.0.0"></script>
+<script src="./life-integrity.js?v=6.0.0"></script>
+<script>window.dispatchEvent(new Event("other-lives-ready"));</script>
 </body>
 </html>

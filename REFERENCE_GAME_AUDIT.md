@@ -1,6 +1,6 @@
 # 1 in 8 Billion: verified routes and systems
 
-Research snapshot: 20 October 2026, official English game, v0.7.87 beta.
+Research snapshot: 20 October 2026, official English game, v0.7.89 beta.
 
 This is a development reference for Other Lives. It describes functionality in original words, not reusable dialogue, artwork or code. It is a broad inventory of publicly documented features, not a claim to have triggered every random event or audited the source code. Numerical realism and historical/legal accuracy claimed by the developer have not been independently validated here.
 
@@ -8,7 +8,7 @@ This is a development reference for Other Lives. It describes functionality in o
 
 - **Official game:** https://1in8b.life/en/ — launch settings, in-game controls, identity record, status explanations, family display, spending menu, country statistics, life map and survival curve inspected directly.
 - **Official About/FAQ:** https://1in8b.life/en/about/ — simulation scope, mortality model, eras, pacing, local saves and optional keepsakes.
-- **Official Update notes:** open **Update notes → Show earlier notes** on the official game. Read the available English history from v0.4.41 through v0.7.87. Version references below identify the entries behind less visible routes. These are developer-documented features; they were not all replayed individually.
+- **Official Update notes:** open **Update notes → Show earlier notes** on the official game. Read the available English history from v0.4.41 through v0.7.89. Version references below identify the entries behind less visible routes. These are developer-documented features; they were not all replayed individually.
 - **Direct play observation:** a Zambia life through childhood into early adulthood confirmed changing school stages, a rare childhood gift, hobby levels, individual parent ages and closeness, birth-registration consequences, age-specific spending, disabled unaffordable purchases, early-marriage pressure and a choice to request continued education. The adult spending sheet exposed work search, dream-work preparation, child planning, divorce, vocational fields, night/distance university, moving and travel companions. One playthrough cannot establish event frequencies.
 - The user’s supplied Kenya journal provides additional examples of childcare, bereavement, medical borrowing, pet treatment, relationship changes and debt follow-through. It is useful experience evidence, not proof of the current version’s complete feature set.
 
@@ -180,3 +180,10 @@ Every event should recheck the life at the moment it runs. Each factual explanat
 ### Remaining uncertainty
 
 The public notes do not establish the exact number of scenarios, every menu in every jurisdiction, hidden probability equations, complete dialogue trees, or implementation quality of each documented fix. This audit should guide original implementation and focused playtesting; it should not be presented as an exhaustive source-code extraction or validation of every demographic/legal claim.
+
+
+## Latest notes checked during implementation
+
+The official Update notes were inspected again on 20 October 2026 through **0.7.89**. Version 0.7.88 changes the Simplified Chinese keepsake checkout currency; it is a paid-service detail, outside this local game’s implementation. Version 0.7.89 documents unemployment-sensitive search duration, country-specific paid employment and homemaking context, liquid net worth excluding the home, pausing hobby costs, explicit return to work after retirement, more toddler temperament scenes, and historical names before independence. These are developer statements; the exact hidden probability tables are not public in the notes.
+
+See [IMPLEMENTATION_COVERAGE.md](IMPLEMENTATION_COVERAGE.md) for the implemented routes and explicit remaining gaps. Research coverage does not establish feature parity.

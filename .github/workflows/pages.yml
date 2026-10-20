@@ -32,12 +32,24 @@ jobs:
           node --check life-relationships.js
           node --check life-university.js
           node --check life-memory-voice.js
+          node --check life-balance.js
+          node --check life-routes.js
+          node --check life-route-education.js
+          node --check life-route-enterprise.js
+          node --check life-route-family.js
+          node --check life-route-world.js
+          node --check life-route-special.js
+          node --check life-route-health-money.js
+          node --check life-route-assets.js
+          node --check life-integrity.js
+          node --check life-flow.js
           node tests/life-clarity.test.cjs --quick
           node tests/birth-reveal.test.cjs
           node tests/life-dynamics.test.cjs
           node tests/memory-voice.test.cjs
           node tests/university.test.cjs
-          cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js life-clarity.js life-clarity.css life-experience.js life-experience.css pixel-household.js life-evidence.js life-dynamics.js life-dynamics.css life-moments.js life-relationships.js life-university.js life-memory-voice.js sw.js _site/
+          node tests/flow-balance-routes.test.cjs
+          cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js life-clarity.js life-clarity.css life-experience.js life-experience.css pixel-household.js life-evidence.js life-dynamics.js life-dynamics.css life-moments.js life-relationships.js life-university.js life-memory-voice.js life-balance.js life-routes.js life-route-education.js life-route-enterprise.js life-route-family.js life-route-world.js life-route-special.js life-route-health-money.js life-route-assets.js life-flow.js life-integrity.js sw.js _site/
           test -s _site/index.html
           cp release-version.txt _site/
           cp manifest.webmanifest _site/

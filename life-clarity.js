@@ -90,7 +90,8 @@ const careers={id:'career-search-results',min:18,max:74,weight:70,category:'Work
  {label:'Keep looking',detail:'Keep your current role and income. Another round of applications may take a year.',apply:st=>{st.flags.searchReady=st.age+1;st.flags.searchSerial=(st.flags.searchSerial||0)+1;return `You keep looking. Current annual earnings remain ${O.money(st.income)}.`;}},
  {label:'Stop the search',detail:'Keep your current role and income; restart from Spend whenever you wish.',apply:st=>{st.flags.jobSearching=false;return 'You stop applying for now. Your current work arrangement continues.';}}]};
 O.EVENTS.push(careers);
-const agenda=O.makeAgenda;O.makeAgenda=function(s){ensure(s);if(s.age>=18&&!s.job&&!s.flags.studying&&s.flags.jobSearching===undefined){s.flags.jobSearching=true;s.flags.searchMode='pay';s.flags.searchReady=s.age;s.flags.searchSerial=1;}
+const agenda=O.makeAgenda;O.makeAgenda=function(s){ensure(s);// Full-time searches begin only after an explicit school-leaving or work decision.
+
  const list=agenda(s);if(careers.when(s)&&!list.some(x=>x.id===careers.id)){const occupied=new Set(list.map(x=>x.month));const month=[5,6,7,8,9,10,11,4,3,2,1].find(m=>!occupied.has(m));if(month)list.push({type:'decision',id:careers.id,month,done:false});}return list.sort((a,b)=>a.month-b.month);};
 // One bill, quoted before choosing. Every repayment option refers to that same bill.
 function bill(s){s.flags.billQuotes??={};const key=s.age+'|'+(s.used['unexpected-expense']??s.age);if(!s.flags.billQuotes[key]){const cost=Math.max(40,Math.round(s.country.ppp*(.06+(hash(s.seed+'|'+key)%13)/100)));s.flags.billQuotes[key]={cost,kind:['a leaking roof','an urgent dental treatment','a broken water or heating system'][hash(s.seed+'|bill|'+key)%3]};}return s.flags.billQuotes[key];}

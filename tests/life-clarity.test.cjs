@@ -3,7 +3,7 @@ const base=path.join(__dirname,'..'),html=fs.readFileSync(path.join(base,'index.
 const storage=new Map();let themeChange;const deviceTheme={matches:false,addEventListener(_event,fn){themeChange=fn}};const window={OL:{},matchMedia:()=>deviceTheme,dispatchEvent(){}};
 const ctx=vm.createContext({window,OL:window.OL,console,Intl,Date,Math,JSON,Set,Map,Event:class{},localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},document:{documentElement:{dataset:{}},querySelector:()=>null},setTimeout,clearTimeout});
 for(const m of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)){
- const src=/src="\.\/(.*?)"/.exec(m[1]);let code=src?fs.readFileSync(path.join(base,src[1]),'utf8'):m[2];
+ const src=/src="\.\/(.*?)"/.exec(m[1]);let code=src?fs.readFileSync(path.join(base,src[1].split('?')[0]),'utf8'):m[2];
  new vm.Script(code,{filename:src?.[1]||'inline'});
  if(code.includes('const $=s=>document.querySelector')||code.includes("'serviceWorker' in navigator")||code.includes('document.documentElement.dataset.theme=matchMedia'))continue;
  vm.runInContext(code,ctx,{filename:src?.[1]||'inline'});

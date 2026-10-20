@@ -1,5 +1,16 @@
 # Other Lives v5.9.2 — Connected education and family memories
 
+## v6.0 — connected routes and timeline repairs
+
+- School-leaving choices precede full-time job searches. Graduation opens subject-specific roles, with supervised medical entry and a later training review. Old saves receive the missing graduation decision; accepted unrelated careers are not silently replaced. Student jobs end or continue full-time by an explicit choice.
+- Diminishing gains, ongoing maintenance and contextual annual pressures reduce full-bar inflation. Stress and confidence now affect the four visible factors. Spending previews and recorded effects show adjusted changes.
+- Thirty-nine persistent major-choice routes cover further education, business, family planning, care, migration, specialist work, treatment, retirement, property and investments. Stages retain costs, preparation, uncertainty and outcomes. Ongoing preferences replace repetitive annual clicks.
+- Global memory-template cooldowns, named subject revalidation, better relationship wording, varied default pet names and archived pet identities prevent several repeated or contradictory memories.
+- Budgets distinguish earned pay, a partner’s household contribution and asset income. Tuition gifts have explicit labels; unknown legacy labels remain identified as unlabelled rather than inventing a cause. Versioned assets prevent mixed script releases.
+- [Research audit](REFERENCE_GAME_AUDIT.md) covers official update notes through 0.7.89. [Implementation coverage](IMPLEMENTATION_COVERAGE.md) identifies simplified and missing systems. This release does **not** reproduce every feature, national dataset or legal rule from the reference game.
+- `node tests/flow-balance-routes.test.cjs` checks reported Medicine/save transitions, factors, memory cooldowns and all route success/failure stage contracts. `node tests/archive-audit.cjs backup.json` performs a read-only first pass over exported archives.
+
+
 Other Lives is an **independent** fictional life simulator. It is not affiliated with *1 in 8 Billion* and does not use its proprietary game code, artwork, text or database.
 
 
