@@ -1,3 +1,7 @@
+# Engineering checkpoint — 6.2.0-dev.1 (unreleased)
+
+The published game remains v6.1.0. Engineering work is isolated in [draft PR2](https://github.com/aidanko1/other-lives/pull/2). Start with [RELEASE_STATUS.md](RELEASE_STATUS.md), [AGENTS.md](AGENTS.md), [FIDELITY_MATRIX.md](FIDELITY_MATRIX.md), [REQUIREMENTS_MATRIX.md](REQUIREMENTS_MATRIX.md) and [BACKLOG.md](BACKLOG.md). Runtime source 07f81f2 has executed checks recorded in RELEASE_STATUS.md; earlier release claims below are historical. Do not call the entire game stable, fully realistic or reference-equivalent from these counts.
+
 # Other Lives v5.9.2 — Connected education and family memories
 
 ## v6.0 — connected routes and timeline repairs

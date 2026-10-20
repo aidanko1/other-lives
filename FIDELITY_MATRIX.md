@@ -22,3 +22,6 @@ The observation successfully created a life, waited for birth registration, bega
 
 ## Player-experience measures still required
 Measure normal-speed duration and pause behaviour; decisions/year and meaningful versus trivial choices; repeated template/category rates; time spent in menus; consequences visible later; and diverse life trajectories. Automated reports record age/decision/route/memory coverage. They cannot certify enjoyment or subjective fidelity. Record representative human/interactive observations and correct unjustified divergences before calling reference fidelity complete.
+
+## Verified Other Lives checkpoint
+At code 07f81f2, Chromium completed a natural US seed 951 life through age 105 with 47 choices, reloaded established histories at childhood/adulthood/old age, inspected navigation and finances, verified archive/export/import and began another life. All eight quality jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39494233610. This verifies those own-game interactions; it does not turn unknown reference behaviours into verified matches.

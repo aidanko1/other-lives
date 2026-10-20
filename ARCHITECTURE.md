@@ -2,7 +2,7 @@
 
 ## Boot and dependencies
 
-Buildless HTML/CSS/classic JavaScript; Node >=22 for development checks. No production or test package dependencies. `index.html` is the explicit ordered script manifest. Every engine/data extension loads synchronously before **one** `ui/app.js` startup. `scripts/check.cjs` verifies dependency existence, syntax, registry identities and boot order. `scripts/build.cjs` packages an explicit production allowlist into `_site`; tests/docs/private fixtures do not ship.
+Buildless HTML/CSS/classic JavaScript; Node >=22 for development checks. No production package dependencies. Chromium CI installs pinned Playwright 1.56.1 for tests; browser tooling is excluded from production packaging. `index.html` is the explicit ordered script manifest. Every engine/data extension loads synchronously before **one** `ui/app.js` startup. `scripts/check.cjs` verifies dependency existence, syntax, registry identities and boot order. `scripts/build.cjs` packages an explicit production allowlist into `_site`; tests/docs/private fixtures do not ship.
 
 The extraction preserved the original authored content. The old extension graph still exists and must be consolidated incrementally, not replaced wholesale with a smaller game.
 

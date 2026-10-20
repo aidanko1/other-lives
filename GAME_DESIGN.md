@@ -3,7 +3,7 @@
 Research checked 21 October 2026. Official reference: https://1in8b.life/en/ and https://1in8b.life/en/about/ (v0.7.89 beta). Similar-name sites are excluded: the official About page identifies 1in8b.life as its only official address.
 
 ## Evidence levels
-- **Current source/UI text verified:** pages retrieved in this cycle; no interactive browser session was available for the reference.
+- **Current source/UI text verified:** pages retrieved in this cycle; later limited Chromium reference observation is recorded in FIDELITY_MATRIX.md.
 - **Historical report:** REFERENCE_GAME_AUDIT.md records a previous assistant's UI/play observations and developer update notes. Those observations were not repeated in this cycle.
 - **Implementation observed:** source at baseline 4072fd4997992cb7fd6bf78d7f0c9cab41a7379f.
 - **Goal:** intended behaviour, requiring implementation or further verification.

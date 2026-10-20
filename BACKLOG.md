@@ -4,11 +4,11 @@ Status vocabulary: TODO / IN PROGRESS / IMPLEMENTED (awaiting checks) / VERIFIED
 Baseline of this backlog: 4072fd4. See CHANGELOG.md for cycle results.
 
 ## Cycle 1
-- IN PROGRESS: restore branch, permanent reference/design/audit/architecture/testing instructions.
-- TODO: preserve secured mortgage when reoccupying a let home; regression checks.
-- TODO: idempotent end-of-life insurance and wishes; regression checks.
-- TODO: uint32 zero seed, seeded shuffle, cached currency formatters.
-- TODO: branch/PR CI; all existing tests; 1,000 asserted life histories and balance summary; browser save/load/navigation/choice smoke.
+- VERIFIED CHECKPOINT: restore branch and permanent reference/design/audit/architecture/testing instructions.
+- VERIFIED CHECKPOINT: secured mortgage preserved on reoccupation; payment/conservation regression.
+- VERIFIED CHECKPOINT: idempotent end-of-life insurance/wishes; repeated-call regression.
+- VERIFIED CHECKPOINT: uint32 zero seed, seeded shuffle and cached fixed-currency formatters.
+- VERIFIED CHECKPOINT: PR/reusable release CI, all existing tests, two 1,000-life cohorts with assertions/balance reports, browser lifecycle/storage/navigation/choices. See RELEASE_STATUS.md; this is an engineering checkpoint, not stable production.
 
 ## Next: explicit simulation ownership
 1. Separate ensure/migrate from display. Add legacy-save fixtures and demonstrate repeated display leaves RNG, cash, pending decisions, person status and journal unchanged. Extract a versioned migration function without inventing absent history.

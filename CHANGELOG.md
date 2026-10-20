@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-21 — verified engineering checkpoint, 6.2.0-dev.1 (unreleased)
+
+Tested source: 07f81f2516c7209e3932bc4a3952832339cf6bc4. Final CI evidence: https://github.com/aidanko1/other-lives/actions/runs/39494233610. Read RELEASE_STATUS.md for exact gates and limits. No production merge/deployment; the complete overhaul is unfinished.
+
+- Preserved playable v6.1 at 4072fd4 and a named restore branch. Created draft PR2 and permanent AGENTS, design/fidelity, architecture, audit, requirements-to-tests, bug, testing, release and backlog records.
+- Integrated b31a7af engine/UI extraction and its existing eligibility, cooldown, school access/enrolment, migrations, guarded commands, archive and family-funded master's safeguards. Selectively ported later 3d6b306 fixes for late-life follow-ups, family timelines and atomic eligibility validation; retained their regression assertions.
+- Fixed zero-seed reproducibility; cached fixed-currency formatters; preserved mortgage/payment metadata on home reoccupation; made all ending effects idempotent.
+- Fixed immediate adult-contact status, absent GB/foreign destinations, overseas study workload/pay, stale prepared work/study/professional routes and institution conflicts. Shared continuation checks preserve earlier costs/history and provide a valid exit.
+- Full Node suite: 40 reported tests passed, including registry sweep 2,838 contexts/15,863 eligible card checks; existing route/career/funding/memory tests and eight real-snapshot save/replay round trips retained.
+- Two complementary 1,000-life harnesses, assertions and balance/coverage artifacts retained. Actual Chromium browser checks cover storage, choices, navigation, funding, school, archive and a natural birth-to-death life (US 951, age 105, 47 choices), reload at several stages and another birth.
+- Test defects were diagnosed openly: VM prototype versus persisted-content comparison, missing mortgage fields, fixture age/status setup, outgoing-frame save race and obsolete literal school heading. No failing invariant or gameplay assertion was removed to obtain a pass.
+- Reference browser research was read-only and separate from release CI. Observed only the interactions recorded in FIDELITY_MATRIX.md; complete reference life, frequencies and subjective equivalence remain unknown.
+
+Next: isolate migrations/read-only display from annual money settlement behind conservation and legacy-save regressions. Legacy wrappers, rare combinations, national/historical realism and subjective gameplay review remain incomplete.
+
+
 ## Engineering cycle 1 — 2026-10-21 (in progress)
 Recovered main v6.1.0 at 4072fd4997992cb7fd6bf78d7f0c9cab41a7379f.
 Preserved baseline/v6.1-before-engineering-overhaul and began engineering/fidelity-reliability-baseline.
