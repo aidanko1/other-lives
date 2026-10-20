@@ -52,14 +52,14 @@ jobs:
           mkdir -p tests/reports
           node scripts/serve-tests.cjs &
           test_server_pid=$!
-          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --remote-debugging-port=9222 --user-data-dir="$RUNNER_TEMP/other-lives-browser" about:blank > tests/reports/chrome.log 2>&1 &
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222 --user-data-dir="$RUNNER_TEMP/other-lives-browser" about:blank > tests/reports/chrome.log 2>&1 &
           test_browser_pid=$!
           trap 'kill "$test_server_pid" "$test_browser_pid"' EXIT
-          node scripts/browser-ci.cjs
+          node scripts/browser-ci.cjs || { cat tests/reports/chrome.log; exit 1; }
           node scripts/assert-browser-report.cjs
       - name: Preserve browser result
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: browser-report
-          path: tests/reports/browser.html
+          path: tests/reports/

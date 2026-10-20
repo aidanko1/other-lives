@@ -3,9 +3,9 @@
 const fs=require('node:fs');
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{
- let page;
- for(let i=0;i<80;i++){try{const r=await fetch('http://127.0.0.1:9222/json/new?http://127.0.0.1:4173/tests/browser.html?autorun=1',{method:'PUT'});if(r.ok){page=await r.json();break;}}catch{}await delay(250);}
- if(!page)throw Error('Chrome did not become ready');
+ let page,lastError;
+ for(let i=0;i<80;i++){try{const r=await fetch('http://127.0.0.1:9222/json/new?http://127.0.0.1:4173/tests/browser.html?autorun=1',{method:'PUT'});if(r.ok){page=await r.json();break;}lastError=r.status+' '+await r.text();}catch(e){lastError=e.message;}await delay(250);}
+ if(!page)throw Error('Chrome did not become ready: '+lastError);
  const ws=new WebSocket(page.webSocketDebuggerUrl),pending=new Map();let next=0;
  await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject;});
  ws.onmessage=event=>{const m=JSON.parse(event.data);if(m.id&&pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error(m.error.message)):p.resolve(m.result);}};
