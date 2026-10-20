@@ -1,35 +1,25 @@
-# Other Lives v5.5 — Narrative and life-path overhaul
+# Other Lives v5.6 — researched-country development build
 
-Other Lives is an **independent** fictional life simulator. It is not affiliated with *1 in 8 Billion* and does not use its proprietary game code, artwork, text or database.
+A text-led fictional life simulation about people, circumstances, choices and consequences. **Independent and unaffiliated with *1 in 8 Billion*.** It does not use the reference game's proprietary code, words or art.
 
-## What changed
+### Scope
 
-- **Age-sensitive gameplay and logs**: early childhood focuses on care, play, family, first learning, food and surroundings rather than adult decisions. Under-12s have no personal spending menu; teenagers only have limited allowance and age-appropriate options.
-- **129 retained playable country/location profiles** with locally contextualised meals, transport, cultural events, everyday routines and family variation. A country does not imply that every household celebrates the same occasion or eats the same food.
-- **Education threads**: country-named schools, examination and vocational routes where reasonably known; other locations use honest regional fallbacks. An enquiry, admission, attendance and completing a qualification are distinct states.
-- **Employment**: named local and regional occupations, illustrative PPP-equivalent annual earnings, qualifications/availability constraints, choice of offers, and memories linked to employment. Unavailable roles remain visible but cannot be selected.
-- **Postgraduate crossroads**: graduate work, local postgraduate study and studying abroad; costs can make options unavailable. Admission and completion take time and are not guaranteed.
-- **Family and relationship continuity**: caregivers, sibling relationships, teachers' encouragement, childhood memories, food memories, and work memories can affect later entries. Parent names are not repeated in brackets in the Life Log; full names are still in People profiles.
-- **Relevant context** appears alongside decisions and life memories, where a credible source supports it. The separate Facts tab is gone.
-- **iPhone-friendly layout**: combined sticky Life Focus, speed and age controls; Life Log/Profile/Family/People/Spend tabs are situated with the story, not floating over the page. Other tabs pause progression; unanswered decision cards can be set aside and reopened unchanged.
-- **Online-only GitHub Pages**, with no background World Bank API queries and no offline caching. Local browser saves and JSON archive exports remain supported.
+For new births this branch offers **12 evidence-anchored locations**, rather than the previous 129 shallowly localised profiles: Ghana, Nigeria, Ethiopia, Bangladesh, India, United Kingdom, Iran, United States, Japan, Pakistan, Poland and Hong Kong. Previously saved lives are not deleted.
 
-## Verification completed before publishing
+The game is still a fictional simulation. Fixed 2024 UNICEF under-five mortality benchmarks and World Bank life expectancies are source-anchored, but nearly all wages, personal risk adjustments, school admissions, cultural participation and purchasing power **are modelled and not statistically validated**.
 
-- Simulated childhoods across all 129 retained locations: no early childhood coaching/finance events or parent-name brackets in generated logs.
-- Complete-life regression cases across nine geographically varied locations with decision resolution and no simulation exceptions.
-- Five additional reference playthroughs through early adulthood, including examples of job-card earnings and unavailable postgraduate options.
-- A browser-based iPhone-size check: birth reveal, set-aside decision, visiting the Family tab, returning to precisely the same decision, and choosing an option; no JavaScript errors or horizontal overflow.
-- Full country-level demographic calibration, all school admissions, national wages and local cultural frequencies are **not** validated. Prices and income are explicitly game estimates.
+### Improvements
 
-## Known limitations
+- Country-specific educational pathways, with application, possible admission, multi-year study and credential completion. A separate post-secondary application stage follows documented earlier qualifications: college/degree and advanced vocational paths have costs, funding enquiries, admission decisions, and delayed results.
+- Country-specific work options, occupation eligibility rules, existing interests and clear labels for illustrative pay.
+- National childhood-mortality and life-expectancy benchmark checks; Hong Kong's first-year reference uses a different dated source.
+- Personal memory threads based on a childhood meal and routine route that can return later in life.
+- No adult financial decisions for children; no parent names in brackets in the ordinary life record.
+- Conflicting legacy education and career decisions disabled for the curated locations.
+- Automatic time, persistent decisions, tabs, archive and mobile UI retained.
 
-Only some countries have named national education institutions, qualification pathways and occupations; others have region-specific paths and locally contextualised stories. Although every supported country receives recurring local narrative texture, this is not equivalent to a verified, representative biography of every culture, language, class or region.
+### Deployment and quality
 
-Life expectancy and under-five mortality figures use an approximate frozen 2024-era reference when available; the adult mortality distribution and many risk modifiers remain model assumptions. Food examples are optional household possibilities, not statements about what all people eat.
+See [the data and testing audit](AUDIT_V56.md). Automated tests accompany the files. GitHub Pages can deploy the branch if explicitly selected; **GitHub Pages deployment should only be described as live after its Actions job succeeds.**
 
-The game is stored locally in each device/browser. **Export the Life Archive backup before changing browsers, reinstalling or clearing site data.**
-
-### Play
-
-https://aidanko1.github.io/other-lives/
+Save data lives in browser storage and can be exported as JSON. Back up lives before changing branches or browser domains.
