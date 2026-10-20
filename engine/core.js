@@ -52,7 +52,7 @@ O.create=(settings={})=>{
  if(s.strata>=6)s.flags.familyBusiness=O.chance(s,.78);
  if(s.country.code==='UA'||s.country.code==='SD'||s.country.code==='MM'||s.country.code==='AF')s.flags.uncertainSafety=true;
  s.schoolAccess=O.chance(s,(s.country.school*.72+s.strata*3)/100);
- s.school=false;s.schemaVersion=1;s.choiceHistory=[];
+ s.school=false;s.schemaVersion=2;s.choiceHistory=[];s.propertyLedger={version:1,nextId:0,properties:[],history:[]};
  s.birthDescription=`You are born ${s.urban?'in an urban community':'in a rural community'} in ${s.country.name}. Your household is ${bracket.label.toLowerCase()}. ${bracket.desc} Your family includes ${s.people.map(p=>p.role.toLowerCase()+' ('+p.name+')').join(', ')}. You have no control over the circumstances of your birth. The life ahead is not predetermined.`;
  O.journal(s,'A beginning',s.birthDescription,'birth');
  O.snapshot(s);return s;

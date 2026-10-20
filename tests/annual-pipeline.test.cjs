@@ -24,6 +24,11 @@ test('retirement income cannot add working years or professional experience',()=
  const O=loadEngine(),s=adult(O);s.job='Retired';s.income=20000;s.employment={role:'Retired',mode:'retired',hours:0};s.yearsWorked=20;s.workYears=3;const years=s.experience.totalYears,roles=JSON.stringify(s.experience.roles);
  O.passive(s);assert.equal(s.yearsWorked,20);assert.equal(s.workYears,3);assert.equal(s.experience.totalYears,years);assert.equal(JSON.stringify(s.experience.roles),roles);
 });
+test('a savings decision prepays its bill schedule rather than charging it again',()=>{
+ const O=loadEngine(),s=adult(O);s.debt=1000;s.flags.billPlans=[{balance:1000,monthly:100,monthsLeft:10}];s.pending='invest-money';
+ assert(O.applyChoice(s,2));assert.equal(s.debt,0);assert.equal(s.flags.billPlans[0].balance,0);assert.equal(s.flags.billPlans[0].monthsLeft,0);
+ const cash=s.cash;O.settleBillInstalments(s,s.age*12+1);assert.equal(s.debt,0);assert.equal(s.cash,cash);
+});
 test('finished and paused lives cannot receive annual income, ageing or changes',()=>{
  const O=loadEngine();for(const status of ['paused','finished']){const s=adult(O);s.status=status;const before=JSON.stringify(s);O.passive(s);assert.equal(JSON.stringify(s),before,status);}
 });

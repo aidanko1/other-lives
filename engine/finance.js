@@ -20,14 +20,14 @@
   let n=base,b=quote.breakdown;
   const housing=s.housing||{kind:'family',rent:null},enrolled=st?.status==='enrolled'&&!quote.fundingReview;
   if(housing.kind!=='family'&&housing.rent!==null)n=base*.65+(housing.rent||0);
-  if(housing.kind==='owned')n=base*.65+(housing.mortgage?.annual||0)+(s.property||0)*.012;
+  if(housing.kind==='owned')n=base*.65+(housing.mortgage?.annual||0)+(housing.value||0)*.012;
   n=round(n+(s.flags.recurringCare||0)+(s.flags.childTuition||0));
   const dependent=s.flags.livingWithFamily&&(s.age<=18||enrolled&&st.mode==='full-time'||st?.status==='overseas-route'&&st.mode==='full-time')&&(alive(s,'Father').length+alive(s,'Mother').length);
   const support=dependent?Math.min(n,Math.max(0,(s.familyIncome||0)*.18)):0;n-=support;
   if(s.age<=18&&s.flags.livingWithFamily&&!s.job&&!st)n=0;
   const tuition=enrolled&&!st.funding?.managed&&!st.firstYearPaid?st.annualFees||0:0;
   const pet=s.memories?.pet?.alive?round(p*(s.memories.pet.kind==='dog'?.008:.005)):0,routine=routineCost<=routineAvailable?routineCost:0;
-  const childSchooling=Math.min(n,s.flags.childTuition||0),care=Math.min(n-childSchooling,s.flags.recurringCare||0),homePayment=Math.min(n-childSchooling-care,housing.mortgage?.annual||housing.rent||0);
+  const childSchooling=Math.min(n,s.flags.childTuition||0),care=Math.min(n-childSchooling,s.flags.recurringCare||0),homePayment=Math.min(n-childSchooling-care,housing.kind==='owned'?housing.mortgage?.annual||0:housing.rent||0);
   Object.assign(b,{basic:round(n-childSchooling-care-homePayment),homePayment:round(homePayment),childSchooling,care,familySupport:round(support),tuition,pet,routines:routine,vehicle:s.flags.annualUpkeep||0});
   n=round(n+tuition+pet+routine);
   function living(target,funding){
@@ -59,7 +59,7 @@
     if(available<amount){quote.pausedPolicies.push({id,amount});continue;}n+=amount;b[id]=amount;
    }
   }
-  if(housing.rentalMortgage){const extra=housing.mortgage?.annual||0;if(extra)b.rentalMortgage=extra;n+=extra;}
+  const rentalPayment=O.rentalMortgagePayment(s);if(rentalPayment){b.rentalMortgage=rentalPayment;n+=rentalPayment;}
   quote.total=n;quote.familyCashChange=funds.familyCash-s.familyCash;quote.familyAssetsChange=funds.familyAssets-s.familyAssets;
   return quote;
  };
@@ -89,7 +89,15 @@
    return clone(q);
   }catch(error){for(const key of Object.keys(s))delete s[key];Object.assign(s,before);throw error;}
  };
- O.protectedDebt=s=>(s.flags.billPlans||[]).reduce((n,p)=>n+(p.monthsLeft>0?p.balance:0),0)+(s.housing?.mortgage?.balance||0);
+ O.protectedDebt=s=>(s.flags.billPlans||[]).reduce((n,p)=>n+(p.monthsLeft>0?p.balance:0),0)+O.securedBalance(s);
+ O.repayDebt=function(s,requested){
+  if(!Number.isFinite(requested)||requested<0)throw Error('Invalid debt repayment.');
+  const secured=O.securedBalance?O.securedBalance(s):s.housing?.mortgage?.balance||0,plans=s.flags.billPlans||[];
+  const paid=Math.min(s.cash,Math.max(0,s.debt-secured),round(requested));
+  let remaining=Math.max(0,paid-Math.max(0,s.debt-secured-plans.reduce((n,p)=>n+p.balance,0)));
+  for(const plan of plans){const n=Math.min(remaining,plan.balance);plan.balance-=n;remaining-=n;if(!plan.balance)plan.monthsLeft=0;}
+  s.cash-=paid;s.debt-=paid;return paid;
+ };
  O.repayUnsecuredDebt=function(s,requested){
   if(!Number.isFinite(requested)||requested<0)throw Error('Invalid debt repayment.');
   const paid=Math.min(s.cash,Math.max(0,s.debt-O.protectedDebt(s)),Math.round(requested));
@@ -114,7 +122,7 @@
   if(net>0){s.cash+=net;if(s.debt>0)O.repayUnsecuredDebt(s,round(net*.48));}else{const deficit=-net,fromCash=Math.min(s.cash,deficit);s.cash-=fromCash;s.debt+=deficit-fromCash;O.adjust(s,{stress:2,happiness:-1})}
   s.lastInterest=interest;s.lastAnnualIncome=annual;O.reconcileDebt?.(s,'Annual budget shortfall','budget',`Living / housing costs ${O.money(s.budgetBreakdown?.basic||0)}; rent / mortgage payments ${O.money(s.budgetBreakdown?.homePayment||0)}; child school fees ${O.money(s.budgetBreakdown?.childSchooling||0)}; continuing care ${O.money(s.budgetBreakdown?.care||0)}; tuition ${O.money(s.budgetBreakdown?.tuition||0)}; pet care ${O.money(s.budgetBreakdown?.pet||0)}; routines ${O.money(s.budgetBreakdown?.routines||0)}; other commitments ${O.money(s.flags.annualUpkeep||0)}; interest ${O.money(interest)}; total income ${O.money(annual)}. Savings were used first.`);
   if(s.investments>0){let returnRate=O.investmentReturn?O.investmentReturn(s):-.12+O.rand(s)*.23;s.investments=Math.max(0,round(s.investments*(1+returnRate)))}
-  if(s.property>0)s.property=Math.max(0,round(s.property*(.96+O.rand(s)*.09)));
+  if(s.property>0)O.revalueProperties(s,.96+O.rand(s)*.09);
   if(s.debt>c.ppp*2)O.adjust(s,{stress:3,happiness:-2});
 
    const valuation=(s.investments-before.investments)+(s.property-before.property),personalTuition=s.annualCostSettlement?.personalTuition||0;
@@ -126,12 +134,13 @@
  };
  O.settleMortgagePrincipal=function(s){
   if(s.mortgageSettlement?.age===s.age)return clone(s.mortgageSettlement);
-  const mortgage=s.housing.mortgage;if(!mortgage||mortgage.balance<=0)return null;
-  const interest=round(mortgage.balance*mortgage.rate),principal=Math.min(mortgage.balance,Math.max(0,mortgage.annual-interest));
-  if(!Number.isFinite(principal)||principal<0||principal>s.debt)throw Error('Invalid mortgage principal payment.');
-  mortgage.balance-=principal;s.debt-=principal;mortgage.years=Math.max(0,mortgage.years-1);
-  s.mortgageSettlement={age:s.age,interest,principal};
-  if(mortgage.balance<=0){mortgage.annual=0;O.journal(s,'Your mortgage is paid off','Your home is now owned without a mortgage. Maintenance costs continue.','money');}
+  O.initializePropertyLedger(s);const properties=O.mortgageRecords(s);if(!properties.length)return null;
+  const payments=properties.map(p=>{const m=p.mortgage,interest=round(m.balance*m.rate),principal=Math.min(m.balance,Math.max(0,m.annual-interest));return {propertyId:p.id,interest,principal};});
+  const principal=payments.reduce((n,p)=>n+p.principal,0),interest=payments.reduce((n,p)=>n+p.interest,0);
+  if(!Number.isFinite(principal)||principal<0||principal>s.debt||!Number.isFinite(interest))throw Error('Invalid mortgage principal payment.');
+  for(let i=0;i<properties.length;i++){const mortgage=properties[i].mortgage;mortgage.balance-=payments[i].principal;mortgage.years=Math.max(0,mortgage.years-1);
+   if(mortgage.balance<=0){mortgage.annual=0;O.journal(s,'A property mortgage is paid off','The secured loan on this property is repaid. Ownership and any maintenance costs continue.','money');}}
+  s.debt-=principal;O.syncPropertyView(s);s.mortgageSettlement={age:s.age,interest,principal,payments};
   return clone(s.mortgageSettlement);
  };
  O.settleBillInstalments=function(s,month){

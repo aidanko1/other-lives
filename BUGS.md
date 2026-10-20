@@ -59,3 +59,6 @@ OL-016–OL-020 fixes and all retained regressions pass at a248549 in https://gi
 
 ## Cycle3 — verification pending
 See ENGINEERING_CYCLE_3.md for OL-021–OL-027 red reproductions, expected behaviour, corrective owners and permanent tests. No new stable claim or deployment.
+
+## Cycle4
+OL-028–OL-031 expected/actual states, seed reproductions, causes, corrections and regressions are recorded in ENGINEERING_CYCLE_4.md. Source85deb8d failed simulation CI (https://github.com/aidanko1/other-lives/actions/runs/39512695036), despite passing regression/browser. The unchanged full cohorts are required to pass the correction. No test assertions were weakened.

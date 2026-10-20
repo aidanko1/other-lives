@@ -1,5 +1,9 @@
 # Changelog
 
+## Cycle4 — property and debt identity (verification pending)
+
+Added per-holding property/loan ownership behind existing housing choices, schema2 conservative migrations, multi-loan budgeting/principal and asset/debt invariants. Fixed a full-cohort failure where prepaying a scheduled bill left future instalments charging. Added housing UI save/reload coverage and ten targeted property regressions, including129-country combinations. See ENGINEERING_CYCLE_4.md; final exact-revision gates pending.
+
 ## Cycle3 — annual/employment/decision continuity (verification pending)
 
 Replaced passive wrapper composition with one ordered annual/birthday transaction, saved once-per-age receipts and complete rollback. Centralized budget/debt allocation and employment/hour/FTE updates. Added read-only decision views, stale-click tokens, participant-bound family intentions and course/stipend cancellation cleanup. Retained all content and existing assertions; see ENGINEERING_CYCLE_3.md for red reproductions and exact verification status. No production change.

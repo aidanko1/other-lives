@@ -1,11 +1,15 @@
 /* Versioned load boundary and observational invariants; never overwrite the input save. */
 (function (O) {
  'use strict';
- O.SAVE_VERSION = 1;
+ O.SAVE_VERSION = 2;
  O.migrateLife = function (input) {
   if (!input || typeof input !== 'object' || !input.id || !input.country?.code || !Array.isArray(input.journal) || !Array.isArray(input.people)) throw Error('Invalid life record.');
   if ((input.schemaVersion || 0) > O.SAVE_VERSION) throw Error('This save requires a newer version of Other Lives.');
   const s = JSON.parse(JSON.stringify(input));
+  if((s.schemaVersion||0)<2&&Number.isFinite(s.familyAssets)&&s.familyAssets<0){
+   const deficit=-s.familyAssets;s.flags??={};(s.flags.legacyRepairs??=[]).push({field:'familyAssets',from:s.familyAssets,to:0,householdDebtAdded:deficit,reason:'Negative legacy assets retained as household liability'});
+   s.familyAssets=0;s.familyDebts=(s.familyDebts||0)+deficit;
+  }
   if (!s.schemaVersion) {
    s.schoolAccess ??= !!s.school;
    if (s.age < O.rules.schoolStartAge) s.school = false;
@@ -20,6 +24,7 @@
    s.month??=0;s.storyUsed??={};O.upgradeLife(s);O.ensureClarity(s);s.journal=history;
    s.schemaVersion = 1;
   }
+  if(s.schemaVersion===1){O.initializePropertyLedger(s);s.schemaVersion=2;}
   return s;
  };
  O.consistencyIssues = function (s) {
@@ -28,14 +33,27 @@
   if (!Number.isInteger(s.age) || s.age < 0 || s.age > 120) issue('age', 'Invalid player age.');
   if (!Number.isInteger(s.month) || s.month < 0 || s.month > 11) issue('month', 'Invalid month.');
   if (!['alive', 'paused', 'finished'].includes(s.status)) issue('status', 'Unknown life status.');
-  for (const key of ['cash', 'debt', 'income', 'investments', 'property', 'familyCash', 'familyAssets']) if (!Number.isFinite(s[key]) || s[key] < 0) issue('money.' + key, 'Invalid ' + key + '.');
+  for (const key of ['cash', 'debt', 'income', 'investments', 'property', 'familyCash', 'familyAssets', 'familyDebts']) if (!Number.isFinite(s[key]) || s[key] < 0) issue('money.' + key, 'Invalid ' + key + '.');
   for (const key of ['health', 'happiness', 'knowledge', 'relationships', 'stress', 'confidence']) if (!Number.isFinite(s[key]) || s[key] < 0 || s[key] > 100) issue('factor.' + key, 'Invalid ' + key + '.');
   if (s.age < 6 && s.school) issue('school.preschool', 'Formal school enrolment before school-entry age.');
   if (s.age < 16 && s.job && s.job !== 'Retired') issue('work.child', 'Adult employment assigned to a child.');
   if (O.rules.fullTimeStudy(s) && s.job && s.employment?.mode === 'full-time') issue('commitment.work-study', 'Full-time employment during full-time study.');
   if (s.study?.status === 'completed' && s.school) issue('study.completed-enrolment', 'Completed degree still enrolled.');
   if (s.study?.status === 'completed' && Number.isFinite(s.study.progress) && s.study.progress < s.study.duration) issue('study.credits', 'Qualification awarded before credits completed.');
-  if (s.housing?.mortgage?.balance > s.debt + 1) issue('debt.mortgage', 'Secured balance exceeds total debt.');
+  const secured=O.securedBalance(s),plans=s.flags?.billPlans||[];
+  if (secured > s.debt + .001) issue('debt.mortgage', 'Secured balances exceed total debt.');
+  if(plans.some(p=>!Number.isFinite(p.balance)||p.balance<0||!Number.isInteger(p.monthsLeft)||p.monthsLeft<0))issue('debt.plan','Invalid scheduled bill balance or term.');
+  if(secured+plans.reduce((n,p)=>n+p.balance,0)>s.debt+.001)issue('debt.components','Scheduled and secured liabilities exceed recorded debt.');
+  const properties=s.propertyLedger?.properties;
+  if(properties?.length){
+   if(new Set(properties.map(p=>p.id)).size!==properties.length||properties.some(p=>!p.id))issue('property.identity','Missing or duplicate property identity.');
+   if(properties.some(p=>!Number.isFinite(p.value)||p.value<0||!['home','rental','unclassified'].includes(p.kind)))issue('property.value','Invalid dwelling value or use.');
+   if(properties.filter(p=>p.kind==='home').length>1)issue('property.home','More than one current owned home.');
+   if(properties.some(p=>p.acquiredAge!==null&&(!Number.isInteger(p.acquiredAge)||p.acquiredAge>s.age||p.acquiredAge<18)))issue('property.timeline','Property purchase outside the recorded adult timeline.');
+   if(Math.abs(properties.reduce((n,p)=>n+p.value,0)-s.property)>.001)issue('property.total','Dwelling values disagree with total property.');
+   if(Math.abs(properties.filter(p=>p.kind==='rental').reduce((n,p)=>n+p.value,0)-(s.flags.rentalPropertyValue||0))>.001)issue('property.rentals','Rental values disagree with rental income assets.');
+   const home=properties.find(p=>p.kind==='home');if(home&&(s.housing?.kind!=='owned'||home.value!==s.housing.value))issue('property.residence','Owned dwelling disagrees with current housing.');
+  }
   if (s.people.filter(p => p.alive && p.role === 'Partner').length > 1) issue('family.partners', 'Multiple current partnerships.');
   const ids = new Set();
   for (const p of s.people) {

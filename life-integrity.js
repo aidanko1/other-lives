@@ -23,7 +23,7 @@ O.routeBlock=function(s,d){
 };
 // A move must not erase a secured liability or a property that is being let.
 const move=O.moveCountry;
-O.moveCountry=function(s,c,family){const mortgage=s.housing.rentalMortgage?s.housing.mortgage:null;move(s,c,family);if(mortgage){s.housing.mortgage=mortgage;s.housing.rentalMortgage=true;}if(s.memories.pet?.alive){s.memories.pet.residence=family?'Your household':'Previous household';}};
+O.moveCountry=function(s,c,family){move(s,c,family);if(s.memories.pet?.alive){s.memories.pet.residence=family?'Your household':'Previous household';}};
 const candidates=O.momentCandidates;
 O.momentCandidates=function(s){return candidates(s).filter(({d,p})=>{
  if(d.subject==='pet'&&p.residence==='Previous household')return false;

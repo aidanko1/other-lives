@@ -51,7 +51,7 @@ O.householdMembers=s=>{return s.people.filter(p=>p.alive&&(
  (p.role==='Partner'&&p.residence!=='Separate home')||
  (p.role==='Child'&&!p.movedOut&&p.residence!=='Separate home')
  ));};
-O.householdCaption=s=>{const people=O.householdMembers(s);const pet=s.memories?.pet;return `${s.urban?'Urban':'Rural'} ${s.country.name} · ${s.flags.livingWithFamily?'Family home':s.property>0?'Your own home':'Rented home'} · ${people.length?'With '+people.map(p=>p.role==='Mother'?'Mom':p.role==='Father'?'Dad':p.name.split(' ')[0]).join(', '):'Living independently'}${pet?.alive?' and '+pet.name+' the '+pet.kind:''}`;};
+O.householdCaption=s=>{const people=O.householdMembers(s);const pet=s.memories?.pet;return `${s.urban?'Urban':'Rural'} ${s.country.name} · ${s.flags.livingWithFamily?'Family home':s.housing?.kind==='owned'?'Your own home':'Rented home'} · ${people.length?'With '+people.map(p=>p.role==='Mother'?'Mom':p.role==='Father'?'Dad':p.name.split(' ')[0]).join(', '):'Living independently'}${pet?.alive?' and '+pet.name+' the '+pet.kind:''}`;};
 O.householdAges=s=>[`You, ${s.age}`,...O.householdMembers(s).map(p=>`${p.name.split(' ')[0]}, ${p.age}`),...(s.memories?.pet?.alive?[`${s.memories.pet.name}, ${s.memories.pet.age}`]:[])].join(' · ');
 // A search is an action. Legacy random job-change windows are replaced by this one flow.
 for(const e of O.EVENTS)if(/^(job-offer|named-job-offer|local-career-|local-job-choice-|world-.*job)/.test(e.id))e.when=()=>false;

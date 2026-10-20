@@ -54,6 +54,21 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   const readExport=JSON.parse(fs.readFileSync(results+'/browser-read-boundary.json','utf8'));assert.deepEqual(readExport.current,readFixture,'reload/render/export changed paused life, RNG, finances, people or journal');
   console.log('PASS actual browser reload/render/export state immutability');
 
+  // Existing housing choices must preserve each secured loan through real UI/save boundaries.
+  const propertyFixture=await page.evaluate(()=>{
+   const O=window.OL,s=O.create({country:'GB',seed:2218});for(const p of s.people)p.age+=40;
+   Object.assign(s,{age:40,month:0,school:false,pending:null,agenda:[],cash:2000000});s.flags.flow.schoolLeavingResolved=true;O.routeJob(s,'Office administrator',400000);
+   if(!O.planAction(s,'mortgage').ok||!O.startRoute(s,'housing-review').ok)throw Error('Housing fixture setup failed');O.advanceMonth(s);
+   localStorage.setItem('other-lives-current-v1',JSON.stringify(s));return s;
+  });
+  await page.reload();await click('resume');await page.locator('[data-action="choose"]').filter({hasText:'Let the owned home and rent elsewhere'}).click();
+  await page.locator('[data-action="game-tab"][data-tab="spend"]').click();
+  await page.locator('[data-action="plan-action"][data-id="move-area"]').click();await page.locator('[data-action="plan-action"][data-id="buy-home"]').click();
+  const propertySaved=await read();assert.equal(propertySaved.debt,propertyFixture.debt);assert.equal(propertySaved.propertyLedger.properties.length,2);assert(propertySaved.flags.rentalPropertyValue>0);
+  assert.equal(propertySaved.propertyLedger.properties.filter(p=>p.mortgage?.balance>0).length,1);assert.equal(propertySaved.propertyLedger.properties.find(p=>p.kind==='rental').mortgage.balance,propertyFixture.debt);
+  await page.reload();await click('resume');await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.deepEqual((await read()).propertyLedger,propertySaved.propertyLedger);
+  console.log('PASS housing UI let/move/buy/save/reload preserves the let dwelling and secured loan');
+
   // Retain the earlier branch's browser assertions and execute them with real asynchronous waits.
   const legacy=await context.newPage();await legacy.goto('http://127.0.0.1:8000/tests/browser.html?autorun=1');
   await legacy.waitForFunction(()=>['passed','failed'].includes(document.querySelector('#results')?.dataset.status),{},{timeout:45000});
