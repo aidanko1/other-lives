@@ -2,8 +2,8 @@
 (function(O){'use strict';
 const hash=v=>{let n=2166136261;for(const c of String(v))n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0};
 const skins=[['#f8d0a0','#d89868','#a86048'],['#e8b080','#bc7850','#885038'],['#c08858','#985838','#683c30'],['#986040','#704030','#482c28'],['#704838','#503028','#382428'],['#e8c098','#c09068','#885840']];
-function appearance(person,s){if(person.appearance)return person.appearance;const h=hash((s?.seed||'')+'|'+(person.id||person.name));let options=[0,1,2,3,4,5];const region=s?.country?.region||'';if(/africa/i.test(region))options=[2,3,4,3,4,1];else if(/asia/i.test(region))options=[0,1,2,5,1,5];else if(/europe/i.test(region))options=[0,0,1,5,2,3];const family=s?.appearance;const tone=family&&['Child','Sibling'].includes(person.role)?Math.max(0,Math.min(5,family.skinTone+(h%3)-1)):options[h%options.length];return person.appearance={skinTone:tone,hairStyle:h%4,hairColour:h%5===0?'#905840':'#403038',shirt:h%6};}
-const priorEnsure=O.ensureClarity;O.ensureClarity=function(s){priorEnsure(s);s.appearance??=appearance({id:s.id,name:s.name},s);for(const p of s.people)appearance(p,s);return s;};
+function appearance(person,s){if(person.appearance)return person.appearance;const h=hash((s?.seed||'')+'|'+(person.id||person.name));let options=[0,1,2,3,4,5];const region=s?.country?.region||'';if(/africa/i.test(region))options=[2,3,4,3,4,1];else if(/asia/i.test(region))options=[0,1,2,5,1,5];else if(/europe/i.test(region))options=[0,0,1,5,2,3];const family=s?.appearance;const tone=family&&['Child','Sibling'].includes(person.role)?Math.max(0,Math.min(5,family.skinTone+(h%3)-1)):options[h%options.length];return {skinTone:tone,hairStyle:h%4,hairColour:h%5===0?'#905840':'#403038',shirt:h%6};}
+const priorEnsure=O.ensureClarity;O.ensureClarity=function(s){priorEnsure(s);s.appearance??=appearance({id:s.id,name:s.name},s);for(const p of s.people)p.appearance??=appearance(p,s);return s;};
 const oldCreate=O.create;O.create=function(settings){const s=oldCreate(settings);O.ensureClarity(s);return s;};
 function person(k,x,y,p,s){
  const a=appearance(p,s),skin=skins[a.skinTone]||skins[1],age=p.age??30,infant=age<3,child=age<12;
@@ -48,7 +48,7 @@ function tree(k,x,y){const r=(x,y,w,h,c)=>{k.fillStyle=c;k.fillRect(x,y,w,h)};
  for(const [dx,dy,w,h] of [[-9,-31,19,4],[-15,-27,31,8],[-18,-19,37,10],[-14,-9,29,6]])r(x+dx,y+dy,w,h,'#104830');
  for(const [dx,dy] of [[-13,-16],[-5,-12],[5,-14],[-10,-23],[1,-23],[9,-18],[-6,-29],[-14,-9],[-3,-6],[7,-8]])leafCluster(k,x+dx,y+dy);
 }
-let demo;O.drawScene=function(canvas,_scene,s){if(!s?.country){if(!demo){demo=O.create({country:'GB',seed:14});demo.age=30;demo.job='Office worker';demo.school=false;}s=demo;}O.ensureClarity(s);canvas.width=384;canvas.height=128;const k=canvas.getContext('2d');if(!k)return;k.imageSmoothingEnabled=false;const r=(x,y,w,h,c)=>{k.fillStyle=c;k.fillRect(x,y,w,h)};
+let demo;O.drawScene=function(canvas,_scene,s){if(!s?.country){if(!demo){demo=O.create({country:'GB',seed:14});demo.age=30;demo.job='Office worker';demo.school=false;}s=demo;}canvas.width=384;canvas.height=128;const k=canvas.getContext('2d');if(!k)return;k.imageSmoothingEnabled=false;const r=(x,y,w,h,c)=>{k.fillStyle=c;k.fillRect(x,y,w,h)};
  // 24 by 8 tiles. Flat overhead ground; no horizon, sky, gradients or labels.
  const urban=s.urban,arid=!urban&&['EG','SA','AE','IR','PK','ET','KE','MA'].includes(s.country.code),cool=!urban&&['GB','DE','PL','CA','NZ'].includes(s.country.code);
  const ground=urban?['#a8b0b0','#889898','#c0c8c0']:arid?['#d8c080','#b89860','#e8d098']:cool?['#78a870','#508858','#a0c080']:['#50b080','#28885b','#78c088'];

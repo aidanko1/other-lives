@@ -26,3 +26,6 @@ Updated 2026-10-21. Status **PASS-SCOPED** means the named implementation/tests 
 | E03 | Exact bug reproductions and continuity docs | BUGS.md, RELEASE_STATUS.md, CHANGELOG.md, BACKLOG.md | repository review | In progress; update after executed checks |
 | UX01 | Events respond to personal history, not generic repetition | moments, memory-voice, routes, subject checks | moment/route tests, no-repeat assertion | PARTIAL; novelty/engagement cannot be established from exit code |
 | UX02 | Simulation depth does not add mandatory micromanagement | existing focus/route/policy UI | fidelity playtest checklist in GAME_DESIGN.md | Unknown; density review needed before new UI |
+
+
+Cycle2 verification pending: S06 and S09 now additionally map to engine/finance.js and tests/finance-boundary.test.cjs (explicit cost ownership, conservation/rollback, once-per-age reload, display purity, conservative old-save migration). tests/browser-smoke.cjs adds complete-state reload/render/export equality. The existing implementation-status rows above describe07f81, not a claim that cycle2 CI has passed. See ENGINEERING_CYCLE_2.md for final revision evidence.

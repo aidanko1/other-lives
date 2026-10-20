@@ -78,7 +78,7 @@ O.passive=(s)=>{
   if(s.strata>=5&&s.flags.familySupport&&!s.income)cost*=.5;
   if(s.flags.foodInsecure)cost*=.9;
   if(s.job==='Retired')cost*=.85;
-  if(O.livingCost)cost=O.livingCost(s,cost);cost+=(s.flags.annualUpkeep||0);s.annualExpenses=round(cost);
+  if(O.settleAnnualCosts)cost=O.settleAnnualCosts(s,cost).total;cost+=(s.flags.annualUpkeep||0);s.annualExpenses=round(cost);
   const planBalance=(s.flags.billPlans||[]).reduce((n,p)=>n+(p.monthsLeft>0?p.balance:0),0)+(s.housing?.mortgage?.balance||0);const interest=round(Math.max(0,s.debt-planBalance)*(s.flags.predatoryDebt?.19:.055));
   let net=round(annual-cost-interest);
   if(net>0){s.cash+=net;if(s.debt>0){let paid=Math.min(Math.max(0,s.debt-planBalance),round(net*.48));s.debt-=paid;s.cash-=paid}}else{const deficit=-net,fromCash=Math.min(s.cash,deficit);s.cash-=fromCash;s.debt+=deficit-fromCash;O.adjust(s,{stress:2,happiness:-1})}

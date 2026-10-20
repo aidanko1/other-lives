@@ -53,21 +53,4 @@
   O.commitFamilyGift(s, quote); s.cash -= quote.personal;
   return {ok: true, quote};
  };
- O.supportStudyLiving = function(s, total, funding) {
-  const breakdown=s.budgetBreakdown, eligible=Math.max(0,total-(breakdown.pet||0)-(breakdown.routines||0));
-  const prior=funding.livingHistory?.find(x=>x.age===s.age),budget=O.parentStudyBudget(s);
-  const amount=Math.min(eligible,prior?.amount??budget.cash+budget.assets);
-  if(amount>0){
-   if(!prior){const cashPart=Math.min(amount,budget.cash),assetPart=amount-cashPart;O.commitFamilyGift(s,{cashPart,assetPart});(funding.livingHistory??=[]).push({age:s.age,amount,cashPart,assetPart});funding.totalLiving=(funding.totalLiving||0)+amount;}
-   breakdown.familyStudyLiving=amount;let remaining=amount;
-   for(const key of ['basic','homePayment','care','childSchooling']){const n=Math.min(remaining,breakdown[key]||0);breakdown[key]-=n;remaining-=n;}
-  }
-  return total-amount;
- };
- // Living cost historically settles tuition and policies. Keep callers needing a query on a copy.
- O.quoteAnnualCosts = function (s, base) {
-  const copy = JSON.parse(JSON.stringify(s));
-  const total = O.livingCost(copy, base);
-  return {total, breakdown: copy.budgetBreakdown, familyCashChange: copy.familyCash - s.familyCash, familyAssetsChange: copy.familyAssets - s.familyAssets};
- };
 })(window.OL);

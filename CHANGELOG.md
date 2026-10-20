@@ -1,5 +1,14 @@
 # Changelog
 
+## Cycle2 — annual cost/read boundaries (development; final verification pending)
+
+- Extracted one annual cost quote/settlement owner; removed the earlier living-cost wrapper chain. Pure quotes, once-per-age receipts, gift/tuition conservation and rollback; existing funding/routes/cost rates preserved.
+- Current saves reload without replaying repairs. Legacy migration preserves authored journals. Missing family cash is explicitly unknown with zero opening cash, rather than inventing savings.
+- Removed adapters from profile/family/spending/finance/art reads; estate/trust transfer now occurs at the existing explicit annual family phase.
+- Fixed the confirmed prepaid-overseas continuing-policy crash; added all129-country coverage and retained645 working cost-composition parity cases against2aea.
+- Added permanent finance/read/save/rollback regressions and actual browser reload→inspect→export immutability assertion. Existing estate conservation assertions now execute the explicit transition; no assertions removed.
+- See ENGINEERING_CYCLE_2.md and RELEASE_STATUS.md for executed results and known limitations. No main merge/deployment.
+
 ## 2026-10-21 — verified engineering checkpoint, 6.2.0-dev.1 (unreleased)
 
 Tested source: 07f81f2516c7209e3932bc4a3952832339cf6bc4. Final CI evidence: https://github.com/aidanko1/other-lives/actions/runs/39494233610. Read RELEASE_STATUS.md for exact gates and limits. No production merge/deployment; the complete overhaul is unfinished.

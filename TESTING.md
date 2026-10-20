@@ -31,3 +31,7 @@ Reference browser observation has a separate research-only workflow so a changin
 
 ## Executed checkpoint — 2026-10-21
 Source 07f81f2: https://github.com/aidanko1/other-lives/actions/runs/39494233610. Check the run's exact jobs and retained artifacts; RELEASE_STATUS.md records their final status. The Node runner reports40 tests, not the number of individual assertions. Registry sweep exercises2838 country/age/wealth contexts and 15,863 eligible decision render contracts (523 definitions). Two full 1,000-life cohorts are complementary. Browser natural lifecycle reaches 105 with 47 real UI choices and stage reloads; the actual normal-speed duration remains unmeasured. No fresh production deployment was performed.
+
+
+## Cost/read boundary regressions
+`node --test tests/finance-boundary.test.cjs` checks complete-state quote/display/load immutability, tuition and family-gift conservation, repeat/reload receipts, affordability/funding holds, transactional rollback, missing legacy cash and129-country prepaid/institution budgets. It is included in npm test and the existing CI glob. Browser smoke exports the actual inspected paused life and compares every serialized field. Private backups may be audited read-only; never commit them or report them as complete new simulated lives.

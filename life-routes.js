@@ -29,6 +29,5 @@ const spend=O.spendHTML;O.spendHTML=s=>{const base=spend(s),routes=O.routesHTML(
 const profile=O.profileHTML;O.profileHTML=s=>profile(s)+`<section class="course-entry"><h3>Current commitments</h3>${Object.values(O.ensureRoutes(s).active).map(r=>`<p>${esc(O.ROUTES.find(d=>d.id===r.id)?.title||r.id)} · ${esc(r.stage.replace(/-/g,' '))}</p>`).join('')||'<p>No additional commitments.</p>'}${s.residency?`<p>${esc(s.residency.status)} in ${esc(s.country.name)} · ${s.age-s.residency.arrived} years since arrival</p>`:''}</section>`;
 O.routeYearHandlers=[];
 const passive=O.passive;O.passive=function(s){O.ensureRoutes(s);for(const fn of O.routeYearHandlers)fn(s,'before');passive(s);for(const fn of O.routeYearHandlers)fn(s,'after');};
-const living=O.livingCost;O.livingCost=(s,n)=>s.institution?0:living(s,n);
 O.VERSION='6.0.0';
 })(window.OL);

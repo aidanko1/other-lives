@@ -10,12 +10,16 @@
    s.schoolAccess ??= !!s.school;
    if (s.age < O.rules.schoolStartAge) s.school = false;
    s.flags ??= {}; s.used ??= {}; s.choiceHistory ??= [];
+   // Early saves did not track liquid family savings. Do not invent a balance from income.
+   if(s.familyCash===undefined){s.familyCash=0;s.flags.legacyFamilyCashUnknown=true;}
    if(s.pending&&s.used[s.pending]===s.age&&!s.journal.some(e=>e.eventId===s.pending))s.flags.legacyPendingUsage=s.pending;
    // New journals identify their event; old prose is not evidence of a particular command.
    for (const entry of s.journal) if (entry.eventId) s.used[entry.eventId] = Math.max(s.used[entry.eventId] ?? -1, entry.age);
+   // Unversioned records need structural adapters once. Preserve their authored history.
+   const history=JSON.parse(JSON.stringify(s.journal));
+   s.month??=0;s.storyUsed??={};O.upgradeLife(s);O.ensureClarity(s);s.journal=history;
    s.schemaVersion = 1;
   }
-  O.ensureTimeline(s); O.ensureClarity(s);
   return s;
  };
  O.consistencyIssues = function (s) {

@@ -1,3 +1,7 @@
+# Current development status
+
+Cycle2 is under verification on the draft engineering branch. The previous verified checkpoint below remains the last verified engineering version until fresh checks pass. See ENGINEERING_CYCLE_2.md. Experimental code is not stable and is not deployed.
+
 # Release status — verified engineering checkpoint
 
 Updated 2026-10-21. **6.2.0-dev.1 is unreleased. The complete overhaul is unfinished.**
@@ -34,5 +38,5 @@ Observed random birth, registration, begin-life, pause/speed and invocation of n
 Legacy closure/wrapper chains, render-time adapters and financial settlement side effects remain. Invariants cover defined contracts, not every causal implication. Rare combinations, complete national/historical/legal data and qualitative narrative/pacing review are incomplete. The private 13-life backup was not re-audited. Other browser engines and a full accessibility review remain unverified.
 
 ## Next highest-priority task
-Separate versioned migration and read-only display from annual financial settlement, with one explicit transaction owner, conservation assertions and legacy-save regressions. Preserve the existing gameplay and all working routes.
+Finish verification of cycle2 cost/migration/read extraction, then consolidate the remaining annual income/debt/mortgage/investment and employment transition owners. Preserve the existing gameplay and all working routes.
 A passing engineering checkpoint is not a stable release. Stable promotion also requires resolving remaining high-severity behaviour issues and completing fidelity/player review. Branch protection/hosting enforcement has not been verified.

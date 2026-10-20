@@ -41,6 +41,19 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   await click('archive');await page.locator('[data-action="record"][data-id="'+natural.id+'"]').waitFor();await page.locator('[data-action="record"][data-id="'+natural.id+'"]').click();assert((await page.locator('body').innerText()).includes(natural.cause),'archive must display actual cause');
   await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');assert.notEqual((await read()).id,natural.id,'new life after natural death');await page.locator('[data-action="game-tab"][data-tab="family"]').click();
 
+  // Current-save reload and actual rendering/export must not execute an estate or other repairs.
+  const readFixture=await page.evaluate(()=>{
+   const O=window.OL,s=O.create({country:'GB',seed:61});s.age=19;s.month=0;s.pending=null;s.agenda=[];s.school=false;
+   for(const p of s.people){p.age+=19;p.alive=false;p.diedAt=p.age;}
+   s.familyCash=10000;s.familyAssets=40000;s.familyDebts=500;s.cash=3000;s.inheritance=0;s.status='paused';
+   localStorage.setItem('other-lives-current-v1',JSON.stringify(s));return s;
+  });
+  await page.reload();await click('resume');
+  for(let repeat=0;repeat<2;repeat++)for(const tab of ['profile','family','people','spend','log'])await page.locator('[data-action="game-tab"][data-tab="'+tab+'"]').click();
+  await click('archive');const readDownloadPromise=page.waitForEvent('download');await click('export');const readDownload=await readDownloadPromise;await readDownload.saveAs(results+'/browser-read-boundary.json');
+  const readExport=JSON.parse(fs.readFileSync(results+'/browser-read-boundary.json','utf8'));assert.deepEqual(readExport.current,readFixture,'reload/render/export changed paused life, RNG, finances, people or journal');
+  console.log('PASS actual browser reload/render/export state immutability');
+
   // Retain the earlier branch's browser assertions and execute them with real asynchronous waits.
   const legacy=await context.newPage();await legacy.goto('http://127.0.0.1:8000/tests/browser.html?autorun=1');
   await legacy.waitForFunction(()=>['passed','failed'].includes(document.querySelector('#results')?.dataset.status),{},{timeout:45000});
