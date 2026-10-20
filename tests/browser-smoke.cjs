@@ -10,7 +10,12 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   assert(await page.locator('[aria-label="New life reveal"]').isVisible());await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');
   await page.locator('[data-action="game-tab"][data-tab="family"]').click();const paused=await read();await page.waitForTimeout(4100);const later=await read();assert.equal(later.age,paused.age);assert.equal(later.month,paused.month,'inspecting family must pause clock');
   for(const tab of ['profile','people','spend','log'])await page.locator('[data-action="game-tab"][data-tab="'+tab+'"]').click();
-  await click('next-decision');const pending=await read();assert(pending.pending||pending.status==='finished','next decision must reach choice or ending');
+  let pending;
+  for(let skipped=0;skipped<30;skipped++){const beforeSkip=await read();await click('next-decision');pending=await read();if(pending.pending||pending.status==='finished')break;
+   assert(beforeSkip.people.some(p=>p.alive&&['Mother','Father','Parent','Grandparent','Sibling','Partner','Child'].includes(p.role)&&pending.people.find(q=>q.id===p.id)?.alive===false),'skip stopped without a new family bereavement');
+   assert((await page.locator('.toast').innerText()).includes('Time has stopped'));
+  }
+  assert(pending.pending||pending.status==='finished','next decision must eventually reach choice or ending after bereavement stops');
   if(pending.pending){await page.locator('[data-action="choose"]:not([disabled])').first().click();const chosen=await read();assert(chosen.journal.length>pending.journal.length,'choice must record consequence');}
   await page.locator('[data-action="game-tab"][data-tab="profile"]').click();const saved=await read();await page.reload();await click('resume');await page.locator('[data-action="game-tab"][data-tab="profile"]').click();const reloaded=await read();assert.equal(reloaded.id,saved.id);assert.deepEqual(reloaded.journal,saved.journal,'loading must preserve established history');
   await click('archive');const downloadPromise=page.waitForEvent('download');await click('export');const download=await downloadPromise;await download.saveAs(results+'/browser-backup.json');const backup=JSON.parse(fs.readFileSync(results+'/browser-backup.json','utf8'));assert.equal(backup.current.id,saved.id);
@@ -68,6 +73,14 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   assert.equal(propertySaved.propertyLedger.properties.filter(p=>p.mortgage?.balance>0).length,1);assert.equal(propertySaved.propertyLedger.properties.find(p=>p.kind==='rental').mortgage.balance,propertyFixture.debt);
   await page.reload();await click('resume');await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.deepEqual((await read()).propertyLedger,propertySaved.propertyLedger);
   console.log('PASS housing UI let/move/buy/save/reload preserves the let dwelling and secured loan');
+
+  const bereavement=await page.evaluate(()=>{
+   const O=window.OL,s=O.create({country:'GB',seed:2218});for(const p of s.people)p.age+=30;Object.assign(s,{age:30,month:11,school:false,pending:null,agenda:[],cash:100000});s.flags.flow.schoolLeavingResolved=true;
+   localStorage.setItem('other-lives-current-v1',JSON.stringify(s));return s.people.find(p=>['Mother','Father'].includes(p.role)).id;
+  });
+  await page.reload();await click('resume');await page.evaluate(id=>{const O=window.OL;O.personDeathRisk=(_s,p)=>p.id===id?1:0;O.mortality=()=>false;O.makeAgenda=()=>[{type:'decision',id:'unexpected-expense',month:1,done:false}];},bereavement);
+  await click('next-decision');const bereaved=await read();assert.equal(bereaved.age,31);assert.equal(bereaved.month,0);assert.equal(bereaved.pending,null);assert.equal(bereaved.people.find(p=>p.id===bereavement).alive,false);assert((await page.locator('.toast').innerText()).includes('Time has stopped'));
+  await page.waitForTimeout(4100);assert.deepEqual(await read(),bereaved,'bereavement stop must remain paused');console.log('PASS next-decision pauses at a real annual family death without adding a choice');
 
   // Retain the earlier branch's browser assertions and execute them with real asynchronous waits.
   const legacy=await context.newPage();await legacy.goto('http://127.0.0.1:8000/tests/browser.html?autorun=1');

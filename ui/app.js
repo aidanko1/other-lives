@@ -149,7 +149,7 @@ async function handle(action,el){switch(action){
  }
  case 'inspector':if(playing){resumeAfterInspector=true;stopClock()}decisionAside=!!state?.pending;inspector=el.dataset.tab||'profile';break;
   case 'close-inspector':inspector=null;if(resumeAfterInspector&&!state?.pending&&state?.status==='alive'){resumeAfterInspector=false;startClock()}break;
-  case 'next-decision':{if(!state||state.pending||state.status!=='alive')return;stopClock();resumeAfterDecision=true;O.skipToDecision(state);saveCurrent();if(state.status==='finished')await persistFinished();break}
+  case 'next-decision':{if(!state||state.pending||state.status!=='alive')return;stopClock();resumeAfterDecision=true;O.skipToDecision(state,p=>{resumeAfterDecision=false;notify(`${p.name} has died. Time has stopped so you can read the life record.`);});saveCurrent();if(state.status==='finished')await persistFinished();break}
 
  case 'dismiss-birth':if(!birthRouletteFinished)break;birthReveal=false;birthRouletteFinished=true;if(birthRouletteTimer)clearInterval(birthRouletteTimer);birthRouletteTimer=null;startClock();break;
  case 'play-pause':if(playing)stopClock();else{gameTab='log';inspector=null;modal=null;tabResume=false;if(state?.pending){decisionAside=false;resumeAfterDecision=true;}else startClock();}break;

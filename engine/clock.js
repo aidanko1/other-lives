@@ -60,12 +60,15 @@ O.advance=function(s){ // Legacy compatibility; advance to the next birthday or 
  for(let i=0;i<22&&s.status==='alive'&&!s.pending&&s.age===start;i++)O.advanceMonth(s);
  return true;
 };
-O.skipToDecision=function(s){
+O.skipToDecision=function(s,onFamilyDeath){
  if(!s||s.status!=='alive'||s.pending)return 0;
+ const family=new Set(s.people.filter(p=>p.alive&&['Mother','Father','Parent','Grandparent','Sibling','Partner','Child'].includes(p.role)).map(p=>p.id));
  let months=0;
  while(s.status==='alive'&&!s.pending&&months<1500){
   const before=s.month,age=s.age;
   O.advanceMonth(s);if(s.month!==before||s.age!==age)months++;
+  const bereaved=s.people.find(p=>family.has(p.id)&&!p.alive);
+  if(bereaved&&s.status==='alive'){if(typeof onFamilyDeath==='function')onFamilyDeath(bereaved);break;}
  }
  return months;
 };
