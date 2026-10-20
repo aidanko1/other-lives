@@ -7,6 +7,7 @@
   attendingSchool: s => s.age >= 6 && !!s.school,
   fullTimeStudy: s => s.study?.mode === 'full-time' && ['enrolled', 'overseas-route'].includes(s.study.status),
   routeConflict(s,d) {
+   if(s.institution&&d.exclusive!=='institution'&&!d.institution)return 'This plan must wait until your institutional commitment ends.';
    const research=Object.values(s.routes?.active||{}).find(r=>r.id==='masters'&&r.stage==='studying'||r.id==='phd'&&r.stage==='research');
    if(research&&['overseas-work','military','seafaring','politics','vocation','business','family-enterprise'].includes(d.id))return 'Resolve the current postgraduate commitment first.';
    if(this.fullTimeStudy(s)&&(d.exclusive==='rare-career'||['seafaring','politics','vocation','business','family-enterprise','masters','phd','faculty'].includes(d.id)))return 'Complete or pause your full-time course before committing to this work route.';

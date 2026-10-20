@@ -36,3 +36,10 @@ test('overseas full-time study gets part-time offers and preserves quoted pay',(
 test('a prepared full-time work route is revalidated after enrolling overseas',()=>{
  const s=adult();const d=O.ROUTES.find(d=>d.id==='seafaring');s.routes.active.seafaring={id:'seafaring',stage:'consider',started:39,due:40,status:'decision',spent:100};s.study={course:'Nursing',degreeId:'nursing',mode:'full-time',status:'overseas-route',started:40,duration:3,graduationAge:43};s.job='';s.income=0;s.employment={role:'',mode:'unemployed',hours:0};s.pending='life-route-decision';assert(O.routeContinuationBlock(s,d,s.routes.active.seafaring));const e=O.EVENTS.find(e=>e.id===s.pending),opts=e.options(s);assert.equal(opts.length,1);assert.match(opts[0].label,/circumstances changed/);assert(O.applyChoice(s,0));assert(!s.routes.active.seafaring);assert.equal(s.study.status,'overseas-route');assert.equal(s.job,'');assert(s.routes.history.some(r=>r.id==='seafaring'&&r.outcome==='Circumstances changed'));
 });
+
+test('institutional service prevents an earlier study plan delivering an unusable course card',()=>{
+ const s=adult();s.institution={kind:'service',until:42};s.routes.active['exam-retake']={id:'exam-retake',started:39,stage:'consider',due:40,status:'preparing',spent:100};s.pending=null;s.agenda=[];const r=s.routes.active['exam-retake'],d=O.ROUTES.find(d=>d.id===r.id);assert(O.routeContinuationBlock(s,d,r));O.advanceMonth(s);assert(!s.routes.active['exam-retake']);assert.notEqual(s.pending,'choose-degree-subject');assert(s.routes.history.some(r=>r.id==='exam-retake'&&r.outcome==='Circumstances changed'));
+});
+test('professional preparation is cancelled if its prerequisite occupation changes',()=>{
+ const s=adult();s.routes.active['professional-training']={id:'professional-training',started:39,stage:'consider',due:40,status:'decision',spent:0};s.pending='life-route-decision';const e=O.EVENTS.find(e=>e.id===s.pending);assert.match(e.options(s)[0].label,/circumstances changed/);assert(O.applyChoice(s,0));assert(!s.routes.active['professional-training']);assert.equal(s.job,'Office administrator');
+});

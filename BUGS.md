@@ -25,3 +25,9 @@ OL-010 / High: default overseas destination was GB only when the current country
 OL-011 / High: overseas study was omitted from several domestic-only workload predicates, and intentions were checked only when starting. Seeds61181 LA/business and103025 LT/seafaring commit full-time work after the overseas course began. Reuse fullTimeStudy for offers/settlement and shared routeConflict at preparation, delivery and choice; present a recorded exit if circumstances changed. New regressions preserve quoted part-time pay and cancel a stale prepared work route.
 
 TEST-003: retained browser runner reused the previous iframe DOM because its load wait returned as soon as the old page still had a brand element. Await the new iframe load event before querying. Keep every original gameplay/funding assertion. The original failed funding assertion is retained and must pass against the actual new document.
+
+OL-012 / High: seed128702 CM, school exam preparation followed by service, delivered choose-degree-subject while institutional eligibility rejected all resolution. Revalidate institutional obligations at route continuation and exit the earlier intention; keep service's own completion route available. Regression: institutional service invalidates older study preparation.
+
+OL-013 / High: a professional-training enquiry could reach selection after the player left the eligible profession; dereferencing careerTrack(job).id then failed. Revalidate initial consider-stage prerequisites before offering its action; preserve history via a recorded changed-circumstances exit. Regression: professional preparation after job change.
+
+CI-001 remains under investigation: awaiting an iframe load event alone did not resolve the retained browser funding check. Added actual saved ID/pending route/parent budget/choice diagnostics. No funding assertion has been removed or relaxed.

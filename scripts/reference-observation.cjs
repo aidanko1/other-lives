@@ -7,7 +7,7 @@ const fs=require('node:fs'),{chromium}=require('playwright');
  try{
   await page.goto(report.url,{waitUntil:'domcontentloaded',timeout:45000});report.title=await page.title();report.steps.push({stage:'setup',controls:await visibleControls()});await page.screenshot({path:'test-results/reference-setup.png',fullPage:true});
   if(!await clickText(/^Be born$/i))throw Error('Birth control not found');
-  await page.waitForTimeout(3000);report.steps.push({stage:'birth registration',controls:await visibleControls()});await page.screenshot({path:'test-results/reference-birth.png',fullPage:true});
+  await page.getByRole('button',{name:/Begin this life/i}).waitFor({state:'visible',timeout:20000});report.steps.push({stage:'birth registration',controls:await visibleControls()});await page.screenshot({path:'test-results/reference-birth.png',fullPage:true});
   if(!await clickText(/^Begin this life/i))throw Error('Begin-life control not found');
   await page.waitForTimeout(1200);await clickText(/^.*Pause$/i);report.steps.push({stage:'life',controls:await visibleControls()});await page.screenshot({path:'test-results/reference-life.png',fullPage:true});
   if(await clickText(/^Family and life$/i)){report.steps.push({stage:'family inspection',controls:await visibleControls()});await page.screenshot({path:'test-results/reference-family.png',fullPage:true});await page.keyboard.press('Escape');await clickText(/^(Close|Done|×|✕)$/);}
