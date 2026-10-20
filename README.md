@@ -13,7 +13,7 @@ The game is still a fictional simulation. Fixed 2024 UNICEF under-five mortality
 - Country-specific educational pathways, with application, possible admission, multi-year study and credential completion. A separate post-secondary application stage follows documented earlier qualifications: college/degree and advanced vocational paths have costs, funding enquiries, admission decisions, and delayed results.
 - Country-specific work options, occupation eligibility rules, existing interests and clear labels for illustrative pay.
 - National childhood-mortality and life-expectancy benchmark checks; Hong Kong's first-year reference uses a different dated source.
-- Personal memory threads based on a childhood meal and routine route that can return later in life.
+- Personal memory threads based on childhood meals, transport and an individual country-specific childhood experience that can resurface later in life.
 - No adult financial decisions for children; no parent names in brackets in the ordinary life record.
 - Conflicting legacy education and career decisions disabled for the curated locations.
 - Automatic time, persistent decisions, tabs, archive and mobile UI retained.
