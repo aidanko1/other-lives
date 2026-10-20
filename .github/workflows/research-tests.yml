@@ -1,0 +1,17 @@
+name: Test Other Lives research build
+on:
+  push:
+    branches: [research-v5-6-calibrated]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run sourced-country regression
+        run: node qa-smoke.js
