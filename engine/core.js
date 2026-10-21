@@ -19,7 +19,7 @@ O.modifyPerson=(s,id,delta)=>{const p=s.people.find(x=>x.id===id&&x.alive);if(p)
 O.bond=(s,role,delta)=>s.people.filter(x=>(x.role===role||(role==='Parent'&&['Mother','Father'].includes(x.role)))&&x.alive).forEach(p=>O.modifyPerson(s,p.id,delta));
 O.adjust=(s,fx={})=>{for(const [k,v] of Object.entries(fx)){if(['health','happiness','knowledge','relationships','stress','confidence'].includes(k))s[k]=O.clamp((s[k]||0)+v);else s[k]=(s[k]||0)+v} if(s.cash<0){s.debt+=-s.cash;s.cash=0}};
 O.journal=(s,title,description,type='life')=>{s.journal.unshift({age:s.age,year:s.birthYear+s.age,title,description,type});};
-O.snapshot=(s)=>{if(s.age%5!==0&&![16,18,22,30,40,50,65].includes(s.age))return;let clone=JSON.parse(JSON.stringify({...s,snapshots:[]}));s.snapshots.push({age:s.age,data:clone});if(s.snapshots.length>24)s.snapshots.shift()};
+O.snapshot=(s)=>{if(s.settings?.snapshotPolicy==='none'||s.age%5!==0&&![16,18,22,30,40,50,65].includes(s.age))return;let clone=JSON.parse(JSON.stringify({...s,parallelWorld:undefined,...(s.parallelWorld?{parallelWorldRef:{version:1,id:s.parallelWorld.id}}:{}),snapshots:[]}));s.snapshots.push({age:s.age,data:clone});if(s.snapshots.length>24)s.snapshots.shift()};
 O.create=(settings={})=>{
  const seed=Number.isInteger(settings.seed)?settings.seed>>>0:((Math.random()*0xffffffff)>>>0);
  const s={id:'life-'+Date.now()+'-'+Math.floor(Math.random()*1e6),rng:seed>>>0,seed,birthYear:settings.year||2026,age:0,gender:'',country:null,percentile:0,urban:false,people:[],nextPerson:0,status:'alive',settings,health:85,happiness:70,knowledge:12,relationships:60,stress:0,confidence:45,schooling:0,education:O.EDU[0],school: false,schoolGrades:0,job:'',jobTier:0,workYears:0,income:0,annualExpenses:0,unemployedYears:0,personalFreedom:0,cash:0,debt:0,investments:0,property:0,inheritance:0,yearsInCity:0,focus:'Balanced',flags:{},used:{},journal:[],snapshots:[],pending:null,lastOutcome:'',startedAt:new Date().toISOString(),finishedAt:null,cause:null,yearsWorked:0,scene:'home'};
@@ -56,14 +56,15 @@ O.create=(settings={})=>{
  s.school=false;s.schemaVersion=2;s.choiceHistory=[];s.propertyLedger={version:1,nextId:0,properties:[],history:[]};
  s.birthDescription=`You are born ${s.urban?'in an urban community':'in a rural community'} in ${s.country.name}. Your household is ${bracket.label.toLowerCase()}. ${bracket.desc} Your family includes ${s.people.map(p=>p.role.toLowerCase()+' ('+p.name+')').join(', ')}. You have no control over the circumstances of your birth. The life ahead is not predetermined.`;
  O.journal(s,'A beginning',s.birthDescription,'birth');
+ if(settings.comparisons===true)s.parallelWorld=O.buildParallelWorld(s);
  O.snapshot(s);return s;
 };
 O.annualCore=(s)=>{
  const age=s.age,c=s.country;
  s.people.forEach(p=>{
   if(!p.alive)return;
-  p.age++;
-  if(O.chance(s,O.personDeathRisk?O.personDeathRisk(s,p):Math.min(.25,Math.pow(1.106,p.age-65)*.007))){p.alive=false;p.diedAt=p.age;O.journal(s,`Goodbye to ${p.name}`,`${p.name}, your ${p.role.toLowerCase()}, dies at age ${p.age}. Cause: ${O.personCause?O.personCause(s,p):'a serious illness'}. The family makes arrangements and finds a new daily rhythm.`,'family');O.adjust(s,{happiness:-12,relationships:-3,stress:9});return;}
+  if(p.age<160)p.age++;
+  if(p.age>=160||O.chance(s,O.personDeathRisk?O.personDeathRisk(s,p):Math.min(.25,Math.pow(1.106,p.age-65)*.007))){p.alive=false;p.diedAt=p.age;O.journal(s,`Goodbye to ${p.name}`,`${p.name}, your ${p.role.toLowerCase()}, dies at age ${p.age}. Cause: ${O.personCause?O.personCause(s,p):'a serious illness'}. The family makes arrangements and finds a new daily rhythm.`,'family');O.adjust(s,{happiness:-12,relationships:-3,stress:9});return;}
   if(O.chance(s,.03))p.close=O.clamp(p.close+O.int(s,-5,5));
  });
  const focus={Balanced:[0,0,0,0],Learning:[0,-1,2,0],Health:[2,1,0,0],Relationships:[0,1,0,2],Career:[-1,-1,1,-1],Rest:[1,2,0,0]};

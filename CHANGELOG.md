@@ -62,3 +62,10 @@ This is historical CI evidence, not evidence for the engineering branch.
 ## Integration checkpoint — validation pending
 Recovered and integrated b31a7af from quality/simulation-foundation with provenance. Retains engine/UI extraction, shared eligibility/cooldown history, preschool access/attendance, versioned migrations/atomic commands, archive repairs and family-assisted postgraduate funding. These were existing unmerged changes; this integration does not claim authorship or new verification of their earlier tests.
 Added Phase 11 requirements matrix, bug reproductions and explicit release status. Applied zero-seed, mortgage preservation, terminal idempotence and currency-formatter fixes. Preserved existing tests and browser assertions. Corrected one new test's VM/host prototype comparison to compare persisted JSON content and source immutability. No production merge/deployment.
+
+## 6.2.0-dev.2 — candidate, unreleased
+- Four passive same-age comparison lives, simulated through the production engine with independent seeds and checked states. Compact saved timelines and shared snapshot references preserve exact replay without altering player outcomes.
+- Factual ending recap for education/work, children/survivors, partners, interests and wealth; no invented missing history or reflection feature.
+- OL-034: deceased teenage partners no longer trigger a false living age-gap violation later in life; historical minor marriage/adult-start safeguards retained.
+- OL-035: player/relative mortality honors the declared120/160 model validity ceilings even if stochastic death rolls miss.
+- New permanent regressions and1000-peer cohort; quality workflow expands from eight to11 jobs with Firefox/WebKit alongside Chromium. Local90-test suite passes; exact-source CI and final release decision pending. No production merge/deployment.

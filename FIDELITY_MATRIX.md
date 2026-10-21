@@ -2,7 +2,7 @@
 
 Verified 20 October 2026 UTC / 21 October Hong Kong. Official https://1in8b.life/en/ v0.7.89 beta. Evidence: direct rendered play, official documentation, Other Lives source/tests and explicit unknowns. REFERENCE_PLAYTEST_2026-10-21.md records the completed observation; earlier limited automated evidence is historical: https://github.com/aidanko1/other-lives/actions/runs/39493052211. No proprietary reference assets/source/substantial text are incorporated.
 
-| ID / dimension | Verified reference | Other Lives at ba00e5b | Evaluation / acceptance |
+| ID / dimension | Verified reference | Other Lives / current candidate | Evaluation / acceptance |
 |---|---|---|---|
 | RF01 Structure | Random birth/registration, text life, events, ending and rebirth played | Same broad sequence; full actual UI lifecycle/new birth pass | Core structure matches; not all-content parity |
 | RF02 Time | Automatic clock, pause,16× and Next used; choices stop time | Month clock, same six speeds/pause/Next | Preserve simple controls; full timed duration unknown |
@@ -13,9 +13,9 @@ Verified 20 October 2026 UTC / 21 October Hong Kong. Official https://1in8b.life
 | RF07 Inspection | Waiting choice retained; spending pauses | Inspection pauses and retains choice | Actual navigation and whole-state reload/inspect/export equality pass |
 | RF08 Pacing |30/60/90 setup, default60; target uses birth-country life expectancy (visible v0.7.90 setup);47 rendered decision entries by74 in earlier life | Cycle6 implements the same targets/default, frozen birth-country reference; legacy saves retain45s/calendar year; story deliveries no longer charge extra months | Timed Chromium checks pass for all three values and legacy rate; exact internal reference timer, full wall-clock session and quantitative decision parity remain unknown |
 | RF09 Stages | Primary automatic6 in this life; school/work, uncertain admission, subject/degree/offers, care and retirement at 60 played | Explicit school entry, subjects/funding, qualified offers/hours/FTE/care/retirement | Entry/home learning and conservative funding are prior requirements; national rules simplified |
-| RF10 Endings | Infant death/rebirth and natural91-year ending: cause/family/work/wealth/hobbies/happy year | Cause/history/summary/archive/export/replay; terminal effects once; actual death at 105/new birth | Same broad loop; richer retrospective remains a gap |
+| RF10 Endings | Infant death/rebirth and natural91-year ending: cause/family/work/wealth/hobbies/happy year | Cause/history/summary/archive/export/replay; terminal effects once; actual death at 105/new birth | Cycle8 factual retrospective implemented; local unit/Chromium pass, exact-source CI pending; missing historical details omitted |
 | RF11 Chance | Opposed marriage failed, later marriage succeeded; independent illness/deaths/family/work | Stochastic world plus consequential eligible choices | No guaranteed life outcomes or per-person management |
-| RF12 Parallel lives | Four passive companion lives directly observed | No equivalent implemented | Remaining fidelity work |
+| RF12 Parallel lives | Four passive companion lives directly observed | Cycle8 four same-age passive peers implemented; independent production simulation/saved compact history | Local unit/Chromium pass;1000 checked peers pass before final boundary change; exact-source CI pending |
 | RF16 Reflections | Optional milestone questions/notes directly observed | Explicitly excluded by user on21October2026; Next/actual browser continue across all five ages | Intentional difference, verified at6c8763a: no reflection questions, notes screen, special pauses or toggle |
 | RF13 Art | Text-led interface/scene and ending sequence observed | Independent static illustration, no movement/exploration | Intentional restrained preference; assets/animation not copied |
 | RF14 Significant loss | Next stopped on father's death without a choice | Next stops on new close-family death with existing pause/toast | Addressed, red→green unit and real browser. Other-family generalization is explicit judgment |

@@ -29,7 +29,7 @@
   try{
    s.age++;s.month=0;s.lastOutcome='';O.runAnnual(s);
    if(s.status==='finished')return {advanced:true,finished:true,birthday:true};
-   if(O.mortality(s)){O.finish(s);return {advanced:true,finished:true,birthday:true};}
+   if(s.age>=120||O.mortality(s)){O.finish(s);return {advanced:true,finished:true,birthday:true};}
    O.snapshot(s);s.agenda=O.makeAgenda(s);return {advanced:true,birthday:true};
   }catch(error){restore(s,before);throw error;}
  };

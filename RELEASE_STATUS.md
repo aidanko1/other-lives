@@ -1,3 +1,13 @@
+# Current candidate —6.2.0-dev.2, not released
+
+Cycle8 continues from8c549dd on engineering/completion-cycle8, targeting the existing draft PR#2. The new production code is not represented by earlier CI results. No main merge or deployment.
+
+Executed locally:90 Node tests pass,0 failures; Chromium complete lifecycle/storage/property/timer/exclusion suite plus new comparison/export/import/replay/ending checks passes. A1000-peer run passes:250 worlds,129 player origins,95 peer countries,760051 checked states,33125 decisions,ages1–104,max newborn save22982 bytes. That run preceded the final120/160 mortality-boundary fix; final exact-source CI must rerun all cohorts. Newborn GB2218 generated four complete peer histories in approximately1.9 seconds locally; performance on slower devices is unverified.
+
+New release gate:11 jobs (regression/build,four background shards,balance,trajectory,parallel,three browser engines). CI pending. Firefox local test running; WebKit local launch blocked by missing host libraries. No passed status is inferred from downloaded binaries. Reflections remain excluded. ENGINEERING_CYCLE_8.md records acceptance, failed fixture investigation and bug reproductions. The historical verified checkpoint below remains restorable until this candidate's gates pass.
+
+---
+
 # Release status — verified reliability baseline
 
 Verified 21 October 2026 UTC/Hong Kong. Version 6.2.0-dev.1 is unreleased. The audited reliability and playback stages are implemented and verified; complete reference parity and national calibration remain incomplete. No experimental merge/deployment. ENGINEERING_CYCLE_6.md records the latest acceptance and evidence.

@@ -1,6 +1,7 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=require('playwright');
+const assert=require('node:assert/strict'),fs=require('node:fs'),playwright=require('playwright'),browserName=process.env.PLAYWRIGHT_BROWSER||'chromium';
+if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown test browser: '+browserName);
 (async()=>{
- const browser=await chromium.launch(),context=await browser.newContext({viewport:{width:1280,height:900},acceptDownloads:true}),page=await context.newPage(),errors=[];
+ const browser=await playwright[browserName].launch(),context=await browser.newContext({viewport:{width:1280,height:900},acceptDownloads:true}),page=await context.newPage(),errors=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});page.on('response',r=>{if(r.url().startsWith('http://127.0.0.1:8000')&&r.status()>=400)errors.push('HTTP '+r.status()+' '+r.url());});
  const read=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('other-lives-current-v1')));
  const click=action=>page.locator('[data-action="'+action+'"]').first().click();
@@ -9,6 +10,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   await require('./browser-pacing.cjs')(browser);
   await require('./browser-duration.cjs')(browser);
   await require('./browser-no-reflections.cjs')(browser);
+  await require('./browser-parallel.cjs')(browser);
   await page.goto('http://127.0.0.1:8000');await page.locator('[data-action="new-dialog"]').first().waitFor();await click('new-dialog');await page.locator('#new-country').selectOption('GB');await click('start');
   assert(await page.locator('[aria-label="New life reveal"]').isVisible());await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');
   await page.locator('[data-action="game-tab"][data-tab="family"]').click();const paused=await read();await page.waitForTimeout(4100);const later=await read();assert.equal(later.age,paused.age);assert.equal(later.month,paused.month,'inspecting family must pause clock');
@@ -90,6 +92,6 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
   await legacy.waitForFunction(()=>['passed','failed'].includes(document.querySelector('#results')?.dataset.status),{},{timeout:45000});
   const legacyResult=await legacy.locator('#results').innerText();console.log(legacyResult);
   assert.equal(await legacy.locator('#results').getAttribute('data-status'),'passed',legacyResult);await legacy.close();
-  assert.deepEqual(errors,[],'browser errors');console.log('PASS: Chromium birth/choice, tab pause, save/reload, downloaded export/import, ending display, next life, mobile navigation. Natural UI lifecycle exercised; wall-clock life duration and full reference lifecycle remain unverified.');
+  assert.deepEqual(errors,[],'browser errors');console.log('PASS: '+browserName+' birth/choice, tab pause, save/reload, downloaded export/import, ending display, next life, mobile navigation. Natural UI lifecycle exercised; wall-clock life duration and full reference lifecycle remain unverified.');
  }catch(e){await page.screenshot({path:results+'/browser-failure.png',fullPage:true}).catch(()=>{});throw e;}finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

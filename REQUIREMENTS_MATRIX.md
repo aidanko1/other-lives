@@ -57,3 +57,13 @@ Historical cycle2 totals:49 reported Node tests,2,000 complete asserted seeded l
 | T01–T04/E02: exact-revision quality | quality.yml/pages.yml,both harnesses,browser-smoke |75 tests/build,2,000 validated lives,all eight gates at b87e519 | PASS-SCOPED; no deployment; main protection false |
 
 No significant requirement is whole-game complete merely because a control exists or one fixture passes. Remaining work and owner-level enforcement are in BACKLOG.md.
+
+## Cycle8 current acceptance supplement
+| Requirement | Implementation | Permanent checks | Current status |
+|---|---|---|---|
+| RF12 passive four companions, current-date information only | engine/parallel.js; core snapshot/create; ui/app.js | parallel.test.cjs; browser-parallel.cjs; parallel-simulation.cjs | Implemented;3unit tests and Chromium UI pass locally;1000 peers pass before final boundary fix; exact-source CI pending |
+| RF10 factual richer ending, including infants/unknown legacy history | engine/retrospective.js; ui/app.js | retrospective.test.cjs; browser-parallel.cjs | Two unit tests and actual Chromium ending pass locally; exact-source CI pending |
+| S04 dead partner history and bounded terminal ages | state.js; core.js; annual.js | bereaved-teen-partner.test.cjs; age-ceilings.test.cjs; all cohorts | Three regressions pass;90-test full suite passes locally |
+| S08/S09 immutable companion world/save/replay with unchanged player outcomes | parallel.js; core.js; ui/app.js | full-state independent VM comparison; exact export/import/replay; old-save fixtures | Local unit/Chromium pass; all browser-engine CI pending |
+| T02/T04/E02 expanded release gates | quality.yml; parallel harness; browser smoke | Four background shards, balance, trajectory, parallel, regression/build, three browser engines | Authored11-job gate; no claim of CI pass until run completes |
+All earlier scoped evidence is historical. These additions do not establish national calibration, enjoyment or complete reference parity.
