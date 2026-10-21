@@ -1,57 +1,49 @@
 # Other Lives — permanent development contract
 
-## Product priority
-Preserve the experience of **1 in 8 Billion**, official reference https://1in8b.life/en/.
-Priority: gameplay fidelity; logical consistency and realism; causal storytelling and lasting consequences; reliability/completeness/maintainability; then content.
-Explicit user exception (21October2026): **do not implement the reference's reflection feature**. No milestone reflection questions, note-entry screens, reflection pauses or reflection toggle. This is an intentional product requirement, not missing fidelity work. Ordinary noninteractive memories remain part of event storytelling. Consult GAME_DESIGN.md and FIDELITY_MATRIX.md before proposing reference parity changes.
-Retain `tests/fidelity-exclusions.test.cjs` and `tests/browser-no-reflections.cjs`; ENGINEERING_CYCLE_7.md records this correction. They protect uninterrupted progression at5/15/30/50/70 while preserving normal choices and bereavement stops.
-Latest tested guard/source checkpoint:6c8763a,82 tests/build/two1000-life cohorts/all eight jobs (run39532142864). Production engine/UI/index remain identical to ba00e5b. Restore:`checkpoint/6.2.0-dev.1-fidelity-exclusions-verified`. Older verification paragraphs below are historical supplements.
-Keep chronological, text-driven life progression, an automatic clock with pause/speed/next-decision controls, occasional meaningful decisions, and optional family/spending inspection. Keep a restrained modern interface and static pixel illustrations. Do not turn it into an RPG, management simulator or dashboard.
+## Product
+Preserve the independently implemented, text-driven chronological life/choice experience of the official reference https://1in8b.life/en/. Priority: fidelity; consistency/realism; persistent causal storytelling; reliability/maintainability; additional content. Use FIDELITY_MATRIX.md to distinguish direct observations, documentation, assumptions and unknowns. Never copy proprietary source, art or substantial prose.
 
-## Before editing
-Read GAME_DESIGN.md, ARCHITECTURE.md, TESTING.md, ENGINEERING_AUDIT.md and BACKLOG.md. Inspect the real implementation and callers; UI presence and old release claims are not verification.
-Inspect index.html script order and every wrapper of affected OL functions. Define acceptance criteria, affected systems, fidelity implications, save implications and regression scenarios before implementing.
-Treat REFERENCE_GAME_AUDIT.md as historical research, not proof of new playtesting. Use only the official site for reference evidence. Label source-documentation observations separately from hands-on play.
+**Explicit user exception: no reflections.** No milestone reflection questions, player note-entry screen, special reflection pause or toggle. Keep fidelity-exclusions.test.cjs and browser-no-reflections.cjs. Ordinary noninteractive memories and the existing Rest focus remain. Do not remove unrelated meaningful decisions merely because they concern a life milestone.
 
-## Engineering rules
-Preserve a restorable SHA and use a development branch. Work in small coherent commits; do not merge or call a release stable with failing required checks.
-Prefer fixing the existing owner of a rule. Do not add another layer of monkey patches to repair an earlier patch. Move toward explicit system ownership incrementally behind tests, without a wholesale rewrite.
-Use OL.rand/OL.int/OL.chance for simulation randomness. No random sort comparators. Metadata IDs/timestamps may be nondeterministic; exclude them explicitly from replay comparisons.
-Validate eligibility at execution as well as presentation. Preserve qualifications, identities, debts, commitments and established history across transitions.
-No silent placeholders, removed functionality or invented country-specific evidence. National averages are not individual predictions. Clearly label model assumptions.
-Preserve current save keys. Changes to save semantics need idempotent migrations, older-save fixtures and round-trip checks. Never commit a user's private archive or rewrite their original backup.
-Do not add UI controls merely because the engine gains depth.
+Keep the automatic clock/pause/speed/Next controls, occasional meaningful choices, optional inspection and restrained static pixel art. No movement/exploration, management dashboard, extra compulsory menus or micromanagement. Deeper simulation does not require more controls.
+
+## Start every session
+Read RELEASE_STATUS.md, GAME_DESIGN.md, FIDELITY_MATRIX.md, ARCHITECTURE.md, TESTING.md, REQUIREMENTS_MATRIX.md, BUGS.md and BACKLOG.md, plus the latest engineering cycle. Inspect git status/log/remote and affected implementation/callers/tests. Do not overwrite other worktrees or uncommitted work. Older cycle reports are historical exact-revision evidence; do not present them as new tests or rely on conversation history alone.
+
+Latest verified source at this document's preparation: 3c30143 (cycle11),107 tests/build/all11 jobs/3000 release-cohort lives plus432 targeted complete lives; checkpoint/6.2.0-dev.4-narratives-verified. Cycle12 strengthens the archive fixture; its exact-source CI is separate. RELEASE_STATUS.md supersedes counts here.
+
+## Work in verifiable stages
+Before edits, identify fidelity implications, dependencies/owners, root cause, acceptance criteria, save implications and edge cases. Implement/integrate the complete scoped behavior. Preserve existing functionality and assertions; no placeholders, hidden errors, reduced coverage or expected-result changes to manufacture a pass. Investigate failures. Explain any genuinely invalid fixture correction with evidence.
+
+Use isolated development branches/restorable SHAs and small traceable commits. Do not merge/deploy experimental or failing work. Production main4072fd4 is preserved. All11 quality jobs gate Pages; protected-main settings are not enabled and available connector access cannot administer them. Never claim settings-level enforcement or a deployment that did not occur.
+
+## Rule ownership
+| Boundary | Owner / rule |
+|---|---|
+| Annual/birthday | engine/annual.js: named stages, atomic rollback and saved once-per-age receipts; never replace OL.passive |
+| Costs/cash/debt | engine/finance.js: quoteAnnualCosts is pure; settleAnnualCosts only at explicit commit; preserve conserved gifts, reserves, unknown legacy cash and scheduled prepayment |
+| Employment | engine/employment.js: role/pay/hours/FTE/retirement; preserve course/care/service restoration |
+| Property | engine/property.js: separate dwellings, residence/letting, values and secured loans; repayment through finance |
+| Eligibility/choices | engine/rules.js, decisions.js, commands.js: pure display, execution checks, displayed token, participant identity and rollback |
+| State/load | engine/state.js: invariants and conservative schema0/1→2 migration; current-schema exact clone, no simulation during load |
+| Calendar/playback | engine/clock.js: stories do not charge calendar months; pending choices/bereavement stop appropriately; saved30/60/90 targets, old3750ms/month fallback |
+| Mortality | demographics.js probabilities, clock.js first-year atomic timing; preserve saved model versions/receipts, no extra infant rolls for stories or first birthday |
+| Comparisons | engine/parallel.js: four complete independent seeded production lives, per-action assertions, immutable compact histories/current-date views |
+| Ending | engine/retrospective.js pure recorded facts; never fabricate marriage lengths, descendants or happiest year; UI formats stored text/currency |
+| Narrative | life-moments.js definition prerequisites apply at selection and queued execution; preserve existing recorded history |
+
+Prefer the existing owner over another monkey-patch layer. Legacy helper/wrapper simplification must be incremental behind concrete regressions, not a wholesale rewrite. Do not use livingCost or mutating ensure helpers as display previews.
+
+Use OL.rand/int/chance and seeded shuffle for simulation randomness. No random sort comparators. Given established state/seed/choices, continuation must reproduce. Metadata IDs/timestamps may vary between different births; isolate those explicitly, never discard gameplay/appearance/history merely to pass a comparison.
+
+## Save/data safeguards
+Keep storage keys and old fixtures. Add idempotent migrations when semantics require them. Preserve unknown historical balances/dates instead of inventing facts. Never modify or commit a user's private backup; read-only audits verify original bytes and disclose stubs/limits.
+
+Do not add mortalityTiming to older saves, regenerate saved comparison worlds or invent past companions for existing lives. New timing/world data is written before birth snapshots. Snapshots share a world reference; replayState validates membership and restores the exact saved world. Current-schema loading is not a repair/transition.
+
+Sources/national averages are not individual predictions. Label proxy economics, licensing, country/era assumptions and mortality approximations. Uniform infant hazard is not an empirical neonatal curve;120/160 are engine bounds, not claimed biological maxima. Do not invent national rules or remove chance/independent world developments.
 
 ## Completion evidence
-Implement, integrate and test the complete agreed scope. Execute appropriate unit/integration/regression tests and actual browser checks. A major release needs at least 1,000 complete seeded lives with explicit assertions, coverage/outcome summaries and retained failure reproduction data. A bounded run that stops while alive is a failure.
-Record exact commands, commit SHA, CI URLs, validated life count and limitations. Never describe authored tests as executed or old CI results as results for the new revision.
-Update CHANGELOG.md and BACKLOG.md; distinguish implemented, verified, incomplete and unverified work. Do not claim a live deployment until its workflow succeeds. Report the next highest-priority task.
+Execute relevant unit/integration/regression checks, production build, actual browser lifecycle/storage/choices/replay and all release cohorts. A major release requires at least1000 complete asserted reproducible lives; current CI retains three1000-life cohorts plus432 targeted complete rare-path cases. Bounds reached alive are failures; counts require outcome/state assertions. Retain seeds/traces, explicit invariants and failure reports. Repeated runs are not additional unique scenarios.
 
-## Phase 11: invariants and traceability
-Read REQUIREMENTS_MATRIX.md, BUGS.md and RELEASE_STATUS.md at session start. Keep verified implementation status and exact-revision test evidence current. Record expected/actual state, reproduction seed, cause, correction and regression for significant bugs. Do not weaken/delete failing assertions, hide errors or reduce coverage to pass a release. Correct an invalid test transparently with evidence.
-Use the extracted engine/rules.js, engine/state.js and engine/commands.js boundaries. Never use livingCost as a read-only preview: quoteAnnualCosts clones state. Keep old migration fixtures and browser assertions. Quality CI must gate production packaging/deployment; no automatic deployment from experimental branches. Do not label stable while critical/high defects remain or release checks are unverified.
-
-Consult FIDELITY_MATRIX.md for measurable comparison and unknown reference behaviour. Preserve the original game through independent code/art/prose. A passing technical gate does not resolve documented player-experience or calibration gaps.
-
-Annual cost ownership is engine/finance.js. Use quoteAnnualCosts for queries and settleAnnualCosts only at the explicit yearly commit; preserve saved receipts, conservation/rollback tests and legacy unknown-cash/known-zero-debt regressions. Do not reintroduce livingCost wrappers or adapter calls in UI/profile/family/spending/art reads. Current-schema loading must not execute simulation transitions. Consult ENGINEERING_CYCLE_2.md and RELEASE_STATUS.md for the latest exact-code evidence.
-
-## Verified ownership and continuity checkpoint
-Read RELEASE_STATUS.md and ENGINEERING_CYCLE_3.md through ENGINEERING_CYCLE_5.md at session start. Tested source b87e519 has 75 passing tests and all eight CI gates, including two 1,000-life cohorts. Do not confuse a documentation-only descendant with a new runtime revision.
-Annual ownership is engine/annual.js: register named stages, never replace OL.passive. Preserve whole-birthday rollback and saved once-per-age receipts. Employment role/pay/hours/FTE belong to engine/employment.js. Dwelling identity, use, values and secured loans belong to engine/property.js. Repay through engine/finance.js so total debt and bill schedules change together.
-Current schema2 loading is an exact clone; retain schema0/1 migrations, unknown legacy aggregates and explicit conserved liability repairs. UI uses engine/decisions.js and submits its displayed token. Next stops at a newly deceased close family member without inventing a choice.
-Full reference parity/calibration remain incomplete. Main protection is currently false and owner administration is outside available access. No experimental production merge/deployment.
-
-Cycle6 continuity: read ENGINEERING_CYCLE_6.md. Playback must charge actual calendar movement, not story delivery. New-life duration is presentation metadata frozen before the birth snapshot; preserve the3750ms/month fallback and exact load for existing saves. Never use pacing to change RNG or life outcomes. Keep all three timed UI tests plus the retained legacy five-highlight regression. These tests use controlled elapsed browser time, not a claimed full normal-speed human session.
-Latest tested runtime/tests/workflows: ba00e5b,81 passing tests/build, both1000-life cohorts and all eight jobs (run39530111698). Checkpoint/6.2.0-dev.1-pacing-verified preserves that source. Cycle6's policy-stratified counts and high-count replays do not justify treating voluntary stress choices as mandatory burden or claiming enjoyment. Current docs-only descendants must be distinguished from new runtime revisions.
-
-## Cycle8 continuation — candidate, not released
-Read ENGINEERING_CYCLE_8.md before editing the comparison/ending work. Version6.2.0-dev.2 introduces engine/parallel.js and engine/retrospective.js. Four peers use the production engine, separate seeds and per-action assertions; views are restricted to the current date. Never regenerate an existing save's comparison history or attach invented past peers to old lives. Snapshot data stores a world reference; replayState restores that exact saved world. Keep comparisons out of recursive peer generation and preserve player RNG/outcomes. Ending selectors must remain pure and use recorded facts only. No reflection prompts, notes or pauses. Current verification status is in RELEASE_STATUS.md; do not mistake earlier CI for this revision.
-
-## Current continuity (cycles8–9)
-Last exact-source verified checkpoint is bc74cde:90 tests/build/all11 jobs/3000 complete asserted lives, including three browser engines. Restore checkpoint/6.2.0-dev.2-comparisons-verified. Earlier statements of82 tests/eight gates are historical. Read ENGINEERING_CYCLE_8.md, ENGINEERING_CYCLE_9.md and current RELEASE_STATUS.md. Candidate9 adds reachable interests, contrast/modal accessibility and large-archive assertions; its exact-source verification is separate.
-
-Cycle10 mortality candidate: new births save mortalityTiming version1 before the first snapshot. Never add it to older saves or reroll saved worlds. clock.js owns atomic first-year timing; demographics.js owns probabilities/deduplication. Keep six infant regressions and natural NG2 UI check; no extra mortality on story delivery. Consult ENGINEERING_CYCLE_10.md and actual exact-source CI, not older counts. The uniform infant hazard is an assumption, not a national neonatal curve.
-
-Cycle9 now verified at db19f9c1,98 tests/build/all11 jobs/3000 release-cohort lives plus432 targeted complete rare-path cases, including accessibility and100-record archives in Chromium/Firefox/WebKit. Restore checkpoint/6.2.0-dev.2-accessibility-routes-verified. Cycle10 has separate pending evidence.
-
-Cycle10 verified source f0f2608:104 tests/build/all11 jobs/3000+432 complete asserted lives; restore checkpoint/6.2.0-dev.3-infant-timing-verified. Cycle11 candidate uses definition min ages (shared selection/execution) and pure ending selection/text formatting; read ENGINEERING_CYCLE_11.md. New test expectation107 is not a pass until executed.
+Update requirements-to-tests status, CHANGELOG, BACKLOG and current release evidence. Significant bugs need expected/actual state, reproduction/seed, cause, correction and permanent regression. Record exact source SHA/CI URL, actual tests/counts, build/deployment status and limits. A green gate does not establish national calibration, subjective enjoyment or complete reference parity. Never label unexecuted checks passed or the whole project finished from scoped results.
