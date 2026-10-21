@@ -9,7 +9,7 @@ module.exports=async browser=>{
    await page.clock.install({time:new Date('2026-10-21T00:00:00Z')});await page.clock.pauseAt(new Date('2026-10-21T00:00:01Z'));await page.goto('http://127.0.0.1:8000');
    const fixture=await page.evaluate(()=>{
     const O=window.OL,s=O.create({country:'GB',seed:2218});for(const p of s.people)p.age+=30;
-    Object.assign(s,{age:30,month:0,pending:null,agenda:[],school:false,cash:1000000,knowledge:70,health:40,relationships:70});s.flags.flow.schoolLeavingResolved=true;O.ensureClarity(s);s.interests=['Music'];s.experience.hobbies.Music={years:1,level:1};
+    Object.assign(s,{age:30,month:0,pending:null,agenda:[],school:false,education:O.EDU[2],cash:1000000,knowledge:70,health:40,relationships:70});s.flags.flow.schoolLeavingResolved=true;O.ensureClarity(s);s.interests=['Music'];s.experience.hobbies.Music={years:1,level:1};
     const friend=O.createContact(s,'Friend',30,'F');friend.name='Amelia Parker';friend.close=70;
     const p=O.person(s,'Acquaintance',30,'F');Object.assign(p,{id:'qa-acquaintance',name:'Alex Morgan',close:50,interests:['Music'],job:'Office worker',knownSince:30});s.flags.dynamics.candidate={teen:false,createdAt:30,birthAt:0,person:p};
     if(!O.startRoute(s,'career-direction').ok)throw Error('Could not queue older work enquiry');s.pending='adult-connection-specific';

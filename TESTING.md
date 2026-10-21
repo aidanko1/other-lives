@@ -5,6 +5,8 @@ Routine updates follow the proportional protocol in AGENTS.md: targeted checks f
 Current exact-source evidence: RELEASE_STATUS.md. Node 22+; local executed runs also used Node 24. Tests are permanent repository files, not conversation-only claims. Node-reported test counts are not assertion counts. Never weaken/delete a failing assertion, hide an error or count an unfinished life as a completed simulation. Correct an invalid fixture transparently and retain the original failure investigation.
 
 ## Local commands
+School progression: `node --test tests/schooling.test.cjs` covers all129 birth profiles, pure opportunity queries, attendance/assessment prerequisites, interrupted and late courses, preserved vocational distinctions, funded recovery, deliberate withdrawal, invariant failures and exact complete legacy continuation. browser-schooling.cjs runs in all existing browser jobs at390/1280 widths: natural HK2218 academic/home-learning paths, real school-leaving/university/recovery clicks, withdrawal/Spend continuity, protected conserved funding and exact reload. Simulation reports include school outcomes; the four-shard aggregate asserts secondary/non-secondary, interruption and equivalency coverage. These are consistency/coverage tests, not demographic calibration.
+
 No npm packages are needed for normal static gameplay/building.
 
 ```sh

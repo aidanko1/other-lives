@@ -16,6 +16,7 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
   await require('./browser-parallel.cjs')(browser);
   await require('./browser-infant.cjs')(browser);
   await require('./browser-accessibility.cjs')(browser);
+  await require('./browser-schooling.cjs')(browser);
   await require('./browser-large-archive.cjs')(browser);
   await page.goto('http://127.0.0.1:8000');await page.locator('[data-action="new-dialog"]').first().waitFor();assert.equal(await page.locator('.footer-note .release-version').innerText(),'v'+require('../package.json').version,'landing must identify the running release');await click('new-dialog');await page.locator('#new-country').selectOption('GB');await click('start');
   assert(await page.locator('[aria-label="New life reveal"]').isVisible());await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');assert.equal(await page.locator('.footer-note .release-version').innerText(),'v'+require('../package.json').version,'gameplay must retain the subtle release label');
@@ -36,7 +37,7 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
   await page.setViewportSize({width:390,height:844});await page.locator('[data-action="game-tab"][data-tab="family"]').click();assert(await page.locator('.story-tabs').isVisible());await page.screenshot({path:results+'/family-mobile.png',fullPage:true});
 
   // Complete a real seeded life through production UI controls. Only its birth input is fixed.
-  await page.evaluate(()=>{const create=window.OL.create;window.OL.create=settings=>{window.OL.create=create;return create({...settings,country:'US',seed:951});};});
+  await page.evaluate(()=>{const create=window.OL.create;window.OL.create=settings=>{window.OL.create=create;return create({...settings,country:'US',seed:953});};});
   await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');
   const stages=new Set(['birth']);let lifecycleChoices=0,ended=false;
   for(let step=0;step<200;step++){
@@ -53,7 +54,7 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
    await page.locator('[data-action="choose"][data-index="'+chosen.index+'"]').click();lifecycleChoices++;
    if(await page.locator('[data-action="save-pet-name"]').isVisible())await click('save-pet-name');
   }
-  assert(ended,'natural UI life did not conclude');assert(stages.has('childhood')&&stages.has('adulthood')&&stages.has('old-age'),'full lifecycle stage coverage');const natural=await read();assert(natural.cause);assert(natural.age>=65);console.log('PASS natural UI lifecycle',JSON.stringify({country:'US',seed:951,age:natural.age,choices:lifecycleChoices,stages:[...stages]}));
+  assert(ended,'natural UI life did not conclude');assert(stages.has('childhood')&&stages.has('adulthood')&&stages.has('old-age'),'full lifecycle stage coverage');const natural=await read();assert(natural.cause);assert(natural.age>=65);console.log('PASS natural UI lifecycle',JSON.stringify({country:'US',seed:953,age:natural.age,choices:lifecycleChoices,stages:[...stages]}));
   await click('archive');await page.locator('[data-action="record"][data-id="'+natural.id+'"]').waitFor();await page.locator('[data-action="record"][data-id="'+natural.id+'"]').click();assert((await page.locator('body').innerText()).includes(natural.cause),'archive must display actual cause');
   await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');assert.notEqual((await read()).id,natural.id,'new life after natural death');await page.locator('[data-action="game-tab"][data-tab="family"]').click();
 

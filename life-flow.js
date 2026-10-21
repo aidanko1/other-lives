@@ -33,11 +33,11 @@ function repair(s){
 }
 const ensure=O.ensureClarity;O.ensureClarity=s=>{ensure(s);return repair(s);};
 const applyDegree=O.applyForDegree;O.applyForDegree=function(s,id){if(s.study?.status==='overseas-route')return 'Your overseas programme is already in progress.';const before={role:s.job,fullPay:s.income,mode:s.employment?.mode};const result=applyDegree(s,id);if(s.study?.status==='enrolled'&&s.study.degreeId===id){s.study.studentWork=before.role?before:null;s.flags.flow??={};s.flags.flow.schoolLeavingResolved=true;s.flags.jobSearching=false;s.flags.studentWorkSearch=false;s.agenda=(s.agenda||[]).filter(x=>x.id!=='career-search-results');}return result;};
-const leave=O.EVENTS.find(e=>e.id==='adult-crossroads');leave.max=19;leave.when=s=>s.age===O.schoolLeavingAge(s)&&!studying(s)&&!s.flags.flow?.schoolLeavingResolved;
+const leave=O.EVENTS.find(e=>e.id==='adult-crossroads');leave.max=120;leave.when=s=>(s.schoolRecord?O.schoolLeavingReady(s):s.age===O.schoolLeavingAge(s))&&!studying(s)&&!s.flags.flow?.schoolLeavingResolved;
 const leaveOpts=leave.options;leave.options=s=>leaveOpts(s).map(o=>({...o,apply:st=>{st.flags.flow??={};st.flags.flow.schoolLeavingResolved=true;st.flags.jobSearching=false;return o.apply(st);}}));
 const oldSearch=O.startJobSearch;O.startJobSearch=function(s,mode='pay'){
- if(s.age<O.schoolLeavingAge(s)&&s.school)return {ok:false,message:'School-age work is not a full-time career search.'};
- if(s.age===O.schoolLeavingAge(s)&&!studying(s)&&!s.flags.flow?.schoolLeavingResolved&&!s.job)return {ok:false,message:'Choose your school-leaving route before beginning full-time applications.'};
+ if((s.age<O.schoolLeavingAge(s)||O.initialSchoolCourse?.(s))&&s.school)return {ok:false,message:'School-age work is not a full-time career search.'};
+ if((s.schoolRecord?O.schoolLeavingReady(s):s.age===O.schoolLeavingAge(s))&&!studying(s)&&!s.flags.flow?.schoolLeavingResolved&&!s.job)return {ok:false,message:'Choose your school-leaving route before beginning full-time applications.'};
  if(studying(s)&&s.study.mode==='full-time'){s.flags.studentWorkSearch=true;const result=oldSearch(s,mode);if(result.ok)result.message='You apply for part-time student work around your course.';return result;}
  if(s.job==='Retired'){O.setEmployment(s,{});s.flags.jobSearching=false;}
  return oldSearch(s,mode);
@@ -61,12 +61,12 @@ const graduate={id:'graduate-next-step',min:18,max:120,weight:0,category:'Educat
  ]};O.EVENTS.push(graduate);
 const career=O.EVENTS.find(e=>e.id==='career-search-results'),careerWhen=career.when;career.when=s=>!s.flags.flow?.graduateDecision&&(!studying(s)||s.flags.studentWorkSearch||s.study.mode==='part-time')&&careerWhen(s);
 const post=O.EVENTS.find(e=>e.id==='postgraduate-crossroads');if(post)post.when=()=>false;
-const agenda=O.makeAgenda;O.makeAgenda=function(s){O.ensureClarity(s);const list=agenda(s);if(s.age===O.schoolLeavingAge(s)&&!studying(s)&&!s.flags.flow.schoolLeavingResolved){s.flags.jobSearching=false;return [{type:'decision',id:'adult-crossroads',month:1,done:false},...list.filter(x=>x.id!=='career-search-results'&&x.id!=='adult-crossroads')];}return list.filter(x=>x.id!=='career-search-results'||career.when(s));};
+const agenda=O.makeAgenda;O.makeAgenda=function(s){O.ensureClarity(s);const list=agenda(s);if((s.schoolRecord?O.schoolLeavingReady(s):s.age===O.schoolLeavingAge(s))&&!studying(s)&&!s.flags.flow.schoolLeavingResolved){s.flags.jobSearching=false;return [{type:'decision',id:'adult-crossroads',month:1,done:false},...list.filter(x=>x.id!=='career-search-results'&&x.id!=='adult-crossroads')];}return list.filter(x=>x.id!=='career-search-results'||career.when(s));};
 O.registerAnnualStage('graduate-transition',s=>{
  return ()=>{repair(s);
  };
 });
-const advance=O.advanceMonth;O.advanceMonth=function(s){O.ensureClarity(s);if(s.status==='alive'&&!s.pending&&s.age===O.schoolLeavingAge(s)&&!studying(s)&&!s.flags.flow.schoolLeavingResolved&&!s.job){s.flags.jobSearching=false;s.pending='adult-crossroads';return {advanced:true,decision:true,entry:true};}if(s.status==='alive'&&!s.pending&&graduate.when(s)){s.pending=graduate.id;return {advanced:true,decision:true,entry:true};}return advance(s);};
+const advance=O.advanceMonth;O.advanceMonth=function(s){O.ensureClarity(s);if(s.status==='alive'&&!s.pending&&(s.schoolRecord?O.schoolLeavingReady(s):s.age===O.schoolLeavingAge(s))&&!studying(s)&&!s.flags.flow.schoolLeavingResolved&&!s.job){s.flags.jobSearching=false;s.pending='adult-crossroads';return {advanced:true,decision:true,entry:true};}if(s.status==='alive'&&!s.pending&&graduate.when(s)){s.pending=graduate.id;return {advanced:true,decision:true,entry:true};}return advance(s);};
 // Foundation experience opens further training; calendar time alone does not qualify a specialist.
 O.routeYearHandlers.push((s,phase)=>{if(phase!=='after')return;const m=s.flags.medicalTraining;if(!m||m.foundationComplete||!/doctor/i.test(s.job))return;const years=Object.entries(s.experience.roles).filter(([title])=>/doctor/i.test(title)).reduce((n,[,y])=>n+y,0);if(years>=2){m.foundationComplete=true;m.independent=false;O.journal(s,'Your initial supervised medical training is completed','Two full-time-equivalent years of supervised medical work prepare you to apply for further clinical training. This does not make you a specialist or consultant; senior practice requires further supervised training and assessment.','work');}});
 })(window.OL);

@@ -31,7 +31,7 @@ function repair(s){
  if(s.familyAssets<0){s.familyDebts=(s.familyDebts||0)-s.familyAssets;s.familyAssets=0;}
  for(const p of s.people){if(p.role==='Partner'&&!p.relationshipStage){p.relationshipStage=s.flags.married?'married':p.residence==='Your household'?'cohabiting':'dating';if(p.age<18){p.relationshipStage='dating';p.residence='Separate home';}}if(!p.careerInitialized){updatePerson(s,p,true);p.careerInitialized=true;}}
  // Migrate a complete but unpassed final year to a reviewable assessment, without awarding a degree.
- if(!s.study&&s.school&&s.age>=12&&O.educationNumber(s.education)<1)s.education=O.EDU[1];
+ if(!s.schoolRecord&&!s.study&&s.school&&s.age>=12&&O.educationNumber(s.education)<1)s.education=O.EDU[1];
  const st=s.study;if(st?.status==='interrupted'&&st.progress>=st.duration&&s.age<=(st.graduationAge||s.age)+5&&!st.resitDeclined){st.status='assessment-review';s.school=false;s.flags.studying=false;}
 
  return s;

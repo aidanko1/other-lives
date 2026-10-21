@@ -8,6 +8,7 @@
   attendingSchool: s => s.age >= 6 && !!s.school,
   fullTimeStudy: s => s.study?.mode === 'full-time' && ['enrolled', 'overseas-route'].includes(s.study.status),
   routeConflict(s,d,r) {
+   if(O.initialSchoolCourse?.(s)&&d.exclusive==='study')return 'Complete or leave your current school course before taking on another study commitment.';
    if(s.institution&&d.exclusive!=='institution'&&!d.institution&&!(d.id==='child-planning'&&r?.stage==='birth'))return 'This plan must wait until your institutional commitment ends.';
    if(['overseas-work','overseas-study','return-home'].includes(d.id)&&s.housing?.kind==='owned'&&!(d.id==='overseas-study'&&r?.stage==='study'))return 'Choose whether to sell or let your current home under Money & property before moving abroad.';
    const research=Object.values(s.routes?.active||{}).find(r=>r.id==='masters'&&r.stage==='studying'||r.id==='phd'&&r.stage==='research');

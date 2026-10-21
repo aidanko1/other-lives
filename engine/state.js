@@ -2,9 +2,12 @@
 (function (O) {
  'use strict';
  O.SAVE_VERSION = 2;
+ const trackInvalid=s=>{const t=s.flags?.educationTrack;return t&&['academic','vocational','postgraduate'].includes(t.route)&&t.passed&&(t.status!=='completed'||!Number.isFinite(t.admittedAt)||t.admittedAt<t.started||t.admittedAt>s.age||t.progress<(t.required||2));};
  O.migrateLife = function (input) {
   if (!input || typeof input !== 'object' || !input.id || !input.country?.code || !Array.isArray(input.journal) || !Array.isArray(input.people)) throw Error('Invalid life record.');
   if ((input.schemaVersion || 0) > O.SAVE_VERSION) throw Error('This save requires a newer version of Other Lives.');
+  if(input.schoolRecord&&input.schoolRecord.version!==1)throw Error('This save requires a newer schooling model.');
+  if(input.schoolRecord&&(!input.schoolRecord.profile||!Array.isArray(input.schoolRecord.years)||!Array.isArray(input.schoolRecord.awards)))throw Error('Invalid schooling record.');
   const s = JSON.parse(JSON.stringify(input));
   if((s.schemaVersion||0)<2&&Number.isFinite(s.familyAssets)&&s.familyAssets<0){
    const deficit=-s.familyAssets;s.flags??={};(s.flags.legacyRepairs??=[]).push({field:'familyAssets',from:s.familyAssets,to:0,householdDebtAdded:deficit,reason:'Negative legacy assets retained as household liability'});
@@ -37,6 +40,17 @@
   for (const key of ['cash', 'debt', 'income', 'investments', 'property', 'familyCash', 'familyAssets', 'familyDebts']) if (!Number.isFinite(s[key]) || s[key] < 0) issue('money.' + key, 'Invalid ' + key + '.');
   for (const key of ['health', 'happiness', 'knowledge', 'relationships', 'stress', 'confidence']) if (!Number.isFinite(s[key]) || s[key] < 0 || s[key] > 100) issue('factor.' + key, 'Invalid ' + key + '.');
   if (s.age < 6 && s.school) issue('school.preschool', 'Formal school enrolment before school-entry age.');
+  if(s.schoolRecord){
+   const r=s.schoolRecord,p=r.profile,years=Array.isArray(r.years)?r.years:[],awards=Array.isArray(r.awards)?r.awards:[];
+   if(!Array.isArray(r.years)||!Array.isArray(r.awards)||!Number.isInteger(s.schooling)||s.schooling!==years.filter(y=>y.attended).length)issue('school.periods','Completed school periods disagree with attendance.');
+   if(r.version!==1||!p||p.startAge!==6||p.primaryYears!==6||![6,7].includes(p.secondaryYears)||!O.COUNTRIES.some(c=>c.code===p.countryCode))issue('school.profile','Unknown or invalid schooling profile.');
+   if(!Number.isInteger(r.lastAge)||r.lastAge<0||r.lastAge>s.age||years.some((y,i)=>!Number.isInteger(y.age)||y.age<=6||y.age>s.age||i>0&&y.age<=years[i-1].age||typeof y.attended!=='boolean'||typeof y.formal!=='boolean'))issue('school.timeline','Invalid or duplicated attendance period.');
+   const formal=years.filter(y=>y.attended&&y.formal).length;
+   if(awards.some(a=>!Number.isInteger(a.age)||a.age<6||a.age>s.age||!Number.isInteger(a.level)||a.level<1||a.level>5||!Number.isFinite(a.credits)||!Number.isFinite(a.required)||a.required<1||a.credits<a.required))issue('school.award','Qualification without completed required study.');
+   if(p&&awards.some(a=>a.source==='school'&&formal<p.primaryYears||a.level===2&&['school-assessment','local-course'].includes(a.source)&&formal<p.primaryYears+p.secondaryYears))issue('school.credits','School qualification without sufficient recorded attendance.');
+   if(awards.some((a,i)=>awards.slice(0,i).some(b=>b.level===a.level&&b.name===a.name)))issue('school.duplicate-award','Qualification awarded twice.');
+   if(trackInvalid(s))issue('school.course','School course completed without attendance or a valid timeline.');
+  }
   if (s.age < 16 && s.job && s.job !== 'Retired') issue('work.child', 'Adult employment assigned to a child.');
   if (O.rules.fullTimeStudy(s) && s.job && s.employment?.mode === 'full-time') issue('commitment.work-study', 'Full-time employment during full-time study.');
   if (s.study?.status === 'completed' && s.school) issue('study.completed-enrolment', 'Completed degree still enrolled.');

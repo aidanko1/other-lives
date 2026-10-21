@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.5.0 — connected school progression (candidate)
+Adds versioned attendance and completion for new lives across all129 countries, with contextual access/continuation, persistent support, delayed entry, course prerequisites, optional withdrawal, and school-leaving after late completion. Replaces age-only primary awards, immediate academic-choice secondary awards and zero-attendance course passes. Adult equivalency connects foundation/secondary assessments, protected family funding, preserved vocational certificates and shared domestic/flexible/overseas admission gates. Existing saved lives retain their progression without invented history. Adds school invariant, integration, browser and cohort-coverage assertions. No reflections or general UI redesign. National calendars and empirical rates remain explicitly approximate; source gates/publication are pending.
+
 ## 6.4.1 — decision keyboard access (candidate)
 Decision overlays now use the existing modal focus boundary, preventing Tab/Shift+Tab from reaching covered controls. Set aside and Escape focus Open decision; inspecting tabs and reopening preserve the pending choice. No simulation, save schema, history or reflection changes. Added mobile/desktop browser regressions for focus wrapping, inspection, exact pending reload and resolution. Local build/static checks and13 affected Node tests pass; exact-source CI and deployment are not yet verified.
 

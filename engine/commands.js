@@ -23,4 +23,5 @@
   };
  }
  command('applyChoice',Boolean);command('startRoute',r=>r?.ok);command('planAction',r=>r?.ok);
+ if(O.leaveSchoolCourse)command('leaveSchoolCourse',r=>r?.ok);
 })(window.OL);
