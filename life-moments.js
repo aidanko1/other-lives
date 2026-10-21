@@ -6,28 +6,28 @@ const inSchool=s=>s.school&&!s.study,working=s=>!!s.job&&s.job!=='Retired',stude
 const group=(subject,min,max,category,rows)=>rows.forEach(([id,title,body,fx,when,extra={}])=>defs.push({id,subject,min,max,category,title,body,fx,when:when||(()=>true),cooldown:12,maxUses:2,...extra}));
 group('parent',0,2,'Early care',[
  ['lap-sleep','Asleep against a familiar shoulder','{person} learns which rhythm settles you. You sleep against their shoulder while the room carries on around you.',{health:1,happiness:2,relationships:1}],
- ['cloth-book','A book you can chew','You turn the thick pages in both directions. {person} gives up on the story and names the pictures you point at.',{knowledge:1,relationships:1}],
- ['first-steps-care','A few steps, then a landing','You cross the gap between {person} and a chair, then sit down with a surprised bump. Their applause makes you try again.',{health:1,confidence:1,relationships:1}],
+ ['cloth-book','A book you can chew','You turn the thick pages in both directions. {person} gives up on the story and names the pictures you point at.',{knowledge:1,relationships:1},null,{min:1}],
+ ['first-steps-care','A few steps, then a landing','You cross the gap between {person} and a chair, then sit down with a surprised bump. Their applause makes you try again.',{health:1,confidence:1,relationships:1},null,{min:1}],
  ['small-fever','A night of temperature checks','You run a fever. {person} stays nearby, offering fluids and checking on you until morning.',{health:-2,relationships:1,stress:1},s=>s.health<75],
  ['washing-song','A song during the washing','You splash at the water while {person} repeats a silly song. Soon you are waiting for the same line every time.',{happiness:2,relationships:1}],
  ['familiar-face','A face in the doorway','You stop crying when {person} appears in the doorway. Their face has become part of what safety feels like.',{happiness:1,relationships:2}],
- ['shared-spoon','A spoon of your own','You insist on holding the spoon. More food reaches your clothes than your mouth, but a little more reaches it each day.',{knowledge:1,confidence:1}],
- ['first-naming','Names for the things outside','{person} names the bird, the passing vehicle and your shoes. You repeat one word for several different things.',{knowledge:1,relationships:1}],
+ ['shared-spoon','A spoon of your own','You insist on holding the spoon. More food reaches your clothes than your mouth, but a little more reaches it each day.',{knowledge:1,confidence:1},null,{min:1}],
+ ['first-naming','Names for the things outside','{person} names the bird, the passing vehicle and your shoes. You repeat one word for several different things.',{knowledge:1,relationships:1},null,{min:1}],
  ['caregiver-strain','A tired household','Work and interrupted sleep leave {person} exhausted. You are fed and held, but this week the usual games are shorter.',{happiness:-1,relationships:-1},s=>s.familyIncome<s.country.ppp*.45],
  ['small-checkup','A visit to the child clinic','{person} brings you to a routine child-health appointment. You object to the unfamiliar room, then settle on the way home.',{health:2,stress:1},s=>s.country.infra>=60],
- ['toddler-stacking','A tower built together','You stack objects, knock them down and hand them back to {person}. Taking turns becomes a game of its own.',{knowledge:1,relationships:2}],
+ ['toddler-stacking','A tower built together','You stack objects, knock them down and hand them back to {person}. Taking turns becomes a game of its own.',{knowledge:1,relationships:2},null,{min:1}],
  ['safe-corner','A corner made safe','{person} moves breakable things out of reach and gives you a small space to explore. You inspect every part of it.',{health:1,knowledge:1}]
 ]);
 group('self',0,5,'Discovery',[
  ['window-shadows','Following a moving shadow','You watch a shadow move across the wall. When it disappears behind an object, you lean over to find it.',{knowledge:1,happiness:1}],
- ['ant-trail','A trail with somewhere to go','A line of ants holds your attention long after the grown-ups are ready to leave. You return to look for them the next day.',{knowledge:1,happiness:1},s=>!s.urban],
- ['lost-mitten','One mitten missing','The household searches for a missing mitten. You eventually produce it from a hiding place nobody thought to check.',{confidence:1,happiness:1},s=>['GB','PL','DE','CA','CN','JP','KR'].includes(s.country.code)],
+ ['ant-trail','A trail with somewhere to go','A line of ants holds your attention long after the grown-ups are ready to leave. You return to look for them the next day.',{knowledge:1,happiness:1},s=>!s.urban,{min:1}],
+ ['lost-mitten','One mitten missing','The household searches for a missing mitten. You eventually produce it from a hiding place nobody thought to check.',{confidence:1,happiness:1},s=>['GB','PL','DE','CA','CN','JP','KR'].includes(s.country.code),{min:1}],
  ['drawing-wall','A drawing where it did not belong','Your drawing spreads beyond the paper. A grown-up helps you clean the mark, then finds you a bigger sheet.',{knowledge:1,relationships:1},s=>s.age>=3],
  ['rain-window','Rain against the window','You race two drops down the window with a finger. A little later you find a way to make the sound of the rain yourself.',{happiness:2,knowledge:1},s=>s.age>=2],
  ['pretend-market','A shop made from small things','You arrange a pretend shop and insist on counting out the change. Everyone has to buy something before leaving.',{knowledge:1,confidence:1},s=>s.age>=3],
  ['waiting-turn','Waiting is the hard part','Another child has the toy you want. Waiting for a turn is difficult; when the turn finally comes, you offer it back sooner than expected.',{relationships:2,confidence:1},s=>s.age>=3],
  ['stubborn-button','The last button','You insist on doing the last button yourself. It takes a long time, and afterwards you refuse to take the shirt off.',{confidence:2,happiness:1},s=>s.age>=3],
- ['new-taste','An unfamiliar taste','A new food is put in front of you. You make a face, try a tiny amount, then ask what it is called.',{health:1,knowledge:1},s=>!s.flags.foodInsecure],
+ ['new-taste','An unfamiliar taste','A new food is put in front of you. You make a face, try a tiny amount, then ask what it is called.',{health:1,knowledge:1},s=>!s.flags.foodInsecure,{min:2}],
  ['quiet-child','Watching before joining','You stay near the edge of a game until you understand the rules. Then you join without needing to be led in.',{confidence:1,relationships:1},s=>s.age>=4],
  ['hungry-afternoon','A smaller afternoon meal','The adults make the portions stretch. You become tired and irritable earlier than usual.',{health:-2,happiness:-2},s=>!!s.flags.foodInsecure],
  ['invented-melody','A tune with no proper words','You make up a tune and sing it often enough that somebody else starts singing it too.',{happiness:2,relationships:1},s=>s.age>=3]

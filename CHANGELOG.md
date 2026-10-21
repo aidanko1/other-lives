@@ -80,3 +80,9 @@ Added Phase 11 requirements matrix, bug reproductions and explicit release statu
 - OL-038: first-year mortality for new births occurs during age0 rather than being deferred to the first birthday.12 conditional monthly risks preserve the prior annual survival product under constant circumstances; no extra roll on story/choice delivery or at the surviving first birthday.
 - Additive saved timing version/receipt; legacy saves retain their original model. Atomic rollback includes mortality RNG and terminal/birthday state. Six local regressions and natural NG2 age0 UI lifecycle checks pass; full final-source gates pending.
 - Corrected companion text line layout after screenshot review. No new gameplay control, reflection feature, merge or deployment.
+
+## 6.2.0-dev.4 — candidate, unreleased
+- OL-039: correct eight infant/toddler story age prerequisites at their definition owner; legacy queued stories revalidate, existing history remains intact. No new prompts/tracking.
+- OL-040: retrospective chooses a recorded personal memory ahead of finance ledgers, formats stored currency correctly and omits missing memories.
+- Two permanent eligibility tests, extended retrospective/browser regressions; targeted checks/build pass locally, final107-test/all11-job gate pending.
+- Prior f0f2608 verified104 tests/build/all11 jobs/3000 release-cohort plus432 targeted lives, all three browser engines; no merge/deployment.

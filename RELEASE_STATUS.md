@@ -1,10 +1,10 @@
 # Release status — verified development checkpoint
 
-Version6.2.0-dev.3 is a candidate and remains unreleased. Main4072fd4997992cb7fd6bf78d7f0c9cab41a7379f is untouched; no new deployment is claimed. Draft PR: https://github.com/aidanko1/other-lives/pull/2, engineering/fidelity-reliability-baseline.
+Version6.2.0-dev.4 is a candidate and remains unreleased. Main4072fd4997992cb7fd6bf78d7f0c9cab41a7379f is untouched; no new deployment is claimed. Draft PR: https://github.com/aidanko1/other-lives/pull/2, engineering/fidelity-reliability-baseline.
 
-## Last verified checkpoint (cycle9)
+## Last verified checkpoint (cycle10)
 
-Source db19f9c1fecf861116004fcf1dccd2b2fd83bac4 passes all11 jobs: https://github.com/aidanko1/other-lives/actions/runs/39538037613.98 tests/build,3000 release-cohort lives and432 additional targeted complete rare-route cases; all three browser engines pass accessibility/keyboard/100-record archive plus the retained gameplay suite. Restore checkpoint/6.2.0-dev.2-accessibility-routes-verified. Earlier bc74cde comparison checkpoint is preserved. The table below records cycle8; cycle9 adds the eight new tests and scoped gates.
+Source f0f260896cd7cc55f72b5aa473f9f6815f867ab8 passes all11 jobs: https://github.com/aidanko1/other-lives/actions/runs/39538674951.104 tests/build,3000 complete release-cohort lives plus432 targeted complete rare-route cases, all three browser engines including natural NG2 age0/9months and US95195/44.13 private legacy records additionally pass the local read-only migration/history/idempotence audit with unchanged original bytes. Restore checkpoint/6.2.0-dev.3-infant-timing-verified. Earlier db19f9c1 and bc74cde checkpoints remain. The historical cycle8 table below is superseded by these current counts and cycle10 evidence.
 
 | Gate | Executed result at bc74cde |
 |---|---|
@@ -34,3 +34,6 @@ Known model/product limits:129 authored country profiles versus reference172; no
 Six infant timing regressions and natural NG2 UI death at0/month9 pass locally. Build/static checks pass with50 dependencies. New-life seeded outcomes change (US951 engine probe95/44); original saves retain their prior timing. Local full Node glob passes103 tests; the added sixth infant regression also passes separately. Final CI must execute the complete104-test suite;103 is not misreported as104. ENGINEERING_CYCLE_10.md records source definitions/assumptions and acceptance.
 
 Cycle10 local peer cohort passes1000 complete lives/0 failures:250 worlds,129 root origins,95 peer countries,788955 checked states,34552 decisions,ages0–104,max newborn JSON24831 bytes. Actual full Chromium suite passes with natural US95195/44 and NG2 infant ending; archive fixture12808234 bytes/100 exact storage records. These are local results for the current engine; final CI still required. The13 private legacy records were re-audited read-only in cycle10:13/13 migrations, original journal/identity, idempotence, no invented timing model and consistency pass; original bytes hash unchanged. No private contents were committed. No avatar/text-render claim is made for this latest audit.
+
+## Cycle11 candidate under verification
+Eight narrative-age prerequisites and ending personal-memory/currency formatting corrected. Targeted eligibility/retrospective/actual recap tests and build pass locally. Full107-test/all11-job source gate pending. No new controls/reflections/history rewrite. ENGINEERING_CYCLE_11.md records qualitative review and distinguishes deliberate career application gates from a confirmed bug.

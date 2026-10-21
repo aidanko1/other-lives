@@ -1,10 +1,10 @@
-# Other Lives —6.2.0-dev.3 candidate
+# Other Lives —6.2.0-dev.4 candidate
 
 An independent, text-driven life simulation guided by the verified experience of [1 in8Billion](https://1in8b.life/en/). No proprietary source, art or substantial writing is copied. The user explicitly excludes milestone reflections, notes and reflection pauses/toggle.
 
 Development is isolated in [draft PR2](https://github.com/aidanko1/other-lives/pull/2); main v6.1 remains untouched. Start every session with [RELEASE_STATUS.md](RELEASE_STATUS.md), [AGENTS.md](AGENTS.md), [FIDELITY_MATRIX.md](FIDELITY_MATRIX.md), [REQUIREMENTS_MATRIX.md](REQUIREMENTS_MATRIX.md) and [BACKLOG.md](BACKLOG.md). Exact-source results supersede historical release claims below.
 
-The verified cycle8 checkpoint bc74cde passes90 tests/build/all11 quality jobs,3000 asserted complete lives and Chromium/Firefox/WebKit. Cycle9 connects existing specialised careers to reachable interests and adds keyboard/contrast/100-record archive gates. Cycle10 corrects infant timing for new births while preserving legacy saves. Cycle9 db19f9c1 passes98 tests/all11 jobs/3000 release-cohort lives plus432 targeted complete rare-path cases. Cycle10 final-source status is recorded in RELEASE_STATUS.md; pending checks are never called passed. No experimental deployment.
+The verified cycle8 checkpoint bc74cde passes90 tests/build/all11 quality jobs,3000 asserted complete lives and Chromium/Firefox/WebKit. Cycle9 connects existing specialised careers to reachable interests and adds keyboard/contrast/100-record archive gates. Cycle10 corrects infant timing for new births while preserving legacy saves. Cycle9 db19f9c1 passes98 tests/all11 jobs/3000 release-cohort lives plus432 targeted complete rare-path cases. Cycle10 f0f2608 passes104 tests/all11 jobs and both natural infant/adult lifecycles in three engines. Cycle11 narrative corrections are under verification. Current final-source status is recorded in RELEASE_STATUS.md; pending checks are never called passed. No experimental deployment.
 
 Local development: Node22+, npm test, npm run build. Serve the repository with `python3 -m http.server 8000`. Browser checks need test-only playwright1.56.1 and axe-core4.10.3; full commands/release cohorts are in [TESTING.md](TESTING.md). National inputs/eras/age-sex mortality and full normal-speed enjoyment remain partial or unverified; no claim of complete reference parity or population prediction.
 

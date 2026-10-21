@@ -78,3 +78,5 @@ All earlier scoped evidence is historical. These additions do not establish nati
 | E02 release gates | quality.yml/pages.yml |all11 exact-source jobs;test-only Playwright/axe pins |bc74cde passes; candidate9 pending; no deployment/admin protection |
 
 Cycle10 S01/S07/S08/S09 candidate: infant timing owners core/clock/demographics/state, six executed local regressions plus natural NG2 browser ending/save/archive/new birth pass. Exact-source full suite/three1000-life cohorts/three browser-engine gates pending. Existing saves without model metadata retain legacy continuation; no migration invents a past risk. Probability-product assertion is a calculation contract, not demographic validation.
+
+Cycle10 acceptance verified at f0f2608:104 tests/all11 jobs/3000+432 asserted complete lives, three-engine natural infant/95-year lifecycle/save checks,13 read-only private migration records. Cycle11 S01/UX01/RF10 candidate maps to life-moments.js,retrospective.js,app.js and toddler-eligibility/retrospective/browser-parallel regressions; targeted tests pass, final107-test source/CI pending. No claim of full national or subjective fidelity.
