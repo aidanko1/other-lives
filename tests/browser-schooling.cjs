@@ -14,6 +14,7 @@ module.exports=async browser=>{
       if(s.pending){const v=O.decisionView(s),a=v.options.map((o,i)=>({...o,i})).filter(o=>!o.disabled);let c=a[0];
        if(mode==='home'){if(s.pending==='school-entry')c=a.find(o=>/Learn with family/.test(o.label));if(s.pending==='school-return')c=a.find(o=>/Keep learning/.test(o.label));if(s.pending.startsWith('local-pathway-'))c=a.find(o=>/Work or help/.test(o.label));if(s.pending==='exam-years')c=a.find(o=>/contributing/.test(o.label));}
        if(!c||!O.applyChoice(s,c.i,v.token))throw Error('No valid school continuation '+s.pending);
+       if(s.memories.pet?.needsName&&!O.namePet(s,s.memories.pet.name).ok)throw Error('Could not complete normal pet naming');
       }else O.advanceMonth(s);
       O.assertConsistent(s);if(!course&&!s.pending&&s.age>=16&&O.initialSchoolCourse(s)&&s.flags.educationTrack.status==='enrolled')course=JSON.parse(JSON.stringify(s));
      }

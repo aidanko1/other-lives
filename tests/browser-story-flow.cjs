@@ -10,7 +10,7 @@ module.exports=async browser=>{
    let found=false;
    for(let n=0;n<18;n++){
     const s=await read();if(s.journal.some(e=>e.momentId==='chosen-curiosity')){found=true;break;}assert.equal(s.status,'alive');assert(s.age<=17,'childhood follow-through did not appear');
-    if(s.pending){const options=await page.locator('.decision-popup [data-action="choose"]').evaluateAll(xs=>xs.filter(x=>!x.disabled).map(x=>x.dataset.index));assert(options.length);await page.locator('.decision-popup [data-action="choose"][data-index="'+options[0]+'"]').click();}else await page.locator('[data-action="next-decision"]').click();
+    if(s.pending){const options=await page.locator('.decision-popup [data-action="choose"]').evaluateAll(xs=>xs.filter(x=>!x.disabled).map(x=>x.dataset.index));assert(options.length);await page.locator('.decision-popup [data-action="choose"][data-index="'+options[0]+'"]').click();if(await page.locator('[data-action="save-pet-name"]').isVisible())await page.locator('[data-action="save-pet-name"]').click();}else await page.locator('[data-action="next-decision"]').click();
    }
    assert(found,'natural choices must produce a later contextual scene');let s=await read();const e=s.journal.find(e=>e.momentId==='chosen-curiosity');assert.equal(e.cause.eventId,'early-bonds');assert.equal(e.cause.index,1);assert.equal(e.cause.age,5);assert(e.age>5);assert.match(e.description,/chose to explore books and questions/);
    if(s.pending)await page.locator('[data-action="set-aside"]').click();await page.locator('[data-action="game-tab"][data-tab="log"]').click();assert(await page.locator('.log-entry').filter({hasText:e.title}).count());assert.equal(await page.locator('.log-entry .effect-badge').count(),0);const before=await read();
