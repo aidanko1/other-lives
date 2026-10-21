@@ -67,3 +67,12 @@ No significant requirement is whole-game complete merely because a control exist
 | S08/S09 immutable companion world/save/replay with unchanged player outcomes | parallel.js; core.js; ui/app.js | full-state independent VM comparison; exact export/import/replay; old-save fixtures | Local unit/Chromium pass; all browser-engine CI pending |
 | T02/T04/E02 expanded release gates | quality.yml; parallel harness; browser smoke | Four background shards, balance, trajectory, parallel, regression/build, three browser engines | Authored11-job gate; no claim of CI pass until run completes |
 All earlier scoped evidence is historical. These additions do not establish national calibration, enjoyment or complete reference parity.
+
+## Cycle9 current candidate (supersedes older status/counts)
+| Requirement | Owner | Permanent acceptance | Evidence/status |
+|---|---|---|---|
+| RF10/RF12 endings/comparison worlds | parallel.js,retrospective.js,core.js,app.js |90-test source,1000-peer cohort,exact save/replay,three-engine UI |PASS-SCOPED at bc74cde,all11 jobs |
+| S05 usable rare-career prerequisites | life-experience.js,life-route-special.js | interest-access plus432 natural prepared full trajectories |Interest tests pass locally; full trajectory/final CI pending |
+| F03/T04 accessibility | index.html,life-clarity.css,app.js | nine axe light/dark surfaces,real keyboard modal entry/wrap/escape/return |Local Chromium pass; final all-engine CI pending; manual AT unknown |
+| S09/T04 large archives | app.js existing IndexedDB path |100-record actual import/reload/whole export/detail/delete |Local11744934-byte fixture pass;100 copies not100 simulations; final CI pending |
+| E02 release gates | quality.yml/pages.yml |all11 exact-source jobs;test-only Playwright/axe pins |bc74cde passes; candidate9 pending; no deployment/admin protection |

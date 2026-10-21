@@ -69,3 +69,9 @@ Added Phase 11 requirements matrix, bug reproductions and explicit release statu
 - OL-034: deceased teenage partners no longer trigger a false living age-gap violation later in life; historical minor marriage/adult-start safeguards retained.
 - OL-035: player/relative mortality honors the declared120/160 model validity ceilings even if stochastic death rolls miss.
 - New permanent regressions and1000-peer cohort; quality workflow expands from eight to11 jobs with Firefox/WebKit alongside Chromium. Local90-test suite passes; exact-source CI and final release decision pending. No production merge/deployment.
+
+## Cycle9 candidate — unreleased
+- OL-036: connected existing dance/acting/esports/chess careers to reachable childhood/optional interests; stable four-choice presentation, no extra compulsory decisions.
+- Corrected light-theme text contrast and dark ending/tab/log contrast; modal focus entry, Tab wrapping, Escape and return to opener. Life decisions remain nonmodal to preserve inspection.
+- Permanent axe9-surface/keyboard and100-record archive import/reload/exact-export/detail/delete gates; targeted six-route complete-life tests.
+- Cycle8 bc74cde verified all11 jobs,90 tests/build/3000 complete asserted lives and Chromium/Firefox/WebKit. Cycle9 final-source gates pending; no deployment.

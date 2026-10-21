@@ -18,3 +18,9 @@ html[data-theme=dark] .decision-shade,html[data-theme=dark] .birth-shade,html[da
 html[data-theme=dark] .speed-list,html[data-theme=dark] .speed-btn,html[data-theme=dark] .time-track,html[data-theme=dark] .tagline-pills span{background:var(--surface-alt)!important;color:var(--ink)!important;border-color:var(--line)!important}
 html[data-theme=dark] .hero-lede,html[data-theme=dark] .hero-note{color:var(--muted)!important}
 .survival-card svg{width:100%;height:auto;margin:5px 0}.survival-card p{line-height:1.6}.survival-card small{font-size:11px;line-height:1.7;color:var(--muted)}
+
+/* Keep settled text contrast in dark ending/detail surfaces. */
+html[data-theme=dark] .death-summary{background:var(--surface-alt);color:var(--ink)}
+html[data-theme=dark] .story-tabs button{color:var(--muted)}
+html[data-theme=dark] .log-entry.tone-bad strong{color:var(--negative)}
+html[data-theme=dark] .log-entry.tone-good strong{color:var(--positive)}

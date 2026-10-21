@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict'),fs=require('node:fs');
+module.exports=async function verifyAccessibility(browser){
+ const context=await browser.newContext(),page=await context.newPage(),reports=[];
+ async function audit(stage){console.log('Accessibility audit',stage);await page.evaluate(()=>Promise.all(document.getAnimations().filter(a=>a.playState==='running').map(a=>a.finished.catch(()=>{}))));await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});const result=await page.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));reports.push({stage,violations:result.violations.map(v=>({id:v.id,impact:v.impact,help:v.help,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})),incomplete:result.incomplete.map(v=>v.id)});}
+ try{
+  await page.goto('http://127.0.0.1:8000');await audit('landing');await page.locator('[data-action="new-dialog"]').first().click();await audit('birth-form');
+  assert(await page.evaluate(()=>document.querySelector('[role="dialog"]').contains(document.activeElement)),'new dialog must receive focus');
+  await page.locator('[data-action="start"]').focus();await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement.dataset.action),'close-modal','Tab must wrap inside modal');await page.keyboard.press('Shift+Tab');assert.equal(await page.evaluate(()=>document.activeElement.dataset.action),'start');await page.keyboard.press('Escape');assert.equal(await page.locator('[role="dialog"]').count(),0);assert.equal(await page.evaluate(()=>document.activeElement.dataset.action),'new-dialog','closing must return focus to the opener');
+
+  await page.evaluate(()=>{const O=window.OL,s=O.create({country:'GB',seed:2218});localStorage.setItem('other-lives-current-v1',JSON.stringify(s));});await page.reload();await page.locator('[data-action="resume"]').first().click();await audit('childhood');
+  await page.locator('[data-action="next-decision"]').click();await audit('decision');
+  await page.evaluate(()=>{const O=window.OL,s=JSON.parse(localStorage.getItem('other-lives-current-v1'));O.finish(s,'Accessibility fixture ending');localStorage.setItem('other-lives-current-v1',JSON.stringify(s));});await page.reload();await page.locator('[data-action="resume"]').first().click();await audit('ending');
+  await page.setViewportSize({width:390,height:844});await audit('mobile-ending');await page.evaluate(()=>{document.documentElement.dataset.theme='dark'});await audit('dark-ending');await page.locator('[data-action="home"]').click();await audit('dark-landing');await page.locator('[data-action="new-dialog"]').first().click();await audit('dark-birth-form');
+  fs.mkdirSync('test-results',{recursive:true});fs.writeFileSync('test-results/accessibility-'+browser.browserType().name()+'.json',JSON.stringify(reports,null,2));const failures=reports.flatMap(r=>r.violations.filter(v=>['serious','critical'].includes(v.impact)).map(v=>({...v,stage:r.stage})));assert.deepEqual(failures,[],'WCAG serious/critical accessibility violations');console.log('PASS accessibility: nine light/dark lifecycle/form/mobile surfaces, no serious/critical WCAG violations; manual screen-reader review remains separate');
+ }finally{await context.close();}
+};
