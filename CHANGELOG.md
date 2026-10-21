@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.4.1 — decision keyboard access (candidate)
+Decision overlays now use the existing modal focus boundary, preventing Tab/Shift+Tab from reaching covered controls. Set aside and Escape focus Open decision; inspecting tabs and reopening preserve the pending choice. No simulation, save schema, history or reflection changes. Added mobile/desktop browser regressions for focus wrapping, inspection, exact pending reload and resolution. Local build/static checks and13 affected Node tests pass; exact-source CI and deployment are not yet verified.
+
 ## 6.4.0 — Spend continuity, narrative clarity and bounded birth data (candidate)
 Final screenshot follow-up also removes embedded legacy signed-factor readouts from narrative display without rewriting purchase history/effects.
 
