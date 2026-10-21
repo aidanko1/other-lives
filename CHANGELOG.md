@@ -1,6 +1,7 @@
 # Changelog
 
 ## 6.3.0 — gameplay polish candidate
+Also groups career-stage work experience into one skill per existing track (including Business analysis), retaining title/pay/history. Hides unavailable decisions/Spend actions without changing option indices or engine guards. Spend menu sections consistently collapse, with money overview visible; selected routines remain removable and other eligible routines return when a slot opens. Four targeted regressions pass locally; new browser checks await CI. AGENTS.md adopts the user’s proportional development protocol; no new gameplay mechanic or save migration.
 Moves four living factor bars into the existing sticky controls and removes numerical delta chips from current narrative/life log, retaining consequences, history/context and optional spending previews. Routine edits update in place without collapsing Spend disclosures or moving the selected row; readable rounded relationship values replace raw decimal tails. Corrects advertised three-year career reviews being blocked for seven years; applications/chance/training gates remain. Adds three career regressions and two three-engine browser helpers. First source3b29944 passes110 tests/build/all11 jobs/3432 asserted full lives/all three browsers. Corrected capture-only theme transition timing for QA screenshots; final harness checks and publication are recorded in PR3. Country/era expansion and broad narrative/promotion calibration remain separate updates.
 
 ## 6.2.0 — authorised release promotion

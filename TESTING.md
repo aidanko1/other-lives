@@ -1,5 +1,7 @@
 # Reproducible testing and release gates
 
+Routine updates follow the proportional protocol in AGENTS.md: targeted checks for minor changes, related integration/regression for moderate changes, broad cohorts for major simulation/state work. Do not manually repeat full-life cohorts for isolated UI/data fixes. Existing automated release gates remain active; any scope adjustment must preserve required correctness and cannot hide failures.
+
 Current exact-source evidence: RELEASE_STATUS.md. Node 22+; local executed runs also used Node 24. Tests are permanent repository files, not conversation-only claims. Node-reported test counts are not assertion counts. Never weaken/delete a failing assertion, hide an error or count an unfinished life as a completed simulation. Correct an invalid fixture transparently and retain the original failure investigation.
 
 ## Local commands

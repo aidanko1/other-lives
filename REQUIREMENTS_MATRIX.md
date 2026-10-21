@@ -39,3 +39,6 @@ Release scope: RELEASE_PLAN.md records the user's21October decision to accept th
 | S05 review interval correction | life-careers cooldown; events/clock selectors | career-review three tests; retained career-continuity and all cohorts | PASS-SCOPED at3b29944;110 tests/all release cohorts pass |
 
 These bounded requirements do not mark general enjoyment, all narrative variation or country calibration complete. Last published6.2.0 evidence is recorded in PR2 and RELEASE_STATUS.md.
+
+| Related career stages share one displayed skill; retain seniority/pay/history | life-careers.js workExperienceGroups; life-dynamics.js profile | Implemented; four targeted tests pass, browser pending | menu-clarity.test.cjs; browser-menu-clarity.cjs | Unknown jobs remain separate; no title-ledger migration |
+| Available actions only; consistent Spend disclosures | Spend rendering owners; ui/app.js spendView/decision rendering/routine updates | Implemented; browser pending | menu-clarity.test.cjs; browser-menu-clarity.cjs; browser-routines.cjs | Money overview stays visible; original decision index/token retained |

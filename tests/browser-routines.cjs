@@ -40,13 +40,13 @@ module.exports=async function verifyRoutineInteraction(browser){
     return after;
    }
    assert((await read()).routines.includes('outdoors'));
-   await toggle('outdoors');await toggle('study');await toggle('practice',{rejected:true});
-   const selected=await toggle('study',{keyboard:true});
+   await toggle('outdoors');await toggle('study');assert.equal(await panel.locator('[data-id="practice"]').isVisible(),false,'a third routine must be hidden when both slots are full');
+   const selected=await toggle('study',{keyboard:true});assert.equal(await panel.locator('[data-id="practice"]').isVisible(),true,'freeing a slot reveals eligible routines');
    await page.reload();await page.locator('[data-action="resume"]').first().click();await page.locator('[data-action="game-tab"][data-tab="spend"]').click();
    assert.deepEqual(await read(),selected,'selected routine must persist exactly through save/load');assert.deepEqual(errors,[]);
-   results.push({width,changes:3,rejectedLimit:1,exactReload:true,errors});
+   results.push({width,changes:3,hiddenLimit:1,exactReload:true,errors});
   }finally{await context.close();}
  }
  fs.mkdirSync('test-results',{recursive:true});fs.writeFileSync('test-results/routines-'+browser.browserType().name()+'.json',JSON.stringify(results,null,2));
- console.log('PASS Spend routines: pointer/keyboard changes and rejected third selection retain disclosures, row position, focus, annual timing and exact saves at mobile/desktop sizes');
+ console.log('PASS Spend routines: pointer/keyboard changes and hidden unavailable selections retain disclosures, row position, focus, annual timing and exact saves at mobile/desktop sizes');
 };

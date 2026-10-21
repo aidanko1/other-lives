@@ -42,7 +42,7 @@ for(const age of [0,2,4])for(let seed=1;seed<=15;seed++){
  const s=adult();s.cash=0;s.income=0;s.debt=50000;
  const mortgage=O.planOffers(s).find(x=>x.id==='mortgage');assert(mortgage.reason);assert(!O.planAction(s,'mortgage').ok);assert.equal(s.debt,50000);assert.equal(s.cash,0);
  s.pending=bill.id;assert(bill.options(s)[1].disabled);assert(!O.applyChoice(s,1));
- const html=O.spendHTML(s);assert.match(html,/available savings/);assert.match(html,/Not available yet/);assert.match(html,/Credit & borrowing/);
+ const html=O.spendHTML(s);assert.match(html,/available savings/);assert.doesNotMatch(html,/Not available yet/);assert.doesNotMatch(html,/data-action="plan-action" data-id="mortgage"/);assert.match(html,/Credit & borrowing/);
 }
 {
  const s=adult();s.income=100000;s.cash=1000000;s.knowledge=70;s.experience.totalYears=10;
