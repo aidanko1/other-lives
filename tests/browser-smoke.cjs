@@ -9,6 +9,9 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
  try{
   await require('./browser-pacing.cjs')(browser);
   await require('./browser-duration.cjs')(browser);
+  await require('./browser-polish.cjs')(browser);
+  const menuChecks=await Promise.allSettled([require('./browser-routines.cjs')(browser),require('./browser-menu-clarity.cjs')(browser)]);
+  const menuFailures=menuChecks.filter(r=>r.status==='rejected');if(menuFailures.length)throw new AggregateError(menuFailures.map(r=>r.reason),'Spend interaction checks failed');
   await require('./browser-no-reflections.cjs')(browser);
   await require('./browser-parallel.cjs')(browser);
   await require('./browser-infant.cjs')(browser);
@@ -76,7 +79,7 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
   });
   await page.reload();await click('resume');await page.locator('[data-action="choose"]').filter({hasText:'Let the owned home and rent elsewhere'}).click();
   await page.locator('[data-action="game-tab"][data-tab="spend"]').click();
-  await page.locator('[data-action="plan-action"][data-id="move-area"]').click();await page.locator('[data-action="plan-action"][data-id="buy-home"]').click();
+  await page.locator('.budget-group').filter({has:page.locator('[data-action="plan-action"][data-id="move-area"]')}).locator(':scope > summary').click();await page.locator('[data-action="plan-action"][data-id="move-area"]').click();const housing=page.locator('.budget-group').filter({has:page.locator('[data-action="plan-action"][data-id="buy-home"]')});if(await housing.getAttribute('open')===null)await housing.locator(':scope > summary').click();await page.locator('[data-action="plan-action"][data-id="buy-home"]').click();
   const propertySaved=await read();assert.equal(propertySaved.debt,propertyFixture.debt);assert.equal(propertySaved.propertyLedger.properties.length,2);assert(propertySaved.flags.rentalPropertyValue>0);
   assert.equal(propertySaved.propertyLedger.properties.filter(p=>p.mortgage?.balance>0).length,1);assert.equal(propertySaved.propertyLedger.properties.find(p=>p.kind==='rental').mortgage.balance,propertyFixture.debt);
   await page.reload();await click('resume');await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.deepEqual((await read()).propertyLedger,propertySaved.propertyLedger);

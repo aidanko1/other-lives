@@ -4,3 +4,8 @@
 @media(max-width:480px){.routine-options{grid-template-columns:1fr}.routine-panel,.debt-explanation,.course-entry{padding:15px}.skill-record>div{display:block}.skill-record span{display:block;margin-top:5px}.quintile-circles{gap:6px}}
 
 .route-planner{margin-top:24px}.route-planner details,.route-policies{border-top:1px solid var(--line);padding:14px 0}.route-planner summary,.route-policies summary{font-weight:700;cursor:pointer}.route-option,.route-progress{border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}.route-option p,.route-progress p{line-height:1.65;margin:8px 0}.route-option small{display:block;margin-bottom:10px;color:var(--muted)}.route-option .btn{white-space:normal}.route-destination{display:grid;gap:8px;margin:20px 0;font-size:.9rem}.route-destination select{max-width:100%;padding:12px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px}.policy-switch{display:block;width:100%;text-align:left;margin:10px 0;white-space:normal;line-height:1.5}.policy-switch[aria-pressed=true]{border-color:var(--green)}
+
+/* Consistent Spend disclosures; preserve the overview and native keyboard behaviour. */
+.spend-section{border:1px solid var(--line);border-radius:14px;padding:18px;margin:18px 0;background:var(--surface);color:var(--ink)}.spend-section>summary{font-weight:650;cursor:pointer;line-height:1.5}.spend-section[open]>summary{margin-bottom:14px}.routine-option[hidden]{display:none!important}
+
+.routine-panel{box-sizing:border-box}

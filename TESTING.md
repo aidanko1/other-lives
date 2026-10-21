@@ -1,5 +1,7 @@
 # Reproducible testing and release gates
 
+Routine updates follow the proportional protocol in AGENTS.md: targeted checks for minor changes, related integration/regression for moderate changes, broad cohorts for major simulation/state work. Do not manually repeat full-life cohorts for isolated UI/data fixes. Existing automated release gates remain active; any scope adjustment must preserve required correctness and cannot hide failures.
+
 Current exact-source evidence: RELEASE_STATUS.md. Node 22+; local executed runs also used Node 24. Tests are permanent repository files, not conversation-only claims. Node-reported test counts are not assertion counts. Never weaken/delete a failing assertion, hide an error or count an unfinished life as a completed simulation. Correct an invalid fixture transparently and retain the original failure investigation.
 
 ## Local commands
@@ -68,3 +70,6 @@ quality.yml has11 jobs: regression/static/build; four background shards; balance
 Do not call stable/promote production with unresolved critical/high defects, failing/missing relevant checks, unverified save compatibility or absent changes/limitations. Preserve a restore branch and trace requirements to files/tests. Documentation-only descendants must be distinguished from tested executable revisions; never rebrand an older run as new testing. No new deployment is verified unless its workflow actually succeeds.
 
 Private backups never belong in git/test fixtures. Read-only audits hash original bytes and report only scoped checks; a13-record migration audit is not13 simulated lives. Latest evidence and stubs/limits are in RELEASE_STATUS.md. Long-session enjoyment, slow hardware, arbitrary archives and full national/era calibration remain separate work.
+
+## 6.3 additions
+career-review.test.cjs has three red-to-green regressions for the promised review interval, exact load/read purity, primary/secondary selection pools and retained specialist training gates. browser-polish.cjs checks all four accessible meters inside the sticky strip, no duplicate living bars, eight320/390/768/1280 light/dark layouts, scrolling/fit, prose without effect badges, rounded bonds, real choice consequences and exact full-state reload. browser-routines.cjs checks natural childhood-to18 partial fixtures, mobile/desktop pointer/keyboard routine changes, rejected third selection, open Spend disclosures, row anchoring, focus and unchanged calendar/RNG/cash/journal before annual effects. Partial fixtures are not extra complete simulated lives. Both browser helpers run in every existing engine job. Existing assertions/cohorts remain; final exact-source results are in the cycle/PR record.
