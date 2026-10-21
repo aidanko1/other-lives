@@ -17,7 +17,9 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
   await require('./browser-infant.cjs')(browser);
   await require('./browser-accessibility.cjs')(browser);
   await require('./browser-schooling.cjs')(browser);
+  await require('./browser-story-flow.cjs')(browser);
   await require('./browser-large-archive.cjs')(browser);
+  await page.clock.install({time:new Date('2026-10-21T00:00:00Z')});
   await page.goto('http://127.0.0.1:8000');await page.locator('[data-action="new-dialog"]').first().waitFor();assert.equal(await page.locator('.footer-note .release-version').innerText(),'v'+require('../package.json').version,'landing must identify the running release');await click('new-dialog');await page.locator('#new-country').selectOption('GB');await click('start');
   assert(await page.locator('[aria-label="New life reveal"]').isVisible());await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');assert.equal(await page.locator('.footer-note .release-version').innerText(),'v'+require('../package.json').version,'gameplay must retain the subtle release label');
   await page.locator('[data-action="game-tab"][data-tab="family"]').click();const paused=await read();await page.waitForTimeout(4100);const later=await read();assert.equal(later.age,paused.age);assert.equal(later.month,paused.month,'inspecting family must pause clock');
@@ -40,6 +42,9 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
   await page.evaluate(()=>{const create=window.OL.create;window.OL.create=settings=>{window.OL.create=create;return create({...settings,country:'US',seed:953});};});
   await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');
   const stages=new Set(['birth']);let lifecycleChoices=0,ended=false;
+  // Next drives this lifecycle; freeze timer delivery so automatic playback cannot
+  // open a decision between the saved-state read and its corresponding UI click.
+  await page.clock.pauseAt((await page.evaluate(()=>Date.now()))+1);
   for(let step=0;step<200;step++){
    let life=await read();if(life.status==='finished'){ended=true;break;}
    for(const [stage,age]of [['childhood',6],['adulthood',18],['old-age',65]]){
@@ -55,6 +60,7 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
    if(await page.locator('[data-action="save-pet-name"]').isVisible())await click('save-pet-name');
   }
   assert(ended,'natural UI life did not conclude');assert(stages.has('childhood')&&stages.has('adulthood')&&stages.has('old-age'),'full lifecycle stage coverage');const natural=await read();assert(natural.cause);assert(natural.age>=65);console.log('PASS natural UI lifecycle',JSON.stringify({country:'US',seed:953,age:natural.age,choices:lifecycleChoices,stages:[...stages]}));
+  await page.clock.resume();
   await click('archive');await page.locator('[data-action="record"][data-id="'+natural.id+'"]').waitFor();await page.locator('[data-action="record"][data-id="'+natural.id+'"]').click();assert((await page.locator('body').innerText()).includes(natural.cause),'archive must display actual cause');
   await click('new-dialog');await click('start');await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');assert.notEqual((await read()).id,natural.id,'new life after natural death');await page.locator('[data-action="game-tab"][data-tab="family"]').click();
 

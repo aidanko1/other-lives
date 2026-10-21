@@ -6,7 +6,7 @@ module.exports=async function verifyLargeArchive(browser){
   await page.goto('http://127.0.0.1:8000');
   // Transfer one serialized normal save, not100 deep object graphs through the automation protocol.
   const template=JSON.parse(await page.evaluate(()=>{
-   const O=window.OL,s=O.create({country:'US',seed:951,comparisons:true});let actions=0;
+   const O=window.OL,s=O.create({country:'US',seed:955,comparisons:true});let actions=0;
    while(s.status==='alive'&&actions++<3000){if(s.pending){const v=O.decisionView(s),i=v.options.findIndex(o=>!o.disabled);if(i<0||!O.applyChoice(s,i,v.token))throw Error('Archive fixture choice failed');}else O.advanceMonth(s);O.assertConsistent(s);if(O.lifeIssues(s).length)throw Error('Invalid archive fixture');}
    if(s.status!=='finished')throw Error('Archive fixture did not finish');if(s.snapshots.length!==24||s.parallelWorld?.lives?.length!==4)throw Error('Archive fixture lacks normal replay/comparison data');return JSON.stringify(s);
   }));

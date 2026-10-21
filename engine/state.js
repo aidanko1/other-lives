@@ -6,6 +6,7 @@
  O.migrateLife = function (input) {
   if (!input || typeof input !== 'object' || !input.id || !input.country?.code || !Array.isArray(input.journal) || !Array.isArray(input.people)) throw Error('Invalid life record.');
   if ((input.schemaVersion || 0) > O.SAVE_VERSION) throw Error('This save requires a newer version of Other Lives.');
+  if(input.storyFlow&&input.storyFlow.version!==1)throw Error('This save requires a newer story-flow model.');
   if(input.schoolRecord&&input.schoolRecord.version!==1)throw Error('This save requires a newer schooling model.');
   if(input.schoolRecord&&(!input.schoolRecord.profile||!Array.isArray(input.schoolRecord.years)||!Array.isArray(input.schoolRecord.awards)))throw Error('Invalid schooling record.');
   const s = JSON.parse(JSON.stringify(input));
@@ -35,6 +36,10 @@
   const issue = (code, message) => issues.push({code, message});
   if (!Number.isInteger(s.age) || s.age < 0 || s.age > 120) issue('age', 'Invalid player age.');
   if (!Number.isInteger(s.month) || s.month < 0 || s.month > 11) issue('month', 'Invalid month.');
+  if(s.storyFlow){
+   if(s.storyFlow.version!==1)issue('story.model','Unknown story-flow model.');
+   for(const e of s.journal.filter(e=>e.cause)){const c=e.cause;if(!s.choiceHistory.some(x=>x.eventId===c.eventId&&x.age===c.age&&x.month===c.month&&x.index===c.index)||c.age>=e.age||c.personId&&!s.people.some(p=>p.id===c.personId))issue('story.cause','Story consequence without an earlier recorded choice or participant.');}
+  }
   if(s.mortalityTiming?.version===1&&(!Number.isInteger(s.mortalityTiming.infantMonths)||s.mortalityTiming.infantMonths<0||s.mortalityTiming.infantMonths>12))issue('mortality.receipt','Invalid first-year mortality receipt.');
   if (!['alive', 'paused', 'finished'].includes(s.status)) issue('status', 'Unknown life status.');
   for (const key of ['cash', 'debt', 'income', 'investments', 'property', 'familyCash', 'familyAssets', 'familyDebts']) if (!Number.isFinite(s[key]) || s[key] < 0) issue('money.' + key, 'Invalid ' + key + '.');

@@ -56,10 +56,11 @@ O.advanceMonth=function(s){
  const due=s.agenda.find(a=>a.month<=s.month&&!a.done);
  if(due){
   due.done=true;
-  if(due.type==='story')O.fireStory(s,due);
+  if(due.type==='story'){const previous=s.journal[0];O.fireStory(s,due);if(previous===s.journal[0])O.replaceMissedStory?.(s);}
   else{
    const e=O.EVENTS.find(x=>x.id===due.id);
    if(e&&(O.eventEligible?O.eventEligible(s,e):e.when(s))&&s.age>=e.min&&s.age<=e.max){s.pending=e.id;s.scene=e.scene||s.scene;O.snapshot(s)}
+   else if(s.storyFlow?.version===1)O.replaceMissedStory(s);
    else O.journal(s,'Plans change','An expected opportunity does not materialise as circumstances shift.','life');
   }
   return {advanced:true,decision:!!s.pending,entry:true};

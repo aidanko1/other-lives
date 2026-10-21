@@ -1,5 +1,10 @@
 # Gameplay contract and reference evidence
 
+## 6.6 gameplay experience scope
+Contextual selection, recent-topic rotation and eleven optional ordinary follow-ups connect existing recorded choices to current life circumstances. Practice outcomes need practice; work follow-through needs an accepted role; repair stays tied to the original partner; financial memories do not transfer money again. At most one follow-up is planned per year within existing story slots. No new decisions, menus, compulsory pauses or reflection prompts. These are independently authored improvements, not claims about unverified reference internals. Enjoyment and exact frequency parity remain unverified.
+
+New births store storyFlow.version1 before snapshots; old saves keep their model and history. Shared queued-participant role safety applies to all lives. No past choice context is invented on load.
+
 ## 6.5 school progression scope
 New births use one connected school progression model: access is separate from attendance; attended years and assessments determine primary/secondary or practical-course completion; delayed entry, interrupted courses, family-funded equivalency and later admissions retain their consequences. Enrolling, choosing a pathway, reaching an age or reading Profile cannot grant a qualification. Practical training does not automatically substitute for secondary admission eligibility. Qualifications are never downgraded when another route is completed. Existing university, funding, work and professional gates remain.
 

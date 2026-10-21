@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.6.0 — contextual life flow and choice follow-through (candidate)
+New lives favour relevant stories, rotate recent topics and use eleven possible follow-ups to recorded childhood, schooling, interest, work, relationship and financial choices. Follow-ups require present circumstances and actual practice/acceptance/repayment, with persistent effects in existing story slots. No new menu, mandatory decision or reflection prompt. Outcomes remain uncertain.
+
+Queued scenes recheck participant roles and current prose. Invalidated slots use an eligible ordinary replacement without another month or choice. Fixes a reproduced former-partner scene contradiction. New births version selection before snapshots; old lives keep their selection model and history, with shared role safety. Targeted tests/build and50 asserted smoke lives passed at checkpoints; final exact-source CI/publication pending. This is scoped gameplay improvement, not complete subjective/reference parity.
+
 ## 6.5.0 — connected school progression (candidate)
 Adds versioned attendance and completion for new lives across all129 countries, with contextual access/continuation, persistent support, delayed entry, course prerequisites, optional withdrawal, and school-leaving after late completion. Replaces age-only primary awards, immediate academic-choice secondary awards and zero-attendance course passes. Adult equivalency connects foundation/secondary assessments, protected family funding, preserved vocational certificates and shared domestic/flexible/overseas admission gates. Existing saved lives retain their progression without invented history. Adds school invariant, integration, browser and cohort-coverage assertions. No reflections or general UI redesign. National calendars and empirical rates remain explicitly approximate; source gates/publication are pending.
 
