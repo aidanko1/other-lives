@@ -70,3 +70,4 @@ No unresolved confirmed critical/high audit finding remains uncorrected. Unknown
 
 ## Cycle6
 OL-033 / Medium pacing: narrative delivery consumed another monthly playback budget despite no calendar movement. GB seed2218/five authored infant highlights reached month8 after45.1controlled seconds. Fixed at the UI/clock boundary; full state/RNG equality and real Chromium red→green regression retained. See ENGINEERING_CYCLE_6.md for reproduction and execution evidence.
+Resolved at b751cb3 and retained at ba00e5b; both exact revisions pass all eight CI gates. Final81 tests and both1000-life cohorts pass without weakened gameplay assertions. TEST-006 corrects an invalid exact floating-point inverse assertion transparently; monthly formula is still asserted exactly. No additional confirmed critical/high defect emerged from the six density-review traces.

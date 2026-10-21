@@ -1,6 +1,6 @@
 # Engineering checkpoint — 6.2.0-dev.1 (unreleased)
 
-The published game remains v6.1.0. Engineering work is isolated in [draft PR2](https://github.com/aidanko1/other-lives/pull/2). Start with [RELEASE_STATUS.md](RELEASE_STATUS.md), [AGENTS.md](AGENTS.md), [FIDELITY_MATRIX.md](FIDELITY_MATRIX.md), [REQUIREMENTS_MATRIX.md](REQUIREMENTS_MATRIX.md) and [BACKLOG.md](BACKLOG.md). Runtime source 07f81f2 has executed checks recorded in RELEASE_STATUS.md; earlier release claims below are historical. Do not call the entire game stable, fully realistic or reference-equivalent from these counts.
+The published game remains v6.1.0. Engineering work is isolated in [draft PR2](https://github.com/aidanko1/other-lives/pull/2). Start with [RELEASE_STATUS.md](RELEASE_STATUS.md), [AGENTS.md](AGENTS.md), [FIDELITY_MATRIX.md](FIDELITY_MATRIX.md), [REQUIREMENTS_MATRIX.md](REQUIREMENTS_MATRIX.md) and [BACKLOG.md](BACKLOG.md). Runtime source ba00e5b passes81 tests, production build,2,000 asserted complete lives and all eight [CI gates](https://github.com/aidanko1/other-lives/actions/runs/39530111698). [Cycle6](ENGINEERING_CYCLE_6.md) fixes story-delivery delays and adds reference-aligned30/60/90-minute birth pacing with old-save compatibility. Earlier release claims below are historical. Do not call the entire game stable, fully realistic or reference-equivalent from these counts.
 
 # Other Lives v5.9.2 — Connected education and family memories
 

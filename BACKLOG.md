@@ -1,6 +1,6 @@
 # Prioritised continuation backlog
 
-Current verified source b87e519; exact evidence in RELEASE_STATUS.md. VERIFIED means scoped acceptance passed, not whole-game completeness.
+Current verified source ba00e5b; exact evidence in RELEASE_STATUS.md and ENGINEERING_CYCLE_6.md. VERIFIED means scoped acceptance passed, not whole-game completeness.
 
 ## Completed reliability stage
 - Reversible production baseline, isolated branch, permanent audit/design/fidelity/architecture/testing/requirements/bugs/release documentation, reusable quality and gated Pages workflow.
@@ -10,11 +10,13 @@ Current verified source b87e519; exact evidence in RELEASE_STATUS.md. VERIFIED m
 - Pure displayed choices/tokens; participant/conception identity; changed-circumstance exits and ended overseas/doctoral commitments.
 - Separate property/loan identity, rental/current residence, fees/sales/revaluation, schema2 compatibility and scheduled-debt prepayment.
 - Full official reference play to 91 plus infant/rebirth; Next bereavement stop through existing controls.
-- 75 tests/build,2,000 complete asserted lives and actual Chromium lifecycle/save/read/property/pacing gates. Checkpoint/6.2.0-dev.1-reliability-verified points at b87e519.
+- Calendar-only playback budget and reference30/60/90-minute birth duration/default60, frozen origin and exact legacy fallback; seeded outcomes unaffected.
+- 81 tests/build,2,000 complete asserted lives and actual Chromium lifecycle/save/read/property/duration gates. Checkpoint/6.2.0-dev.1-pacing-verified points at ba00e5b; b87e519's restore branch remains.
+- Scoped optional-menu/decision-density review, including six asserted replays of the three highest-count births. Stress-policy follow-ups explain most extra choices; no unsupported global rate reduction.
 
 ## Next work, by priority
-1. Finish cycle6 verification: calendar-only time budget and30/60/90-minute duration are implemented with targeted browser checks. Compare remaining normal-speed/optional-menu density, route-heavy trajectories (up to178 decisions in stress policy) and generic repetition; CI does not certify enjoyment.
-2. Reconcile optional reflections/parallel lives and richer retrospective endings. Independently author justified work; preserve established tabs/home learning/funding/art. Duration chooser is implemented in cycle6 rather than still missing.
+1. Implement verified optional reflections/parallel lives and richer retrospective endings in a separate tested stage. Reference reflection5 private note/skip/disable and four same-age companion stages are directly observed. Preserve established tabs/home learning/funding/art; avoid extra management.
+2. Continue long-session enjoyment/contextual repetition review. Cycle6 measures playback and optional-menu/stress-policy density, not full subjective parity; repeated hardship/general cards need contextual writing judgment. Duration chooser is implemented and verified.
 3. Source/version demographic/economic inputs, age/sex mortality and national schooling/opportunity.129 versus172 locations and eras remain incomplete; no invented national legal/wage precision.
 4. Extend rare-route/country combination coverage.34/42 types start in the cohort; contracts for all definitions do not validate every full trajectory.
 5. Incrementally simplify structural/command helpers only behind concrete acceptance; do not recreate annual/finance wrapper chains.

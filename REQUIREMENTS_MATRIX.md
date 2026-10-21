@@ -1,8 +1,8 @@
 # Requirements → implementation → tests
 
-Cycle6 adds F02/RF08: calendar-only playback budget and30/60/90-minute birth duration/default60, frozen origin and legacy3750ms/month fallback. Owners: engine/clock.js, core.js, ui/app.js. Tests: pacing.test.cjs (eight tests, including full seeded-life outcome equality), browser-pacing.cjs (legacy5highlights/45.1s), browser-duration.cjs (actual UI setup/timed year/pause/reload at all three values). Local targeted/regression passes; exact final-commit CI pending. Approximate targets do not guarantee actual wall time or a lifespan.
+Cycle6 F02/RF08 is PASS-SCOPED at ba00e5b: calendar-only playback budget and30/60/90-minute birth duration/default60, frozen origin and legacy3750ms/month fallback. Owners: engine/clock.js, core.js, ui/app.js. Tests: pacing.test.cjs (eight tests, including full seeded-life outcome equality), browser-pacing.cjs (legacy5highlights/45.1s), browser-duration.cjs (actual UI setup/timed year/pause/reload at all three values). Local checks and all eight exact-source CI jobs pass: https://github.com/aidanko1/other-lives/actions/runs/39530111698. Approximate targets do not guarantee actual wall time or a lifespan. UX02 now includes descriptive policy-stratified counts and six asserted complete replay traces; enjoyment remains unverified.
 
-Current source b87e519 passes all eight gates: https://github.com/aidanko1/other-lives/actions/runs/39515340262. 75 tests/build and 2,000 complete asserted lives. PASS-SCOPED means executed acceptance, not entire-system completeness. The original matrix below is historical; the current cycle supplement and RELEASE_STATUS.md supersede its old counts/unknowns.
+Current source ba00e5b passes all eight gates: https://github.com/aidanko1/other-lives/actions/runs/39530111698.81 tests/build and2,000 complete asserted lives. PASS-SCOPED means executed acceptance, not entire-system completeness. The original matrix below is historical; current cycle supplements and RELEASE_STATUS.md supersede old counts/unknowns.
 
 | ID | Requirement / acceptance | Implementation | Tests / evidence | Status and limits |
 |---|---|---|---|---|

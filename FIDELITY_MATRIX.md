@@ -2,7 +2,7 @@
 
 Verified 20 October 2026 UTC / 21 October Hong Kong. Official https://1in8b.life/en/ v0.7.89 beta. Evidence: direct rendered play, official documentation, Other Lives source/tests and explicit unknowns. REFERENCE_PLAYTEST_2026-10-21.md records the completed observation; earlier limited automated evidence is historical: https://github.com/aidanko1/other-lives/actions/runs/39493052211. No proprietary reference assets/source/substantial text are incorporated.
 
-| ID / dimension | Verified reference | Other Lives at b87e519 | Evaluation / acceptance |
+| ID / dimension | Verified reference | Other Lives at ba00e5b | Evaluation / acceptance |
 |---|---|---|---|
 | RF01 Structure | Random birth/registration, text life, events, ending and rebirth played | Same broad sequence; full actual UI lifecycle/new birth pass | Core structure matches; not all-content parity |
 | RF02 Time | Automatic clock, pause,16× and Next used; choices stop time | Month clock, same six speeds/pause/Next | Preserve simple controls; full timed duration unknown |
@@ -27,5 +27,7 @@ Enjoyment, normal-speed session duration, all variants, paid features and full s
 
 Cycle6 inspected optional controls: six focus settings and seven persistent routines (maximum two active) plus policies/routes. These are voluntary, retained across years and grouped in closed disclosures. They do not require yearly re-entry. No evidence justifies removing established options simply to reduce counts; actual high-density trajectories and long-session enjoyment still need review. Corrected the birth selector's inaccurate normal-distribution label: the existing household-percentile draw is uniform, not Gaussian. Country choices now show names without implementation labels.
 
+Cycle6 quantifies the voluntary-policy contribution:666 no-annual-intention lives have median39 choices/p90=54/max68;334 annual-intention stress lives have median99/p90=150/max178. Three highest-count stress replays exactly reproduce counts, with most choices in voluntary route follow-ups. Disabling annual voluntary starts from those births yields35–43 choices and different outcomes. These are descriptive/branching traces, not national rates or a reference-frequency match. Details/seeds/assertions are in ENGINEERING_CYCLE_6.md. Full long-session enjoyment remains unknown.
+
 ## Exact own-game evidence
-b87e519fd04fceb489a39c68a67719e0159d8324:75 tests/build/all eight gates pass; 2,000 complete asserted lives across 129 countries; natural US951 to 105 with 47 choices, stage reloads, archive and another birth. Actual housing and bereavement checks pass. https://github.com/aidanko1/other-lives/actions/runs/39515340262. This verifies an engineering baseline, not complete reference parity or national calibration.
+ba00e5bd8cfc50cf54c92bbecd23ee954024934f:81 tests/build/all eight gates pass;2,000 complete asserted lives across129 countries; natural US951 to105 with47 choices, stage reloads, archive and another birth. Actual housing/bereavement and legacy/new-duration timer/save checks pass. https://github.com/aidanko1/other-lives/actions/runs/39530111698. This verifies an engineering baseline, not complete reference parity or national calibration. Reference v0.7.90 setup/birth/five-year pause inspected after the earlier whole-life v0.7.89 observation. Sex-specific birth expectancy is displayed by the reference; Other Lives still uses its combined-country model.
