@@ -9,7 +9,7 @@ module.exports=async browser=>{
    for(const mode of ['academic','home']){
     // Natural production progression to the first school-leaving choice; only birth and choices are fixed.
     const fixture=await page.evaluate(mode=>{
-     const O=window.OL,s=O.create({country:'HK',seed:2218,classChoice:'comfortable'});let actions=0,course=null;
+     const O=window.OL,s=O.create({country:'HK',seed:2222,classChoice:'comfortable'});let actions=0,course=null;
      while(s.status==='alive'&&s.pending!=='adult-crossroads'&&actions++<600){
       if(s.pending){const v=O.decisionView(s),a=v.options.map((o,i)=>({...o,i})).filter(o=>!o.disabled);let c=a[0];
        if(mode==='home'){if(s.pending==='school-entry')c=a.find(o=>/Learn with family/.test(o.label));if(s.pending==='school-return')c=a.find(o=>/Keep learning/.test(o.label));if(s.pending.startsWith('local-pathway-'))c=a.find(o=>/Work or help/.test(o.label));if(s.pending==='exam-years')c=a.find(o=>/contributing/.test(o.label));}
@@ -34,7 +34,7 @@ module.exports=async browser=>{
      await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.equal(await page.locator('[data-action="browse-degrees"]').count(),0,'ineligible applications are hidden');await page.locator('.route-planner > summary').click();assert.match(await page.locator('.route-progress').filter({hasText:/equivalency/i}).innerText(),/qualification/i);
      await page.reload();await page.locator('[data-action="resume"]').first().click();await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.deepEqual(await read(),started,'prepared recovery and exact funds survive reload');
     }
-    assert.deepEqual(errors,[]);results.push({width,mode,seed:2218,country:'HK',age:fixture.s.age,awards:fixture.s.schoolRecord.awards.length});
+    assert.deepEqual(errors,[]);results.push({width,mode,seed:2222,country:'HK',age:fixture.s.age,awards:fixture.s.schoolRecord.awards.length});
    }
    await page.screenshot({path:'test-results/schooling-'+browser.browserType().name()+'-'+width+'.png',fullPage:true,animations:'disabled'});
   }finally{await context.close();}

@@ -3,7 +3,10 @@
 ## Last verified stable baseline: 6.5.0
 Released at 1c33e7b5f1c5432196a19b90e4ce7704f9e74dc0; restorable at release/6.5.0. [PR6](https://github.com/aidanko1/other-lives/pull/6) records the identical tested/merged tree, 140 passing Node tests, all 11 source gates, 3,432 complete asserted release cases, all three browsers and [successful production validation/deployment39597865257](https://github.com/aidanko1/other-lives/actions/runs/39597865257). Actual live6.4.1→6.5.0 pending-choice/age/family/finances continuity and fresh school-entry/qualification/reload checks passed. National education calibration remains deferred. No next feature release is underway; use BACKLOG.md's gameplay-first selection rule.
 
-The preparation notes below are historical; PR6 and the release evidence above supersede their pending statuses.
+## 6.6.0 gameplay candidate
+Isolated on updates/6.6-gameplay-experience; live remains6.5.0. Contextual selection/topic rotation, recorded-choice follow-through and queued-role/replacement corrections are implemented. Targeted checks/build and50 asserted smoke lives passed at recorded checkpoints. Final exact-source regression, cohorts and three browser suites must pass before promotion. The candidate pull request records subsequent gates, merge, deployment and actual live verification. No national-data expansion or UI redesign.
+
+The older preparation notes below are historical; PR6 and the6.5 evidence above supersede their pending statuses.
 
 ## Previous verified baseline: 6.4.1
 Release461105639de083663e2be4c2186325e9e7b96ceb is restorable at release/6.4.1. [PR5](https://github.com/aidanko1/other-lives/pull/5) records the identical tested/merged tree,128 Node tests, all11 source gates,3432 asserted complete lives, all three browser suites and [successful production validation/deployment39582896103](https://github.com/aidanko1/other-lives/actions/runs/39582896103). Actual6.4.0→6.4.1 pending-choice/age/family/finances continuity, repaired focus, Set aside/Family/reopening and footer were verified. Earlier releases remain available.

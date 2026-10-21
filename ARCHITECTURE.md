@@ -1,5 +1,7 @@
 # Simulation architecture
 
+engine/story-flow.js owns optional new-birth story selection, using existing moments, choiceHistory and journal with small bound contexts/causal references. It adds no annual owner or separate event queue. clock.js replaces invalidated slots without additional calendar time; state.js validates causal references. Legacy selection/history remains unchanged except shared queued-role safety.
+
 ## Runtime and state
 New births initialize schoolRecord version1 in core before the first snapshot or comparison generation. engine/schooling.js owns its immutable birth assumptions, attendance receipts, earned school qualifications, local-course progression and recovery. Its annual prepare phase captures attendance before legacy end-of-school adapters run; the finalizer records each period once inside the existing rollback boundary. Earlier academic/local-course adapters delegate only for these versioned lives. Saved lives without schoolRecord retain the old owner path; migration remains observational.
 
