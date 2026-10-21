@@ -25,9 +25,10 @@ module.exports=async function verifyRoutineInteraction(browser){
    async function toggle(id,{keyboard=false,rejected=false}={}){
     const button=panel.locator('[data-action="set-routine"][data-id="'+id+'"]');await button.scrollIntoViewIfNeeded();
     await button.evaluate(el=>{const target=document.querySelector('.time-sticky').getBoundingClientRect().bottom+24;scrollBy(0,el.getBoundingClientRect().top-target);});
-    await button.focus();const before=await read(),top=await button.evaluate(e=>e.getBoundingClientRect().top);
+    await button.focus();const before=await read(),top=await button.evaluate(e=>e.getBoundingClientRect().top),height=await panel.evaluate(e=>e.getBoundingClientRect().height);
     if(keyboard)await button.press('Enter');else await button.click();
     assert.equal(await panel.getAttribute('open'),'','the ongoing-routines menu must remain open');
+    assert(await panel.evaluate(e=>e.getBoundingClientRect().height)>=height-1,'hiding alternatives must not collapse the editing space');
     assert.equal(await other.getAttribute('open'),'','other expanded Spend sections must remain open');
     const after=await read();
     if(rejected){assert.deepEqual(after.routines,before.routines);assert((await page.locator('.toast').innerText()).includes('two routines'));}
@@ -42,6 +43,7 @@ module.exports=async function verifyRoutineInteraction(browser){
    assert((await read()).routines.includes('outdoors'));
    await toggle('outdoors');await toggle('study');assert.equal(await panel.locator('[data-id="practice"]').isVisible(),false,'a third routine must be hidden when both slots are full');
    const selected=await toggle('study',{keyboard:true});assert.equal(await panel.locator('[data-id="practice"]').isVisible(),true,'freeing a slot reveals eligible routines');
+   await panel.locator('summary').click();assert.equal(await panel.evaluate(e=>e.style.minHeight),'','closing releases temporary editing space');
    await page.reload();await page.locator('[data-action="resume"]').first().click();await page.locator('[data-action="game-tab"][data-tab="spend"]').click();
    assert.deepEqual(await read(),selected,'selected routine must persist exactly through save/load');assert.deepEqual(errors,[]);
    results.push({width,changes:3,hiddenLimit:1,exactReload:true,errors});

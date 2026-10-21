@@ -7,3 +7,5 @@
 
 /* Consistent Spend disclosures; preserve the overview and native keyboard behaviour. */
 .spend-section{border:1px solid var(--line);border-radius:14px;padding:18px;margin:18px 0;background:var(--surface);color:var(--ink)}.spend-section>summary{font-weight:650;cursor:pointer;line-height:1.5}.spend-section[open]>summary{margin-bottom:14px}.routine-option[hidden]{display:none!important}
+
+.routine-panel{box-sizing:border-box}
