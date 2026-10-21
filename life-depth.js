@@ -140,6 +140,7 @@ O.registerAnnualStage('education-tracks',s=>{
  if(s.status!=='alive')return;
  // Qualifications are durable; progressing through a different route must not erase an earned degree.
  if(O.educationNumber(s.education)<earlierQualification)s.education=O.EDU[earlierQualification];
+ if(s.schoolRecord?.version===1)return; // The shared school owner settles versioned courses.
  const t=s.flags.educationTrack;
  if(!t||t.completed||t.route==='work')return;
  if(t.status==='enquiring'&&s.age>=t.started+1){
