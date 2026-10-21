@@ -47,6 +47,7 @@ test('Spend has one persistent control per repeated yearly activity and no separ
  assert(offers.some(x=>x.id==='dental'));assert(offers.some(x=>x.id==='holiday'));assert(offers.some(x=>x.id==='gift'));
  const support=O.ROUTES.find(r=>r.id==='support').options(s);assert.equal(support[1].disabled,true,'legacy counselling option index stays guarded; its control moved to Spend');
  s.interests=[];assert(O.planOffers(s).some(x=>x.id==='hobby'),'the introductory drawing acquisition path remains available');
+ s.routines=[];assert.equal(O.ROUTES.find(r=>r.id==='support').options(s)[2].disabled,true);s.routines=['connection','outdoors','study','practice'];assert(O.startRoute(s,'support').ok);assert(O.openRouteDecision(s,'support'));assert(O.applyChoice(s,2));assert.deepEqual(JSON.parse(JSON.stringify(s.routines)),['connection','outdoors','study'],'reduce one demand must preserve the other three');
 });
 test('more than two enabled preferences persist across annual settlement and exact reload without yearly rebooking',()=>{
  const O=loadEngine(),s=adult(O);s.interests=['Programming'];s.experience.hobbies.Programming={years:1,level:1};s.routines=[];
