@@ -1,15 +1,16 @@
-# Verified development baseline —6.2.0-dev.4
+# Other Lives 6.2.0 — bounded consistency and reliability release
 
-This is a verified, restorable **development** baseline, not a claim of complete reference parity/national calibration or a production release. No merge/deployment was performed. Main remains4072fd4997992cb7fd6bf78d7f0c9cab41a7379f (v6.1; historical deployment is not a new correctness certification).
+The user authorised publishing this update on21October2026 if no major blocker remains. The accepted scope is coherent gameplay, no known unresolved confirmed critical/high consistency defect and the existing release gates. Remaining polish/realism is batched in RELEASE_PLAN.md; full national calibration/reference parity is not claimed.
 
-Development branch: engineering/fidelity-reliability-baseline. Draft PR: https://github.com/aidanko1/other-lives/pull/2.
+## Publication record and rollback
 
-**21 October user scope decision:** the current consistency/reliability work is sufficient once there are no known major consistency defects and the release gates pass. Remaining polish and realism will ship in smaller later updates. RELEASE_PLAN.md defines the batches. Recorded engineering acceptance below is met; the candidate is ready for release review, with no known unresolved confirmed critical/high defect. It remains unpublished. Full national/era calibration and extended subjective/device review are future work, not conditions silently added to this release. The scope review rechecked all11 successful jobs at handover11dcd56: https://github.com/aidanko1/other-lives/actions/runs/39541605654. No additional test runs or simulated lives are claimed for that recheck.
+[PR2](https://github.com/aidanko1/other-lives/pull/2) records source review/promotion. Actual publication and deployed revision are recorded in the [v6.2.0 publication record in PR2](https://github.com/aidanko1/other-lives/pull/2) after successful deployment, with a direct workflow and live-smoke result. Until that PR description records successful deployment, publication is pending; do not infer a successful deployment from this preparation document. [Pages workflow runs](https://github.com/aidanko1/other-lives/actions/workflows/pages.yml) are authoritative for deployment status and always require the complete quality workflow.
 
-**Tested executable/tests/workflows source:**75b2154d4794d09410537bebea37937b9cc64ebf.
-**All11 jobs pass:** https://github.com/aidanko1/other-lives/actions/runs/39540689377.
-**Restore:** checkpoint/6.2.0-dev.4-release-gates-verified.
-Production engine/UI/assets are unchanged from3c301436e5f1a4817ec847c717ee575a2d60fcba;75b2154 strengthens the archive test and handover instructions. Subsequent documentation-only descendants record these results without claiming additional scenarios.
+Restorable pre-release main:4072fd4997992cb7fd6bf78d7f0c9cab41a7379f, preserved at baseline/v6.1-before-engineering-overhaul. Verified development checkpoints: checkpoint/6.2.0-dev.4-release-gates-verified and checkpoint/6.2.0-dev.4-handover-verified. Promotion is traceable and reversible; no experimental features were added for release.
+
+## Evidence and exact-source boundary
+
+Tested executable/tests/workflows source75b2154d4794d09410537bebea37937b9cc64ebf passed all11 jobs: https://github.com/aidanko1/other-lives/actions/runs/39540689377. Handover11dcd56 also passed all11: https://github.com/aidanko1/other-lives/actions/runs/39541605654. Later scope commit2d754b0 is documentation-only. The6.2.0 promotion changes package/index/release-version strings from6.2.0-dev.4 to6.2.0, including asset cache keys, plus release documentation. Engine/UI logic, schema, tests and workflows remain byte-identical to the verified candidate. Final-promotion CI must pass before merge; Pages repeats the complete gate before deployment. Final exact-source run IDs belong in the publication record; earlier tests are not presented as fresh runs.
 
 ## Executed acceptance
 | Gate | Verified result |
@@ -27,7 +28,7 @@ Production engine/UI/assets are unchanged from3c301436e5f1a4817ec847c717ee575a2d
 | Accessibility |Nine light/dark lifecycle/form/mobile WCAG2A/2AA/2.1AA axe surfaces,zero serious/critical violations in all engines; actual modal focus entry/wrap/Escape/return; nonmodal decisions preserve inspection |
 | Large normal-save archives |198957434-byte backup;100/100 exact records after actual import/render/reload/export/detail/targeted deletion in all three engines. Each record includes24 turning points/four peer histories/229 journal entries. Copies of one complete asserted fixture, not100 new simulated lives |
 | Save compatibility |Schema0/1→2 pure/idempotent migrations, exact schema2 load/eight country snapshot continuations, legacy unknowns/conserved liability repair, no invented timing/worlds.13 private records also pass local read-only history/identity/idempotence/consistency/migration audit; original bytes hash unchanged |
-| Deployment/enforcement |No new deployment. Pages depends on all quality jobs; protected-main remains false and connector administration is unavailable. Settings-level enforcement is not claimed |
+| Deployment/enforcement | Actual publication is recorded separately above. Pages depends on all quality jobs; protected-main remains false and connector administration is unavailable. Settings-level enforcement is not claimed |
 
 3432 is the three release-cohort totals plus targeted432 for this revision. Repeated runs at older/newer commits are not additional unique scenarios; storage copies/private records are not simulations. CI retains logs/artifacts/reproducible failures. These are seed/policy-conditioned distributions, not measured national probabilities or proof of enjoyment.
 
@@ -39,6 +40,6 @@ The expanded archive fixture initially exhausted the test runner's heap through 
 ## Remaining limits and next priority
 No confirmed unresolved critical/high defect is knowingly hidden; this is not a bug-free guarantee.129 authored profiles versus reference172 locations, eras, national economics/schooling/licensing and age/sex mortality remain partial. Uniform infant hazard does not model neonatal concentration; older-age timing is annual. Long junior medical titles/promotion opportunities and contextual generic repetition need further evidence before changing deliberate application/training gates. Full normal-speed subjective enjoyment, manual assistive-technology/low-end-device checks and arbitrary archive sizes are unverified. New-birth peer generation is synchronous, measured around1.9s locally; slow-device latency is unknown.
 
-Next operational priority: review the bounded consistency/reliability candidate for deliberate release. Remaining work is batched in RELEASE_PLAN.md, beginning with targeted gameplay polish after this release. Owner-level required-check protection needs owner administration. Keep this checkpoint playable/restorable and experimental changes separate; do not automatically merge/deploy it or call the whole project fully realistic/reference-equivalent.
+Current release task: complete the authorised gated publication and record live verification; after publication, consult that record before repeating any release operation. Remaining work is batched in RELEASE_PLAN.md, beginning with targeted gameplay polish after this release. Owner-level required-check protection needs owner administration. Keep this checkpoint playable/restorable and experimental changes separate; do not automatically merge/deploy it or call the whole project fully realistic/reference-equivalent.
 
 Read AGENTS.md, GAME_DESIGN.md, FIDELITY_MATRIX.md, ARCHITECTURE.md, TESTING.md, REQUIREMENTS_MATRIX.md, BUGS.md and BACKLOG.md at the next session. Previous cycle failures and exact evidence remain in ENGINEERING_CYCLE_*.md. No private backup was modified or committed; no avatar/text-render audit is claimed for the latest13-record migration recheck.

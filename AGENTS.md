@@ -17,7 +17,7 @@ The user's 21 October release-scope decision is in RELEASE_PLAN.md: the current 
 
 Before edits, identify fidelity implications, dependencies/owners, root cause, acceptance criteria, save implications and edge cases. Implement/integrate the complete scoped behavior. Preserve existing functionality and assertions; no placeholders, hidden errors, reduced coverage or expected-result changes to manufacture a pass. Investigate failures. Explain any genuinely invalid fixture correction with evidence.
 
-Use isolated development branches/restorable SHAs and small traceable commits. Do not merge/deploy experimental or failing work. Production main4072fd4 is preserved. All11 quality jobs gate Pages; protected-main settings are not enabled and available connector access cannot administer them. Never claim settings-level enforcement or a deployment that did not occur.
+Use isolated development branches/restorable SHAs and small traceable commits. Do not merge/deploy experimental or failing work. Pre-release main4072fd4 is preserved at baseline/v6.1-before-engineering-overhaul. The user has authorised gated v6.2.0 publication; consult RELEASE_STATUS.md and the linked PR publication record for actual publication status before repeating it. All11 quality jobs gate Pages; protected-main settings are not enabled and available connector access cannot administer them. Never claim settings-level enforcement or a deployment that did not occur.
 
 ## Rule ownership
 | Boundary | Owner / rule |

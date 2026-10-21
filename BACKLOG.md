@@ -1,6 +1,6 @@
 # Prioritised continuation backlog
 
-Current verified executable/tests/workflows source 75b2154 (cycle12):107 tests/build/all 11 jobs/3000 release-cohort lives plus 432 targeted complete rare-path cases, Chromium/Firefox/WebKit. Cycle11 narrative fixes and the broader cycle12 archive fixture pass. Current exact-source evidence is in RELEASE_STATUS.md. Main4072fd4 is unchanged; no new deployment.
+Current verified executable/tests/workflows source 75b2154 (cycle12):107 tests/build/all 11 jobs/3000 release-cohort lives plus 432 targeted complete rare-path cases, Chromium/Firefox/WebKit. Cycle11 narrative fixes and the broader cycle12 archive fixture pass. Current exact-source evidence is in RELEASE_STATUS.md. Pre-release main4072fd4 is preserved; publication status is recorded in RELEASE_STATUS.md and its linked PR publication record.
 
 ## Completed checkpoint
 All11 exact-source jobs pass at 75b2154: https://github.com/aidanko1/other-lives/actions/runs/39540689377. Restore checkpoint/6.2.0-dev.4-release-gates-verified. The100-record normal-save archive gate passes in three engines with 198957434 bytes,24 snapshots and four comparison histories per record. Storage copies are not additional simulated lives. Handover documentation is consolidated; no experimental production merge/deployment.
@@ -9,7 +9,7 @@ All11 exact-source jobs pass at 75b2154: https://github.com/aidanko1/other-lives
 
 The user accepted a release focused on no known major consistency errors on 21 October 2026. RELEASE_PLAN.md is the authoritative bounded-update plan. The current candidate meets its recorded engineering acceptance; deliberate release review/publication is separate. Do not delay it for the future goals below. Confirmed critical/high defects still block release; unknown combinations and documented model approximations are not automatically confirmed defects.
 
-Next operational task: release review of PR2 and, when publishing is requested, the gated merge/deployment and live verification. No merge/deployment is performed by this planning update.
+The user subsequently authorised publication. Current operational task: gated PR2 merge/deployment, live verification and the v6.2.0 publication record in PR2. Check that record before repeating publication. After release, proceed to the first separately scoped future update.
 
 Future sequence: (1) gameplay/career/narrative polish; (2) one sourced input family and a named country subset; (3) measured device/accessibility and bounded helper maintenance. Exact acceptance and splitting rules are in RELEASE_PLAN.md. Historical eras and comprehensive national coverage are optional longer-term goals.
 
