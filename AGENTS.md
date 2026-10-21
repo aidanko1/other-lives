@@ -15,6 +15,8 @@ Keep chronological, text-driven life progression, meaningful occasional choices,
 **Exclude reflection prompts, note-entry screens, reflection toggles and special reflection pauses.** Ordinary memories and the existing Rest focus remain. Independently implement the reference experience; distinguish verified behaviour from assumptions and never copy proprietary code, artwork or substantial prose.
 
 ## Scope and implementation
+Choose work for a noticeable player benefit: natural flow, engaging and varied events, meaningful choices, intuitive interactions or a believable life history. Deeper realism and data precision are optional unless a gap harms that experience or causes a confirmed inconsistency. Do not turn possible refinements into a mandatory multi-release programme. Feature completeness means the essential behaviour of the selected scope works together; it does not require modelling every aspect of life. Prefer focused playtesting and reported friction to speculative expansion.
+
 For a bug, inspect the affected implementation and dependencies, reproduce the problem, correct its shared cause where practical, and check affected regressions. Do not turn routine fixes into feature overhauls.
 
 For a major feature, define an achievable scope and measurable acceptance criteria, examine consequential interactions, and complete the essential connected behaviour. Preserve meaningful distinctions between related concepts. Completeness does not require every rare case, perfect data or unrelated rewrites. Use shared country rules with reliable inputs and transparent, defensible fallbacks across supported locations.
