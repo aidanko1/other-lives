@@ -17,16 +17,13 @@ O.ensureClarity=function(s){
 };
 const block=O.routeBlock;
 O.routeBlock=function(s,d){
- const reason=block(s,d);if(reason)return reason;if(researchCourse(s)&&['overseas-work','military','seafaring','politics','vocation','business','family-enterprise'].includes(d.id))return 'Resolve the current postgraduate commitment first.';
- const activeStudy=['enrolled','funding-review','overseas-route'].includes(s.study?.status)&&s.study.mode==='full-time';
- if(activeStudy&&(d.exclusive==='rare-career'||['seafaring','politics','vocation','business','family-enterprise','masters','phd','faculty'].includes(d.id)))return 'Complete or pause your full-time course before committing to this work route.';
- if(['overseas-work','overseas-study','return-home'].includes(d.id)&&s.housing.kind==='owned')return 'Choose whether to sell or let your current home under Money & property before moving abroad.';
+ const reason=block(s,d)||O.rules.routeConflict(s,d);if(reason)return reason;
  if(d.id==='kpop'&&s.country.code!=='KR')return 'This agency-training route is currently available while living in South Korea.';
  return null;
 };
 // A move must not erase a secured liability or a property that is being let.
 const move=O.moveCountry;
-O.moveCountry=function(s,c,family){const mortgage=s.housing.rentalMortgage?s.housing.mortgage:null;move(s,c,family);if(mortgage){s.housing.mortgage=mortgage;s.housing.rentalMortgage=true;}if(s.memories.pet?.alive){s.memories.pet.residence=family?'Your household':'Previous household';}};
+O.moveCountry=function(s,c,family){move(s,c,family);if(s.memories.pet?.alive){s.memories.pet.residence=family?'Your household':'Previous household';}};
 const candidates=O.momentCandidates;
 O.momentCandidates=function(s){return candidates(s).filter(({d,p})=>{
  if(d.subject==='pet'&&p.residence==='Previous household')return false;

@@ -1,0 +1,58 @@
+
+(function(O){
+ const add=(id,min,max,category,scene,weight,when,title,description,options)=>O.EVENTS.push({id,min,max,category,scene,weight,when,title:typeof title==='function'?title:()=>title,description:typeof description==='function'?description:()=>description,options});
+ const o=(label,detail,apply)=>({label,detail,apply});
+ add('childhood-immunisation',1,3,'Healthcare','clinic',10,s=>!s.flags.vaccineChoiceMade,'Early vaccinations',s=>`Routine childhood vaccines are being offered or discussed. Access to services, travel costs and family circumstances affect whether your caregivers can obtain them.`,s=>[
+ o('Attend the clinic','Time and transport may be needed; protection against some diseases improves.',s=>{s.flags.vaccineChoiceMade=true;s.flags.vaccinationMissed=false;O.adjust(s,{health:4});return 'A caregiver gets you the routine vaccines available through the local service.'}),
+ o('Try to arrange immunisation later','Delay can leave you less protected, particularly during early childhood.',s=>{s.flags.vaccineChoiceMade=true;s.flags.vaccinationMissed=O.chance(s,.55);return s.flags.vaccinationMissed?'Clinic access proves difficult, and some doses are missed.':'Your family manages to arrange the visit later.'})
+ ]);
+ add('ghana-school-path',14,21,'Ghana · Education','school',12,s=>s.country.code==='GH', 'A new educational route',s=>`A teacher suggests looking at both further schooling and technical or vocational opportunities. The costs of transport, materials and time matter differently to households in ${s.urban?'town':'a rural community'}.`,s=>[
+ o('Apply for continued study','Admission and affordability remain uncertain.',s=>{O.adjust(s,{knowledge:7,stress:2});return 'You prepare an application and ask about support.'}),
+ o('Pursue technical training','Work toward practical qualifications and paid experience.',s=>{s.interests.push('Craft');s.education=O.EDU[3];O.adjust(s,{knowledge:4,confidence:5});return 'You begin developing a practical trade.'}),
+ o('Contribute to household earnings','Immediate family needs may take priority.',s=>{s.cash+=Math.round(s.country.ppp*.05);O.adjust(s,{knowledge:-3,stress:4});return 'You bring in some money, but have less time for study.'})
+ ]);
+ add('ghana-family-expectations',15,21,'Ghana · Family','home',9,s=>s.country.code==='GH'&&s.gender==='F'&&s.strata<=3,'A conversation about the future',s=>`A relative asks what you imagine for your adult life. Their ideas about relationships and education do not necessarily match your own. Family expectations vary enormously between people and communities.`,s=>[
+ o('Explain your education plans','Ask for time and backing to continue studying.',s=>{O.adjust(s,{confidence:6,knowledge:3});return 'You speak about the possibilities you want, and begin working out who might support you.'}),
+ o('Discuss the family’s worries','Learn what is motivating your relative’s concern.',s=>{O.adjust(s,{relationships:5,stress:2});return 'You understand some of the financial and social pressures behind the conversation.'}),
+ o('Set a boundary','Assert what you want without knowing how the discussion will go.',s=>{O.adjust(s,{confidence:7,stress:3});return 'Your views are heard, though the disagreement does not immediately disappear.'})
+ ]);
+ add('bangladesh-seasonal-work',13,33,'Bangladesh · Livelihood','home',10,s=>s.country.code==='BD'&&s.urban===false,'A difficult season for work',s=>`A period of bad weather changes household income. Your family considers seasonal work away from home, while other family members would need to cover daily responsibilities.`,s=>[
+ o('Look for local work','Stay close to support, though jobs may be limited.',s=>{O.adjust(s,{relationships:4,stress:3});return 'You find occasional tasks, without a guaranteed income.'}),
+ o('Travel temporarily for work','Seek earnings while accepting separation and travel costs.',s=>{s.cash+=Math.round(s.country.ppp*.09);O.adjust(s,{relationships:-3,stress:5});return 'Temporary work brings some income but reduces your time with family.'}),
+ o('Seek local assistance','Access depends on your area and available programmes.',s=>{O.adjust(s,{knowledge:3});return 'You make enquiries about support. The outcome remains uncertain.'})
+ ]);
+ add('hongkong-housing-path',17,52,'Hong Kong · Housing','city',11,s=>s.country.code==='HK'&&s.strata<=3,'A question of living space',s=>`Housing costs and the amount of space available shape what comes next. Remaining with family can preserve savings but limit privacy and independence.`,s=>[
+ o('Stay with family longer','Keep housing costs lower, if the household has room.',s=>{s.flags.livingWithFamily=true;O.adjust(s,{relationships:-2,stress:-2});return 'You stay in the family household and build some financial stability.'}),
+ o('Search for a room or shared flat','Trade rent for greater independence.',s=>{s.flags.livingWithFamily=false;s.debt+=Math.round(s.country.ppp*.05);O.adjust(s,{confidence:4,stress:5});return 'You begin comparing rooms and commuting distances.'}),
+ o('Ask about housing assistance','Eligibility varies and waiting periods may be long.',s=>{O.adjust(s,{knowledge:3});return 'You gather information about possible assistance; a place is not guaranteed.'})
+ ]);
+ add('uk-apprenticeship',16,23,'United Kingdom · Training','school',10,s=>s.country.code==='GB'&&!s.flags.studying,'An apprenticeship vacancy',s=>`An employer advertises paid training alongside a recognised qualification. You compare this with further study and other work.`,s=>[
+ o('Apply for the apprenticeship','Earn and learn; selection is competitive.',s=>{if(O.chance(s,.30+s.knowledge/250)){s.education=O.EDU[3];O.hire(s,O.JOBS.find(j=>j.title==='Technician'));return 'You secure a paid technician training position.'}return 'Your application does not succeed this time.'}),
+ o('Look into further education','Potentially more qualifications, but delayed full-time earnings.',s=>{O.adjust(s,{knowledge:6,stress:2});return 'You consider a different route and gather entry requirements.'}),
+ o('Apply for other jobs','Seek earnings without an apprenticeship place.',s=>{O.adjust(s,{confidence:3});return 'You widen your search.'})
+ ]);
+ add('nigeria-schooling',12,20,'Nigeria · Education','school',11,s=>s.country.code==='NG'&&s.strata<=3,'A question of school fees and transport',s=>`Your family discusses the cost of staying in school or finding training. Opportunities vary widely by region and household circumstances.`,s=>[
+ o('Ask about scholarships or subsidies','Seek more support to continue learning.',s=>{O.adjust(s,{knowledge:4,stress:2});return 'You investigate the assistance available in your area.'}),
+ o('Find practical training','Work towards a trade while supporting the household.',s=>{s.interests.push('Craft');O.adjust(s,{confidence:3,knowledge:3});return 'You make enquiries about vocational routes.'}),
+ o('Earn money alongside schooling','Combine paid tasks with lessons where possible.',s=>{s.cash+=Math.round(s.country.ppp*.05);O.adjust(s,{health:-2,knowledge:-2});return 'You earn a little, but time and energy are stretched.'})
+ ]);
+ add('india-exam-path',14,22,'India · Education','school',12,s=>s.country.code==='IN'&&s.school,'Preparing for entrance examinations',s=>`Classmates are considering university, professional qualifications, or vocational routes. Private coaching might help some candidates but is expensive and not essential to every route.`,s=>[
+ o('Prepare independently','Protect money for other household expenses.',s=>{O.adjust(s,{knowledge:5,stress:4});return 'You develop a study routine with the resources you can access.'}),
+ o('Pay for coaching if affordable','Extra tuition costs money and cannot guarantee admission.',s=>{if(s.strata<3){s.debt+=Math.round(s.country.ppp*.08);O.adjust(s,{stress:6})}O.adjust(s,{knowledge:6});return 'You prepare with additional instruction, but examinations remain uncertain.'}),
+ o('Explore vocational routes','Consider skills training instead of a university-only path.',s=>{s.interests.push('Craft');O.adjust(s,{knowledge:3,confidence:4});return 'You begin researching apprenticeships and practical courses.'})
+ ]);
+ add('ethiopia-seasonal-costs',12,36,'Ethiopia · Livelihood','home',11,s=>s.country.code==='ET'&&!s.urban&&s.strata<=3,'Rainfall and household plans',s=>`Seasonal rainfall affects agricultural households differently. Your family talks about diversifying work rather than relying on one uncertain source of income.`,s=>[
+ o('Help with the existing work','Give time to support the family.',s=>{O.adjust(s,{relationships:4,stress:3});return 'You contribute to the work already available.'}),
+ o('Learn another practical skill','Try to create an additional option for the future.',s=>{s.interests.push('Craft');O.adjust(s,{knowledge:4});return 'You begin acquiring skills alongside your current responsibilities.'}),
+ o('Ask about cooperative or community programmes','Access differs substantially between communities.',s=>{O.adjust(s,{relationships:3});return 'You speak to people about what programmes might actually be available.'})
+ ]);
+ add('teacher-encouragement',7,18,'School','school',16,s=>s.school&&!s.memories?.teacher,'A teacher sees something in you',s=>`After a class, a teacher tells you that you are showing promise. What stands out may influence what you enjoy learning next.`,s=>['History','Technology','Sport','Art','Healthcare'].map(subject=>o(`Lean into ${subject.toLowerCase()}`,`Explore a genuine interest in ${subject.toLowerCase()}.`,s=>{let p=O.createContact(s,'Mentor',s.age+O.int(s,15,32));p.job='Teacher';p.residence='Your school';s.interests=[...(s.interests||[]),subject];s.memories.teacher={name:p.name,subject,age:s.age,remembered:false};O.adjust(s,{happiness:6,confidence:6,knowledge:3});return `Your teacher ${p.name} encourages your interest in ${subject.toLowerCase()}. You leave class feeling noticed.`})));
+ add('pet-adoption',5,65,'Family · Companions','home',7,s=>!s.memories?.pet&&s.strata>=1,'An animal needs a home',s=>`Someone nearby is looking for a safe home for a cat. You think about the joy and responsibility of caring for another living thing.`,s=>[
+ o('Adopt the cat','Food and care have an ongoing cost.',s=>{s.memories.pet={kind:'cat',name:O.pick(s,['Miso','Milo','Luna','Coco','Nala','Toby']),age:1,alive:true};O.adjust(s,{happiness:7,relationships:2});return `${s.memories.pet.name} comes home. You soon learn where the cat likes to sleep.`}),
+ o('Help find another home','Support the animal without taking on full responsibility.',s=>{O.adjust(s,{relationships:3});return 'You help someone else make room for the cat.'}),
+ o('Decline','Care may be impossible with your present space, money or time.',s=>{O.adjust(s,{happiness:-1});return 'You decide that taking on a pet would be difficult right now.'})
+ ]);
+ add('named-job-offer',17,66,'Work · Job offer','factory',14,s=>!s.flags.studying&&(s.income<=0||s.flags.jobSearching||O.chance(s,.18)),'An employer makes an offer',s=>`You have been offered a chance to interview or start paid work. Available roles reflect your qualifications, experience and interests. You do not have to accept an unspecified job.`,s=>{
+ const jobs=O.relevantJobs(s);return [...jobs.map(job=>o(`Accept: ${job.title}`,`Estimated annual pay: ${O.money(s.country.ppp*job.mult)} (PPP proxy). Your actual offer may differ.`,s=>{s.flags.jobSearching=false;s.flags.lastOfferedRole=job.title;return 'You accept the offer: '+O.hire(s,job)})),o('Decline and keep searching','May mean a longer period without earnings.',s=>{s.flags.jobSearching=true;O.adjust(s,{stress:3});return 'You decline the available roles, hoping for a better match later.'})];
+ });
+})(window.OL);

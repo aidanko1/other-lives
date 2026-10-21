@@ -1,0 +1,111 @@
+name: Other Lives quality
+on:
+  pull_request:
+    branches: [main]
+  workflow_call:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/static-check.cjs
+      - run: npm run build
+      - run: node --test --test-concurrency=2 tests/*.test.cjs
+  simulation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/simulation.cjs --count=1000 --shards=4 --shard=${{ matrix.shard }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: simulation-${{ matrix.shard }}
+          path: test-results/
+  balance:
+    needs: simulation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: simulation-*
+          path: test-results
+          merge-multiple: true
+      - run: node tests/simulation-summary.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simulation-summary
+          path: test-results/summary.json
+  browser:
+    name: browser (${{ matrix.engine }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --package-lock=false --ignore-scripts playwright@1.56.1 axe-core@4.10.3
+      - run: npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Run real browser smoke
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 > /tmp/other-lives-http.log 2>&1 &
+          PLAYWRIGHT_BROWSER=${{ matrix.engine }} node tests/browser-smoke.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-results-${{ matrix.engine }}
+          path: test-results/
+  trajectory-simulation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run test:simulation
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trajectory-simulation-report
+          path: tests/reports/simulation-latest.json
+  parallel-simulation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/parallel-simulation.cjs --lives=1000
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: parallel-simulation-report
+          path: test-results/parallel-summary.json

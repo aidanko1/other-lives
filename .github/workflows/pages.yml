@@ -11,55 +11,20 @@ concurrency:
   group: pages
   cancel-in-progress: true
 jobs:
+  validate:
+    uses: ./.github/workflows/quality.yml
   deploy:
+    needs: validate
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble static site
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p _site
-          node --check life-clarity.js
-          node --check life-experience.js
-          node --check pixel-household.js
-          node --check life-evidence.js
-          node --check life-dynamics.js
-          node --check life-moments.js
-          node --check life-relationships.js
-          node --check life-university.js
-          node --check life-memory-voice.js
-          node --check life-balance.js
-          node --check life-routes.js
-          node --check life-route-education.js
-          node --check life-route-enterprise.js
-          node --check life-route-family.js
-          node --check life-route-world.js
-          node --check life-route-special.js
-          node --check life-route-health-money.js
-          node --check life-route-assets.js
-          node --check life-integrity.js
-          node --check life-flow.js
-          node --check life-careers.js
-          node --check life-continuity.js
-          node --check life-career-moments.js
-          node tests/life-clarity.test.cjs --quick
-          node tests/birth-reveal.test.cjs
-          node tests/life-dynamics.test.cjs
-          node tests/memory-voice.test.cjs
-          node tests/university.test.cjs
-          node tests/flow-balance-routes.test.cjs
-          node tests/career-continuity.test.cjs
-          node tests/playthrough.test.cjs --quick
-          cp index.html world-countries.js world-simulation.js culture-economy.js age-culture-audit.js life-depth.js life-clarity.js life-clarity.css life-experience.js life-experience.css pixel-household.js life-evidence.js life-dynamics.js life-dynamics.css life-moments.js life-relationships.js life-university.js life-memory-voice.js life-balance.js life-routes.js life-route-education.js life-route-enterprise.js life-route-family.js life-route-world.js life-route-special.js life-route-health-money.js life-route-assets.js life-flow.js life-integrity.js life-careers.js life-continuity.js life-career-moments.js sw.js _site/
-          test -s _site/index.html
-          cp release-version.txt _site/
-          cp manifest.webmanifest _site/
-          if [[ -d icons ]]; then cp -R icons _site/icons; fi
-          if [[ -f icon.svg ]]; then cp icon.svg _site/; fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

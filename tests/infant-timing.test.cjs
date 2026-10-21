@@ -1,0 +1,22 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{loadEngine}=require('./engine.cjs');
+test('twelve conditional infant risks preserve annual survival for all countries and model modifiers',()=>{
+ const O=loadEngine();for(const c of O.COUNTRIES)for(const gender of ['M','F'])for(const strata of [0,3,7]){const s={country:c,gender,strata,age:0,health:30,flags:{vaccinationMissed:true}},before=JSON.stringify(s),annual=O.mortalityProbability(s,1),monthly=O.infantMonthlyProbability(s);assert(monthly>=0&&monthly<1);assert(Math.abs(Math.pow(1-monthly,12)-(1-annual))<1e-12,c.code);assert.equal(JSON.stringify(s),before);}
+});
+test('stories and waiting decisions add no infant rolls; survivors pay twelve monthly checks and no extra first-birthday risk',()=>{
+ const O=loadEngine(),s=O.create({country:'GB',seed:2218,snapshotPolicy:'none'});let rolls=0;O.infantMortality=()=>{rolls++;return false};s.agenda=O.pickStories(s,2).map(a=>({...a,type:'story',month:0,done:false}));assert.equal(s.agenda.length,2);O.advanceMonth(s);O.advanceMonth(s);assert.equal(rolls,0);s.pending='waiting-fixture';const blocked=JSON.stringify(s);assert.equal(O.advanceMonth(s).advanced,false);assert.equal(JSON.stringify(s),blocked);s.pending=null;
+ while(s.age===0)O.advanceMonth(s);assert.equal(rolls,12);assert.equal(s.age,1);assert.equal(s.mortalityTiming.infantMonths,12);const rng=s.rng;assert.equal(O.mortality(s),false);assert.equal(s.rng,rng);s.age=2;O.mortality(s);assert.notEqual(s.rng,rng);
+});
+test('first and last infant months conclude at age zero and terminal calls cannot change history',()=>{
+ for(const month of [0,11]){const O=loadEngine(),s=O.create({country:'NG',seed:38,snapshotPolicy:'none'});s.month=month;s.agenda=[];s.mortalityTiming.infantMonths=month;O.infantMortality=()=>true;const relatives=JSON.stringify(s.people),result=O.advanceMonth(s);assert(result.finished&&result.infant);assert.equal(s.age,0);assert.equal(s.month,month);assert.equal(s.mortalityTiming.infantMonths,month+1);assert(s.cause);assert.equal(JSON.stringify(s.people),relatives);O.assertConsistent(s);const ended=JSON.stringify(s);O.advanceMonth(s);O.playbackStep(s);O.skipToDecision(s);assert.equal(JSON.stringify(s),ended);}
+});
+test('new timing is snapshotted and loaded exactly; missing legacy metadata is never invented',()=>{
+ const O=loadEngine(),s=O.create({country:'GB',seed:2218});assert.deepEqual(JSON.parse(JSON.stringify(s.snapshots[0].data.mortalityTiming)),{version:1,infantMonths:0});s.month=5;s.mortalityTiming.infantMonths=5;assert.equal(JSON.stringify(O.migrateLife(JSON.parse(JSON.stringify(s)))),JSON.stringify(s));delete s.mortalityTiming;const legacy=JSON.stringify(s),loaded=O.migrateLife(JSON.parse(legacy));assert.equal(JSON.stringify(loaded),legacy);let monthly=0;O.infantMortality=()=>{monthly++;return true};loaded.agenda=[];O.advanceMonth(loaded);assert.equal(loaded.age,0);assert.equal(loaded.month,6);assert.equal(monthly,0);loaded.age=1;const rng=loaded.rng;O.mortality(loaded);assert.notEqual(loaded.rng,rng);
+});
+test('fatal and birthday exceptions restore the complete month, RNG and receipt',()=>{
+ for(const kind of ['ending','birthday']){const O=loadEngine(),s=O.create({country:'GB',seed:2218,snapshotPolicy:'none'});s.agenda=[];if(kind==='ending'){O.infantMortality=st=>{O.rand(st);return true};O.finish=()=>{throw Error('ending failure')};}else{s.month=11;s.mortalityTiming.infantMonths=11;O.infantMortality=st=>{O.rand(st);return false};O.registerAnnualStage('failure-fixture',()=>{throw Error('birthday failure')});}const before=JSON.stringify(s);assert.throws(()=>O.advanceMonth(s),/failure/);assert.equal(JSON.stringify(s),before);}
+});
+test('NG seed2 naturally concludes before its first birthday and saved infant continuations are reproducible',()=>{
+ const O=loadEngine(),P=loadEngine();let s=O.create({country:'NG',seed:2,snapshotPolicy:'none'}),steps=0;
+ while(s.status==='alive'&&steps++<100){const loaded=P.migrateLife(JSON.parse(JSON.stringify(s)));if(s.pending){const view=O.decisionView(s),i=view.options.findIndex(o=>!o.disabled);assert(O.applyChoice(s,i,view.token));assert(P.applyChoice(loaded,i,P.decisionView(loaded).token));}else{O.advanceMonth(s);P.advanceMonth(loaded);}assert.equal(JSON.stringify(loaded),JSON.stringify(s),'save/reload changed the infant continuation');O.assertConsistent(s);}
+ assert.equal(s.status,'finished');assert.equal(s.age,0);assert.equal(s.month,9);assert.equal(s.mortalityTiming.infantMonths,10);assert(s.cause);
+});

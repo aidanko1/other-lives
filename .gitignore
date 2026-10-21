@@ -1,0 +1,9 @@
+_site/
+preview/
+.openai/
+node_modules/
+tests/reports/*.json
+*.log
+tests/reports/*.html
+
+test-results/

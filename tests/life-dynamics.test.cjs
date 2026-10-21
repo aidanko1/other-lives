@@ -29,7 +29,7 @@ for(const age of [0,2,4,7,13,17,18,30,65,90])for(const code of ['IN','CN','HK','
  const out=life('GB',30);out.job='';out.income=0;out.cash=0;out.flags.livingWithFamily=false;O.passive(out);assert(out.debt>0);assert(out.debtLedger.some(x=>x.reason==='Annual budget shortfall'));assert(out.lastBudget.expenses>0);assert(!O.debtHTML(out).includes('undefined'));
 }
 {
- const s=life();s.routines=[];assert(O.setRoutine(s,'practice').ok);assert(O.setRoutine(s,'study').ok);assert(!O.setRoutine(s,'outdoors').ok);const before=s.experience.hobbies.Programming.years;O.passive(s);assert(s.experience.hobbies.Programming.years>before);O.passive(s);assert(s.experience.hobbies.Programming.years>before+.6);assert(s.routines.includes('practice'));assert(O.skillLevel(s,'Programming')>1);
+ const s=life();s.routines=[];assert(O.setRoutine(s,'practice').ok);assert(O.setRoutine(s,'study').ok);assert(!O.setRoutine(s,'outdoors').ok);const before=s.experience.hobbies.Programming.years;O.passive(s);assert(s.experience.hobbies.Programming.years>before);const once=JSON.stringify(s);O.passive(s);assert.equal(JSON.stringify(s),once,'one year cannot grant routine progress twice');s.age++;O.passive(s);assert(s.experience.hobbies.Programming.years>before+.6);assert(s.routines.includes('practice'));assert(O.skillLevel(s,'Programming')>1);
  const poor=life();poor.cash=0;poor.income=0;poor.routines=[];assert(!O.setRoutine(poor,'therapy').ok);
 }
 {

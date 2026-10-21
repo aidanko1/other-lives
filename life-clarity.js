@@ -13,7 +13,8 @@ let currency='GBP';try{currency=localStorage.getItem('other-lives-currency')||'G
 if(!rates[currency])currency='GBP';
 O.currency=()=>currency;
 O.setCurrency=value=>{if(rates[value]){currency=value;try{localStorage.setItem('other-lives-currency',value)}catch{}}};
-O.money=n=>new Intl.NumberFormat('en-GB',{style:'currency',currency,maximumFractionDigits:0}).format((Number(n)||0)*rates[currency]);
+const moneyFormats=Object.fromEntries(Object.keys(rates).map(currency=>[currency,new Intl.NumberFormat('en-GB',{style:'currency',currency,maximumFractionDigits:0})]));
+O.money=n=>moneyFormats[currency].format((Number(n)||0)*rates[currency]);
 O.currencySelector=()=>`<label class="currency-choice">Currency <select aria-label="Display currency" data-change="currency">${Object.keys(rates).map(c=>`<option ${c===currency?'selected':''}>${c}</option>`).join('')}</select></label>`;
 // Values in saved stories are canonical base-unit tokens, formatted only for display.
 const symbols={GBP:'£',USD:'US$',HKD:'HK$',EUR:'€'};
@@ -45,12 +46,12 @@ function retirePerson(s,p,announce){
 }
 O.personDeathRisk=(s,p)=>{const base=O.hazardAt?O.hazardAt(s.country,p.age):.001*Math.exp(Math.max(0,p.age-40)*.09);return Math.min(.98,base*(p.gender==='M'?1.07:.94)*(1+Math.max(0,45-(p.health||65))*.008));};
 O.personCause=(s,p)=>p.age<5?'complications of an acute childhood illness':p.age<40?'an acute illness or injury':p.age<70?'a serious cardiovascular illness or cancer':'complications of cardiovascular illness or frailty';
-O.householdMembers=s=>{ensure(s);return s.people.filter(p=>p.alive&&(
+O.householdMembers=s=>{return s.people.filter(p=>p.alive&&(
  (['Mother','Father','Parent','Grandparent','Sibling'].includes(p.role)&&s.flags.livingWithFamily&&!p.movedOut)||
  (p.role==='Partner'&&p.residence!=='Separate home')||
  (p.role==='Child'&&!p.movedOut&&p.residence!=='Separate home')
  ));};
-O.householdCaption=s=>{const people=O.householdMembers(s);const pet=s.memories?.pet;return `${s.urban?'Urban':'Rural'} ${s.country.name} · ${s.flags.livingWithFamily?'Family home':s.property>0?'Your own home':'Rented home'} · ${people.length?'With '+people.map(p=>p.role==='Mother'?'Mom':p.role==='Father'?'Dad':p.name.split(' ')[0]).join(', '):'Living independently'}${pet?.alive?' and '+pet.name+' the '+pet.kind:''}`;};
+O.householdCaption=s=>{const people=O.householdMembers(s);const pet=s.memories?.pet;return `${s.urban?'Urban':'Rural'} ${s.country.name} · ${s.flags.livingWithFamily?'Family home':s.housing?.kind==='owned'?'Your own home':'Rented home'} · ${people.length?'With '+people.map(p=>p.role==='Mother'?'Mom':p.role==='Father'?'Dad':p.name.split(' ')[0]).join(', '):'Living independently'}${pet?.alive?' and '+pet.name+' the '+pet.kind:''}`;};
 O.householdAges=s=>[`You, ${s.age}`,...O.householdMembers(s).map(p=>`${p.name.split(' ')[0]}, ${p.age}`),...(s.memories?.pet?.alive?[`${s.memories.pet.name}, ${s.memories.pet.age}`]:[])].join(' · ');
 // A search is an action. Legacy random job-change windows are replaced by this one flow.
 for(const e of O.EVENTS)if(/^(job-offer|named-job-offer|local-career-|local-job-choice-|world-.*job)/.test(e.id))e.when=()=>false;
@@ -66,7 +67,7 @@ O.startJobSearch=function(s,mode='pay'){
  return {ok:true,message:'Search started. Results can arrive from next year.'};
 };
 O.careerOffers=function(s){
- ensure(s);const mode=s.flags.searchMode||'pay';const edu=O.educationNumber(s.education);const serial=s.flags.searchSerial||0;
+ const mode=s.flags.searchMode||'pay';const edu=O.educationNumber(s.education);const serial=s.flags.searchSerial||0;
  const licensed=s.flags.professionalLicences||[];
  const qualified=j=>{
   if(/doctor|nurse|teacher/i.test(j.title))return licensed.includes(j.title)||new RegExp(j.title,'i').test(s.education);
@@ -81,12 +82,12 @@ O.careerOffers=function(s){
  }).filter(j=>mode==='interest'?j.match:j.pay>s.income).sort((a,b)=>mode==='interest'?(a.tier-b.tier||a.title.localeCompare(b.title)):(a.pay-b.pay||a.title.localeCompare(b.title))).slice(0,3);
 };
 O.payComparison=(current,offered)=>current>0?`${((offered-current)/current*100)>=0?'+':''}${((offered-current)/current*100).toFixed(1)}% ${offered>=current?'increase':'decrease'}`:'First paid role · no previous earnings';
-const careers={id:'career-search-results',min:18,max:74,weight:70,category:'Work · Search results',scene:'office',
+const careers={id:'career-search-results',min:18,max:120,weight:70,category:'Work · Search results',scene:'office',
  when:s=>!!s.flags.jobSearching&&s.age>=(s.flags.searchReady||s.age)&&s.job!=='Retired'&&!s.flags.studying,
  title:s=>s.flags.searchMode==='interest'?'Work closer to your interests':'Your job search: the available offers',
  description:s=>`Current role: ${s.job||'Not employed'}. Earnings: ${O.money(s.income)} a year (${O.money(s.income/12)} a month). ${s.flags.searchMode==='interest'?'These roles match an interest, but may reduce your earnings.':'Only qualified roles paying more than your current income are listed.'} ${O.careerOffers(s).length?'These are firm in-game salary offers.':'No suitable vacancy was found this time.'}`,
  options:s=>[...O.careerOffers(s).map(j=>({label:j.title,detail:`${O.money(j.pay)} / year · ${O.money(j.pay/12)} / month · ${O.payComparison(s.income,j.pay)}${j.match?' · Matches your interests':''}. Current: ${O.money(s.income)} / year.`,apply:st=>{
- const old=st.job||'No paid role',pay=st.income;st.job=j.title;st.income=j.pay;st.workYears=0;st.flags.jobSearching=false;st.flags.workMemory={job:j.title,age:st.age,pay:j.pay};st.flags.lastCareerAge=st.age;st.experience.roles[j.title]??=0;O.adjust(st,{confidence:3,stress:2});return `You move from ${old} (${O.money(pay)} a year) to ${j.title} (${O.money(j.pay)} a year; ${O.payComparison(pay,j.pay)}). Your new work experience begins here.`;}})),
+ const old=st.job||'No paid role',pay=st.income;O.setEmployment(st,{role:j.title,pay:j.pay,mode:j.mode||'full-time',hours:j.hours??(j.mode==='part-time'?20:40)});st.flags.workMemory={job:j.title,age:st.age,pay:j.pay};st.flags.lastCareerAge=st.age;st.experience.roles[j.title]??=0;O.adjust(st,{confidence:3,stress:2});return `You move from ${old} (${O.money(pay)} a year) to ${j.title} (${O.money(j.pay)} a year; ${O.payComparison(pay,j.pay)}). Your new work experience begins here.`;}})),
  {label:'Keep looking',detail:'Keep your current role and income. Another round of applications may take a year.',apply:st=>{st.flags.searchReady=st.age+1;st.flags.searchSerial=(st.flags.searchSerial||0)+1;return `You keep looking. Current annual earnings remain ${O.money(st.income)}.`;}},
  {label:'Stop the search',detail:'Keep your current role and income; restart from Spend whenever you wish.',apply:st=>{st.flags.jobSearching=false;return 'You stop applying for now. Your current work arrangement continues.';}}]};
 O.EVENTS.push(careers);
@@ -103,7 +104,7 @@ if(billEvent){billEvent.description=s=>{const b=bill(s);return `You need to pay 
  {label:'Ask family for help or negotiate',detail:`No payment today. A successful request reduces the bill by 40%; otherwise the full ${O.money(b.cost)} remains due. Unpaid costs become debt.`,apply:st=>{const helped=O.chance(st,st.relationships<25?0:.35+st.relationships/300);const due=Math.round(b.cost*(helped?.6:1));const paid=Math.min(st.cash,due);st.cash-=paid;st.debt+=due-paid;O.bond(st,'Parent',-2);return `${helped?'Support reduces the bill':'No discount or contribution is available'}. You pay ${O.money(paid)} now; ${O.money(due-paid)} is added to debt. Total debt: ${O.money(st.debt)}.`;}}
  ];};}
 // Exact previews for spending; probabilistic decisions retain their uncertainty.
-const offers=O.spendOffers;O.spendOffers=function(s){ensure(s);return offers(s).map(o=>({...o,effectsHTML:changesHTML(Object.fromEntries(Object.entries(o.delta||{}).map(([k,n])=>[k,O.clamp((s[k]||0)+n)-(s[k]||0)])))}));};
+const offers=O.spendOffers;O.spendOffers=function(s){return offers(s).map(o=>({...o,effectsHTML:changesHTML(Object.fromEntries(Object.entries(o.delta||{}).map(([k,n])=>[k,O.clamp((s[k]||0)+n)-(s[k]||0)])))}));};
 const buy=O.buy;O.buy=function(s,id){ensure(s);const offered=O.spendOffers(s).find(x=>x.id===id),before=amounts(s);const result=buy(s,id);if(result.ok){if(id==='vehicle')s.flags.annualUpkeep=(s.flags.annualUpkeep||0)+Math.round(offered.cost*.08);if(id==='sport'){const interest=s.interests[0]||'A personal hobby';s.experience.hobbies[interest]??={years:0,level:0};s.experience.hobbies[interest].level+=2;}const change=diff(before,amounts(s));s.ledger.unshift({age:s.age,title:offered.title,...change});const e=s.journal[0];e.money=change;e.effects=offered.delta;s.lastOutcome=e.description;}return result;};
 const apply=O.applyChoice;O.applyChoice=function(s,index){ensure(s);const before=amounts(s),previous=s.job;const result=apply(s,index);if(result){s.lastOutcome=canonical(s.lastOutcome);const change=diff(before,amounts(s));s.journal[0].money=change;const financial=change.cash+change.investments+change.property-change.debt;if(financial)s.journal[0].tone=financial>0?'good':'bad';s.ledger.unshift({age:s.age,title:s.journal[0].title,...change});if(previous!==s.job&&s.job){s.experience.roles[s.job]??=0;s.workYears=0;}}return result;};
 // Population reference milestones use the very same baseline as mortality draws.
@@ -115,15 +116,13 @@ O.countryEvidence=s=>s.country.code==='KE'?{under5:38.8,infant:null,life:null,un
 if(O.SOURCE_MODEL?.childMortality2024)O.SOURCE_MODEL.childMortality2024.KE=[38.8,undefined];
 const journalContext=O.contextForJournal;
 O.contextForJournal=(s,e)=>e?.context||journalContext?.(s,e);
-const passive=O.passive;O.passive=function(s){
+O.registerAnnualStage('family-work-journal',s=>{
  ensure(s);const before=amounts(s),oldWorth=O.netWorth(s),oldAge=s.age;
  for(const p of s.people)if(p.alive&&!p.retired&&p.age>=63&&p.job&&p.job!=='—'&&(p.age>=68||hash(p.id+'|'+p.age)%4===0))retirePerson(s,p,true);
- const planBalances=(s.flags.billPlans||[]).map(p=>p.balance);
- passive(s);
- const debtRepaid=Math.max(0,before.debt-s.debt);let allocate=debtRepaid;for(const plan of s.flags.billPlans||[]){const n=Math.min(allocate,plan.balance);plan.balance-=n;allocate-=n;}
+
+ return ()=>{
  for(const p of s.people){if(!p.alive){p.diedAt??=p.age;p.annualIncome=0;}if(p.alive&&p.role==='Child'&&p.age>=22&&!p.movedOut&&hash(s.seed+'|'+p.id+'|'+p.age)%3===0){p.movedOut=true;p.residence='Separate home';O.journal(s,`${p.name.split(' ')[0]} moves out`,`${p.name}, ${p.age}, establishes a separate home. You still make time to visit.`,'family');}}
  const parents=s.people.filter(p=>['Mother','Father'].includes(p.role));if(parents.length)s.familyIncome=parents.reduce((sum,p)=>sum+(p.alive?(p.annualIncome||0):0),0);
- if(s.income>0&&s.job!=='Retired'){s.experience.totalYears++;s.experience.roles[s.job]=(s.experience.roles[s.job]||0)+1;}
  for(const [name,hobby] of Object.entries(s.experience.hobbies)){if(s.age<6)continue;hobby.years+=s.focus==='Rest'?1:.25;hobby.level+=s.focus==='Rest'?2:1;if(hobby.level>=12&&!hobby.noted){hobby.noted=true;O.journal(s,`Your practice in ${name} is showing`,`After sustained practice, people start asking you for tips on ${name.toLowerCase()}. It has become something you can share.`,'achievement');}}
  if(s.age>=18){const after=amounts(s),change=diff(before,after);s.ledger.unshift({age:s.age,title:'Yearly finances',...change});s.ledger=s.ledger.slice(0,120);
  O.journal(s,'Your yearly finances',`Income ${O.money(before.income)} · living costs ${O.money(s.annualExpenses||0)} · debt change ${change.debt>=0?'+':''}${O.money(change.debt)}. Savings ${O.money(s.cash)}; debt ${O.money(s.debt)}. Net worth ${O.money(O.netWorth(s))} (${O.netWorth(s)-oldWorth>=0?'+':''}${O.money(O.netWorth(s)-oldWorth)} this year).`,'money');s.journal[0].money=change;s.journal[0].tone=O.netWorth(s)>=oldWorth?'good':'bad';}
@@ -131,20 +130,14 @@ const passive=O.passive;O.passive=function(s){
  const evidence=O.countryEvidence(s);const survival=O.baselineSurvival(s,s.age);O.journal(s,'A birthday, and those born alongside you',`You reach ${s.age}. In this simulation’s baseline cohort for ${s.country.name}, about ${(survival*100).toFixed(1)}% survive to this age. Your own health and circumstances can change your risk.`,'milestone');
  s.journal[0].context={text:evidence.under5!==null?`National under-five mortality: ${evidence.under5} per 1,000 live births (2024). Survival after childhood is a model fitted to life expectancy, not a measured age/sex life table.`:`This location currently uses an estimated mortality curve. The displayed survival percentage is a model output, not a verified national statistic.`,source:evidence.under5!==null?'UNICEF / UN IGME 2024':'Mortality model and its limits',url:evidence.under5Source||'https://population.un.org/wpp/'};
  }
-};
+ };
+});
 
 const advanceMonth=O.advanceMonth;
 O.advanceMonth=function(s){
  ensure(s);const at=s.age*12+s.month;const result=advanceMonth(s);
  // Story resolution may run more than once in a month; never collect twice.
- if(result.advanced&&s.age*12+s.month!==at&&s.flags.lastInstalmentMonth!==at){
-  s.flags.lastInstalmentMonth=at;
-  for(const plan of s.flags.billPlans||[]){if(plan.monthsLeft<=0||plan.balance<=0)continue;
-   const due=Math.min(plan.monthly,plan.balance),paid=Math.min(Math.max(0,s.cash),due);
-   s.cash-=paid;s.debt=Math.max(0,s.debt-paid);plan.balance-=paid;plan.monthsLeft--;
-   if(paid<due){O.journal(s,'An instalment is short',`You pay ${O.money(paid)} of the ${O.money(due)} bill instalment. The unpaid amount remains in your debt.`,'money');}
-  }
- }
+ if(result.advanced&&s.age*12+s.month!==at)O.settleBillInstalments(s,at);
  return result;
 };
 
@@ -170,10 +163,10 @@ O.pickStories=function(s,n){const stories=oldPickStories(s,n);if(!n||hash(s.seed
  if(detail&&stories.length)stories[stories.length-1]={...detail,kind:'story',effect:'clarity-relationship-detail'};
  return stories;
 };
-O.experienceHTML=s=>{ensure(s);const label=n=>n>=12?'Expert':n>=5?'Experienced':n>=2?'Capable':'Beginner';return `<section class="experience"><h3>Experience & interests</h3><p>${s.experience.totalYears} years in paid work</p>${Object.entries(s.experience.roles).map(([role,years])=>`<div class="experience-row"><span>${esc(role)}</span><strong>${years.toFixed(1)} years · ${label(years)}</strong></div>`).join('')}${Object.entries(s.experience.hobbies).map(([name,h])=>`<div class="experience-row"><span>${esc(name)}</span><strong>${label(h.level/2)} · Level ${Math.floor(h.level)} · ${h.years.toFixed(1)} practice years</strong></div>`).join('')}<small>${s.experience.trackedFrom>0?'Detailed practice tracking begins at age '+s.experience.trackedFrom+' for this save.':'Practice and experience accumulate as you grow.'}</small></section>`;};
-O.familyHTML=s=>{ensure(s);return `<section class="family-life"><h3>Family, household & pets</h3>${s.people.filter(p=>['Mother','Father','Parent','Grandparent','Sibling','Partner','Child'].includes(p.role)).map(p=>`<div class="family-person ${p.alive?'':'deceased'}"><strong>${esc(p.role)} · ${esc(p.name)}</strong><span>${p.alive?`Age ${p.age}`:`Died at ${p.diedAt??p.age}`} · ${esc(p.job||'Not working')}</span><small>${p.alive?(O.householdMembers(s).includes(p)?'Lives with you':esc(p.residence||'Separate home')):'Remembered in your life'}</small></div>`).join('')}${s.memories.pet?`<div class="family-person"><strong>${esc(s.memories.pet.name)} · ${esc(s.memories.pet.kind)}</strong><span>${s.memories.pet.alive?'Age '+s.memories.pet.age:'Died at '+s.memories.pet.age}</span></div>`:''}</section>`;};
+O.experienceHTML=s=>{const label=n=>n>=12?'Expert':n>=5?'Experienced':n>=2?'Capable':'Beginner';return `<section class="experience"><h3>Experience & interests</h3><p>${s.experience.totalYears} years in paid work</p>${Object.entries(s.experience.roles).map(([role,years])=>`<div class="experience-row"><span>${esc(role)}</span><strong>${years.toFixed(1)} years · ${label(years)}</strong></div>`).join('')}${Object.entries(s.experience.hobbies).map(([name,h])=>`<div class="experience-row"><span>${esc(name)}</span><strong>${label(h.level/2)} · Level ${Math.floor(h.level)} · ${h.years.toFixed(1)} practice years</strong></div>`).join('')}<small>${s.experience.trackedFrom>0?'Detailed practice tracking begins at age '+s.experience.trackedFrom+' for this save.':'Practice and experience accumulate as you grow.'}</small></section>`;};
+O.familyHTML=s=>{return `<section class="family-life"><h3>Family, household & pets</h3>${s.people.filter(p=>['Mother','Father','Parent','Grandparent','Sibling','Partner','Child'].includes(p.role)).map(p=>`<div class="family-person ${p.alive?'':'deceased'}"><strong>${esc(p.role)} · ${esc(p.name)}</strong><span>${p.alive?`Age ${p.age}`:`Died at ${p.diedAt??p.age}`} · ${esc(p.job||'Not working')}</span><small>${p.alive?(O.householdMembers(s).includes(p)?'Lives with you':esc(p.residence||'Separate home')):'Remembered in your life'}</small></div>`).join('')}${s.memories.pet?`<div class="family-person"><strong>${esc(s.memories.pet.name)} · ${esc(s.memories.pet.kind)}</strong><span>${s.memories.pet.alive?'Age '+s.memories.pet.age:'Died at '+s.memories.pet.age}</span></div>`:''}</section>`;};
 O.moneyDeltaHTML=e=>e?.money?`<div class="money-changes">${Object.entries(e.money).filter(([k,n])=>n&&['cash','debt','income'].includes(k)).map(([k,n])=>`<span class="effect-chip ${(k==='debt'?n<0:n>0)?'positive':'negative'}">${({cash:'Savings',debt:'Debt',income:'Yearly income'})[k]} ${n>0?'+':''}${O.money(n)}</span>`).join('')}</div>`:'';
-O.financesHTML=s=>{ensure(s);return `<section class="money-strip" aria-label="Current finances"><div><small>${s.age<18?'Personal earnings':'Yearly income'}</small><strong>${O.money(s.income)}</strong><span>${O.money(s.income/12)} / month</span></div><div><small>Savings</small><strong>${O.money(s.cash)}</strong></div><div><small>Debt</small><strong class="${s.debt>0?'negative':''}">${O.money(s.debt)}</strong></div><div><small>Net worth</small><strong class="${O.netWorth(s)<0?'negative':''}">${O.money(O.netWorth(s))}</strong></div><div class="money-caption">${esc(s.job|| (s.age<18?'Supported by your household':'Not employed'))} · Purchasing-power equivalents ${O.currencySelector()}</div></section>`;};
+O.financesHTML=s=>{return `<section class="money-strip" aria-label="Current finances"><div><small>${s.age<18?'Personal earnings':'Yearly income'}</small><strong>${O.money(s.income)}</strong><span>${O.money(s.income/12)} / month</span></div><div><small>Savings</small><strong>${O.money(s.cash)}</strong></div><div><small>Debt</small><strong class="${s.debt>0?'negative':''}">${O.money(s.debt)}</strong></div><div><small>Net worth</small><strong class="${O.netWorth(s)<0?'negative':''}">${O.money(O.netWorth(s))}</strong></div><div class="money-caption">${esc(s.job|| (s.age<18?'Supported by your household':'Not employed'))} · Purchasing-power equivalents ${O.currencySelector()}</div></section>`;};
 O.searchHTML=s=>s.age<18||s.job==='Retired'?'':`<section class="search-actions"><h3>Work & direction</h3><p>Current: ${esc(s.job||'Not employed')} · ${O.money(s.income)} / year</p><button class="btn" data-action="search-work" data-mode="pay" ${s.flags.jobSearching?'disabled':''}>Look for ${s.income>0?'better-paid':'paid'} work · Free</button><button class="btn" data-action="search-work" data-mode="interest" ${s.flags.jobSearching?'disabled':''}>Explore work matching your interests · Free</button>${s.flags.jobSearching?`<p class="fact-text">Search in progress · ${s.flags.searchMode==='interest'?'Interest-led roles, including possible pay cuts':'Higher-paid roles only'} · Results from age ${s.flags.searchReady||s.age}</p>`:''}</section>`;
 // Persistent, original low-resolution household tableau. Drawn from state, never event.
 function sprite(ctx,x,ground,person,index=0){
@@ -185,7 +178,7 @@ function sprite(ctx,x,ground,person,index=0){
  if(age>=75){r(11,-20,2,20,'#977a52');r(9,-21,4,2,'#977a52');}ctx.restore();
 }
 const oldScene=O.drawScene;
-O.drawScene=function(canvas,scene,s){if(!s?.country)return oldScene(canvas,scene,s);ensure(s);canvas.width=400;canvas.height=140;const k=canvas.getContext('2d');if(!k)return;k.imageSmoothingEnabled=false;
+O.drawScene=function(canvas,scene,s){if(!s?.country)return oldScene(canvas,scene,s);canvas.width=400;canvas.height=140;const k=canvas.getContext('2d');if(!k)return;k.imageSmoothingEnabled=false;
  const r=(x,y,w,h,c)=>{k.fillStyle=c;k.fillRect(x,y,w,h)};
  r(0,0,400,140,'#bcdbd4');r(0,0,400,35,'#a8ced8');r(0,39,400,53,'#d5e3ce');r(0,72,400,68,'#88ad80');r(0,116,400,24,'#d4c4a3');r(0,112,400,4,'#6f9367');
  [[35,14],[172,9],[288,17]].forEach(([x,y])=>{r(x,y,25,5,'#f4f3df');r(x+6,y-5,15,6,'#f4f3df')});

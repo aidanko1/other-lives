@@ -715,7 +715,6 @@ O.refreshWorldData=async()=>false; // no network, no cached live override
 O.WB_WORLD={status:()=> 'fixed',get:()=>null,meta:()=>({mode:'offline-fixed',version:SAVE_VERSION,countries:O.COUNTRIES.length})};
 const oldMake=O.create;
 const oldEnsure=O.ensureTimeline;
-const oldPassive=O.passive;
 const oldStories=O.pickStories;
 const oldFire=O.fireStory;
 const names=(s)=>((s.people||[]).filter(p=>p.alive&&['Mother','Father'].includes(p.role)).map(p=>O.personLabel(p)).join(' and ')||'your family');
@@ -837,8 +836,9 @@ O.buy=function(s,id){ensure(s);if(s.status!=='alive')return {ok:false,message:'T
  O.journal(s,s.age<18?'Your activity: '+offer.title:'Spend: '+offer.title,s.age<18?(offer.cost===0?`You make time for ${offer.title.toLowerCase()}. No money changes hands. ${offer.detail}`:`You use ${O.money(offer.cost)} of your small allowance on ${offer.title.toLowerCase()}. ${offer.detail}`):`You spend ${O.money(offer.cost)} (illustrative international purchasing-power units) on ${offer.title.toLowerCase()}. ${offer.detail}`,'money');
  return {ok:true,message:offer.title+' recorded.'};
 };
-O.passive=function(s){
- oldPassive(s);
+O.registerAnnualStage('culture',s=>{
+
+ return ()=>{
  if(s.age<=20){
   ensure(s);
   const deps=1+s.people.filter(p=>p.role==='Sibling'&&p.alive).length;
@@ -851,7 +851,8 @@ O.passive=function(s){
   }
  }
  if(s.status==='alive')ensure(s);
-};
+ };
+});
 O.pickStories=function(s,n){
  let results=oldStories(s,n);
  if(n<1||s.age<4||!PROFILE[s.country.code])return results;
