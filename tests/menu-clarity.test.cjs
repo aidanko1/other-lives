@@ -18,9 +18,9 @@ test('unavailable spending, routes, preferences and search actions are omitted w
  assert.doesNotMatch(O.policiesHTML(s),/data-id="insurance"/);s.routes.policies.insurance=true;assert.match(O.policiesHTML(s),/data-id="insurance"/,'active unaffordable preference remains removable');
  assert.equal(O.planAction(s,'mortgage').ok,false);assert.equal(O.startRoute(s,'professional-training').ok,false);
 });
-test('routine visibility shares the existing age, budget and two-slot rules, retaining selected removals',()=>{
+test('continuing preferences retain age and budget rules without a two-slot cap',()=>{
  const O=loadEngine(),s=adult(O);s.routines=['outdoors','study'];
- assert.equal(O.routineAvailable(s,'practice'),false);assert.equal(O.setRoutine(s,'practice').ok,false);
+ assert.equal(O.routineAvailable(s,'practice'),true);assert.equal(O.setRoutine(s,'practice').ok,true);assert.equal(s.routines.length,3);
  assert.equal(O.routineAvailable(s,'study'),true);assert(O.setRoutine(s,'study').ok);assert.equal(O.routineAvailable(s,'practice'),true);
  assert.equal(O.routineAvailable(s,'therapy'),false);assert.equal(O.setRoutine(s,'therapy').ok,false);
  s.routines=['therapy'];assert.equal(O.routineAvailable(s,'therapy'),true);assert(O.setRoutine(s,'therapy').ok);

@@ -19,9 +19,9 @@ module.exports=async browser=>{
   await page.locator('[data-action="game-tab"][data-tab="profile"]').click();
   const work=page.locator('.passport-experience .skill-record').filter({hasText:'Business analysis'});assert.equal(await work.count(),1);assert.match(await work.innerText(),/3.5 working years/);
   await page.locator('[data-action="game-tab"][data-tab="spend"]').click();
-  assert.equal(await page.locator('.life-details > .panel > section:not(.budget-summary)').count(),0,'each Spend menu section is a native disclosure');
+  assert.equal(await page.locator('.spend-content > section:not(.budget-summary)').count(),0,'each Spend menu section is a native disclosure');
   assert(await page.locator('.budget-summary').isVisible(),'money overview stays visible');
-  const panels=page.locator('.life-details > .panel > details');const sectionCount=await panels.count();assert(sectionCount>=3);
+  const panels=page.locator('.spend-content > details');const sectionCount=await panels.count();assert(sectionCount>=3);
   for(let i=0;i<await panels.count();i++){
    const panel=panels.nth(i),summary=panel.locator(':scope > summary');assert.equal(await summary.count(),1);assert.equal(await panel.getAttribute('open'),null);
    await summary.click();assert.equal(await panel.getAttribute('open'),'');await summary.click();assert.equal(await panel.getAttribute('open'),null);
