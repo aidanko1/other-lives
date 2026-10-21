@@ -67,3 +67,6 @@ OL-028–OL-031 expected/actual states, seed reproductions, causes, corrections 
 OL-021–OL-031 corrections and retained regressions pass at b87e519 in run39515340262: 75 reported tests and both 1,000-life cohorts have zero failures. OL-028's failing seeds remain unchanged in the full harnesses.
 OL-032 / Medium fidelity: Next skipped newly deceased family until another card. Direct reference father-loss observation established a pause without a choice. clock.js now stops on new close-family loss; app.js uses existing pause/toast. GB seed2218 synthetic30y11m with targeted parent mortality reproduced month1 instead of0 before correction. pacing.test and real browser annual-death/pause checks pass; old losses and distant contacts do not add stops. ENGINEERING_CYCLE_5.md records the scope/judgment.
 No unresolved confirmed critical/high audit finding remains uncorrected. Unknown combinations are not declared bug-free.
+
+## Cycle6
+OL-033 / Medium pacing: narrative delivery consumed another monthly playback budget despite no calendar movement. GB seed2218/five authored infant highlights reached month8 after45.1controlled seconds. Fixed at the UI/clock boundary; full state/RNG equality and real Chromium red→green regression retained. See ENGINEERING_CYCLE_6.md for reproduction and execution evidence.

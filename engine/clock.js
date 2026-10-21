@@ -60,6 +60,13 @@ O.advance=function(s){ // Legacy compatibility; advance to the next birthday or 
  for(let i=0;i<22&&s.status==='alive'&&!s.pending&&s.age===start;i++)O.advanceMonth(s);
  return true;
 };
+// Delivery at the current date is not another month of elapsed calendar time.
+O.playbackStep=function(s){
+ if(!s||s.status!=='alive'||s.pending)return {advanced:false,decision:!!s?.pending,months:0};
+ const before=s.age*12+s.month,result=O.advanceMonth(s),months=s.age*12+s.month-before;
+ if(months!==0&&months!==1)throw Error('Playback must advance at most one calendar month.');
+ return {...result,months};
+};
 O.skipToDecision=function(s,onFamilyDeath){
  if(!s||s.status!=='alive'||s.pending)return 0;
  const family=new Set(s.people.filter(p=>p.alive&&['Mother','Father','Parent','Grandparent','Sibling','Partner','Child'].includes(p.role)).map(p=>p.id));

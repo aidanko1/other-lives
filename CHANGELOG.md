@@ -1,5 +1,8 @@
 # Changelog
 
+## Cycle6 — playback correction, development only
+Stories at the current date no longer spend another month's playback delay. Every story and simulation transition is preserved. Local npm fast checks, complete Node glob, production packaging and actual Chromium suite passed; exact-commit CI is pending. Reproduction and assertions: ENGINEERING_CYCLE_6.md. No production merge/deployment.
+
 ## Verified cycles3–5 — unreleased reliability baseline
 Tested b87e519fd04fceb489a39c68a67719e0159d8324; all eight quality jobs pass: https://github.com/aidanko1/other-lives/actions/runs/39515340262. 75 tests, production build, 2,000 complete asserted lives across 129 countries and actual Chromium lifecycle/storage/read/property/bereavement checks.
 Completed explicit annual/birthday, employment, displayed-decision and property/debt ownership; schema2 compatibility, participant/conception identity and cancellation cleanup. Direct official-reference play covers a complete91-year life plus infant death/rebirth. Corrected Next skipping close-family loss using existing controls, with no new choice/menu.

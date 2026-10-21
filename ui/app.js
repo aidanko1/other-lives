@@ -112,7 +112,7 @@ function syncTime(){const bar=$('#month-fill');if(bar)bar.style.width=(state.mon
 function tickClock(){if(!state||state.status!=='alive'||view!=='game'){stopClock();return}if(state.pending){resumeAfterDecision=true;stopClock();render();return}
  const now=performance.now(),dt=Math.max(0,Math.min(700,now-lastPulse));lastPulse=now;monthBank+=dt*clockSpeed/3750;
  let n=0,draw=false;
- while(monthBank>=1&&n++<8&&state.status==='alive'&&!state.pending){monthBank-=1;const r=O.advanceMonth(state);if(r.entry||r.birthday||r.finished)draw=true;if(r.decision){if(autoChoices){const e=O.EVENTS.find(x=>x.id===state.pending);if(e){{const valid=e.options(state).map((c,i)=>c.disabled?null:i).filter(i=>i!==null);if(valid.length)O.applyChoice(state,O.pick(state,valid));}draw=true}}else{resumeAfterDecision=true;stopClock();draw=true;break}}}
+ while(monthBank>=1&&n++<8&&state.status==='alive'&&!state.pending){const r=O.playbackStep(state);monthBank-=r.months;if(r.entry||r.birthday||r.finished)draw=true;if(r.decision){if(autoChoices){const e=O.EVENTS.find(x=>x.id===state.pending);if(e){{const valid=e.options(state).map((c,i)=>c.disabled?null:i).filter(i=>i!==null);if(valid.length)O.applyChoice(state,O.pick(state,valid));}draw=true}}else{resumeAfterDecision=true;stopClock();draw=true;break}}}
  if(n>0){saveCurrent();if(state.status==='finished'){stopClock();persistFinished();draw=true}if(draw)render();else syncTime()}
 }
 async function persistFinished(){if(state?.status==='finished'){const ok=await putArchive(state);await refreshArchive();if(!ok)notify('Could not archive this life. Export a backup immediately.')}}

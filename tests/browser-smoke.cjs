@@ -6,6 +6,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),{chromium}=requ
  const click=action=>page.locator('[data-action="'+action+'"]').first().click();
  const results='test-results';fs.mkdirSync(results,{recursive:true});
  try{
+  await require('./browser-pacing.cjs')(browser);
   await page.goto('http://127.0.0.1:8000');await page.locator('[data-action="new-dialog"]').first().waitFor();await click('new-dialog');await page.locator('#new-country').selectOption('GB');await click('start');
   assert(await page.locator('[aria-label="New life reveal"]').isVisible());await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');
   await page.locator('[data-action="game-tab"][data-tab="family"]').click();const paused=await read();await page.waitForTimeout(4100);const later=await read();assert.equal(later.age,paused.age);assert.equal(later.month,paused.month,'inspecting family must pause clock');
