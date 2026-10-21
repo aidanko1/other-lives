@@ -30,7 +30,10 @@ O.decisionText=function(s,value){
  text=text.replace(rx,(whole,prefix,name)=>{const matches=aliases.get(name);if(matches.length!==1)return whole;const p=matches[0],label=p.role==='Pet'?'your '+(p.kind||'pet'):p.role==='Acquaintance'?'your acquaintance':O.memoryPerson(s,p);return prefix+label+' '+name;});
  return text.replace(/(^|[.!?]\s+|\n)(your\b|someone\b)/g,(_m,prefix,word)=>prefix+word[0].toUpperCase()+word.slice(1));
 };
-O.narrativeText=(s,value)=>O.decisionText(s,O.cleanLogText(s,value));
+// Legacy purchase prose embeds technical deltas even when the UI has no effect chips.
+// Strip only signed factor readouts at presentation; prices, history and effects stay saved.
+const factorReadout=/\b(?:health|happiness|knowledge|relationships|stress|confidence)\s*[+−-]\d+(?:\.\d+)?(?:\s*·\s*(?:health|happiness|knowledge|relationships|stress|confidence)\s*[+−-]\d+(?:\.\d+)?)*\b/gi;
+O.narrativeText=(s,value)=>O.decisionText(s,O.cleanLogText(s,value)).replace(factorReadout,'').replace(/\s*·(?:\s*·)+\s*/g,' · ').replace(/^\s*·\s*|\s*·\s*$/g,'').trim();
 // UI memory only, keyed by life and panel: actions may rebuild DOM, not reset disclosures.
 const menus=new Map();
 O.rememberSpendMenus=function(root){

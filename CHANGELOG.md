@@ -1,6 +1,8 @@
 # Changelog
 
 ## 6.4.0 — Spend continuity, narrative clarity and bounded birth data (candidate)
+Final screenshot follow-up also removes embedded legacy signed-factor readouts from narrative display without rewriting purchase history/effects.
+
 Fixes all post6.3.0 reports: neutral ordinary/mixed log entries with restrained outcome-headline accents; relationship introductions in decisions; shared Spend disclosure/focus/position restoration; explicit clicked-route identity instead of unrelated queue order; purchases, route and university choices stay in Spend. Counselling/eating and other continuing preferences appear once as persistent Spend toggles, without the separate routines menu or two-choice cap. Duplicate annual purchase cards are removed; distinct meals, holidays, gifts, dental care and the initial interest-discovery path remain. Existing saved selections, choice indices, annual settlement and history remain intact. The user explicitly removed the cap, so its previous rejection assertions now assert successful third selections; age/budget/settlement guards remain.
 
 Also implements the next planned targeted-realism batch: frozen2024 known-live-birth counts for Hong Kong and final resident-live-birth counts for the US replace only their illustrative birthplace weights. Provenance, units, coverage differences and unchanged fallback are in BIRTH_DATA.md. No new interface or save migration. New source fields are additive; existing country snapshots/comparison histories never receive retrospective edits.
