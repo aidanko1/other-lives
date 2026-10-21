@@ -12,7 +12,7 @@ module.exports=async function verifyAccessibility(browser){
   // The decision covers the page: keyboard access must match that visible boundary.
   const read=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('other-lives-current-v1'))),waiting=await read();
   const popup=page.locator('.decision-popup'),reopen=page.locator('[data-action="return-decision"]');
-  const decision=await popup.innerText(),token=await popup.locator('[data-action="choose"]').first().getAttribute('data-decision');
+  const decision=await popup.textContent(),token=await popup.locator('[data-action="choose"]').first().getAttribute('data-decision');
   for(const width of [390,1280]){
    await page.setViewportSize({width,height:900});
    assert.equal(await popup.getAttribute('aria-modal'),'true','visible decision must be modal');
@@ -28,7 +28,7 @@ module.exports=async function verifyAccessibility(browser){
     assert.equal(await popup.count(),0);assert.deepEqual(await read(),waiting,'inspection must preserve the pending life exactly');
     assert.equal(await page.locator('.story-tabs').evaluate(e=>!!e.closest('[inert]')),false,'inspection is available after Set aside');
    }
-   await reopen.press('Enter');assert.equal(await popup.innerText(),decision);assert.equal(await popup.locator('[data-action="choose"]').first().getAttribute('data-decision'),token);
+   await reopen.press('Enter');assert.equal(await popup.textContent(),decision);assert.equal(await popup.locator('[data-action="choose"]').first().getAttribute('data-decision'),token);
    await first.click();assert(await reopen.evaluate(e=>e===document.activeElement),'pointer Set aside also restores focus');
    await reopen.press('Enter');assert.deepEqual(await read(),waiting);
   }
