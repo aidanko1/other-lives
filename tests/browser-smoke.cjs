@@ -14,8 +14,8 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
   await require('./browser-infant.cjs')(browser);
   await require('./browser-accessibility.cjs')(browser);
   await require('./browser-large-archive.cjs')(browser);
-  await page.goto('http://127.0.0.1:8000');await page.locator('[data-action="new-dialog"]').first().waitFor();await click('new-dialog');await page.locator('#new-country').selectOption('GB');await click('start');
-  assert(await page.locator('[aria-label="New life reveal"]').isVisible());await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');
+  await page.goto('http://127.0.0.1:8000');await page.locator('[data-action="new-dialog"]').first().waitFor();assert.equal(await page.locator('.footer-note .release-version').innerText(),'v'+require('../package.json').version,'landing must identify the running release');await click('new-dialog');await page.locator('#new-country').selectOption('GB');await click('start');
+  assert(await page.locator('[aria-label="New life reveal"]').isVisible());await page.locator('[data-action="dismiss-birth"]').waitFor();await click('dismiss-birth');assert.equal(await page.locator('.footer-note .release-version').innerText(),'v'+require('../package.json').version,'gameplay must retain the subtle release label');
   await page.locator('[data-action="game-tab"][data-tab="family"]').click();const paused=await read();await page.waitForTimeout(4100);const later=await read();assert.equal(later.age,paused.age);assert.equal(later.month,paused.month,'inspecting family must pause clock');
   for(const tab of ['profile','people','spend','log'])await page.locator('[data-action="game-tab"][data-tab="'+tab+'"]').click();
   let pending;
