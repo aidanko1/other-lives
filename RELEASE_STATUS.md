@@ -1,39 +1,42 @@
-# Release status — verified development checkpoint
+# Verified development baseline —6.2.0-dev.4
 
-Version6.2.0-dev.4 is a candidate and remains unreleased. Main4072fd4997992cb7fd6bf78d7f0c9cab41a7379f is untouched; no new deployment is claimed. Draft PR: https://github.com/aidanko1/other-lives/pull/2, engineering/fidelity-reliability-baseline.
+This is a verified, restorable **development** baseline, not a claim of complete reference parity/national calibration or a production release. No merge/deployment was performed. Main remains4072fd4997992cb7fd6bf78d7f0c9cab41a7379f (v6.1; historical deployment is not a new correctness certification).
 
-## Last verified checkpoint (cycle10)
+Development branch: engineering/fidelity-reliability-baseline. Draft PR: https://github.com/aidanko1/other-lives/pull/2.
 
-Source f0f260896cd7cc55f72b5aa473f9f6815f867ab8 passes all11 jobs: https://github.com/aidanko1/other-lives/actions/runs/39538674951.104 tests/build,3000 complete release-cohort lives plus432 targeted complete rare-route cases, all three browser engines including natural NG2 age0/9months and US95195/44.13 private legacy records additionally pass the local read-only migration/history/idempotence audit with unchanged original bytes. Restore checkpoint/6.2.0-dev.3-infant-timing-verified. Earlier db19f9c1 and bc74cde checkpoints remain. The historical cycle8 table below is superseded by these current counts and cycle10 evidence.
+**Tested executable/tests/workflows source:**75b2154d4794d09410537bebea37937b9cc64ebf.
+**All11 jobs pass:** https://github.com/aidanko1/other-lives/actions/runs/39540689377.
+**Restore:** checkpoint/6.2.0-dev.4-release-gates-verified.
+Production engine/UI/assets are unchanged from3c301436e5f1a4817ec847c717ee575a2d60fcba;75b2154 strengthens the archive test and handover instructions. Subsequent documentation-only descendants record these results without claiming additional scenarios.
 
-| Gate | Executed result at bc74cde |
+## Executed acceptance
+| Gate | Verified result |
 |---|---|
-| Production build/static | Pass;50 script dependencies;129 countries,853 events,280 moments,42 routes,10 degrees,37 careers |
-| Unit/integration/regression |90 Node-reported tests pass,0 failures; original assertions retained |
-| Background cohort |1000 complete asserted lives across129 countries/four backgrounds; balance aggregate passes |
-| Trajectory cohort |Additional1000 complete asserted lives across129 countries/five quintiles/four policies |
-| Parallel cohort |Additional1000 complete asserted peer lives,250 worlds;129 root origins,95 peer countries,760051 checked states,33125 decisions;ages1–104,max newborn JSON22982 bytes |
-| Chromium/Firefox/WebKit |All three actual-browser suites pass in CI, including birth/choices/full natural lifecycle/storage/export/import/archive/replay, family funding/property/bereavement,30/60/90 duration and no-reflection guards |
-| Natural UI lifecycle |US951 reaches105 with47 choices and all major stages/reloads; actual ending/archive/new birth |
-| Comparison worlds/endings |Four passive current-date peers, no future death leak; player-outcome/RNG independence, exact save/replay and factual/infant/legacy recap checks pass |
-| Save compatibility |Schema2 exact clone, schema0/1 migration fixtures/eight seeded continuations; saved world never regenerated, snapshots share references |
+| Static/production build | Pass;50 script dependencies;129 enabled countries,853 events,280 moments,42 routes,10 degrees,37 career tracks |
+| Unit/integration/regression |107 Node-reported tests pass,0 failures; original assertions retained; includes finance/annual/property/employment/eligibility/participants/save/terminal/clock regressions |
+| Background/optional-route cohort |1000 complete asserted lives;129 countries/four backgrounds;56592 decisions,age0–108,median58; aggregate distribution/repetition gate passes |
+| Trajectory cohort |Additional1000 complete asserted lives;129 countries/five quintiles/four policies;45107 decisions,mean age74.539;963 lives with paid work,973 with family changes |
+| Parallel cohort |Additional1000 complete per-action-asserted peers in250 worlds;129 player origins/95 peer countries;782518 checked states,34149 decisions,age0–104,max newborn save23997 bytes |
+| Targeted complete rare paths |432 additional complete asserted naturally prepared lives:48 each dance/acting/esports/board-professional/vocation,192 K-pop; actual interests/practice/eligible retries/academy/professional/failure outcomes and stage reloads; no forced success/stat/fund/age/RNG injection |
+| Chromium/Firefox/WebKit |All three pass full production-control lifecycle/choice/navigation/storage/export/import/archive/replay plus school/funding/property/bereavement/mobile/legacy regressions |
+| Natural UI lifecycles |US951: childhood/adulthood/old-age reloads,44 choices,death95,actual archived cause and another birth. NG2: natural death0years9months,exact ending reload/archive and another birth |
+| Pacing/reflection exclusion |Actual30/60/90 setup/timed years/pause/reload and legacy5-highlights/45.1-controlled-second year pass; real progression across 5/15/30/50/70 with no reflection questions/notes/toggle/special pauses |
+| Comparison/ending |Four passive current-date peers/no future-death leak, unchanged player outcomes/RNG; exact saved-world replay without regeneration; factual infant/legacy recap/personal memory/formatted currency with no internal markers |
+| Accessibility |Nine light/dark lifecycle/form/mobile WCAG2A/2AA/2.1AA axe surfaces,zero serious/critical violations in all engines; actual modal focus entry/wrap/Escape/return; nonmodal decisions preserve inspection |
+| Large normal-save archives |198957434-byte backup;100/100 exact records after actual import/render/reload/export/detail/targeted deletion in all three engines. Each record includes24 turning points/four peer histories/229 journal entries. Copies of one complete asserted fixture, not100 new simulated lives |
+| Save compatibility |Schema0/1→2 pure/idempotent migrations, exact schema2 load/eight country snapshot continuations, legacy unknowns/conserved liability repair, no invented timing/worlds.13 private records also pass local read-only history/identity/idempotence/consistency/migration audit; original bytes hash unchanged |
+| Deployment/enforcement |No new deployment. Pages depends on all quality jobs; protected-main remains false and connector administration is unavailable. Settings-level enforcement is not claimed |
 
-The3000 complete lives are three different cohorts, not three reruns of the same1000 seeds. Repeated CI reruns are not additional unique scenarios. National rates/enjoyment are not inferred from these outputs. Private13-record read-only audit is historical (cycle2/5); original backup was not changed/committed and was not rerun for cycles8–9.
+3432 is the three release-cohort totals plus targeted432 for this revision. Repeated runs at older/newer commits are not additional unique scenarios; storage copies/private records are not simulations. CI retains logs/artifacts/reproducible failures. These are seed/policy-conditioned distributions, not measured national probabilities or proof of enjoyment.
 
-## Cycle9 verified work
+## Corrections completed in cycles8–12
+Four passive comparison lives and factual richer endings address verified reference gaps. Reflections remain intentionally excluded. Bugs OL-034–040 cover deceased teenage partner history, model age bounds, unreachable career interests, contrast/modal focus, infant timing, newborn/toddler prerequisites and ledger/raw-currency retrospective selection. Earlier audit corrections cover conserved finance/tuition/estates, atomic annual/birthday receipts/rollback, employment hours/FTE/pensions, bound participants/cancellation, distinct property/loans and debt schedules, exact load/read boundaries, seeded determinism and bereavement/calendar pacing. BUGS.md and requirements/cycle records preserve causes, states/seeds and permanent regressions.
 
-Reachable Dance/Acting/Gaming/Chess interests use existing four-choice discovery and optional introductions. Nine settled light/dark lifecycle/form/mobile axe surfaces pass locally after contrast corrections. Modal keyboard focus/return checks pass; decision dialogs remain nonmodal so existing inspection stays available. A100-record11744934-byte archive import/render/reload/exact export/detail/delete passes locally;100 storage copies of one completed fixture are not100 simulations. Full natural Chromium US951 lifecycle remains105/47. All432 targeted complete rare-path lives and all11 exact-source CI gates pass at db19f9c1. ENGINEERING_CYCLE_9.md records acceptance and failed-fixture investigations.
+The expanded archive fixture initially exhausted the test runner's heap through deep fixture duplication; it now streams input construction, transfers one serialized template and uses full deep equality per downloaded record. Record count/history/assertions were not reduced and memory limits were not raised. Unique download paths avoid local artifact collisions. This is not a claimed production OOM fix.
 
-## Release restrictions and remaining limits
+## Remaining limits and next priority
+No confirmed unresolved critical/high defect is knowingly hidden; this is not a bug-free guarantee.129 authored profiles versus reference172 locations, eras, national economics/schooling/licensing and age/sex mortality remain partial. Uniform infant hazard does not model neonatal concentration; older-age timing is annual. Long junior medical titles/promotion opportunities and contextual generic repetition need further evidence before changing deliberate application/training gates. Full normal-speed subjective enjoyment, manual assistive-technology/low-end-device checks and arbitrary archive sizes are unverified. New-birth peer generation is synchronous, measured around1.9s locally; slow-device latency is unknown.
 
-Pages requires reusable quality; experimental branches do not deploy. Main protection is false and connector administration is unavailable; owner-level protected-main enforcement is not claimed. Do not merge/deploy experimental work or label production stable without deliberate release review and passing exact-source gates.
+Next highest priority: source/version national demographic/opportunity inputs and assess remaining mortality/promotion pacing against reference evidence, while preserving the simple loop. Owner-level required-check protection needs owner administration. Keep this checkpoint playable/restorable and experimental changes separate; do not automatically merge/deploy it or call the whole project fully realistic/reference-equivalent.
 
-Known model/product limits:129 authored country profiles versus reference172; no historical eras; national economic/education/legal inputs and adult age/sex mortality remain simplified. Cycle10 implements age0 timing for new births; exact-source gates pending. Legacy saves intentionally retain the first-birthday model. Neonatal/month-specific and older-age timing/calibration remain simplified. Combined-country duration reference is an approximation; exact reference timer unknown. Full normal-speed enjoyment/contextual writing review and manual screen-reader/device testing remain incomplete. Structural helpers/rare cross-route combinations need continued evidence, not a rewrite or invented precision. No confirmed unresolved critical/high defect is knowingly hidden, and a green gate is not a bug-free guarantee. Reflections are intentionally excluded by the user.
-
-## Cycle10 candidate
-Six infant timing regressions and natural NG2 UI death at0/month9 pass locally. Build/static checks pass with50 dependencies. New-life seeded outcomes change (US951 engine probe95/44); original saves retain their prior timing. Local full Node glob passes103 tests; the added sixth infant regression also passes separately. Final CI must execute the complete104-test suite;103 is not misreported as104. ENGINEERING_CYCLE_10.md records source definitions/assumptions and acceptance.
-
-Cycle10 local peer cohort passes1000 complete lives/0 failures:250 worlds,129 root origins,95 peer countries,788955 checked states,34552 decisions,ages0–104,max newborn JSON24831 bytes. Actual full Chromium suite passes with natural US95195/44 and NG2 infant ending; archive fixture12808234 bytes/100 exact storage records. These are local results for the current engine; final CI still required. The13 private legacy records were re-audited read-only in cycle10:13/13 migrations, original journal/identity, idempotence, no invented timing model and consistency pass; original bytes hash unchanged. No private contents were committed. No avatar/text-render claim is made for this latest audit.
-
-## Cycle11 candidate under verification
-Eight narrative-age prerequisites and ending personal-memory/currency formatting corrected. Targeted eligibility/retrospective/actual recap tests and build pass locally. Full107-test/all11-job source gate pending. No new controls/reflections/history rewrite. ENGINEERING_CYCLE_11.md records qualitative review and distinguishes deliberate career application gates from a confirmed bug.
+Read AGENTS.md, GAME_DESIGN.md, FIDELITY_MATRIX.md, ARCHITECTURE.md, TESTING.md, REQUIREMENTS_MATRIX.md, BUGS.md and BACKLOG.md at the next session. Previous cycle failures and exact evidence remain in ENGINEERING_CYCLE_*.md. No private backup was modified or committed; no avatar/text-render audit is claimed for the latest13-record migration recheck.

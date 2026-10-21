@@ -1,9 +1,9 @@
 # Prioritised continuation backlog
 
-Current verified source 3c30143 (cycle11):107 tests/build/all11 jobs/3000 release-cohort lives plus432 targeted complete rare-path cases, Chromium/Firefox/WebKit. Cycle11 narrative fixes pass; the broader cycle12 archive fixture is under exact-source verification; current status is in RELEASE_STATUS.md. Main4072fd4 is unchanged; no new deployment.
+Current verified executable/tests/workflows source 75b2154 (cycle12):107 tests/build/all 11 jobs/3000 release-cohort lives plus 432 targeted complete rare-path cases, Chromium/Firefox/WebKit. Cycle11 narrative fixes and the broader cycle12 archive fixture pass. Current exact-source evidence is in RELEASE_STATUS.md. Main4072fd4 is unchanged; no new deployment.
 
-## Current stage
-Complete cycle12's broader100-record normal-save archive gate in all three engines and consolidate final handover evidence. Chromium passes a198957434-byte backup with24 snapshots/four companions per record; final-source CI is separate. Do not count storage copies as new simulated lives.
+## Completed checkpoint
+All11 exact-source jobs pass at 75b2154: https://github.com/aidanko1/other-lives/actions/runs/39540689377. Restore checkpoint/6.2.0-dev.4-release-gates-verified. The100-record normal-save archive gate passes in three engines with 198957434 bytes,24 snapshots and four comparison histories per record. Storage copies are not additional simulated lives. Handover documentation is consolidated; no experimental production merge/deployment.
 
 ## Next work, by priority
 1. Source/version demographic/economic inputs and assess age/sex mortality, schooling/opportunity and129 authored country profiles versus the reference's172 locations. Keep proxies, simplified professional/national rules, older-age annual timing and uniform infant hazard explicit. Do not enable unauthored countries or invent precision merely to match a count. Historical eras remain a goal.
@@ -20,6 +20,6 @@ Complete cycle12's broader100-record normal-save archive gate in all three engin
 - Calendar-only playback, saved30/60/90-minute targets/default60/legacy rate; Next family-bereavement stop; complete UI lifecycle/save/reload/export/import/archive/replay.
 - Four passive same-date comparison lives and factual retrospective; compact shared snapshot references, no invented past worlds/future deaths. Reflections explicitly excluded by the user.
 - OL-034 deceased-teen-partner validator; OL-035 age-bound mortality; OL-036 reachable Dance/Acting/Gaming/Chess prerequisites; OL-037 contrast/modal focus; OL-038 versioned age0 infant mortality with legacy continuation preserved.
-- Cycle11 OL-039 toddler narrative prerequisites and OL-040 personal-memory/currency rendering verified at3c30143,107 tests/all11 jobs.
+- Cycle11 OL-039 toddler narrative prerequisites and OL-040 personal-memory/currency rendering verified at 3c30143,107 tests/all 11 jobs.
 
 No private archive was modified/committed. The latest13-record migration/history/identity/idempotence/consistency audit is read-only; counts are separate from simulated lives. Consult current evidence at every new session.

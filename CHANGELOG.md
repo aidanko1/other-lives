@@ -1,7 +1,7 @@
 # Changelog
 
 ## Cycle7 — user-requested fidelity exception
-Reflection prompts, note-entry screens and reflection-specific pauses/toggle are explicitly excluded from Other Lives. The unfinished local prototype was removed before any commit/publication; production engine/UI/index files are byte-identical to the verified cycle6 source. Permanent instructions, design/comparison/requirements and backlog reflect the exception. Added Next and actual automatic-browser continuation guards at5/15/30/50/70. Guard-source6c8763ad3750747b5abbbd0e2b26d651a8bfde73 passes82 tests/build/full actual Chromium/all eight CI gates and both1000-life asserted cohorts: https://github.com/aidanko1/other-lives/actions/runs/39532142864. No save migration, production merge or deployment.
+Reflection prompts, note-entry screens and reflection-specific pauses/toggle are explicitly excluded from Other Lives. The unfinished local prototype was removed before any commit/publication; production engine/UI/index files are byte-identical to the verified cycle6 source. Permanent instructions, design/comparison/requirements and backlog reflect the exception. Added Next and actual automatic-browser continuation guards at 5/15/30/50/70. Guard-source 6c8763ad3750747b5abbbd0e2b26d651a8bfde73 passes82 tests/build/full actual Chromium/all eight CI gates and both1000-life asserted cohorts: https://github.com/aidanko1/other-lives/actions/runs/39532142864. No save migration, production merge or deployment.
 
 ## Cycle6 — playback correction, development only
 Added the verified30/60/90-minute birth duration/default60 with frozen birth-country playback reference; old saves retain their original rate. Duration affects presentation only, with identical complete seeded histories tested. Actual setup/timed year/highlights/inspection/reload checks pass at all three values. Corrected misleading birth selector labels without changing draws. Stories at the current date no longer spend another month's playback delay; every story and simulation transition is preserved.
@@ -14,7 +14,7 @@ Source 85deb8d failed both full cohorts on debt prepayment; OL-028 is corrected 
 
 ## Cycle4 — property and debt identity (verification pending)
 
-Added per-holding property/loan ownership behind existing housing choices, schema2 conservative migrations, multi-loan budgeting/principal and asset/debt invariants. Fixed a full-cohort failure where prepaying a scheduled bill left future instalments charging. Added housing UI save/reload coverage and ten targeted property regressions, including129-country combinations. See ENGINEERING_CYCLE_4.md; final exact-revision gates pending.
+Added per-holding property/loan ownership behind existing housing choices, schema2 conservative migrations, multi-loan budgeting/principal and asset/debt invariants. Fixed a full-cohort failure where prepaying a scheduled bill left future instalments charging. Added housing UI save/reload coverage and ten targeted property regressions, including 129-country combinations. See ENGINEERING_CYCLE_4.md; final exact-revision gates pending.
 
 ## Cycle3 — annual/employment/decision continuity (verification pending)
 
@@ -26,7 +26,7 @@ Replaced passive wrapper composition with one ordered annual/birthday transactio
 - Current saves reload without replaying repairs. Legacy migration preserves authored journals. Missing family cash is explicitly unknown with zero opening cash, rather than inventing savings.
 - Removed adapters from profile/family/spending/finance/art reads; estate/trust transfer now occurs at the existing explicit annual family phase.
 - Preserved known-zero family liabilities: migration/monthly adapters no longer recreate debts already cleared.
-- Fixed the confirmed prepaid-overseas continuing-policy crash; added all129-country coverage and retained 645 working cost-composition parity cases against2aea.
+- Fixed the confirmed prepaid-overseas continuing-policy crash; added all 129-country coverage and retained 645 working cost-composition parity cases against2aea.
 - Added permanent finance/read/save/rollback regressions and actual browser reload→inspect→export immutability assertion. Existing estate conservation assertions now execute the explicit transition; no assertions removed.
 - Final code a248549:49/49 Node-reported tests, production build, two 1,000-life cohorts with assertions/balance (zero failures), Chromium lifecycle/storage/read-identity checks; all eight CI jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39509582008. Private 13-record audit passed without altering source/history. See ENGINEERING_CYCLE_2.md and RELEASE_STATUS.md for scope and limits. No main merge/deployment.
 
@@ -74,7 +74,7 @@ Added Phase 11 requirements matrix, bug reproductions and explicit release statu
 - OL-036: connected existing dance/acting/esports/chess careers to reachable childhood/optional interests; stable four-choice presentation, no extra compulsory decisions.
 - Corrected light-theme text contrast and dark ending/tab/log contrast; modal focus entry, Tab wrapping, Escape and return to opener. Life decisions remain nonmodal to preserve inspection.
 - Permanent axe9-surface/keyboard and100-record archive import/reload/exact-export/detail/delete gates; targeted six-route complete-life tests.
-- Cycle8 bc74cde verified all11 jobs,90 tests/build/3000 complete asserted lives and Chromium/Firefox/WebKit. Cycle9 final-source gates pending; no deployment.
+- Cycle8 bc74cde verified all 11 jobs,90 tests/build/3000 complete asserted lives and Chromium/Firefox/WebKit. Cycle9 final-source gates pending; no deployment.
 
 ## 6.2.0-dev.3 — candidate, unreleased
 - OL-038: first-year mortality for new births occurs during age0 rather than being deferred to the first birthday.12 conditional monthly risks preserve the prior annual survival product under constant circumstances; no extra roll on story/choice delivery or at the surviving first birthday.
@@ -84,5 +84,8 @@ Added Phase 11 requirements matrix, bug reproductions and explicit release statu
 ## 6.2.0-dev.4 — candidate, unreleased
 - OL-039: correct eight infant/toddler story age prerequisites at their definition owner; legacy queued stories revalidate, existing history remains intact. No new prompts/tracking.
 - OL-040: retrospective chooses a recorded personal memory ahead of finance ledgers, formats stored currency correctly and omits missing memories.
-- Two permanent eligibility tests, extended retrospective/browser regressions; targeted checks/build pass locally, final107-test/all11-job gate pending.
-- Prior f0f2608 verified104 tests/build/all11 jobs/3000 release-cohort plus432 targeted lives, all three browser engines; no merge/deployment.
+- Two permanent eligibility tests, extended retrospective/browser regressions; targeted checks/build pass locally, final107-test/all 11-job gate pending.
+- Prior f0f2608 verified104 tests/build/all 11 jobs/3000 release-cohort plus 432 targeted lives, all three browser engines; no merge/deployment.
+
+## 6.2.0-dev.4 verified development checkpoint
+Executable/tests/workflows source 75b2154d4794d09410537bebea37937b9cc64ebf passes107 tests/build/all 11 jobs: https://github.com/aidanko1/other-lives/actions/runs/39540689377.3000 release-cohort lives plus 432 targeted complete rare-path cases; all three engines pass natural infant/adult lifecycle, nine accessibility surfaces/keyboard and198957434-byte100-record normal-save archives (24 snapshots/four peers each). Restore checkpoint/6.2.0-dev.4-release-gates-verified. OL-034–040 corrections are implemented/verified. Final documentation consolidates current state/owners/requirements/results and preserves historical failures/limitations. No production merge/deployment; full national/era calibration, normal-speed enjoyment, manual AT/slow devices and owner protection remain open.

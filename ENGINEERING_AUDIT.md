@@ -1,3 +1,11 @@
+# Current audit result — verified executable source 75b2154
+
+107 tests/build/all 11 jobs pass: https://github.com/aidanko1/other-lives/actions/runs/39540689377.3000 release-cohort lives plus 432 targeted complete rare-path cases; Chromium/Firefox/WebKit including 198957434-byte100-record normal-save archives with 24 snapshots/four peers each. Cycles8–11 additionally correct deceased-teen history/age ceilings, inaccessible career interests, contrast/modal focus, infant timing, newborn story prerequisites and personal-memory/currency ending rendering. BUGS.md records OL-034–040 reproductions/causes/regressions. Main4072fd4 remains untouched; no new deployment.
+
+No confirmed unresolved critical/high defect is knowingly hidden; this is not a bug-free guarantee. National/era calibration, promotion/repetition/normal-speed enjoyment review, legacy helpers, manual AT/slow devices and protected-main administration remain open in BACKLOG.md. Historical source/tool limitations below describe their original cycles only. No authored content was removed to manufacture a passing suite.
+
+---
+
 # Current audit supplement — verified source b87e519
 
 Cycle6 supersedes current playback evidence at ba00e5b: OL-033 story-delivery time charge fixed; reference duration/default implemented with old-save rate preserved, exact seeded outcomes and UI timer/reload assertions.81 tests/build/all eight CI jobs and both1000-life cohorts pass: https://github.com/aidanko1/other-lives/actions/runs/39530111698. Optional-menu/decision-density review and six asserted high-count replay traces are in ENGINEERING_CYCLE_6.md. No new critical/high defect confirmed; omitted reference features/calibration remain explicit future work. The earlier supplement below describes its historical checkpoint.
