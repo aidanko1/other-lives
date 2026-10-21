@@ -54,7 +54,7 @@ module.exports=async function verifyGameplayPolish(browser){
   fs.mkdirSync('test-results',{recursive:true});
   for(const theme of ['light','dark']){
    await page.setViewportSize({width:390,height:844});await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;scrollTo(0,document.querySelector('.game-layout').offsetTop+160);},theme);
-   await page.screenshot({path:'test-results/gameplay-polish-'+browser.browserType().name()+'-'+theme+'.png'});
+   await page.screenshot({path:'test-results/gameplay-polish-'+browser.browserType().name()+'-'+theme+'.png',animations:'disabled'});
   }
   await page.reload();await click('resume');await click('play-pause');assert.deepEqual(await read(),afterChoice,'reloading must preserve the full choice consequence and metadata');
   assert.deepEqual(errors,[]);fs.writeFileSync('test-results/gameplay-polish-'+browser.browserType().name()+'.json',JSON.stringify({layouts,choice:afterChoice.pending,age:afterChoice.age,errors},null,2));

@@ -43,3 +43,5 @@ Runtime/tests/workflows source 75b2154d4794d09410537bebea37937b9cc64ebf passes10
 
 ## 6.3 requested presentation and bounded pacing correction
 User-directed presentation: four factors in the existing sticky strip; prose/context without stat or money-delta chips in the log/current narrative; retained consequences and optional spending previews. These preferences are independently implemented and do not claim to copy an unverified reference detail. Routine editing keeps the current Spend disclosure/row/focus. Reflections stay excluded. A confirmed three-year review versus seven-year selector contradiction is corrected while retaining random opportunities and professional prerequisites. Exact-source browser/simulation verification is pending in ENGINEERING_CYCLE_14.md; broad subjective/repetition calibration is not declared complete.
+
+6.3 scoped UI/cooldown acceptance passed in all three engines and all11 jobs at3b29944/run39558118913. Final screenshot-harness/source and publication evidence is in PR3/RELEASE_STATUS.md; generic repetition and national calibration remain partial.

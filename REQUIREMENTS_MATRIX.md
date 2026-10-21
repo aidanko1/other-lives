@@ -30,12 +30,12 @@ Outstanding goals and scope limits are in BACKLOG.md. No requirement becomes com
 
 Release scope: RELEASE_PLAN.md records the user's21October decision to accept the consistency/reliability candidate and batch remaining improvements. PARTIAL requirements remain honestly partial and assigned to future batches; they are not relabelled complete or automatically treated as blockers to this scoped release. Confirmed critical/high defects and the existing technical release gates remain blocking.
 
-## Current6.3 scoped additions — final gates pending
+## Current6.3 scoped additions — first acceptance verified, final gates pending
 | Requirement | Implementation | Acceptance | Status |
 |---|---|---|---|
-| UX03: persistent compact four factors | app stats/meter; existing v55-ui styles in index | browser-polish eight layouts/sticky/accessible values, existing accessibility suite | Implemented; browser execution pending |
-| UX04: immersive log with persistent consequences | app journalPanel/game rendering only | browser-polish prose/no-badges/real choice/exact reload; existing finance/save suites | Implemented; no effect metadata or narrative deleted; browser execution pending |
-| UX05: stable routine editing | app updateRoutineControls/set-routine action | browser-routines two sizes/pointer/keyboard/limit rejection/save/annual timing | Implemented; browser execution pending |
-| S05 review interval correction | life-careers cooldown; events/clock selectors | career-review three tests; retained career-continuity and all cohorts | Three targeted regressions pass locally; full exact-source gates pending |
+| UX03: persistent compact four factors | app stats/meter; existing v55-ui styles in index | browser-polish eight layouts/sticky/accessible values, existing accessibility suite | PASS-SCOPED at3b29944 in all three engines |
+| UX04: immersive log with persistent consequences | app journalPanel/game rendering only | browser-polish prose/no-badges/real choice/exact reload; existing finance/save suites | PASS-SCOPED at3b29944 in all three engines; no effect metadata/narrative deleted |
+| UX05: stable routine editing | app updateRoutineControls/set-routine action | browser-routines two sizes/pointer/keyboard/limit rejection/save/annual timing | PASS-SCOPED at3b29944 in all three engines |
+| S05 review interval correction | life-careers cooldown; events/clock selectors | career-review three tests; retained career-continuity and all cohorts | PASS-SCOPED at3b29944;110 tests/all release cohorts pass |
 
 These bounded requirements do not mark general enjoyment, all narrative variation or country calibration complete. Last published6.2.0 evidence is recorded in PR2 and RELEASE_STATUS.md.

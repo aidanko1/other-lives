@@ -2,11 +2,11 @@
 
 An independent text-driven life simulation guided by the verified experience of [1 in 8 Billion](https://1in8b.life/en/), without proprietary source/art/substantial prose. Reflections remain explicitly excluded.
 
-Published stable6.2.0 is preserved at main4b799d6/release/6.2.0; [PR2](https://github.com/aidanko1/other-lives/pull/2) records its successful deployment/live verification. The6.3 candidate adds floating factors, immersive narrative presentation, stable routine editing and specific career/percentage corrections. Exact candidate checks and publication status: [RELEASE_STATUS.md](RELEASE_STATUS.md) and [ENGINEERING_CYCLE_14.md](ENGINEERING_CYCLE_14.md). Do not infer a successful deployment from candidate source.
+Published stable6.2.0 is preserved at main4b799d6/release/6.2.0; [PR2](https://github.com/aidanko1/other-lives/pull/2) records its successful deployment/live verification. The6.3 candidate adds floating factors, immersive narrative presentation, stable routine editing and specific career/percentage corrections. Exact candidate checks and publication status: [RELEASE_STATUS.md](RELEASE_STATUS.md) and [ENGINEERING_CYCLE_14.md](ENGINEERING_CYCLE_14.md); [PR3](https://github.com/aidanko1/other-lives/pull/3) records final exact-source/publication evidence. Do not infer a successful deployment from candidate source.
 
 Start each session with AGENTS.md, RELEASE_STATUS.md, GAME_DESIGN.md, FIDELITY_MATRIX.md, ARCHITECTURE.md, TESTING.md, REQUIREMENTS_MATRIX.md and BACKLOG.md. RELEASE_PLAN.md keeps updates bounded. Country/era calibration and broader subjective/device review remain future goals.
 
-Local development: Node22+, npm test, npm run build; serve with python3 -m http.server8000. TESTING.md describes the complete11-job gate; the old test:release convenience command is not the full gate.
+Local development: Node22+, npm test, npm run build; serve with python3 -m http.server 8000. TESTING.md describes the complete11-job gate; the old test:release convenience command is not the full gate.
 
 ## Historical release notes
 
