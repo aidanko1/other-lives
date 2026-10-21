@@ -1,6 +1,7 @@
 # Gameplay contract and reference evidence
 
 ## Current direct evidence and implementation
+Explicit user requirement,21October2026: Other Lives excludes 1in8bil's reflection feature. Do not add age-milestone reflection prompts, note-entry screens, reflection pauses or a reflection toggle. Reference fidelity is subject to this deliberate exception. Noninteractive contextual memories are ordinary life storytelling, not a player reflection exercise.
 Cycle6 adds the reference's30/60/90-minute birth setting (default60), independently using frozen birth-country life expectancy for approximate pacing. It changes no outcomes and preserves the original rate for saved lives lacking the new metadata. Story delivery does not spend extra calendar-time budget. Direct v0.7.90 setup/birth inspection confirms the life-expectancy target description; exact internal timing remains unknown. ENGINEERING_CYCLE_6.md records scoped tests; this does not supersede older reliability evidence for unchanged systems.
 The comparison below was originally written against baseline 4072fd4 and limited research; its hands-on unknowns are superseded by FIDELITY_MATRIX.md and REFERENCE_PLAYTEST_2026-10-21.md. Direct official play now covers an infant ending/rebirth and a whole life through school/university/work/family/care/retirement at60/old age/death at91. Numerical probabilities and all variants remain unknown.
 Current tested implementation is ba00e5b: full chronological text/choice loop retained; reference duration added only to birth setup. Next pauses at new close-family loss, matching observed parent loss. Existing school-entry/home-learning/funding/tabs/static-art preferences remain deliberate requirements. RELEASE_STATUS.md records scoped verification and remaining omissions/calibration goals.
@@ -33,7 +34,8 @@ Existing user-requested tabs, combined time/speed control, pause during inspecti
 | Life stages | School/work/love/health progression | Degree/funding, careers, relationship, retirement and care systems | Many contracts exist; completeness across combinations is unverified |
 | Conclusion | Death record, local past lives | Cause, journal, archive and snapshots/replay | Preserve; terminal effects must occur once |
 | Demography | 172 locations and era settings documented | 129 locations, fixed/proxy inputs and fitted adult mortality | Known fidelity/realism gap; do not claim numerical equivalence |
-| Parallel lives/reflections | Four other lives and five reflection ages documented | No equivalent verified in current source audit | Known difference; deferred until reliability is established |
+| Parallel lives | Four passive companion lives observed | No equivalent implemented | Remaining fidelity work |
+| Reflection prompts | Optional five-age reflection questions/notes observed | Excluded by explicit user instruction | Intentional difference; never a backlog item |
 | Visual presentation | Clean text interface with optional inspection | Modern coloured UI, tabs and static household illustration | Preserve restrained assets; browser comparison still required |
 
 ## Implemented versus goals

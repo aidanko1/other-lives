@@ -1,5 +1,8 @@
 # Changelog
 
+## Cycle7 — user-requested fidelity exception
+Reflection prompts, note-entry screens and reflection-specific pauses/toggle are explicitly excluded from Other Lives. The unfinished local prototype was removed before any commit/publication; production engine/UI/index files are byte-identical to the verified cycle6 source. Permanent instructions, design/comparison/requirements and backlog reflect the exception. Added Next and actual automatic-browser continuation guards at5/15/30/50/70. Local82-test regression/build and targeted actual-browser guards pass; full exact-head CI pending. No save migration or deployment.
+
 ## Cycle6 — playback correction, development only
 Added the verified30/60/90-minute birth duration/default60 with frozen birth-country playback reference; old saves retain their original rate. Duration affects presentation only, with identical complete seeded histories tested. Actual setup/timed year/highlights/inspection/reload checks pass at all three values. Corrected misleading birth selector labels without changing draws. Stories at the current date no longer spend another month's playback delay; every story and simulation transition is preserved.
 Final source ba00e5bd8cfc50cf54c92bbecd23ee954024934f passes81 tests, production build, both1000-life asserted cohorts and actual Chromium suite locally and CI: https://github.com/aidanko1/other-lives/actions/runs/39530111698. Earlier pacing-only b751cb3 also passes its77-test/eight-job checkpoint. Measured optional-menu/stress-policy density and six asserted high-count replay traces; full enjoyment/reference parity remains unverified. Reproduction, TEST-006 arithmetic correction, seeds and limits: ENGINEERING_CYCLE_6.md. No production merge/deployment.

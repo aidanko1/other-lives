@@ -1,5 +1,7 @@
 # Testing and release criteria
 
+Explicit fidelity exclusion (cycle7): `fidelity-exclusions.test.cjs` verifies Next reaches a real choice after each of5/15/30/50/70 without another stop. `browser-no-reflections.cjs` drives actual automatic playback through all five birthdays and asserts continued calendar movement, no reflection UI/save metadata and retained inspection. Included in npm fast checks/Node glob and the existing Chromium suite respectively. No new gameplay feature or production-code change.
+
 Cycle6 adds `tests/browser-pacing.cjs` and `tests/browser-duration.cjs` to the existing real Chromium suite. Playwright's installed/paused clock plus `runFor` delivers every production timer callback; these are real UI assertions under controlled elapsed time, not a simplified engine or subjective full-session playtest. Keep the legacy45.1s/five-highlight regression even as new births receive duration metadata. `pacing.test.cjs` also compares entire complete seeded histories across30/60/90, ignoring only playback metadata. Latest final-source results belong in ENGINEERING_CYCLE_6.md and RELEASE_STATUS.md.
 
 Latest tested source ba00e5b:81 tests, build,2,000 complete asserted lives, actual Chromium lifecycle/read/property/bereavement plus legacy/30/60/90-duration gates; all eight jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39530111698. Both full cohorts and browser suite also passed locally. Earlier counts below are historical; RELEASE_STATUS.md defines current limits.

@@ -15,7 +15,7 @@ Current verified source ba00e5b; exact evidence in RELEASE_STATUS.md and ENGINEE
 - Scoped optional-menu/decision-density review, including six asserted replays of the three highest-count births. Stress-policy follow-ups explain most extra choices; no unsupported global rate reduction.
 
 ## Next work, by priority
-1. Implement verified optional reflections/parallel lives and richer retrospective endings in a separate tested stage. Reference reflection5 private note/skip/disable and four same-age companion stages are directly observed. Preserve established tabs/home learning/funding/art; avoid extra management.
+1. Implement passive parallel lives and richer retrospective endings in a separate tested stage. Four same-age companion stages are directly observed. **Reflection prompts/notes/pauses are explicitly excluded by the user and must not be implemented.** Preserve established tabs/home learning/funding/art; avoid extra management.
 2. Continue long-session enjoyment/contextual repetition review. Cycle6 measures playback and optional-menu/stress-policy density, not full subjective parity; repeated hardship/general cards need contextual writing judgment. Duration chooser is implemented and verified.
 3. Source/version demographic/economic inputs, age/sex mortality and national schooling/opportunity.129 versus172 locations and eras remain incomplete; no invented national legal/wage precision.
 4. Extend rare-route/country combination coverage.34/42 types start in the cohort; contracts for all definitions do not validate every full trajectory.

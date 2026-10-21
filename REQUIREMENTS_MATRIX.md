@@ -1,5 +1,7 @@
 # Requirements → implementation → tests
 
+RF16 / explicit exclusion: no milestone reflection prompts, player note-entry feature or reflection-specific pauses/toggle. User instruction21October2026 supersedes general reference parity. Unfinished local reflection code was removed before any commit/publication; runtime restored to the tested cycle6 source. Permanent milestone-continuation/browser guards are being added; verification pending in ENGINEERING_CYCLE_7.md.
+
 Cycle6 F02/RF08 is PASS-SCOPED at ba00e5b: calendar-only playback budget and30/60/90-minute birth duration/default60, frozen origin and legacy3750ms/month fallback. Owners: engine/clock.js, core.js, ui/app.js. Tests: pacing.test.cjs (eight tests, including full seeded-life outcome equality), browser-pacing.cjs (legacy5highlights/45.1s), browser-duration.cjs (actual UI setup/timed year/pause/reload at all three values). Local checks and all eight exact-source CI jobs pass: https://github.com/aidanko1/other-lives/actions/runs/39530111698. Approximate targets do not guarantee actual wall time or a lifespan. UX02 now includes descriptive policy-stratified counts and six asserted complete replay traces; enjoyment remains unverified.
 
 Current source ba00e5b passes all eight gates: https://github.com/aidanko1/other-lives/actions/runs/39530111698.81 tests/build and2,000 complete asserted lives. PASS-SCOPED means executed acceptance, not entire-system completeness. The original matrix below is historical; current cycle supplements and RELEASE_STATUS.md supersede old counts/unknowns.
