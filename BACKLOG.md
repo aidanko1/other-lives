@@ -1,7 +1,17 @@
 # Prioritised continuation backlog
 
+## Development priority order
+1. User experience and gameplay fidelity.
+2. Simulation coherence.
+3. Education and careers.
+4. Demographic and country realism.
+5. Health, adversity and family.
+6. Narrative depth and long-term consequences.
+
+Choose work in this order, addressing confirmed serious defects first. The proposed education scope below does not override higher-priority user experience or coherence work. Follow AGENTS.md for development policy; the entries here describe work, not additional protocols.
+
 ## Safe checkpoint and current release
-Published6.3.0 remains restorable at952db710e43948d223b69405c0559de5d186d7ca and release/6.3.0. Current6.4 functional checkpoint0cb0198c5a716cdd1bdb9d7b5a42570677378423 is preserved at checkpoint/6.4-functional-verified:127 Node tests, build, all11 jobs,3432 asserted complete release lives and Chromium/Firefox/WebKit pass in [39568114556](https://github.com/aidanko1/other-lives/actions/runs/39568114556). [PR4](https://github.com/aidanko1/other-lives/pull/4) records subsequent final source/publication/live status. The latest policy/assessment change is documentation only; do not infer deployment from this checkpoint.
+Published6.4.0 is verified at6e0f730a63a6db1b170191830cd2b60f4699fdc9 and restorable at release/6.4.0. [PR4](https://github.com/aidanko1/other-lives/pull/4) records128 tests, all11 source gates,3432 asserted complete release lives, all three browsers, successful production validation/deployment and actual live save/toggle/reload checks. Earlier6.3.0 and verified checkpoints remain restorable. No subsequent gameplay change has been implemented.
 
 ## Country realism assessment at that checkpoint
 This is a focused inspection of the actual current owners/registries, not a repeated whole-game audit or proof of empirical calibration. Counts were queried from the loaded production engine after the runtime gates passed.
@@ -15,8 +25,8 @@ This is a focused inspection of the actual current owners/registries, not a repe
 | Employment and progression |37 ladders, related skill/experience transfer, qualification/application gates, hours/pay and family-care/study interactions; retained career and integration tests pass. | National recognition/licensing/salary distributions are approximate; do not rewrite all careers merely to improve school opportunities. |
 | Country context and saves | Country/place/cultural context,129 supported profiles, exact saved snapshots and existing comparison worlds; save/export/replay and browser continuity pass. | Historical eras and authored variety remain incomplete. New facts must not overwrite established life history or silently regenerate comparison lives. |
 
-## Next coherent feature scope: school opportunities across all supported countries
-Prioritise the common school-opportunity pipeline from access/entry through secondary completion and the existing qualification-to-work boundary. Replace disconnected assumptions only where needed with one versioned country opportunity structure covering all129 profiles. Use a compact reliable source family where available, documented regional/income-group approximations otherwise; select fields/units/coverage before implementation. Do not spend the next release polishing only HK/US counts or claim national labels alone complete the mechanics.
+## Candidate scope for priority3: school opportunities across all supported countries
+Improve the common school-opportunity pipeline from access/entry through secondary completion and the existing qualification-to-work boundary. Replace disconnected assumptions only where needed with one versioned country opportunity structure covering all129 profiles. Use a compact reliable source family where available, documented regional/income-group approximations otherwise; select fields/units/coverage before implementation. This remains a proposed coherent feature, subject to the priority order above; national labels alone do not complete its mechanics.
 
 Acceptance: every supported profile has finite valid values and explicit source/fallback status; entry, attendance/continuation, leaving/completion and resulting qualifications agree; resource/geographic barriers affect opportunity probabilistically without guaranteed success; qualifications continue to gate existing study/job routes. Test poor/wealthy and urban/rural paths, interrupted schooling and valid later recovery, shared calculations, seed replay and old-save continuation, relevant full cohorts and actual unchanged-simple gameplay. Main scenarios must work together; no extra mandatory menus/micromanagement. Preserve existing saved circumstances/model versions rather than inventing past schooling.
 
