@@ -32,3 +32,6 @@ Review PR2, preserve the verified restore references, and deliberately merge/pub
 
 ## Active batch —6.3 gameplay polish
 6.2.0 is published/restorable at4b799d6 and release/6.2.0; PR2 records deployment39553762697/live verification. The user now requests the first next update, including sticky factors, immersive log and Spend routines that remain open/in position. This batch also corrects the reproduced review-cooldown and decimal-display defects. ENGINEERING_CYCLE_14.md defines its bounded acceptance; full generic narrative/promotion calibration and later data/device batches do not silently join it. Candidate CI/publication remain pending until actually executed.
+
+## Current authorised follow-up —6.4.0
+6.3.0 is published and verified at952db71; PR3 is authoritative. The user requests all subsequent fixes plus the next planned update. Combine bounded Spend/presentation/routing fixes with future batch2: sourced birthplace-weight input for HK/US2024 only, selected before coding. BIRTH_DATA.md defines evidence, coverage/fallback and acceptance. Device/maintenance and broader calibration remain later work. Candidate/checkpoint/publication references are in RELEASE_STATUS.md and the release PR.

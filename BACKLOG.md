@@ -15,3 +15,6 @@ Implement and verify the user's floating factor bars, narrative-only stat presen
 6. Owner branch-protection administration remains unavailable; Pages retains all11 quality gates. Settings-level protection is not claimed.
 
 Each batch needs a branch, explicit acceptance, exact-source checks, save compatibility and a restorable checkpoint. A future goal does not block an accepted scoped release. Confirmed critical/high defects get a focused patch. Private archives remain untouched and outside Git. RELEASE_PLAN.md records the user's bounded-release decision.
+
+## Current continuation — supersedes historical candidate status above
+Published baseline6.3.0 at952db71 (PR3). Active6.4 combines all user-reported post-release Spend/narrative/routing fixes with the authorised next targeted data batch (HK/US2024 birth weights); see RELEASE_STATUS.md/BIRTH_DATA.md. Next after this bounded batch: measured device/accessibility work and representative contextual repetition review. Broader country/era calibration remains separate.
