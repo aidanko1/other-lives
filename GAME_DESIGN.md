@@ -1,6 +1,7 @@
 # Gameplay contract and reference evidence
 
 ## Current direct evidence and implementation
+Cycle6 adds the reference's30/60/90-minute birth setting (default60), independently using frozen birth-country life expectancy for approximate pacing. It changes no outcomes and preserves the original rate for saved lives lacking the new metadata. Story delivery does not spend extra calendar-time budget. Direct v0.7.90 setup/birth inspection confirms the life-expectancy target description; exact internal timing remains unknown. ENGINEERING_CYCLE_6.md records scoped tests; this does not supersede older reliability evidence for unchanged systems.
 The comparison below was originally written against baseline 4072fd4 and limited research; its hands-on unknowns are superseded by FIDELITY_MATRIX.md and REFERENCE_PLAYTEST_2026-10-21.md. Direct official play now covers an infant ending/rebirth and a whole life through school/university/work/family/care/retirement at60/old age/death at91. Numerical probabilities and all variants remain unknown.
 Current tested implementation is b87e519: full chronological text/choice loop retained; no new controls. Next pauses at new close-family loss, matching observed parent loss. Existing school-entry/home-learning/funding/tabs/static-art preferences remain deliberate requirements. RELEASE_STATUS.md records scoped verification and remaining omissions/calibration goals.
 

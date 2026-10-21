@@ -1,6 +1,7 @@
 # Changelog
 
 ## Cycle6 — playback correction, development only
+Added the verified30/60/90-minute birth duration/default60 with frozen birth-country playback reference; old saves retain their original rate. Duration affects presentation only, with identical complete seeded histories tested. Actual setup/timed year/highlights/inspection/reload checks pass at all three values. Corrected misleading birth selector labels without changing draws. Full final-source verification is pending; see ENGINEERING_CYCLE_6.md.
 Stories at the current date no longer spend another month's playback delay. Every story and simulation transition is preserved. Local npm fast checks, complete Node glob, production packaging and actual Chromium suite passed; exact-commit CI is pending. Reproduction and assertions: ENGINEERING_CYCLE_6.md. No production merge/deployment.
 
 ## Verified cycles3–5 — unreleased reliability baseline

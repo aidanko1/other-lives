@@ -26,6 +26,7 @@ O.create=(settings={})=>{
  let countries=O.COUNTRIES;
  if(settings.country&&settings.country!=='random')countries=countries.filter(c=>c.code===settings.country);
  s.country=O.weighted(s,countries,c=>settings.draw==='equal'?1:c.births);
+ s.playback=O.birthPlayback(s.country,settings.durationMinutes);
  s.gender=O.chance(s,.505)?'F':'M';
  s.percentile=Number.isInteger(settings.quintile)&&settings.quintile>=1&&settings.quintile<=5?(settings.quintile-1)*20+O.rand(s)*20:settings.classChoice==='top1'?99+O.rand(s):settings.classChoice==='hardship'?O.rand(s)*8:settings.classChoice==='comfortable'?65+O.rand(s)*20:O.rand(s)*100;
  s.urban=O.chance(s,s.country.urban/100);

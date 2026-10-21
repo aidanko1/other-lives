@@ -13,8 +13,8 @@ Current verified source b87e519; exact evidence in RELEASE_STATUS.md. VERIFIED m
 - 75 tests/build,2,000 complete asserted lives and actual Chromium lifecycle/save/read/property/pacing gates. Checkpoint/6.2.0-dev.1-reliability-verified points at b87e519.
 
 ## Next work, by priority
-1. Compare normal-speed pacing and optional-menu density. Inspect route-heavy trajectories (up to178 decisions in the stress policy) and generic repetition; CI does not certify enjoyment.
-2. Reconcile duration settings, optional reflections/parallel lives and richer retrospective endings. Independently author justified work; preserve established tabs/home learning/funding/art.
+1. Finish cycle6 verification: calendar-only time budget and30/60/90-minute duration are implemented with targeted browser checks. Compare remaining normal-speed/optional-menu density, route-heavy trajectories (up to178 decisions in stress policy) and generic repetition; CI does not certify enjoyment.
+2. Reconcile optional reflections/parallel lives and richer retrospective endings. Independently author justified work; preserve established tabs/home learning/funding/art. Duration chooser is implemented in cycle6 rather than still missing.
 3. Source/version demographic/economic inputs, age/sex mortality and national schooling/opportunity.129 versus172 locations and eras remain incomplete; no invented national legal/wage precision.
 4. Extend rare-route/country combination coverage.34/42 types start in the cohort; contracts for all definitions do not validate every full trajectory.
 5. Incrementally simplify structural/command helpers only behind concrete acceptance; do not recreate annual/finance wrapper chains.

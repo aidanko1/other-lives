@@ -2,6 +2,19 @@
 /* v2.4: continuous month-by-month clock; each year has 2–5 highlights,
    and only some highlights are interactive decisions. Original implementation. */
 (function(O){
+// Approximate a normal-speed life; freeze the birth reference so moving does not change pacing.
+// The reference game's exact formula is unknown. This affects playback only, never lifespan.
+O.birthPlayback=function(country,targetMinutes=60){
+ if(![30,60,90].includes(targetMinutes))throw Error('Life duration must be 30, 60 or 90 minutes.');
+ const referenceYears=country?.life;
+ if(!Number.isFinite(referenceYears)||referenceYears<=0||referenceYears>150)throw Error('Invalid birth playback reference.');
+ return {version:1,targetMinutes,referenceYears};
+};
+O.monthDurationMs=function(s){
+ const p=s?.playback;
+ if(p?.version!==1||![30,60,90].includes(p.targetMinutes)||!Number.isFinite(p.referenceYears)||p.referenceYears<=0||p.referenceYears>150)return 3750;
+ return p.targetMinutes*60000/(p.referenceYears*12);
+};
 const originalCreate=O.create;
 O.ensureTimeline=function(s){
  if(typeof s.month!=='number')s.month=0;

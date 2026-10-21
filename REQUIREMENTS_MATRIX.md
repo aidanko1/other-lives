@@ -1,5 +1,7 @@
 # Requirements → implementation → tests
 
+Cycle6 adds F02/RF08: calendar-only playback budget and30/60/90-minute birth duration/default60, frozen origin and legacy3750ms/month fallback. Owners: engine/clock.js, core.js, ui/app.js. Tests: pacing.test.cjs (eight tests, including full seeded-life outcome equality), browser-pacing.cjs (legacy5highlights/45.1s), browser-duration.cjs (actual UI setup/timed year/pause/reload at all three values). Local targeted/regression passes; exact final-commit CI pending. Approximate targets do not guarantee actual wall time or a lifespan.
+
 Current source b87e519 passes all eight gates: https://github.com/aidanko1/other-lives/actions/runs/39515340262. 75 tests/build and 2,000 complete asserted lives. PASS-SCOPED means executed acceptance, not entire-system completeness. The original matrix below is historical; the current cycle supplement and RELEASE_STATUS.md supersede its old counts/unknowns.
 
 | ID | Requirement / acceptance | Implementation | Tests / evidence | Status and limits |

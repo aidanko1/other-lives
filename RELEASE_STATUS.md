@@ -1,5 +1,7 @@
 # Release status — verified reliability baseline
 
+Cycle6 development update: pacing-only checkpoint b751cb3598eb0d5c762e6f419b223507ab20ceaf passes quality CI (https://github.com/aidanko1/other-lives/actions/runs/39529422834). The following duration stage has81 local passing Node tests, build/fast checks, full Chromium suite and a1000-life trajectory pass; the background cohort and exact final-source CI remain pending. Read ENGINEERING_CYCLE_6.md. This is not a stable promotion or production deployment; earlier exact-source evidence below remains historical.
+
 Verified 20 October 2026 UTC / 21 October Hong Kong. Version 6.2.0-dev.1 is unreleased. The audited reliability stage is implemented and verified; complete reference parity and national calibration remain incomplete. No experimental merge/deployment.
 
 Development branch: engineering/fidelity-reliability-baseline. Draft PR: https://github.com/aidanko1/other-lives/pull/2.

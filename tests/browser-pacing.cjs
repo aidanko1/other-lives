@@ -9,6 +9,7 @@ module.exports=async function verifyPlayback(browser){
   await page.goto('http://127.0.0.1:8000');
   const fixture=await page.evaluate(()=>{
    const O=window.OL,s=O.create({country:'GB',seed:2218});
+   delete s.playback; // Existing saves retain their original 45-second calendar-year rate.
    s.agenda=O.pickStories(s,5).map((item,i)=>({...item,type:'story',month:i*2+1,done:false}));
    if(s.agenda.length!==5)throw Error('Expected five real eligible infant highlights.');
    localStorage.setItem('other-lives-current-v1',JSON.stringify(s));return {stories:s.agenda.map(x=>x.id),journal:s.journal.length};
