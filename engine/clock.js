@@ -34,7 +34,7 @@ O.makeAgenda=function(s){
  }
  if(s.age>=16&&s.age<=70&&O.chance(s,.095)&&decisionList.length){
   const ex=new Set(decisionList);
-  let pool=O.EVENTS.filter(e=>!e.milestone&&e.min<=s.age&&e.max>=s.age&&e.when(s)&&!ex.has(e.id)&&(s.used[e.id]===undefined||s.age-s.used[e.id]>=7));
+  let pool=O.EVENTS.filter(e=>!e.milestone&&e.min<=s.age&&e.max>=s.age&&e.when(s)&&!ex.has(e.id)&&(s.used[e.id]===undefined||s.age-s.used[e.id]>=(e.cooldown??7)));
   if(pool.length)decisionList.push(O.weighted(s,pool,e=>e.weight).id);
  }
  const total=O.weighted(s,[2,3,4,5],n=>({2:20,3:37,4:29,5:14})[n]);

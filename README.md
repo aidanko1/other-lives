@@ -1,12 +1,12 @@
-# Other Lives —6.2.0 consistency and reliability release
+# Other Lives —6.3.0 gameplay polish candidate
 
-An independent text-driven life simulation guided by the verified experience of [1 in 8 Billion](https://1in8b.life/en/), with no proprietary source/art/substantial prose copied. **Reflections are explicitly excluded:** no questions, notes, special pauses or toggle.
+An independent text-driven life simulation guided by the verified experience of [1 in 8 Billion](https://1in8b.life/en/), without proprietary source/art/substantial prose. Reflections remain explicitly excluded.
 
-The user authorised publication of the bounded consistency/reliability update on 21 October 2026. [PR2](https://github.com/aidanko1/other-lives/pull/2) records the reviewed changes; the [v6.2.0 publication record in PR2](https://github.com/aidanko1/other-lives/pull/2) and [Pages workflow](https://github.com/aidanko1/other-lives/actions/workflows/pages.yml) record actual publication status. Final promotion changes version labels/cache keys and adds a subtle footer version with matching static/browser checks; gameplay and saves are unchanged. Tested source 75b2154 passes107 tests, production build and all 11 [quality jobs](https://github.com/aidanko1/other-lives/actions/runs/39540689377):3000 complete release-cohort lives plus 432 targeted complete rare-path cases, Chromium/Firefox/WebKit, natural infant/adult lifecycles, save/replay, accessibility and100 normal-save archives/24 snapshots/four companion histories each (198957434-byte backup). Restore checkpoint/6.2.0-dev.4-release-gates-verified. Documentation-only descendants do not change that executable source.
+Published stable6.2.0 is preserved at main4b799d6/release/6.2.0; [PR2](https://github.com/aidanko1/other-lives/pull/2) records its successful deployment/live verification. The6.3 candidate adds floating factors, immersive narrative presentation, stable routine editing and specific career/percentage corrections. Exact candidate checks and publication status: [RELEASE_STATUS.md](RELEASE_STATUS.md) and [ENGINEERING_CYCLE_14.md](ENGINEERING_CYCLE_14.md). Do not infer a successful deployment from candidate source.
 
-Start every session with [RELEASE_STATUS.md](RELEASE_STATUS.md), [AGENTS.md](AGENTS.md), [GAME_DESIGN.md](GAME_DESIGN.md), [FIDELITY_MATRIX.md](FIDELITY_MATRIX.md), [ARCHITECTURE.md](ARCHITECTURE.md), [TESTING.md](TESTING.md), [REQUIREMENTS_MATRIX.md](REQUIREMENTS_MATRIX.md) and [BACKLOG.md](BACKLOG.md). These supersede historical release claims below. National/era calibration, normal-speed enjoyment and manual AT/slow-device review remain partial/unverified; protected-main administration requires owner access.
+Start each session with AGENTS.md, RELEASE_STATUS.md, GAME_DESIGN.md, FIDELITY_MATRIX.md, ARCHITECTURE.md, TESTING.md, REQUIREMENTS_MATRIX.md and BACKLOG.md. RELEASE_PLAN.md keeps updates bounded. Country/era calibration and broader subjective/device review remain future goals.
 
-Local development: Node 22+, `npm test`, `npm run build`; serve with `python3 -m http.server 8000`. Browser gates need pinned test-only Playwright/axe and browser binaries. Full commands/release criteria are in TESTING.md; the old `test:release` convenience command is not the complete11-job gate.
+Local development: Node22+, npm test, npm run build; serve with python3 -m http.server8000. TESTING.md describes the complete11-job gate; the old test:release convenience command is not the full gate.
 
 ## Historical release notes
 

@@ -274,7 +274,7 @@ O.EVENTS=ev;
 O.chooseEvent=(s)=>{
  const milestones=ev.filter(e=>e.milestone&&s.age>=e.min&&s.age<=e.max&&e.when(s));
  if(milestones.length)return milestones[0];
- const options=ev.filter(e=>!e.milestone&&s.age>=e.min&&s.age<=e.max&&(O.eventEligible?O.eventEligible(s,e):e.when(s))&&(s.used[e.id]===undefined||s.age-s.used[e.id]>=7));
+ const options=ev.filter(e=>!e.milestone&&s.age>=e.min&&s.age<=e.max&&(O.eventEligible?O.eventEligible(s,e):e.when(s))&&(s.used[e.id]===undefined||s.age-s.used[e.id]>=(e.cooldown??7)));
  if(!options.length)return null;
  return O.weighted(s,options,e=>e.weight*(e.category==='Hard choices'&&at(s)<=1?1.6:1));
 };

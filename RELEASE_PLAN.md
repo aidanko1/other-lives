@@ -6,13 +6,13 @@ The user accepts the current version once it has no known major consistency erro
 
 The fidelity contract and explicit no-reflections exception remain permanent. Do not expand a release merely because further improvements are possible. A confirmed critical/high defect still blocks release and needs a reproducible fix and regression; a documented approximation or an unverified possible improvement is not automatically such a defect.
 
-## Current batch — consistency and reliability candidate
+## Completed batch —6.2.0 consistency and reliability
 
 Freeze executable scope at 75b2154d4794d09410537bebea37937b9cc64ebf (6.2.0-dev.4); handover 11dcd5643c553d990d2e378cbee714bb4090baaa changes documentation only. Annual transactions, finances, employment, family timelines, event eligibility, terminal state, exact saves and simple reference gameplay are implemented with permanent regressions. Reflections are excluded.
 
 Acceptance: production build, relevant regression/integration tests, critical browser lifecycles, save compatibility and asserted simulation consistency pass; no known unresolved confirmed critical/high defect; limitations and restore references recorded. All 11 jobs passed at both revisions, including 107 tests, three browser engines and 3,432 complete asserted lives. The 21 October scope review rechecked the handover's 11 successful job conclusions at https://github.com/aidanko1/other-lives/actions/runs/39541605654. This is existing executed evidence, not new test runs or extra simulated lives.
 
-**Status: scoped engineering acceptance met; candidate ready for release review.** This is not a production deployment or a claim that every possible life is contradiction-free. Draft PR2 remains separate from main; main4072fd4 and the verified checkpoints are restorable. Actual merge/deployment and its workflow result must be recorded separately. This original scope decision did not itself merge or publish the candidate. The user subsequently authorised gated publication; consult RELEASE_STATUS.md and its linked PR2 publication record for the final outcome.
+**Historical preparation status (superseded by publication): scoped engineering acceptance met.** This is not a production deployment or a claim that every possible life is contradiction-free. Draft PR2 remains separate from main; main4072fd4 and the verified checkpoints are restorable. Actual merge/deployment and its workflow result must be recorded separately. This original scope decision did not itself merge or publish the candidate. The user subsequently authorised gated publication; consult RELEASE_STATUS.md and its linked PR2 publication record for the final outcome.
 
 Documentation-scope verification executed for this change: diff whitespace check, Markdown-only change/link assertions, static syntax/assets/registry checks and production build all pass. Runtime/tests/workflows/schema are unchanged; the full lifecycle/simulation suite was not rerun for this documentation edit.
 
@@ -29,3 +29,6 @@ Each batch has its own isolated branch, complete functionality, tests, documente
 ## Release operations
 
 Review PR2, preserve the verified restore references, and deliberately merge/publish only through the existing quality-gated Pages workflow. Confirm the deployed revision and live smoke test before claiming release success. Main protection requires owner administration unavailable through the current connector; this limitation does not erase the existing workflow gates or justify inventing a new gameplay requirement.
+
+## Active batch —6.3 gameplay polish
+6.2.0 is published/restorable at4b799d6 and release/6.2.0; PR2 records deployment39553762697/live verification. The user now requests the first next update, including sticky factors, immersive log and Spend routines that remain open/in position. This batch also corrects the reproduced review-cooldown and decimal-display defects. ENGINEERING_CYCLE_14.md defines its bounded acceptance; full generic narrative/promotion calibration and later data/device batches do not silently join it. Candidate CI/publication remain pending until actually executed.

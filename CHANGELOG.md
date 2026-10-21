@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.3.0 — gameplay polish candidate
+Moves four living factor bars into the existing sticky controls and removes numerical delta chips from current narrative/life log, retaining consequences, history/context and optional spending previews. Routine edits update in place without collapsing Spend disclosures or moving the selected row; readable rounded relationship values replace raw decimal tails. Corrects advertised three-year career reviews being blocked for seven years; applications/chance/training gates remain. Adds three career regressions and two three-engine browser helpers. Static/build and targeted regressions pass locally; full exact-source CI, release and deployment are pending. Country/era expansion and broad narrative/promotion calibration remain separate updates.
+
 ## 6.2.0 — authorised release promotion
 Promotes the tested consistency/reliability candidate with versioned asset URLs and a subtle footer version requested by the user. Static checks bind the displayed version to package/release/asset keys; actual browser checks retain it on landing and gameplay. Gameplay, schema and workflows are unchanged; existing assertions are retained. The user authorises publication conditional on no major blocker and passing release gates. Includes shared atomic simulation/financial owners, exact save compatibility, reference pacing, passive comparisons, factual endings, age/relationship/route fixes, accessibility and permanent CI. Reflections remain excluded. Remaining polish/data/device work is batched separately. Final exact-source CI, deployment revision and live verification are recorded in the PR2 publication record after execution; preparation alone is not a deployment claim.
 
