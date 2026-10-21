@@ -5,7 +5,15 @@ Current verified executable/tests/workflows source 75b2154 (cycle12):107 tests/b
 ## Completed checkpoint
 All11 exact-source jobs pass at 75b2154: https://github.com/aidanko1/other-lives/actions/runs/39540689377. Restore checkpoint/6.2.0-dev.4-release-gates-verified. The100-record normal-save archive gate passes in three engines with 198957434 bytes,24 snapshots and four comparison histories per record. Storage copies are not additional simulated lives. Handover documentation is consolidated; no experimental production merge/deployment.
 
-## Next work, by priority
+## Current release scope and later batches
+
+The user accepted a release focused on no known major consistency errors on 21 October 2026. RELEASE_PLAN.md is the authoritative bounded-update plan. The current candidate meets its recorded engineering acceptance; deliberate release review/publication is separate. Do not delay it for the future goals below. Confirmed critical/high defects still block release; unknown combinations and documented model approximations are not automatically confirmed defects.
+
+Next operational task: release review of PR2 and, when publishing is requested, the gated merge/deployment and live verification. No merge/deployment is performed by this planning update.
+
+Future sequence: (1) gameplay/career/narrative polish; (2) one sourced input family and a named country subset; (3) measured device/accessibility and bounded helper maintenance. Exact acceptance and splitting rules are in RELEASE_PLAN.md. Historical eras and comprehensive national coverage are optional longer-term goals.
+
+## Future work inventory (not current release blockers)
 1. Source/version demographic/economic inputs and assess age/sex mortality, schooling/opportunity and129 authored country profiles versus the reference's172 locations. Keep proxies, simplified professional/national rules, older-age annual timing and uniform infant hazard explicit. Do not enable unauthored countries or invent precision merely to match a count. Historical eras remain a goal.
 2. Continue representative narrative/promotion/repetition review against verified reference behavior. US951's long junior medical title is an observed pacing concern; existing applications/training are deliberate gates, not permission to auto-promote or grant professional status. Policy-conditioned decision counts are not national rates or proof of enjoyment. Full normal-speed subjective review remains open.
 3. Extend rare cross-route/household/country combinations. All42 definitions have stage/exit contracts; six previously absent specialised paths now have432 naturally prepared complete-life cases with actual uncertain success/failure. Housing has real browser/property coverage; earlier-degree-record has legacy coverage. These do not exhaust combinations.

@@ -27,3 +27,5 @@ PASS-SCOPED means the listed acceptance executed, not whole-game completeness. C
 | E03 | Reproducible bugs, traceability and continuity | AGENTS,BUGS,release/backlog/design/architecture/testing/cycle docs | exact commands/seeds/SHAs/CI/artifacts | Permanent; update at every completed stage; unexecuted checks remain unverified |
 
 Outstanding goals and scope limits are in BACKLOG.md. No requirement becomes complete merely because a UI element exists, a forced route succeeds or an older source passed CI.
+
+Release scope: RELEASE_PLAN.md records the user's21October decision to accept the consistency/reliability candidate and batch remaining improvements. PARTIAL requirements remain honestly partial and assigned to future batches; they are not relabelled complete or automatically treated as blockers to this scoped release. Confirmed critical/high defects and the existing technical release gates remain blocking.

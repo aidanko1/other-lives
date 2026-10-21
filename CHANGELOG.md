@@ -1,5 +1,8 @@
 # Changelog
 
+## Cycle13 — bounded release scope, documentation only
+The user accepts the current consistency/reliability candidate and defers further improvements to smaller updates. Added RELEASE_PLAN.md and aligned permanent instructions, design, backlog, requirement status and release evidence. Future sequence: gameplay polish, a bounded sourced-data update, then measured device/maintenance work; comprehensive country/era calibration is not a blocker for this release. Rechecked all11 successful jobs at handover11dcd56 without claiming new test runs. No executable/test/workflow/save changes, merge or deployment; existing107-test/3432-life evidence remains scoped to the recorded revisions. Partial requirements remain partial.
+
 ## Cycle7 — user-requested fidelity exception
 Reflection prompts, note-entry screens and reflection-specific pauses/toggle are explicitly excluded from Other Lives. The unfinished local prototype was removed before any commit/publication; production engine/UI/index files are byte-identical to the verified cycle6 source. Permanent instructions, design/comparison/requirements and backlog reflect the exception. Added Next and actual automatic-browser continuation guards at 5/15/30/50/70. Guard-source 6c8763ad3750747b5abbbd0e2b26d651a8bfde73 passes82 tests/build/full actual Chromium/all eight CI gates and both1000-life asserted cohorts: https://github.com/aidanko1/other-lives/actions/runs/39532142864. No save migration, production merge or deployment.
 

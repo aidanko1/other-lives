@@ -4,6 +4,8 @@ This is a verified, restorable **development** baseline, not a claim of complete
 
 Development branch: engineering/fidelity-reliability-baseline. Draft PR: https://github.com/aidanko1/other-lives/pull/2.
 
+**21 October user scope decision:** the current consistency/reliability work is sufficient once there are no known major consistency defects and the release gates pass. Remaining polish and realism will ship in smaller later updates. RELEASE_PLAN.md defines the batches. Recorded engineering acceptance below is met; the candidate is ready for release review, with no known unresolved confirmed critical/high defect. It remains unpublished. Full national/era calibration and extended subjective/device review are future work, not conditions silently added to this release. The scope review rechecked all11 successful jobs at handover11dcd56: https://github.com/aidanko1/other-lives/actions/runs/39541605654. No additional test runs or simulated lives are claimed for that recheck.
+
 **Tested executable/tests/workflows source:**75b2154d4794d09410537bebea37937b9cc64ebf.
 **All11 jobs pass:** https://github.com/aidanko1/other-lives/actions/runs/39540689377.
 **Restore:** checkpoint/6.2.0-dev.4-release-gates-verified.
@@ -37,6 +39,6 @@ The expanded archive fixture initially exhausted the test runner's heap through 
 ## Remaining limits and next priority
 No confirmed unresolved critical/high defect is knowingly hidden; this is not a bug-free guarantee.129 authored profiles versus reference172 locations, eras, national economics/schooling/licensing and age/sex mortality remain partial. Uniform infant hazard does not model neonatal concentration; older-age timing is annual. Long junior medical titles/promotion opportunities and contextual generic repetition need further evidence before changing deliberate application/training gates. Full normal-speed subjective enjoyment, manual assistive-technology/low-end-device checks and arbitrary archive sizes are unverified. New-birth peer generation is synchronous, measured around1.9s locally; slow-device latency is unknown.
 
-Next highest priority: source/version national demographic/opportunity inputs and assess remaining mortality/promotion pacing against reference evidence, while preserving the simple loop. Owner-level required-check protection needs owner administration. Keep this checkpoint playable/restorable and experimental changes separate; do not automatically merge/deploy it or call the whole project fully realistic/reference-equivalent.
+Next operational priority: review the bounded consistency/reliability candidate for deliberate release. Remaining work is batched in RELEASE_PLAN.md, beginning with targeted gameplay polish after this release. Owner-level required-check protection needs owner administration. Keep this checkpoint playable/restorable and experimental changes separate; do not automatically merge/deploy it or call the whole project fully realistic/reference-equivalent.
 
 Read AGENTS.md, GAME_DESIGN.md, FIDELITY_MATRIX.md, ARCHITECTURE.md, TESTING.md, REQUIREMENTS_MATRIX.md, BUGS.md and BACKLOG.md at the next session. Previous cycle failures and exact evidence remain in ENGINEERING_CYCLE_*.md. No private backup was modified or committed; no avatar/text-render audit is claimed for the latest13-record migration recheck.

@@ -19,6 +19,8 @@ Research checked 21 October 2026. Official reference: https://1in8b.life/en/ and
 The official pages document birth/population-weighted random origins, three life-duration settings, pause/speed controls, next-decision navigation, annual focus, event decisions, Auto, family/spending inspection, four visible factors, local histories and an ending record. Four parallel lives and reflection pauses are also documented. Mortality is described as age-dependent rather than a guaranteed lifespan. These are documented behaviours, not independently measured probabilities. (Evidence: official game and About, accessed 2026-10-21.)
 
 ## Faithful design principles
+Release scope follows RELEASE_PLAN.md and the user's 21 October decision: a coherent, reliable version with no known major consistency errors is sufficient for the current release. Further narrative/career polish, targeted country inputs and device/maintenance refinements belong to separate updates. Preserve the wider design goals without treating them as one unfinished mega-release.
+
 Use the user's requirements as the product contract: a life unfolds chronologically through circumstances, events and occasional consequential choices. Simple interaction; deeper state and consequences beneath it. Preserve chance and external constraints. Optional inspection must not become compulsory micromanagement. Static original pixel art supports the prose; no movement, exploration or animation-heavy play.
 Existing user-requested tabs, combined time/speed control, pause during inspection, setting decisions aside, archive/export, named courses/people and family finances remain intentional requirements. Do not remove them simply because the reference uses different presentation.
 
