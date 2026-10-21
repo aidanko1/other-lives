@@ -4,6 +4,8 @@
 Preserve the experience of **1 in 8 Billion**, official reference https://1in8b.life/en/.
 Priority: gameplay fidelity; logical consistency and realism; causal storytelling and lasting consequences; reliability/completeness/maintainability; then content.
 Explicit user exception (21October2026): **do not implement the reference's reflection feature**. No milestone reflection questions, note-entry screens, reflection pauses or reflection toggle. This is an intentional product requirement, not missing fidelity work. Ordinary noninteractive memories remain part of event storytelling. Consult GAME_DESIGN.md and FIDELITY_MATRIX.md before proposing reference parity changes.
+Retain `tests/fidelity-exclusions.test.cjs` and `tests/browser-no-reflections.cjs`; ENGINEERING_CYCLE_7.md records this correction. They protect uninterrupted progression at5/15/30/50/70 while preserving normal choices and bereavement stops.
+Latest tested guard/source checkpoint:6c8763a,82 tests/build/two1000-life cohorts/all eight jobs (run39532142864). Production engine/UI/index remain identical to ba00e5b. Restore:`checkpoint/6.2.0-dev.1-fidelity-exclusions-verified`. Older verification paragraphs below are historical supplements.
 Keep chronological, text-driven life progression, an automatic clock with pause/speed/next-decision controls, occasional meaningful decisions, and optional family/spending inspection. Keep a restrained modern interface and static pixel illustrations. Do not turn it into an RPG, management simulator or dashboard.
 
 ## Before editing

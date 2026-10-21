@@ -4,7 +4,7 @@ Explicit fidelity exclusion (cycle7): `fidelity-exclusions.test.cjs` verifies Ne
 
 Cycle6 adds `tests/browser-pacing.cjs` and `tests/browser-duration.cjs` to the existing real Chromium suite. Playwright's installed/paused clock plus `runFor` delivers every production timer callback; these are real UI assertions under controlled elapsed time, not a simplified engine or subjective full-session playtest. Keep the legacy45.1s/five-highlight regression even as new births receive duration metadata. `pacing.test.cjs` also compares entire complete seeded histories across30/60/90, ignoring only playback metadata. Latest final-source results belong in ENGINEERING_CYCLE_6.md and RELEASE_STATUS.md.
 
-Latest tested source ba00e5b:81 tests, build,2,000 complete asserted lives, actual Chromium lifecycle/read/property/bereavement plus legacy/30/60/90-duration gates; all eight jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39530111698. Both full cohorts and browser suite also passed locally. Earlier counts below are historical; RELEASE_STATUS.md defines current limits.
+Latest tested source6c8763a:82 tests, build,2,000 complete asserted lives, actual Chromium lifecycle/read/property/bereavement, legacy/30/60/90-duration and excluded-reflection milestone gates; all eight jobs passed: https://github.com/aidanko1/other-lives/actions/runs/39532142864. Regression/build/full browser also passed locally. Prior local full cohorts at cycle6 have identical production code; cycle7 full cohorts reran in CI. Earlier counts below are historical; RELEASE_STATUS.md defines current limits.
 
 This document defines required verification. See CHANGELOG.md / CI for what actually ran; test-file presence alone is not a pass.
 
