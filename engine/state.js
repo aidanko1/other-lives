@@ -32,6 +32,7 @@
   const issue = (code, message) => issues.push({code, message});
   if (!Number.isInteger(s.age) || s.age < 0 || s.age > 120) issue('age', 'Invalid player age.');
   if (!Number.isInteger(s.month) || s.month < 0 || s.month > 11) issue('month', 'Invalid month.');
+  if(s.mortalityTiming?.version===1&&(!Number.isInteger(s.mortalityTiming.infantMonths)||s.mortalityTiming.infantMonths<0||s.mortalityTiming.infantMonths>12))issue('mortality.receipt','Invalid first-year mortality receipt.');
   if (!['alive', 'paused', 'finished'].includes(s.status)) issue('status', 'Unknown life status.');
   for (const key of ['cash', 'debt', 'income', 'investments', 'property', 'familyCash', 'familyAssets', 'familyDebts']) if (!Number.isFinite(s[key]) || s[key] < 0) issue('money.' + key, 'Invalid ' + key + '.');
   for (const key of ['health', 'happiness', 'knowledge', 'relationships', 'stress', 'confidence']) if (!Number.isFinite(s[key]) || s[key] < 0 || s[key] > 100) issue('factor.' + key, 'Invalid ' + key + '.');

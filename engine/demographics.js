@@ -26,7 +26,7 @@ const rates={};
 function adultMultiplier(c){if(rates[c.code]!==undefined)return rates[c.code];const desired=LE[c.code]??c.life;let lo=.02,hi=100;for(let i=0;i<53;i++){const m=(lo+hi)/2;if(impliedMean(c,m)>desired)lo=m;else hi=m;}return rates[c.code]=(lo+hi)/2;}
 O.hazardAt=(c,a)=>a<=5?childRisk(c,a):1-Math.exp(-adultMultiplier(c)*adultShape(a));
 O.expectedYears=(c)=>impliedMean(c,adultMultiplier(c));
-O.mortality=function(s){const age=s.age;if(age<=0)return false;
+O.mortalityProbability=function(s,age=s.age){if(age<=0)return 0;
  const base=O.hazardAt(s.country,age);
  // Individual variation is a modelled adjustment, NOT sourced stratified mortality tables.
  const classFactor=[1.34,1.18,1.04,.94,.88,.85,.83,.82][s.strata]??1;
@@ -38,7 +38,15 @@ O.mortality=function(s){const age=s.age;if(age<=0)return false;
  if(s.flags?.unsafeEmployment&&age>=17)modifier*=1.06;
  if(s.flags?.vaccinationMissed&&age<=5)modifier*=1.18;
  const personal=1-Math.pow(1-base,modifier);
- return O.chance(s,Math.min(.98,personal));
+ return Math.min(.98,personal);
+};
+// Constant monthly conditional hazard preserves the annual survival product.
+// This is a timing approximation, not an empirical neonatal/month-specific curve.
+O.infantMonthlyProbability=s=>1-Math.pow(1-O.mortalityProbability(s,1),1/12);
+O.infantMortality=s=>O.chance(s,O.infantMonthlyProbability(s));
+O.mortality=function(s){
+ if(s.age<=0||s.age===1&&s.mortalityTiming?.version===1&&s.mortalityTiming.infantMonths===12)return false;
+ return O.chance(s,O.mortalityProbability(s));
 };
 // Explain specific fictional death causes and distinguish probabilities from diagnoses.
 const oldFinish=O.finish;

@@ -1,6 +1,6 @@
 {
   "name": "other-lives",
-  "version": "6.2.0-dev.2",
+  "version": "6.2.0-dev.3",
   "private": true,
   "description": "Buildless, browser-local life simulation with permanent engine and browser QA",
   "engines": {"node": ">=22"},

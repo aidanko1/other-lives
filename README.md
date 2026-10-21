@@ -1,8 +1,14 @@
-# Engineering checkpoint — 6.2.0-dev.1 (unreleased)
+# Other Lives —6.2.0-dev.3 candidate
 
-User-requested exception: Other Lives does not include the reference's reflection prompts, note-entry feature or reflection pauses/toggle. Source6c8763a permanently documents this and passes82 tests/build/all eight [quality gates](https://github.com/aidanko1/other-lives/actions/runs/39532142864), including2,000 asserted complete lives and actual five-milestone browser guards. Production code remains the tested cycle6 version; nothing was deployed.
+An independent, text-driven life simulation guided by the verified experience of [1 in8Billion](https://1in8b.life/en/). No proprietary source, art or substantial writing is copied. The user explicitly excludes milestone reflections, notes and reflection pauses/toggle.
 
-The published game remains v6.1.0. Engineering work is isolated in [draft PR2](https://github.com/aidanko1/other-lives/pull/2). Start with [RELEASE_STATUS.md](RELEASE_STATUS.md), [AGENTS.md](AGENTS.md), [FIDELITY_MATRIX.md](FIDELITY_MATRIX.md), [REQUIREMENTS_MATRIX.md](REQUIREMENTS_MATRIX.md) and [BACKLOG.md](BACKLOG.md). Runtime source ba00e5b passes81 tests, production build,2,000 asserted complete lives and all eight [CI gates](https://github.com/aidanko1/other-lives/actions/runs/39530111698). [Cycle6](ENGINEERING_CYCLE_6.md) fixes story-delivery delays and adds reference-aligned30/60/90-minute birth pacing with old-save compatibility. Earlier release claims below are historical. Do not call the entire game stable, fully realistic or reference-equivalent from these counts.
+Development is isolated in [draft PR2](https://github.com/aidanko1/other-lives/pull/2); main v6.1 remains untouched. Start every session with [RELEASE_STATUS.md](RELEASE_STATUS.md), [AGENTS.md](AGENTS.md), [FIDELITY_MATRIX.md](FIDELITY_MATRIX.md), [REQUIREMENTS_MATRIX.md](REQUIREMENTS_MATRIX.md) and [BACKLOG.md](BACKLOG.md). Exact-source results supersede historical release claims below.
+
+The verified cycle8 checkpoint bc74cde passes90 tests/build/all11 quality jobs,3000 asserted complete lives and Chromium/Firefox/WebKit. Cycle9 connects existing specialised careers to reachable interests and adds keyboard/contrast/100-record archive gates. Cycle10 corrects infant timing for new births while preserving legacy saves. Cycle9 db19f9c1 passes98 tests/all11 jobs/3000 release-cohort lives plus432 targeted complete rare-path cases. Cycle10 final-source status is recorded in RELEASE_STATUS.md; pending checks are never called passed. No experimental deployment.
+
+Local development: Node22+, npm test, npm run build. Serve the repository with `python3 -m http.server 8000`. Browser checks need test-only playwright1.56.1 and axe-core4.10.3; full commands/release cohorts are in [TESTING.md](TESTING.md). National inputs/eras/age-sex mortality and full normal-speed enjoyment remain partial or unverified; no claim of complete reference parity or population prediction.
+
+## Historical release notes
 
 # Other Lives v5.9.2 — Connected education and family memories
 

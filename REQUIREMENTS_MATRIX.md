@@ -76,3 +76,5 @@ All earlier scoped evidence is historical. These additions do not establish nati
 | F03/T04 accessibility | index.html,life-clarity.css,app.js | nine axe light/dark surfaces,real keyboard modal entry/wrap/escape/return |Local Chromium pass; final all-engine CI pending; manual AT unknown |
 | S09/T04 large archives | app.js existing IndexedDB path |100-record actual import/reload/whole export/detail/delete |Local11744934-byte fixture pass;100 copies not100 simulations; final CI pending |
 | E02 release gates | quality.yml/pages.yml |all11 exact-source jobs;test-only Playwright/axe pins |bc74cde passes; candidate9 pending; no deployment/admin protection |
+
+Cycle10 S01/S07/S08/S09 candidate: infant timing owners core/clock/demographics/state, six executed local regressions plus natural NG2 browser ending/save/archive/new birth pass. Exact-source full suite/three1000-life cohorts/three browser-engine gates pending. Existing saves without model metadata retain legacy continuation; no migration invents a past risk. Probability-product assertion is a calculation contract, not demographic validation.

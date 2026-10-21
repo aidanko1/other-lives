@@ -64,6 +64,15 @@ O.advanceMonth=function(s){
   }
   return {advanced:true,decision:!!s.pending,entry:true};
  }
+ if(s.age===0&&s.mortalityTiming?.version===1){
+  const before=JSON.parse(JSON.stringify(s));
+  try{
+   const fatal=O.infantMortality(s);s.mortalityTiming.infantMonths=s.month+1;
+   if(fatal){O.finish(s);return {advanced:true,finished:true,infant:true};}
+   if(s.month<11){s.month++;s.lastOutcome='';return {advanced:true};}
+   return O.completeBirthday(s);
+  }catch(error){for(const key of Object.keys(s))delete s[key];Object.assign(s,before);throw error;}
+ }
  if(s.month<11){s.month++;s.lastOutcome='';return {advanced:true};}
  return O.completeBirthday(s);
 };

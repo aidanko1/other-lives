@@ -49,3 +49,7 @@ Read ENGINEERING_CYCLE_8.md before editing the comparison/ending work. Version6.
 
 ## Current continuity (cycles8–9)
 Last exact-source verified checkpoint is bc74cde:90 tests/build/all11 jobs/3000 complete asserted lives, including three browser engines. Restore checkpoint/6.2.0-dev.2-comparisons-verified. Earlier statements of82 tests/eight gates are historical. Read ENGINEERING_CYCLE_8.md, ENGINEERING_CYCLE_9.md and current RELEASE_STATUS.md. Candidate9 adds reachable interests, contrast/modal accessibility and large-archive assertions; its exact-source verification is separate.
+
+Cycle10 mortality candidate: new births save mortalityTiming version1 before the first snapshot. Never add it to older saves or reroll saved worlds. clock.js owns atomic first-year timing; demographics.js owns probabilities/deduplication. Keep six infant regressions and natural NG2 UI check; no extra mortality on story delivery. Consult ENGINEERING_CYCLE_10.md and actual exact-source CI, not older counts. The uniform infant hazard is an assumption, not a national neonatal curve.
+
+Cycle9 now verified at db19f9c1,98 tests/build/all11 jobs/3000 release-cohort lives plus432 targeted complete rare-path cases, including accessibility and100-record archives in Chromium/Firefox/WebKit. Restore checkpoint/6.2.0-dev.2-accessibility-routes-verified. Cycle10 has separate pending evidence.

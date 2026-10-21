@@ -24,3 +24,5 @@ html[data-theme=dark] .death-summary{background:var(--surface-alt);color:var(--i
 html[data-theme=dark] .story-tabs button{color:var(--muted)}
 html[data-theme=dark] .log-entry.tone-bad strong{color:var(--negative)}
 html[data-theme=dark] .log-entry.tone-good strong{color:var(--positive)}
+
+.parallel-lives .person-meta>span{display:block;line-height:1.5}

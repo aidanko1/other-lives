@@ -1,6 +1,6 @@
 # Prioritised continuation backlog
 
-Current verified source bc74cde:90 tests/build/all11 gates/3000 complete asserted lives. Exact evidence in RELEASE_STATUS.md and ENGINEERING_CYCLE_6.md/ENGINEERING_CYCLE_7.md. VERIFIED means scoped acceptance passed, not whole-game completeness.
+Current verified source db19f9c1:98 tests/build/all11 gates/3000 release-cohort lives plus432 targeted complete rare-path cases. Exact evidence in RELEASE_STATUS.md and ENGINEERING_CYCLE_6.md/ENGINEERING_CYCLE_7.md. VERIFIED means scoped acceptance passed, not whole-game completeness.
 
 ## Completed reliability stage
 - Reversible production baseline, isolated branch, permanent audit/design/fidelity/architecture/testing/requirements/bugs/release documentation, reusable quality and gated Pages workflow.
@@ -16,7 +16,7 @@ Current verified source bc74cde:90 tests/build/all11 gates/3000 complete asserte
 - Explicit exclusion of reflection prompts/notes/pauses/toggle, with Next/actual-browser continuation guards at all five reference ages.82 tests/build/full browser/two1000-life cohorts/all eight CI gates pass at6c8763a; restore branch recorded in RELEASE_STATUS.md.
 
 ## Next work, by priority
-1. Complete cycle9 final-source checks for reachable specialised careers, accessibility and100-record archives. Cycle8 passive parallel lives/factual endings are verified at bc74cde. Four same-age companion stages are directly observed. **Reflection prompts/notes/pauses are explicitly excluded by the user and must not be implemented.** Preserve established tabs/home learning/funding/art; avoid extra management.
+1. Complete cycle10 final-source gates and evidence for first-year mortality/save continuity. Cycle9 specialised-career access/accessibility/100-record gates pass at db19f9c1. Cycle8 passive parallel lives/factual endings are verified at bc74cde. Four same-age companion stages are directly observed. **Reflection prompts/notes/pauses are explicitly excluded by the user and must not be implemented.** Preserve established tabs/home learning/funding/art; avoid extra management.
 2. Continue long-session enjoyment/contextual repetition review. Cycle6 measures playback and optional-menu/stress-policy density, not full subjective parity; repeated hardship/general cards need contextual writing judgment. Duration chooser is implemented and verified.
 3. Source/version demographic/economic inputs, age/sex mortality and national schooling/opportunity.129 versus172 locations and eras remain incomplete; no invented national legal/wage precision.
 4. Extend rare-route/country combination coverage.34/42 types start in the cohort; contracts for all definitions do not validate every full trajectory.
@@ -29,3 +29,5 @@ Current verified source bc74cde:90 tests/build/all11 gates/3000 complete asserte
 Main4072fd4 is untouched; no new deployment. Known confirmed audit regressions are corrected in the tested checkpoint. Calibration/unknown combinations are documented limits. No private backup was modified/committed. Read all current repository evidence at the next session.
 
 Cycle9 root-cause discovery: four specialised routes were unreachable because their required interests could not be acquired. This is a confirmed functional bug, not merely a rare statistical omission. Corrected discovery/introductions retain four choices. Six specialised paths now have a dedicated natural prepared-trajectory harness; final counts/evidence follow executed results. Earliest mortality still occurs at age1; investigate the infant timing boundary against sourced definitions without altering established saves.
+
+Cycle10 first-year timing correction is implemented and under exact-source verification: new births can end at0; saved timing versions preserve old continuation. Keep older-age annual/neonatal assumptions explicit. Current priority is completing all candidate release gates and permanent evidence, not adding features.

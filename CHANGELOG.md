@@ -75,3 +75,8 @@ Added Phase 11 requirements matrix, bug reproductions and explicit release statu
 - Corrected light-theme text contrast and dark ending/tab/log contrast; modal focus entry, Tab wrapping, Escape and return to opener. Life decisions remain nonmodal to preserve inspection.
 - Permanent axe9-surface/keyboard and100-record archive import/reload/exact-export/detail/delete gates; targeted six-route complete-life tests.
 - Cycle8 bc74cde verified all11 jobs,90 tests/build/3000 complete asserted lives and Chromium/Firefox/WebKit. Cycle9 final-source gates pending; no deployment.
+
+## 6.2.0-dev.3 — candidate, unreleased
+- OL-038: first-year mortality for new births occurs during age0 rather than being deferred to the first birthday.12 conditional monthly risks preserve the prior annual survival product under constant circumstances; no extra roll on story/choice delivery or at the surviving first birthday.
+- Additive saved timing version/receipt; legacy saves retain their original model. Atomic rollback includes mortality RNG and terminal/birthday state. Six local regressions and natural NG2 age0 UI lifecycle checks pass; full final-source gates pending.
+- Corrected companion text line layout after screenshot review. No new gameplay control, reflection feature, merge or deployment.
