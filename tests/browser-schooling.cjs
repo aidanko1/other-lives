@@ -31,7 +31,7 @@ module.exports=async browser=>{
      assert.equal(fixture.s.schoolRecord.awards.length,0);assert.equal(fixture.s.schoolRecord.years.filter(y=>y.attended).length,0);
      const before=await read();await popup.locator('[data-action="choose"]').filter({hasText:'Prepare a secondary-equivalency route'}).click();const started=await read(),r=started.routes.active.equivalency;
      assert(r);assert.equal(r.due,started.age+2);assert.equal(started.schoolRecord.awards.length,0);assert.equal(before.cash+before.familyCash+before.familyAssets-started.cash-started.familyCash-started.familyAssets,r.funding.fee);assert.equal(started.debt,before.debt);
-     await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.equal(await page.locator('[data-action="browse-degrees"]').count(),0,'ineligible applications are hidden');assert.match(await page.locator('.route-progress').filter({hasText:/equivalency/i}).innerText(),/qualification/i);
+     await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.equal(await page.locator('[data-action="browse-degrees"]').count(),0,'ineligible applications are hidden');await page.locator('.route-planner > summary').click();assert.match(await page.locator('.route-progress').filter({hasText:/equivalency/i}).innerText(),/qualification/i);
      await page.reload();await page.locator('[data-action="resume"]').first().click();await page.locator('[data-action="game-tab"][data-tab="spend"]').click();assert.deepEqual(await read(),started,'prepared recovery and exact funds survive reload');
     }
     assert.deepEqual(errors,[]);results.push({width,mode,seed:2218,country:'HK',age:fixture.s.age,awards:fixture.s.schoolRecord.awards.length});
