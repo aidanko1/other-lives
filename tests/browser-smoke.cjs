@@ -10,7 +10,7 @@ if(!['chromium','firefox','webkit'].includes(browserName))throw Error('Unknown t
   await require('./browser-pacing.cjs')(browser);
   await require('./browser-duration.cjs')(browser);
   await require('./browser-polish.cjs')(browser);
-  const menuChecks=await Promise.allSettled([require('./browser-routines.cjs')(browser),require('./browser-menu-clarity.cjs')(browser)]);
+  const menuChecks=await Promise.allSettled([require('./browser-routines.cjs')(browser),require('./browser-menu-clarity.cjs')(browser),require('./browser-presentation.cjs')(browser)]);
   const menuFailures=menuChecks.filter(r=>r.status==='rejected');if(menuFailures.length)throw new AggregateError(menuFailures.map(r=>r.reason),'Spend interaction checks failed');
   await require('./browser-no-reflections.cjs')(browser);
   await require('./browser-parallel.cjs')(browser);
