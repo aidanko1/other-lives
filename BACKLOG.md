@@ -11,7 +11,7 @@
 Choose work in this order, addressing confirmed serious defects first. The proposed education scope below does not override higher-priority user experience or coherence work. Follow AGENTS.md for development policy; the entries here describe work, not additional protocols.
 
 ## Safe checkpoint and current release
-Published6.4.0 is verified at6e0f730a63a6db1b170191830cd2b60f4699fdc9 and restorable at release/6.4.0. [PR4](https://github.com/aidanko1/other-lives/pull/4) records128 tests, all11 source gates,3432 asserted complete release lives, all three browsers, successful production validation/deployment and actual live save/toggle/reload checks. Earlier6.3.0 and verified checkpoints remain restorable. No subsequent gameplay change has been implemented.
+Published6.4.0 is verified at6e0f730a63a6db1b170191830cd2b60f4699fdc9 and restorable at release/6.4.0. [PR4](https://github.com/aidanko1/other-lives/pull/4) records128 tests, all11 source gates,3432 asserted complete release lives, all three browsers, successful production validation/deployment and actual live save/toggle/reload checks. Earlier6.3.0 and verified checkpoints remain restorable. Candidate6.4.1 fixes confirmed decision keyboard focus escaping behind the overlay (OL-052); source gates and publication remain pending. Next continue the priority order above; this focused accessibility correction does not complete all subjective UX work.
 
 ## Country realism assessment at that checkpoint
 This is a focused inspection of the actual current owners/registries, not a repeated whole-game audit or proof of empirical calibration. Counts were queried from the loaded production engine after the runtime gates passed.
