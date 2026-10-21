@@ -17,7 +17,7 @@ module.exports=async browser=>{
       }else O.advanceMonth(s);
       O.assertConsistent(s);if(!course&&!s.pending&&s.age>=16&&O.initialSchoolCourse(s)&&s.flags.educationTrack.status==='enrolled')course=JSON.parse(JSON.stringify(s));
      }
-     if(s.pending!=='adult-crossroads')throw Error('Natural school fixture did not reach its school-leaving choice');localStorage.setItem('other-lives-current-v1',JSON.stringify(s));return {s,course};
+     if(s.pending!=='adult-crossroads')throw Error('Natural school fixture did not reach its school-leaving choice');localStorage.setItem('other-lives-current-v1',JSON.stringify(s));return JSON.parse(JSON.stringify({s,course}));
     },mode);
     await page.reload();await page.locator('[data-action="resume"]').first().click();const popup=page.locator('.decision-popup');assert.deepEqual(await read(),fixture.s,'pending school history survives reload');
     if(mode==='academic'){
